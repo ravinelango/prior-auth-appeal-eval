@@ -150,3 +150,42 @@ def test_late_filing_flagged(case, good_letter):
 def test_sections_helper():
     s = sections("head\n## A b\nx\n## C\ny")
     assert s["a b"] == "x" and s["c"] == "y" and s["_header"] == "head"
+
+
+
+def test_negation_flip_is_flagged(case_dict, good_letter):
+    """Chart says 'not on anticoagulants'; asserting the patient is on them fails."""
+    from prior_auth_eval.schema import parse_case
+    case_dict["chart"]["facts"].append({
+        "id": "f3", "date": "2026-02-03",
+        "text": "Not on anticoagulants or antiplatelet agents; no signs of infection.",
+    })
+    case2 = parse_case(case_dict)
+    inject = good_letter.replace(
+        "## Clinical summary\n",
+        "## Clinical summary\n"
+        "- Currently taking anticoagulants and antiplatelet agents (2026-02-03).\n",
+    )
+    r = check_facts(case2, inject)
+    assert not r.passed
+    assert any("negation flip" in f and "anticoagulants" in f for f in r.findings)
+
+
+def test_chart_negation_restated_with_negation_is_ok(case_dict, good_letter):
+    from prior_auth_eval.schema import parse_case
+    case_dict["chart"]["facts"].append({
+        "id": "f3", "date": "2026-02-03",
+        "text": "Not on anticoagulants; no signs of infection.",
+    })
+    case2 = parse_case(case_dict)
+    inject = good_letter.replace(
+        "## Clinical summary\n",
+        "## Clinical summary\n"
+        "- Not on anticoagulants; no signs of infection (2026-02-03).\n",
+    )
+    assert check_facts(case2, inject).passed
+
+
+def test_near_miss_member_id_is_flagged(case, good_letter):
+    r = check_identifiers(case, good_letter.replace("SYN-MBR-900001", "SYN-MBR-900002"))
+    assert not r.passed and any(f.startswith("member_id") for f in r.findings)

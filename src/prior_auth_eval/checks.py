@@ -120,6 +120,26 @@ def _words(text: str) -> set[str]:
     return {w for w in _WORD.findall(_DATE.sub(" ", text).lower()) if w not in _STOP}
 
 
+_NEG_CUE = re.compile(
+    r"\b(?:no|not|never|denies|denied|without|absence|negative|free of|"
+    r"unremarkable for)\b",
+    re.IGNORECASE,
+)
+
+
+def _negated_words(text: str) -> set[str]:
+    """Content words that sit in a short window after a negation cue.
+
+    Used to catch polarity flips (chart: "not on anticoagulants"; letter: "on anticoagulants").
+    The window stops at the next sentence boundary and is capped so distant positives are ignored.
+    """
+    out: set[str] = set()
+    for m in _NEG_CUE.finditer(text):
+        window = re.split(r"[.;\n]", text[m.end():m.end() + 70], maxsplit=1)[0]
+        out |= _words(window)
+    return out
+
+
 def check_facts(case: Case, letter: str) -> CheckResult:
     """Every bullet under '## Clinical summary' must be traceable to the chart."""
     res = CheckResult("facts_in_chart", True, CRITICAL)
@@ -131,13 +151,19 @@ def check_facts(case: Case, letter: str) -> CheckResult:
     chart_text = " ".join(f"{f.date} {f.text}" for f in case.chart.facts)
     chart_nums = _numbers(chart_text)
     chart_words = _words(chart_text) | _words(case.chart.patient_name)
+    chart_negated = _negated_words(chart_text)
     for b in bullets(block):
         bad_nums = sorted(n for n in _numbers(b) if n not in chart_nums)
         words = _words(b)
         unseen = sorted(w for w in words if w not in chart_words)
         ratio = len(unseen) / len(words) if words else 0.0
+        bullet_negated = _negated_words(b)
+        flipped = sorted(w for w in words if w in chart_negated and w not in bullet_negated)
         if bad_nums:
             res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
+        elif flipped:
+            res.findings.append(
+                f"possible negation flip of chart-negated term(s) {flipped}: \"{b}\"")
         elif ratio > UNSEEN_RATIO:
             res.findings.append(f"term(s) not in chart {unseen}: \"{b}\"")
     res.passed = not res.findings
