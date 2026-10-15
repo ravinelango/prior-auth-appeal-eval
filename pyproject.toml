@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prior-auth-appeal-eval"
+version = "0.0.1"
+description = "Evaluate LLM-drafted prior-authorization appeal letters for grounded citations, chart-traceable facts, and whether they answer the denial reason. Synthetic data only."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Ravin Elango" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prior_auth_appeal_eval"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
