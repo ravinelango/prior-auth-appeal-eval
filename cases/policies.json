@@ -1,0 +1,28 @@
+{
+  "_note": "SYNTHETIC coverage policies written for testing. Not real payer or Medicare (NCD/LCD) documents.",
+  "policies": {
+    "SYN-POL-IMG-01": {
+      "title": "Advanced imaging of the lumbar spine (synthetic)",
+      "criteria": {
+        "C1": "Low back pain with radicular symptoms for at least 6 weeks",
+        "C2": "Failure of at least 6 weeks of conservative care (physical therapy or supervised exercise, and medication)",
+        "C3": "Or any red-flag finding: progressive motor deficit, bowel/bladder dysfunction, suspected infection or malignancy"
+      }
+    },
+    "SYN-POL-SLP-01": {
+      "title": "Attended polysomnography (synthetic)",
+      "criteria": {
+        "C1": "Clinical suspicion of obstructive sleep apnea documented by a validated screening score",
+        "C2": "Home sleep apnea testing is contraindicated or was technically inadequate",
+        "C3": "Significant comorbidity such as moderate-to-severe heart failure or neuromuscular disease"
+      }
+    },
+    "SYN-POL-DME-01": {
+      "title": "Positive airway pressure device (synthetic)",
+      "criteria": {
+        "C1": "Sleep study showing AHI of 15 or more, or AHI 5-14 with documented symptoms",
+        "C2": "Face-to-face clinical evaluation before the sleep study"
+      }
+    }
+  }
+}

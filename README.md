@@ -31,4 +31,4 @@ Each case is one JSON file with:
 | `policy_ids` | policies the appeal may cite (must exist in `cases/policies.json`) |
 | `required_elements` | items the appeal must contain |
 
-Status: case schema and loader. Deterministic checks, a mock drafter, and the report are next.
+Status: case schema, loader, and the first 3 synthetic cases (`cases/PA-001..003`). Deterministic checks, a mock drafter, and the report are next.

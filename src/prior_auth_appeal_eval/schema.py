@@ -100,3 +100,21 @@ def parse_case(data: dict) -> Case:
 def load_case(path: str | Path) -> Case:
     with open(path, encoding="utf-8") as fh:
         return parse_case(json.load(fh))
+
+
+def load_policies(path: str | Path) -> dict[str, dict]:
+    """Load the policy set; each policy maps criterion ids (C1, C2, ...) to text."""
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)["policies"]
+
+
+def load_cases(directory: str | Path) -> list[Case]:
+    """Load every PA-*.json case and check its policies exist in policies.json."""
+    directory = Path(directory)
+    policies = load_policies(directory / "policies.json")
+    cases = [load_case(p) for p in sorted(directory.glob("PA-*.json"))]
+    for case in cases:
+        unknown = [p for p in case.policy_ids if p not in policies]
+        if unknown:
+            raise CaseError(f"{case.case_id}: unknown policies {unknown}")
+    return cases

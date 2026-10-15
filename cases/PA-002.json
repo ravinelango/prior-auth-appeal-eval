@@ -1,0 +1,18 @@
+{
+  "case_id": "PA-002",
+  "synthetic": true,
+  "patient": {"name": "Lee Synthetic", "dob": "1955-11-02", "member_id": "SYN220981"},
+  "request": {"cpt": ["95810"], "icd10": ["G47.33"]},
+  "denial": {
+    "reason_code": "ALT_SETTING",
+    "reason_text": "Home sleep apnea testing should be attempted first.",
+    "cited_policy": "SYN-POL-SLP-01"
+  },
+  "chart_facts": [
+    {"id": "F1", "text": "STOP-Bang score of 6"},
+    {"id": "F2", "text": "Heart failure with reduced ejection fraction, EF 30%"},
+    {"id": "F3", "text": "Home sleep test on a prior date was technically inadequate (under 4 hours of valid recording)"}
+  ],
+  "policy_ids": ["SYN-POL-SLP-01"],
+  "required_elements": ["member_id", "requested_service", "denial_reason_addressed", "policy_criteria_cited", "provider_signature"]
+}

@@ -1,0 +1,19 @@
+{
+  "case_id": "PA-001",
+  "synthetic": true,
+  "patient": {"name": "Dana Synthetic", "dob": "1968-03-14", "member_id": "SYN104422"},
+  "request": {"cpt": ["72148"], "icd10": ["M54.16"]},
+  "denial": {
+    "reason_code": "MED_NEC",
+    "reason_text": "Conservative care not documented for the required duration.",
+    "cited_policy": "SYN-POL-IMG-01"
+  },
+  "chart_facts": [
+    {"id": "F1", "text": "Low back pain radiating to the left leg for 10 weeks"},
+    {"id": "F2", "text": "Completed 8 weeks of physical therapy, 2 visits per week"},
+    {"id": "F3", "text": "Naproxen 500 mg twice daily for 7 weeks without relief"},
+    {"id": "F4", "text": "No bowel or bladder dysfunction; strength 5/5 bilaterally"}
+  ],
+  "policy_ids": ["SYN-POL-IMG-01"],
+  "required_elements": ["member_id", "requested_service", "denial_reason_addressed", "policy_criteria_cited", "provider_signature"]
+}
