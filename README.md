@@ -93,7 +93,8 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 tests (all passing). **No real results.**
 
 ## Roadmap
-- More cases (target 25) and harder seeded flaws (negation flips, near-miss identifiers)
+- ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done: 15 cases; target still 25)
+- Grow toward 25 synthetic cases
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - Minimum-necessary / extra-PHI check

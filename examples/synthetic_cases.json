@@ -980,6 +980,497 @@
           ]
         },
         {
+          "id": "SYN-LCD-1011",
+          "title": "Shoulder MRI without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1011-C1",
+              "text": "Shoulder pain lasting at least 6 weeks with functional limitation"
+            },
+            {
+              "id": "SYN-LCD-1011-C2",
+              "text": "Failed or incomplete response to at least 6 weeks of conservative care"
+            },
+            {
+              "id": "SYN-LCD-1011-C3",
+              "text": "No contraindication to MRI (no incompatible implanted device)"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-26\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.221\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-20\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.222\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match",
+            "required_elements"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-011",
+      "title": "Left shoulder MRI: negation flip (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200111",
+        "cpt": "73221",
+        "icd10": "M75.41",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: conservative care failure not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1011-C2"
+        ],
+        "reason_terms": [
+          "conservative",
+          "6 weeks"
+        ],
+        "applicable_policy": "SYN-LCD-1011",
+        "denial_date": "2026-03-13",
+        "appeal_deadline": "2026-05-12",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200111, member SYN-MBR-300111. CPT 73221 denied under SYN-D01: Not medically necessary: conservative care failure not documented. Criterion SYN-LCD-1011-C2 not met. You may appeal by 2026-05-12."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0011",
+        "patient_name": "Pat Testwell",
+        "dob": "1975-06-08",
+        "member_id": "SYN-MBR-300111",
+        "provider_name": "Dr. Quinn Specimen",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-15",
+            "text": "Left shoulder pain for 10 weeks; unable to reach overhead."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-15",
+            "text": "Not on anticoagulants; no implanted cardiac device."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-28",
+            "text": "Completed 6 weeks of physical therapy without meaningful improvement."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-28",
+            "text": "Continued naproxen; pain remains 6/10."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1011",
+          "title": "Shoulder MRI without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1011-C1",
+              "text": "Shoulder pain lasting at least 6 weeks with functional limitation"
+            },
+            {
+              "id": "SYN-LCD-1011-C2",
+              "text": "Failed or incomplete response to at least 6 weeks of conservative care"
+            },
+            {
+              "id": "SYN-LCD-1011-C3",
+              "text": "No contraindication to MRI (no incompatible implanted device)"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1012",
+          "title": "Cardiac rehabilitation (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1012-C1",
+              "text": "Recent qualifying cardiac event or procedure within 12 months"
+            },
+            {
+              "id": "SYN-LCD-1012-C2",
+              "text": "Cleared by cardiology for supervised exercise"
+            },
+            {
+              "id": "SYN-LCD-1012-C3",
+              "text": "Documented need for monitoring during exercise"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-27\nRE: Appeal of denial, claim SYN-CLM-200111 (SYNTHETIC CASE)\nPatient: Pat Testwell | Member ID: SYN-MBR-300111 | DOB: 1975-06-08\nRequested service: CPT 73221 | Diagnosis: ICD-10 M75.41\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1011-C2 is not met. That criterion is met: the chart documents 6 weeks of physical therapy without meaningful improvement.\n\n## Clinical summary\n- Left shoulder pain for 10 weeks; unable to reach overhead (2026-01-15).\n- Not on anticoagulants; no implanted cardiac device (2026-01-15).\n- Completed 6 weeks of physical therapy without meaningful improvement (2026-02-28).\n- Continued naproxen; pain remains 6/10 (2026-02-28).\n\n## Policy basis\nUnder SYN-LCD-1011 (Shoulder MRI without contrast), the relevant criteria are SYN-LCD-1011-C1, SYN-LCD-1011-C2, SYN-LCD-1011-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-15 through 2026-02-28\n- Copy of denial letter\n\nSincerely,\nDr. Quinn Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-27\nRE: Appeal of denial, claim SYN-CLM-200111 (SYNTHETIC CASE)\nPatient: Pat Testwell | Member ID: SYN-MBR-300111 | DOB: 1975-06-08\nRequested service: CPT 73221 | Diagnosis: ICD-10 M75.41\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1011-C2 is not met. That criterion is met: the chart documents 6 weeks of physical therapy without meaningful improvement.\n\n## Clinical summary\n- Left shoulder pain for 10 weeks; unable to reach overhead (2026-01-15).\n- Not on anticoagulants; no implanted cardiac device (2026-01-15).\n- Completed 6 weeks of physical therapy without meaningful improvement (2026-02-28).\n- Continued naproxen; pain remains 6/10 (2026-02-28).\n- Currently on anticoagulants and has an implanted cardiac device (2026-01-15).\n\n## Policy basis\nUnder SYN-LCD-1011 (Shoulder MRI without contrast), the relevant criteria are SYN-LCD-1011-C1, SYN-LCD-1011-C2, SYN-LCD-1011-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-15 through 2026-02-28\n- Copy of denial letter\n\nSincerely,\nDr. Quinn Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-012",
+      "title": "Outpatient cardiac rehab: near miss member (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200112",
+        "cpt": "93798",
+        "icd10": "I25.10",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: qualifying cardiac event not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1012-C1"
+        ],
+        "reason_terms": [
+          "cardiac event",
+          "12 months"
+        ],
+        "applicable_policy": "SYN-LCD-1012",
+        "denial_date": "2026-03-14",
+        "appeal_deadline": "2026-05-13",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200112, member SYN-MBR-300112. CPT 93798 denied under SYN-D01: Not medically necessary: qualifying cardiac event not documented. Criterion SYN-LCD-1012-C1 not met. You may appeal by 2026-05-13."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0012",
+        "patient_name": "Chris Mockson",
+        "dob": "1961-01-29",
+        "member_id": "SYN-MBR-300112",
+        "provider_name": "Dr. Drew Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-08",
+            "text": "STEMI treated with PCI to the LAD on 2025-12-20."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-08",
+            "text": "Cleared by cardiology for Phase II cardiac rehab."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-08",
+            "text": "Exertional dyspnea; needs ECG-monitored exercise."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1012",
+          "title": "Cardiac rehabilitation (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1012-C1",
+              "text": "Recent qualifying cardiac event or procedure within 12 months"
+            },
+            {
+              "id": "SYN-LCD-1012-C2",
+              "text": "Cleared by cardiology for supervised exercise"
+            },
+            {
+              "id": "SYN-LCD-1012-C3",
+              "text": "Documented need for monitoring during exercise"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1013",
+          "title": "Esophagogastroduodenoscopy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1013-C1",
+              "text": "Alarm features (dysphagia, bleeding, or iron-deficiency anemia) or refractory reflux"
+            },
+            {
+              "id": "SYN-LCD-1013-C2",
+              "text": "Age 50 or older, or prior Barrett surveillance indication"
+            },
+            {
+              "id": "SYN-LCD-1013-C3",
+              "text": "No EGD in the prior 3 years unless newly indicated"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-28\nRE: Appeal of denial, claim SYN-CLM-200112 (SYNTHETIC CASE)\nPatient: Chris Mockson | Member ID: SYN-MBR-300112 | DOB: 1961-01-29\nRequested service: CPT 93798 | Diagnosis: ICD-10 I25.10\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1012-C1 is not met. That criterion is met: the patient had a STEMI treated with PCI on 2025-12-20, within 12 months.\n\n## Clinical summary\n- STEMI treated with PCI to the LAD on 2025-12-20 (2026-01-08).\n- Cleared by cardiology for Phase II cardiac rehab (2026-01-08).\n- Exertional dyspnea; needs ECG-monitored exercise (2026-01-08).\n\n## Policy basis\nUnder SYN-LCD-1012 (Cardiac rehabilitation), the relevant criteria are SYN-LCD-1012-C1, SYN-LCD-1012-C2, SYN-LCD-1012-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-01-08\n- Copy of denial letter\n\nSincerely,\nDr. Drew Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-28\nRE: Appeal of denial, claim SYN-CLM-200112 (SYNTHETIC CASE)\nPatient: Chris Mockson | Member ID: SYN-MBR-300113 | DOB: 1961-01-29\nRequested service: CPT 93798 | Diagnosis: ICD-10 I25.10\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1012-C1 is not met. That criterion is met: the patient had a STEMI treated with PCI on 2025-12-20, within 12 months.\n\n## Clinical summary\n- STEMI treated with PCI to the LAD on 2025-12-20 (2026-01-08).\n- Cleared by cardiology for Phase II cardiac rehab (2026-01-08).\n- Exertional dyspnea; needs ECG-monitored exercise (2026-01-08).\n\n## Policy basis\nUnder SYN-LCD-1012 (Cardiac rehabilitation), the relevant criteria are SYN-LCD-1012-C1, SYN-LCD-1012-C2, SYN-LCD-1012-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-01-08\n- Copy of denial letter\n\nSincerely,\nDr. Drew Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-013",
+      "title": "Upper endoscopy: near miss cpt (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200113",
+        "cpt": "43239",
+        "icd10": "K21.0",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: alarm features not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1013-C1"
+        ],
+        "reason_terms": [
+          "dysphagia",
+          "anemia"
+        ],
+        "applicable_policy": "SYN-LCD-1013",
+        "denial_date": "2026-03-15",
+        "appeal_deadline": "2026-05-14",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200113, member SYN-MBR-300113. CPT 43239 denied under SYN-D02: Documentation insufficient: alarm features not documented. Criterion SYN-LCD-1013-C1 not met. You may appeal by 2026-05-14."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0013",
+        "patient_name": "Leslie Sample",
+        "dob": "1957-09-14",
+        "member_id": "SYN-MBR-300113",
+        "provider_name": "Dr. Blair Fictional",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-01",
+            "text": "Progressive dysphagia to solids for 6 weeks."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-01",
+            "text": "Hemoglobin 9.8 g/dL with iron-deficiency anemia."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-01",
+            "text": "Age 68; last EGD was 2019."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1013",
+          "title": "Esophagogastroduodenoscopy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1013-C1",
+              "text": "Alarm features (dysphagia, bleeding, or iron-deficiency anemia) or refractory reflux"
+            },
+            {
+              "id": "SYN-LCD-1013-C2",
+              "text": "Age 50 or older, or prior Barrett surveillance indication"
+            },
+            {
+              "id": "SYN-LCD-1013-C3",
+              "text": "No EGD in the prior 3 years unless newly indicated"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1014",
+          "title": "Cervical spine MRI without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1014-C1",
+              "text": "Neck pain with radicular symptoms for at least 6 weeks"
+            },
+            {
+              "id": "SYN-LCD-1014-C2",
+              "text": "Neurological deficit or progressive symptoms"
+            },
+            {
+              "id": "SYN-LCD-1014-C3",
+              "text": "Inadequate response to conservative therapy"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-29\nRE: Appeal of denial, claim SYN-CLM-200113 (SYNTHETIC CASE)\nPatient: Leslie Sample | Member ID: SYN-MBR-300113 | DOB: 1957-09-14\nRequested service: CPT 43239 | Diagnosis: ICD-10 K21.0\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1013-C1 is not met. That criterion is met: the chart documents progressive dysphagia and iron-deficiency anemia.\n\n## Clinical summary\n- Progressive dysphagia to solids for 6 weeks (2026-02-01).\n- Hemoglobin 9.8 g/dL with iron-deficiency anemia (2026-02-01).\n- Age 68; last EGD was 2019 (2026-02-01).\n\n## Policy basis\nUnder SYN-LCD-1013 (Esophagogastroduodenoscopy), the relevant criteria are SYN-LCD-1013-C1, SYN-LCD-1013-C2, SYN-LCD-1013-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-01 through 2026-02-01\n- Copy of denial letter\n\nSincerely,\nDr. Blair Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-29\nRE: Appeal of denial, claim SYN-CLM-200113 (SYNTHETIC CASE)\nPatient: Leslie Sample | Member ID: SYN-MBR-300113 | DOB: 1957-09-14\nRequested service: CPT 43240 | Diagnosis: ICD-10 K21.0\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1013-C1 is not met. That criterion is met: the chart documents progressive dysphagia and iron-deficiency anemia.\n\n## Clinical summary\n- Progressive dysphagia to solids for 6 weeks (2026-02-01).\n- Hemoglobin 9.8 g/dL with iron-deficiency anemia (2026-02-01).\n- Age 68; last EGD was 2019 (2026-02-01).\n\n## Policy basis\nUnder SYN-LCD-1013 (Esophagogastroduodenoscopy), the relevant criteria are SYN-LCD-1013-C1, SYN-LCD-1013-C2, SYN-LCD-1013-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-01 through 2026-02-01\n- Copy of denial letter\n\nSincerely,\nDr. Blair Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-014",
+      "title": "Cervical spine MRI: swapped icd (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200114",
+        "cpt": "72141",
+        "icd10": "M54.12",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: conservative therapy response not shown",
+        "unmet_criteria": [
+          "SYN-LCD-1014-C3"
+        ],
+        "reason_terms": [
+          "conservative",
+          "inadequate"
+        ],
+        "applicable_policy": "SYN-LCD-1014",
+        "denial_date": "2026-03-16",
+        "appeal_deadline": "2026-05-15",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200114, member SYN-MBR-300114. CPT 72141 denied under SYN-D01: Not medically necessary: conservative therapy response not shown. Criterion SYN-LCD-1014-C3 not met. You may appeal by 2026-05-15."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0014",
+        "patient_name": "Shannon Fakename",
+        "dob": "1969-12-21",
+        "member_id": "SYN-MBR-300114",
+        "provider_name": "Dr. Cameron Demo",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-11",
+            "text": "Right arm radicular pain for 8 weeks; neck pain radiating to digits 1-2."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-11",
+            "text": "Right biceps reflex diminished; mild wrist extension weakness 4/5."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-24",
+            "text": "Completed 6 weeks of physical therapy with inadequate response; pain still 7/10."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1014",
+          "title": "Cervical spine MRI without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1014-C1",
+              "text": "Neck pain with radicular symptoms for at least 6 weeks"
+            },
+            {
+              "id": "SYN-LCD-1014-C2",
+              "text": "Neurological deficit or progressive symptoms"
+            },
+            {
+              "id": "SYN-LCD-1014-C3",
+              "text": "Inadequate response to conservative therapy"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1015",
+          "title": "Pulse oximetry for home oxygen (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1015-C1",
+              "text": "Chronic lung disease with recent exacerbation or resting desaturation"
+            },
+            {
+              "id": "SYN-LCD-1015-C2",
+              "text": "Resting SpO2 of 88 percent or lower, or exertional desaturation"
+            },
+            {
+              "id": "SYN-LCD-1015-C3",
+              "text": "Optimized medical therapy documented"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-30\nRE: Appeal of denial, claim SYN-CLM-200114 (SYNTHETIC CASE)\nPatient: Shannon Fakename | Member ID: SYN-MBR-300114 | DOB: 1969-12-21\nRequested service: CPT 72141 | Diagnosis: ICD-10 M54.12\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1014-C3 is not met. That criterion is met: the patient completed 6 weeks of physical therapy with an inadequate response.\n\n## Clinical summary\n- Right arm radicular pain for 8 weeks; neck pain radiating to digits 1-2 (2026-01-11).\n- Right biceps reflex diminished; mild wrist extension weakness 4/5 (2026-01-11).\n- Completed 6 weeks of physical therapy with inadequate response; pain still 7/10 (2026-02-24).\n\n## Policy basis\nUnder SYN-LCD-1014 (Cervical spine MRI without contrast), the relevant criteria are SYN-LCD-1014-C1, SYN-LCD-1014-C2, SYN-LCD-1014-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-11 through 2026-02-24\n- Copy of denial letter\n\nSincerely,\nDr. Cameron Demo, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-30\nRE: Appeal of denial, claim SYN-CLM-200114 (SYNTHETIC CASE)\nPatient: Shannon Fakename | Member ID: SYN-MBR-300114 | DOB: 1969-12-21\nRequested service: CPT 72141 | Diagnosis: ICD-10 M54.13\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1014-C3 is not met. That criterion is met: the patient completed 6 weeks of physical therapy with an inadequate response.\n\n## Clinical summary\n- Right arm radicular pain for 8 weeks; neck pain radiating to digits 1-2 (2026-01-11).\n- Right biceps reflex diminished; mild wrist extension weakness 4/5 (2026-01-11).\n- Completed 6 weeks of physical therapy with inadequate response; pain still 7/10 (2026-02-24).\n\n## Policy basis\nUnder SYN-LCD-1014 (Cervical spine MRI without contrast), the relevant criteria are SYN-LCD-1014-C1, SYN-LCD-1014-C2, SYN-LCD-1014-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-11 through 2026-02-24\n- Copy of denial letter\n\nSincerely,\nDr. Cameron Demo, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-015",
+      "title": "Home oxygen evaluation: paraphrase flip (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200115",
+        "cpt": "94760",
+        "icd10": "J44.1",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: qualifying saturation values not shown",
+        "unmet_criteria": [
+          "SYN-LCD-1015-C2"
+        ],
+        "reason_terms": [
+          "SpO2",
+          "88"
+        ],
+        "applicable_policy": "SYN-LCD-1015",
+        "denial_date": "2026-03-17",
+        "appeal_deadline": "2026-05-16",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200115, member SYN-MBR-300115. CPT 94760 denied under SYN-D02: Documentation insufficient: qualifying saturation values not shown. Criterion SYN-LCD-1015-C2 not met. You may appeal by 2026-05-16."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0015",
+        "patient_name": "Drew Notreal",
+        "dob": "1954-04-02",
+        "member_id": "SYN-MBR-300115",
+        "provider_name": "Dr. Harper Testdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-10",
+            "text": "COPD with recent exacerbation requiring steroids."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-10",
+            "text": "Resting SpO2 86 percent on room air."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-10",
+            "text": "On optimized inhaler therapy including LABA/LAMA."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-10",
+            "text": "Walks 20 meters before stopping for dyspnea."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1015",
+          "title": "Pulse oximetry for home oxygen (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1015-C1",
+              "text": "Chronic lung disease with recent exacerbation or resting desaturation"
+            },
+            {
+              "id": "SYN-LCD-1015-C2",
+              "text": "Resting SpO2 of 88 percent or lower, or exertional desaturation"
+            },
+            {
+              "id": "SYN-LCD-1015-C3",
+              "text": "Optimized medical therapy documented"
+            }
+          ]
+        },
+        {
           "id": "SYN-LCD-1001",
           "title": "Advanced imaging of the lumbar spine (synthetic)",
           "criteria": [
@@ -1000,14 +1491,13 @@
       ],
       "reference_drafts": {
         "good": {
-          "text": "Date: 2026-03-26\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.221\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": []
         },
         "flawed": {
-          "text": "Date: 2026-05-20\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.222\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n- Resting SpO2 improved to 96 percent on room air after the recent exacerbation (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
-            "identifiers_match",
-            "required_elements"
+            "facts_in_chart"
           ]
         }
       }

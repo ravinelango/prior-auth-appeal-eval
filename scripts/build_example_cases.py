@@ -176,6 +176,73 @@ S = [
      "the patient completed 6 weeks of non-operative treatment with physical therapy and the "
      "locking episodes persist",
      {"kind": "late_and_incomplete", "icd": "M23.222"}),
+    ("Pat Testwell", "1975-06-08", "Dr. Quinn Specimen", "Left shoulder MRI", "73221",
+     "M75.41", "Shoulder MRI without contrast (synthetic)",
+     ["Shoulder pain lasting at least 6 weeks with functional limitation",
+      "Failed or incomplete response to at least 6 weeks of conservative care",
+      "No contraindication to MRI (no incompatible implanted device)"],
+     2, "SYN-D01", "Not medically necessary: conservative care failure not documented",
+     ["conservative", "6 weeks"],
+     [("2026-01-15", "Left shoulder pain for 10 weeks; unable to reach overhead."),
+      ("2026-01-15", "Not on anticoagulants; no implanted cardiac device."),
+      ("2026-02-28", "Completed 6 weeks of physical therapy without meaningful improvement."),
+      ("2026-02-28", "Continued naproxen; pain remains 6/10.")],
+     "the chart documents 6 weeks of physical therapy without meaningful improvement",
+     {"kind": "negation_flip",
+      "bullet": "Currently on anticoagulants and has an implanted cardiac device "
+                "(2026-01-15)."}),
+    ("Chris Mockson", "1961-01-29", "Dr. Drew Placeholder", "Outpatient cardiac rehab",
+     "93798", "I25.10", "Cardiac rehabilitation (synthetic)",
+     ["Recent qualifying cardiac event or procedure within 12 months",
+      "Cleared by cardiology for supervised exercise",
+      "Documented need for monitoring during exercise"],
+     1, "SYN-D01", "Not medically necessary: qualifying cardiac event not documented",
+     ["cardiac event", "12 months"],
+     [("2026-01-08", "STEMI treated with PCI to the LAD on 2025-12-20."),
+      ("2026-01-08", "Cleared by cardiology for Phase II cardiac rehab."),
+      ("2026-01-08", "Exertional dyspnea; needs ECG-monitored exercise.")],
+     "the patient had a STEMI treated with PCI on 2025-12-20, within 12 months",
+     {"kind": "near_miss_member"}),
+    ("Leslie Sample", "1957-09-14", "Dr. Blair Fictional", "Upper endoscopy", "43239",
+     "K21.0", "Esophagogastroduodenoscopy (synthetic)",
+     ["Alarm features (dysphagia, bleeding, or iron-deficiency anemia) or refractory reflux",
+      "Age 50 or older, or prior Barrett surveillance indication",
+      "No EGD in the prior 3 years unless newly indicated"],
+     1, "SYN-D02", "Documentation insufficient: alarm features not documented",
+     ["dysphagia", "anemia"],
+     [("2026-02-01", "Progressive dysphagia to solids for 6 weeks."),
+      ("2026-02-01", "Hemoglobin 9.8 g/dL with iron-deficiency anemia."),
+      ("2026-02-01", "Age 68; last EGD was 2019.")],
+     "the chart documents progressive dysphagia and iron-deficiency anemia",
+     {"kind": "near_miss_cpt", "to": "43240"}),
+    ("Shannon Fakename", "1969-12-21", "Dr. Cameron Demo", "Cervical spine MRI", "72141",
+     "M54.12", "Cervical spine MRI without contrast (synthetic)",
+     ["Neck pain with radicular symptoms for at least 6 weeks",
+      "Neurological deficit or progressive symptoms",
+      "Inadequate response to conservative therapy"],
+     3, "SYN-D01", "Not medically necessary: conservative therapy response not shown",
+     ["conservative", "inadequate"],
+     [("2026-01-11", "Right arm radicular pain for 8 weeks; neck pain radiating to digits 1-2."),
+      ("2026-01-11", "Right biceps reflex diminished; mild wrist extension weakness 4/5."),
+      ("2026-02-24", "Completed 6 weeks of physical therapy with inadequate response; "
+                     "pain still 7/10.")],
+     "the patient completed 6 weeks of physical therapy with an inadequate response",
+     {"kind": "swapped_icd", "to": "M54.13"}),
+    ("Drew Notreal", "1954-04-02", "Dr. Harper Testdoc", "Home oxygen evaluation", "94760",
+     "J44.1", "Pulse oximetry for home oxygen (synthetic)",
+     ["Chronic lung disease with recent exacerbation or resting desaturation",
+      "Resting SpO2 of 88 percent or lower, or exertional desaturation",
+      "Optimized medical therapy documented"],
+     2, "SYN-D02", "Documentation insufficient: qualifying saturation values not shown",
+     ["SpO2", "88"],
+     [("2026-02-10", "COPD with recent exacerbation requiring steroids."),
+      ("2026-02-10", "Resting SpO2 86 percent on room air."),
+      ("2026-02-10", "On optimized inhaler therapy including LABA/LAMA."),
+      ("2026-02-10", "Walks 20 meters before stopping for dyspnea.")],
+     "resting SpO2 is 86 percent on room air, below the 88 percent threshold",
+     {"kind": "paraphrase_flip",
+      "bullet": "Resting SpO2 improved to 96 percent on room air after the recent "
+                "exacerbation (2026-02-10)."}),
 ]
 
 
@@ -259,6 +326,21 @@ def build() -> dict:
             f["date_s"] = str(deadline + timedelta(days=9))
             f["request"], f["icd"] = "", flaw["icd"]
             flaws = ["identifiers_match", "required_elements"]
+        elif kind == "negation_flip":
+            f["bullets"] = bullets + [flaw["bullet"]]
+            flaws = ["facts_in_chart"]
+        elif kind == "near_miss_member":
+            # One-digit near-miss on the member id (last digit + 1, wrapping 9->0).
+            last = int(member[-1])
+            f["member"] = member[:-1] + str((last + 1) % 10)
+            flaws = ["identifiers_match"]
+        elif kind == "near_miss_cpt":
+            f["cpt"], flaws = flaw["to"], ["identifiers_match"]
+        elif kind == "swapped_icd":
+            f["icd"], flaws = flaw["to"], ["identifiers_match"]
+        elif kind == "paraphrase_flip":
+            f["bullets"] = bullets + [flaw["bullet"]]
+            flaws = ["facts_in_chart"]
         cases.append({
             "id": f"PA-{n:03d}",
             "title": f"{title}: {kind.replace('_', ' ')} (synthetic)",

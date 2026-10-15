@@ -15,7 +15,7 @@ CASES = load_cases(ROOT / "examples" / "synthetic_cases.json")
 
 def test_dataset_is_labeled_synthetic_and_sized():
     assert CASES.label.startswith("SYNTHETIC")
-    assert len(CASES.cases) == 10
+    assert len(CASES.cases) == 15
     for c in CASES.cases:
         assert c.chart.member_id.startswith("SYN-MBR-") and c.denial.claim_id.startswith("SYN-CLM-")
         assert all(p.id.startswith("SYN-") and "(synthetic)" in p.title for p in c.policies)

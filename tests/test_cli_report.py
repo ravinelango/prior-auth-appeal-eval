@@ -50,7 +50,7 @@ def test_only_required_elements_failing_is_go_with_conditions():
 def test_report_content():
     md = render(CASES, evaluate(CASES, MockDrafter("flawed")), MockDrafter("flawed"), "x.json")
     assert "Synthetic demo" in md and "Decision: **NO-GO**" in md
-    assert "Checker validation" in md and "10/10 cases matched" in md
+    assert "Checker validation" in md and "15/15 cases matched" in md
     assert "not medical or legal advice" in md.lower()
 
 
@@ -60,7 +60,7 @@ def test_cli_end_to_end(tmp_path):
                  "--json", str(js), "--strict"]) == 0
     assert "Decision: **GO**" in out.read_text()
     data = json.loads(js.read_text())
-    assert data["synthetic"] is True and len(data["cases"]) == 10
+    assert data["synthetic"] is True and len(data["cases"]) == 15
     assert main(["run", "--cases", str(EX), "--drafter", "mock:flawed", "--strict",
                  "--out", str(out)]) == 1
 
