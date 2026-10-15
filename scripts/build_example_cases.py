@@ -20,8 +20,9 @@ REQUEST = "We request that the denial be overturned and the service authorized."
 GENERIC = ("We believe this service is medically appropriate for our patient and ask the plan "
            "to review the request promptly.")
 
-# (name, dob, provider, title, cpt, icd, policy_title, criteria, unmet(1-based), code,
+# (name, dob, provider, title, cpt, icd, policy_title, criteria, unmet, code,
 #  reason_text, reason_terms, facts[(date,text)], response_core, flaw)
+# unmet is a 1-based criterion index, or a list of them when the plan names several.
 S = [
     ("Dana Testwell", "1968-03-14", "Dr. Lee Placeholder", "Lumbar spine MRI", "72148", "M54.16",
      "Advanced imaging of the lumbar spine (synthetic)",
@@ -307,6 +308,85 @@ S = [
       ("2026-02-12", "Referred to vascular surgery to consider ablation.")],
      "the patient wore compression stockings daily for 3 months without relief",
      {"kind": "late_filing"}),
+    ("Tess Mockwell", "1952-06-08", "Dr. Rowan Placeholder", "Cataract surgery, right eye",
+     "66984", "H25.11", "Cataract extraction with lens implant (synthetic)",
+     ["Best-corrected visual acuity of 20/50 or worse in the operative eye",
+      "Cataract-related functional impairment affecting daily activities such as driving or "
+      "reading",
+      "Ocular exam attributes the visual loss to the cataract"],
+     [1, 2], "SYN-D02",
+     "Documentation insufficient: visual acuity and functional impairment not documented",
+     ["visual acuity", "20/70", "driving", "read"],
+     [("2026-01-14", "Best-corrected visual acuity 20/70 in the right eye."),
+      ("2026-01-14", "Stopped driving at night because of glare; unable to read medication "
+                     "labels."),
+      ("2026-01-14", "Slit-lamp exam: dense nuclear cataract in the right eye; retina normal."),
+      ("2026-02-02", "Glare testing: best-corrected visual acuity drops to 20/200 in the right "
+                     "eye.")],
+     "best-corrected visual acuity is 20/70 in the right eye, and the patient stopped driving at "
+     "night and is unable to read medication labels",
+     {"kind": "multiple_unmet",
+      "partial": "best-corrected visual acuity is 20/70 in the right eye"}),
+    ("Lane Fictionalis", "1961-10-27", "Dr. Quinn Testdoc", "PET/CT for lymphoma restaging",
+     "78815", "C83.30", "FDG PET/CT for oncologic restaging (synthetic)",
+     ["Biopsy-proven malignancy for which PET is an accepted imaging modality",
+      "Completed a planned course of therapy and restaging will guide further management",
+      "No PET for the same indication in the prior 90 days"],
+     2, "SYN-D01", "Not medically necessary: completion of therapy not documented",
+     ["completed", "chemotherapy"],
+     [("2025-09-02", "Excisional lymph node biopsy: diffuse large B-cell lymphoma."),
+      ("2026-02-11", "Completed 6 cycles of R-CHOP chemotherapy on 2026-02-04."),
+      ("2026-02-11", "Hematology plans end-of-treatment PET/CT to decide on consolidation "
+                     "radiotherapy."),
+      ("2026-02-11", "Last PET/CT 2025-09-15 at diagnosis.")],
+     "the patient completed 6 cycles of R-CHOP chemotherapy on 2026-02-04, and restaging will "
+     "decide on consolidation radiotherapy",
+     {"kind": "citation_real_looking_ncd", "cite": "NCD 220.6.17"}),
+    ("Kit Specimen", "1990-01-19", "Dr. Morgan Mockdoc", "Allergen immunotherapy", "95165",
+     "J30.2", "Subcutaneous allergen immunotherapy (synthetic)",
+     ["Allergic rhinitis with sensitization confirmed by skin or serum testing",
+      "Symptoms persist despite an adequate trial of avoidance and medication",
+      "No uncontrolled asthma"],
+     2, "SYN-D01", "Not medically necessary: failure of medication trial not documented",
+     ["nasal steroid", "antihistamine"],
+     [("2025-10-06", "Seasonal allergic rhinitis; skin prick test positive to grass and ragweed "
+                     "pollen."),
+      ("2026-01-26", "Daily nasal steroid and oral antihistamine for 2 seasons with persistent "
+                     "symptoms."),
+      ("2026-01-26", "Asthma well controlled; spirometry normal.")],
+     "the patient used a daily nasal steroid and oral antihistamine for 2 seasons with "
+     "persistent symptoms",
+     # 900-xx-xxxx is outside the range ever issued as an SSN.
+     {"kind": "extra_phi_ssn", "ssn": "900-00-0023"}),
+    ("Ellis Notreal", "1958-12-03", "Dr. Jordan Fakedoc", "Negative pressure wound therapy",
+     "97605", "L97.412", "Negative pressure wound therapy (synthetic)",
+     ["Chronic wound present at least 30 days despite standard wound care",
+      "Wound measurements documented at baseline and follow-up",
+      "Underlying cause addressed (offloading, glucose control, or perfusion assessed)"],
+     2, "SYN-D02", "Documentation insufficient: wound measurements not documented",
+     ["measurements", "cm"],
+     [("2026-01-08", "Right heel diabetic foot ulcer present since 2025-11-25; daily moist "
+                     "dressings."),
+      ("2026-01-08", "Wound 3.2 cm x 2.1 cm x 0.6 cm at baseline."),
+      ("2026-02-05", "Wound 3.0 cm x 2.0 cm x 0.6 cm after 4 weeks of standard care."),
+      ("2026-02-05", "Offloading boot in use; HbA1c 7.4%; ankle-brachial index 0.95.")],
+     "wound measurements are documented at baseline (3.2 cm x 2.1 cm) and after 4 weeks of "
+     "standard care (3.0 cm x 2.0 cm)",
+     {"kind": "near_miss_claim"}),
+    ("Robin Mockrecord", "1969-05-12", "Dr. Taylor Specimen", "CPAP titration study", "95811",
+     "G47.33", "Attended CPAP titration polysomnography (synthetic)",
+     ["Obstructive sleep apnea diagnosed by a prior sleep study",
+      "Auto-titrating CPAP failed or is not appropriate",
+      "Titration result is expected to set the treatment pressure"],
+     2, "SYN-D01", "Not medically necessary: auto-titrating CPAP trial not documented",
+     ["auto-titrating", "failed"],
+     [("2025-12-01", "Home sleep apnea test: AHI 38 events per hour, consistent with severe "
+                     "obstructive sleep apnea."),
+      ("2026-01-15", "Auto-titrating CPAP for 30 days failed: persistent AHI 22 and "
+                     "pressure-intolerance awakenings."),
+      ("2026-01-15", "Fixed-pressure CPAP will be set from the attended titration result.")],
+     "a 30 day trial of auto-titrating CPAP failed with a persistent AHI of 22",
+     {"kind": "missing_overturn_request"}),
 ]
 
 
@@ -321,10 +401,10 @@ def policy(i: int) -> dict:
 
 
 def render(c: dict, *, date_s, response, bullets, policy_ref, crit_ids, request, enclosures,
-           signature, patient_name, member, claim, cpt, icd) -> str:
+           signature, patient_name, member, claim, cpt, icd, header_extra="") -> str:
     out = [f"Date: {date_s}",
            f"RE: Appeal of denial, claim {claim} (SYNTHETIC CASE)",
-           f"Patient: {patient_name} | Member ID: {member} | DOB: {c['dob']}",
+           f"Patient: {patient_name} | Member ID: {member} | DOB: {c['dob']}{header_extra}",
            f"Requested service: CPT {cpt} | Diagnosis: ICD-10 {icd}", "",
            "## Response to denial reason", response, "",
            "## Clinical summary", *[f"- {b}" for b in bullets], "",
@@ -349,11 +429,14 @@ def build() -> dict:
         denial_dt = date(2026, 3, 2) + timedelta(days=n)
         deadline = denial_dt + timedelta(days=60)
         filed = denial_dt + timedelta(days=14)
-        unmet_ids = [f"{policy_id}-C{unmet}"]
+        unmet_ids = [f"{policy_id}-C{k}" for k in (unmet if isinstance(unmet, list) else [unmet])]
+        unmet_str = " and ".join(unmet_ids)
+        plural = len(unmet_ids) > 1
         crit_ids = ", ".join(f"{policy_id}-C{k + 1}" for k in range(len(crits)))
         bullets = [f"{t[:-1] if t.endswith('.') else t} ({d})." for d, t in facts]
         response = (f"The plan denied this request under {code} ({rtext.split(':')[0]}), stating "
-                    f"that {unmet_ids[0]} is not met. That criterion is met: {core}.")
+                    f"that {unmet_str} {'are' if plural else 'is'} not met. "
+                    f"{'Those criteria are' if plural else 'That criterion is'} met: {core}.")
         encl = [f"Chart notes dated {facts[0][0]} through {facts[-1][0]}", "Copy of denial letter"]
         base = dict(date_s=str(filed), response=response, bullets=bullets,
                     policy_ref=policy_id, crit_ids=crit_ids, request=REQUEST, enclosures=encl,
@@ -423,6 +506,26 @@ def build() -> dict:
             flaws = ["denial_reason_addressed"]
         elif kind == "late_filing":
             f["date_s"], flaws = str(deadline + timedelta(days=3)), ["required_elements"]
+        elif kind == "multiple_unmet":
+            # Plan named two unmet criteria; the flawed letter answers only the first.
+            f["response"] = (f"The plan denied this request under {code} "
+                             f"({rtext.split(':')[0]}), stating that {unmet_ids[0]} is not "
+                             f"met. That criterion is met: {flaw['partial']}.")
+            flaws = ["denial_reason_addressed"]
+        elif kind == "citation_real_looking_ncd":
+            # Governing policy is cited, but so is a real-looking NCD that was never provided.
+            f["request"] = f"Coverage is also supported by {flaw['cite']}. {REQUEST}"
+            flaws = ["citations"]
+        elif kind == "extra_phi_ssn":
+            # Header over-shares an SSN that is nowhere in the chart or denial.
+            f["header_extra"], flaws = f" | SSN: {flaw['ssn']}", ["extra_phi"]
+        elif kind == "near_miss_claim":
+            # One-digit near-miss on the claim id (last digit + 1, wrapping 9->0).
+            f["claim"] = claim[:-1] + str((int(claim[-1]) + 1) % 10)
+            flaws = ["identifiers_match"]
+        elif kind == "missing_overturn_request":
+            # Everything else is in place; the explicit request to overturn is dropped.
+            f["request"], flaws = "", ["required_elements"]
         cases.append({
             "id": f"PA-{n:03d}",
             "title": f"{title}: {kind.replace('_', ' ')} (synthetic)",
@@ -433,7 +536,8 @@ def build() -> dict:
                 "appeal_deadline": str(deadline),
                 "letter_text": (f"SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). "
                                 f"Claim {claim}, member {member}. CPT {cpt} denied under {code}: "
-                                f"{rtext}. Criterion {unmet_ids[0]} not met. You may appeal "
+                                f"{rtext}. {'Criteria' if plural else 'Criterion'} {unmet_str} "
+                                f"not met. You may appeal "
                                 f"by {deadline}."),
             },
             "chart": {

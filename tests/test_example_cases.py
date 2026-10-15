@@ -15,7 +15,7 @@ CASES = load_cases(ROOT / "examples" / "synthetic_cases.json")
 
 def test_dataset_is_labeled_synthetic_and_sized():
     assert CASES.label.startswith("SYNTHETIC")
-    assert len(CASES.cases) == 20
+    assert len(CASES.cases) == 25
     for c in CASES.cases:
         assert c.chart.member_id.startswith("SYN-MBR-") and c.denial.claim_id.startswith("SYN-CLM-")
         assert all(p.id.startswith("SYN-") and "(synthetic)" in p.title for p in c.policies)
@@ -39,6 +39,17 @@ def test_flawed_reference_draft_fails_exactly_the_seeded_checks(case):
 def test_every_failure_mode_is_covered_at_least_once():
     seeded = {f for c in CASES.cases for f in c.reference_drafts["flawed"].seeded_flaws}
     assert seeded == set(CHECK_NAMES)
+
+
+def test_multi_unmet_case_names_both_criteria_and_flaw_answers_one():
+    case = next(c for c in CASES.cases if c.id == "PA-021")
+    assert len(case.denial.unmet_criteria) == 2
+    assert all(u in case.denial.letter_text for u in case.denial.unmet_criteria)
+    flawed = case.reference_drafts["flawed"].text
+    assert case.denial.unmet_criteria[0] in flawed
+    (r,) = [r for r in run_checks(case, flawed) if r.name == "denial_reason_addressed"]
+    assert r.findings == [f"response does not cite the unmet criterion "
+                          f"{case.denial.unmet_criteria[1]}"]
 
 
 def test_no_real_looking_policy_ids_in_provided_sets():

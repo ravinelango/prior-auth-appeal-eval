@@ -44,7 +44,7 @@ either):
 major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
 
 ## How it works
-1. **Cases** (`examples/synthetic_cases.json`): 20 synthetic denials, each with the denial
+1. **Cases** (`examples/synthetic_cases.json`): 25 synthetic denials, each with the denial
    letter text, reason code and unmet criteria, a patient chart, the provided policy set, and
    two reference drafts: one good and one with a seeded flaw. They are generated from templates
    by `scripts/build_example_cases.py`, so they are reproducible but formulaic. PA-011..PA-015
@@ -52,6 +52,10 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    a paraphrased number. PA-016..PA-020 add a criterion number the policy does not have, a
    patient name pasted from another case, a shifted chart date, a response that cites the
    criterion but never engages the stated reason, and a letter filed after the deadline.
+   PA-021..PA-025 add a denial with two unmet criteria where the flawed letter answers only
+   one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
+   header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
+   the explicit request to overturn.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`), and
@@ -84,7 +88,7 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 
 ## Limitations (read these)
 - **Synthetic only.** The cases are formulaic and the seeded flaws were written by the same
-  author as the checkers, so "20/20 matched" validates the plumbing, not real-world recall.
+  author as the checkers, so "25/25 matched" validates the plumbing, not real-world recall.
 - **A floor, not a verdict.** A GO means the deterministic checks passed. It does not mean the
   letter is persuasive, complete, or clinically right. Human review is still required.
 - **Literal by design.** The fact check is lexical (numbers, dates and vocabulary), so it can
@@ -99,12 +103,14 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 20 synthetic cases, six checkers, mock drafter, report, CLI and
+**Early, v0.1.** Schema, 25 synthetic cases, six checkers, mock drafter, report, CLI and
 tests (all passing). **No real results.**
 
 ## Roadmap
-- ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done: 20 cases; target still 25)
-- Grow toward 25 synthetic cases
+- ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
+- ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
+- Hand-written (non-template) cases and letters, so recall is not measured on the author's own
+  templates
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)

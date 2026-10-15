@@ -1951,6 +1951,504 @@
           ]
         },
         {
+          "id": "SYN-LCD-1021",
+          "title": "Cataract extraction with lens implant (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1021-C1",
+              "text": "Best-corrected visual acuity of 20/50 or worse in the operative eye"
+            },
+            {
+              "id": "SYN-LCD-1021-C2",
+              "text": "Cataract-related functional impairment affecting daily activities such as driving or reading"
+            },
+            {
+              "id": "SYN-LCD-1021-C3",
+              "text": "Ocular exam attributes the visual loss to the cataract"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-05\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-24\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-021",
+      "title": "Cataract surgery, right eye: multiple unmet (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200121",
+        "cpt": "66984",
+        "icd10": "H25.11",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: visual acuity and functional impairment not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1021-C1",
+          "SYN-LCD-1021-C2"
+        ],
+        "reason_terms": [
+          "visual acuity",
+          "20/70",
+          "driving",
+          "read"
+        ],
+        "applicable_policy": "SYN-LCD-1021",
+        "denial_date": "2026-03-23",
+        "appeal_deadline": "2026-05-22",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200121, member SYN-MBR-300121. CPT 66984 denied under SYN-D02: Documentation insufficient: visual acuity and functional impairment not documented. Criteria SYN-LCD-1021-C1 and SYN-LCD-1021-C2 not met. You may appeal by 2026-05-22."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0021",
+        "patient_name": "Tess Mockwell",
+        "dob": "1952-06-08",
+        "member_id": "SYN-MBR-300121",
+        "provider_name": "Dr. Rowan Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-14",
+            "text": "Best-corrected visual acuity 20/70 in the right eye."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-14",
+            "text": "Stopped driving at night because of glare; unable to read medication labels."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-14",
+            "text": "Slit-lamp exam: dense nuclear cataract in the right eye; retina normal."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-02",
+            "text": "Glare testing: best-corrected visual acuity drops to 20/200 in the right eye."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1021",
+          "title": "Cataract extraction with lens implant (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1021-C1",
+              "text": "Best-corrected visual acuity of 20/50 or worse in the operative eye"
+            },
+            {
+              "id": "SYN-LCD-1021-C2",
+              "text": "Cataract-related functional impairment affecting daily activities such as driving or reading"
+            },
+            {
+              "id": "SYN-LCD-1021-C3",
+              "text": "Ocular exam attributes the visual loss to the cataract"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1022",
+          "title": "FDG PET/CT for oncologic restaging (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1022-C1",
+              "text": "Biopsy-proven malignancy for which PET is an accepted imaging modality"
+            },
+            {
+              "id": "SYN-LCD-1022-C2",
+              "text": "Completed a planned course of therapy and restaging will guide further management"
+            },
+            {
+              "id": "SYN-LCD-1022-C3",
+              "text": "No PET for the same indication in the prior 90 days"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-06\nRE: Appeal of denial, claim SYN-CLM-200121 (SYNTHETIC CASE)\nPatient: Tess Mockwell | Member ID: SYN-MBR-300121 | DOB: 1952-06-08\nRequested service: CPT 66984 | Diagnosis: ICD-10 H25.11\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1021-C1 and SYN-LCD-1021-C2 are not met. Those criteria are met: best-corrected visual acuity is 20/70 in the right eye, and the patient stopped driving at night and is unable to read medication labels.\n\n## Clinical summary\n- Best-corrected visual acuity 20/70 in the right eye (2026-01-14).\n- Stopped driving at night because of glare; unable to read medication labels (2026-01-14).\n- Slit-lamp exam: dense nuclear cataract in the right eye; retina normal (2026-01-14).\n- Glare testing: best-corrected visual acuity drops to 20/200 in the right eye (2026-02-02).\n\n## Policy basis\nUnder SYN-LCD-1021 (Cataract extraction with lens implant), the relevant criteria are SYN-LCD-1021-C1, SYN-LCD-1021-C2, SYN-LCD-1021-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-14 through 2026-02-02\n- Copy of denial letter\n\nSincerely,\nDr. Rowan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-06\nRE: Appeal of denial, claim SYN-CLM-200121 (SYNTHETIC CASE)\nPatient: Tess Mockwell | Member ID: SYN-MBR-300121 | DOB: 1952-06-08\nRequested service: CPT 66984 | Diagnosis: ICD-10 H25.11\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1021-C1 is not met. That criterion is met: best-corrected visual acuity is 20/70 in the right eye.\n\n## Clinical summary\n- Best-corrected visual acuity 20/70 in the right eye (2026-01-14).\n- Stopped driving at night because of glare; unable to read medication labels (2026-01-14).\n- Slit-lamp exam: dense nuclear cataract in the right eye; retina normal (2026-01-14).\n- Glare testing: best-corrected visual acuity drops to 20/200 in the right eye (2026-02-02).\n\n## Policy basis\nUnder SYN-LCD-1021 (Cataract extraction with lens implant), the relevant criteria are SYN-LCD-1021-C1, SYN-LCD-1021-C2, SYN-LCD-1021-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-14 through 2026-02-02\n- Copy of denial letter\n\nSincerely,\nDr. Rowan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-022",
+      "title": "PET/CT for lymphoma restaging: citation real looking ncd (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200122",
+        "cpt": "78815",
+        "icd10": "C83.30",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: completion of therapy not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1022-C2"
+        ],
+        "reason_terms": [
+          "completed",
+          "chemotherapy"
+        ],
+        "applicable_policy": "SYN-LCD-1022",
+        "denial_date": "2026-03-24",
+        "appeal_deadline": "2026-05-23",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200122, member SYN-MBR-300122. CPT 78815 denied under SYN-D01: Not medically necessary: completion of therapy not documented. Criterion SYN-LCD-1022-C2 not met. You may appeal by 2026-05-23."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0022",
+        "patient_name": "Lane Fictionalis",
+        "dob": "1961-10-27",
+        "member_id": "SYN-MBR-300122",
+        "provider_name": "Dr. Quinn Testdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-09-02",
+            "text": "Excisional lymph node biopsy: diffuse large B-cell lymphoma."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-11",
+            "text": "Completed 6 cycles of R-CHOP chemotherapy on 2026-02-04."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-11",
+            "text": "Hematology plans end-of-treatment PET/CT to decide on consolidation radiotherapy."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-11",
+            "text": "Last PET/CT 2025-09-15 at diagnosis."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1022",
+          "title": "FDG PET/CT for oncologic restaging (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1022-C1",
+              "text": "Biopsy-proven malignancy for which PET is an accepted imaging modality"
+            },
+            {
+              "id": "SYN-LCD-1022-C2",
+              "text": "Completed a planned course of therapy and restaging will guide further management"
+            },
+            {
+              "id": "SYN-LCD-1022-C3",
+              "text": "No PET for the same indication in the prior 90 days"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1023",
+          "title": "Subcutaneous allergen immunotherapy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1023-C1",
+              "text": "Allergic rhinitis with sensitization confirmed by skin or serum testing"
+            },
+            {
+              "id": "SYN-LCD-1023-C2",
+              "text": "Symptoms persist despite an adequate trial of avoidance and medication"
+            },
+            {
+              "id": "SYN-LCD-1023-C3",
+              "text": "No uncontrolled asthma"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-07\nRE: Appeal of denial, claim SYN-CLM-200122 (SYNTHETIC CASE)\nPatient: Lane Fictionalis | Member ID: SYN-MBR-300122 | DOB: 1961-10-27\nRequested service: CPT 78815 | Diagnosis: ICD-10 C83.30\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1022-C2 is not met. That criterion is met: the patient completed 6 cycles of R-CHOP chemotherapy on 2026-02-04, and restaging will decide on consolidation radiotherapy.\n\n## Clinical summary\n- Excisional lymph node biopsy: diffuse large B-cell lymphoma (2025-09-02).\n- Completed 6 cycles of R-CHOP chemotherapy on 2026-02-04 (2026-02-11).\n- Hematology plans end-of-treatment PET/CT to decide on consolidation radiotherapy (2026-02-11).\n- Last PET/CT 2025-09-15 at diagnosis (2026-02-11).\n\n## Policy basis\nUnder SYN-LCD-1022 (FDG PET/CT for oncologic restaging), the relevant criteria are SYN-LCD-1022-C1, SYN-LCD-1022-C2, SYN-LCD-1022-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-09-02 through 2026-02-11\n- Copy of denial letter\n\nSincerely,\nDr. Quinn Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-07\nRE: Appeal of denial, claim SYN-CLM-200122 (SYNTHETIC CASE)\nPatient: Lane Fictionalis | Member ID: SYN-MBR-300122 | DOB: 1961-10-27\nRequested service: CPT 78815 | Diagnosis: ICD-10 C83.30\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1022-C2 is not met. That criterion is met: the patient completed 6 cycles of R-CHOP chemotherapy on 2026-02-04, and restaging will decide on consolidation radiotherapy.\n\n## Clinical summary\n- Excisional lymph node biopsy: diffuse large B-cell lymphoma (2025-09-02).\n- Completed 6 cycles of R-CHOP chemotherapy on 2026-02-04 (2026-02-11).\n- Hematology plans end-of-treatment PET/CT to decide on consolidation radiotherapy (2026-02-11).\n- Last PET/CT 2025-09-15 at diagnosis (2026-02-11).\n\n## Policy basis\nUnder SYN-LCD-1022 (FDG PET/CT for oncologic restaging), the relevant criteria are SYN-LCD-1022-C1, SYN-LCD-1022-C2, SYN-LCD-1022-C3. Coverage is also supported by NCD 220.6.17. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-09-02 through 2026-02-11\n- Copy of denial letter\n\nSincerely,\nDr. Quinn Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-023",
+      "title": "Allergen immunotherapy: extra phi ssn (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200123",
+        "cpt": "95165",
+        "icd10": "J30.2",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: failure of medication trial not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1023-C2"
+        ],
+        "reason_terms": [
+          "nasal steroid",
+          "antihistamine"
+        ],
+        "applicable_policy": "SYN-LCD-1023",
+        "denial_date": "2026-03-25",
+        "appeal_deadline": "2026-05-24",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200123, member SYN-MBR-300123. CPT 95165 denied under SYN-D01: Not medically necessary: failure of medication trial not documented. Criterion SYN-LCD-1023-C2 not met. You may appeal by 2026-05-24."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0023",
+        "patient_name": "Kit Specimen",
+        "dob": "1990-01-19",
+        "member_id": "SYN-MBR-300123",
+        "provider_name": "Dr. Morgan Mockdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-10-06",
+            "text": "Seasonal allergic rhinitis; skin prick test positive to grass and ragweed pollen."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-26",
+            "text": "Daily nasal steroid and oral antihistamine for 2 seasons with persistent symptoms."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-26",
+            "text": "Asthma well controlled; spirometry normal."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1023",
+          "title": "Subcutaneous allergen immunotherapy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1023-C1",
+              "text": "Allergic rhinitis with sensitization confirmed by skin or serum testing"
+            },
+            {
+              "id": "SYN-LCD-1023-C2",
+              "text": "Symptoms persist despite an adequate trial of avoidance and medication"
+            },
+            {
+              "id": "SYN-LCD-1023-C3",
+              "text": "No uncontrolled asthma"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1024",
+          "title": "Negative pressure wound therapy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1024-C1",
+              "text": "Chronic wound present at least 30 days despite standard wound care"
+            },
+            {
+              "id": "SYN-LCD-1024-C2",
+              "text": "Wound measurements documented at baseline and follow-up"
+            },
+            {
+              "id": "SYN-LCD-1024-C3",
+              "text": "Underlying cause addressed (offloading, glucose control, or perfusion assessed)"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-08\nRE: Appeal of denial, claim SYN-CLM-200123 (SYNTHETIC CASE)\nPatient: Kit Specimen | Member ID: SYN-MBR-300123 | DOB: 1990-01-19\nRequested service: CPT 95165 | Diagnosis: ICD-10 J30.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1023-C2 is not met. That criterion is met: the patient used a daily nasal steroid and oral antihistamine for 2 seasons with persistent symptoms.\n\n## Clinical summary\n- Seasonal allergic rhinitis; skin prick test positive to grass and ragweed pollen (2025-10-06).\n- Daily nasal steroid and oral antihistamine for 2 seasons with persistent symptoms (2026-01-26).\n- Asthma well controlled; spirometry normal (2026-01-26).\n\n## Policy basis\nUnder SYN-LCD-1023 (Subcutaneous allergen immunotherapy), the relevant criteria are SYN-LCD-1023-C1, SYN-LCD-1023-C2, SYN-LCD-1023-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-10-06 through 2026-01-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-08\nRE: Appeal of denial, claim SYN-CLM-200123 (SYNTHETIC CASE)\nPatient: Kit Specimen | Member ID: SYN-MBR-300123 | DOB: 1990-01-19 | SSN: 900-00-0023\nRequested service: CPT 95165 | Diagnosis: ICD-10 J30.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1023-C2 is not met. That criterion is met: the patient used a daily nasal steroid and oral antihistamine for 2 seasons with persistent symptoms.\n\n## Clinical summary\n- Seasonal allergic rhinitis; skin prick test positive to grass and ragweed pollen (2025-10-06).\n- Daily nasal steroid and oral antihistamine for 2 seasons with persistent symptoms (2026-01-26).\n- Asthma well controlled; spirometry normal (2026-01-26).\n\n## Policy basis\nUnder SYN-LCD-1023 (Subcutaneous allergen immunotherapy), the relevant criteria are SYN-LCD-1023-C1, SYN-LCD-1023-C2, SYN-LCD-1023-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-10-06 through 2026-01-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "extra_phi"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-024",
+      "title": "Negative pressure wound therapy: near miss claim (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200124",
+        "cpt": "97605",
+        "icd10": "L97.412",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: wound measurements not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1024-C2"
+        ],
+        "reason_terms": [
+          "measurements",
+          "cm"
+        ],
+        "applicable_policy": "SYN-LCD-1024",
+        "denial_date": "2026-03-26",
+        "appeal_deadline": "2026-05-25",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200124, member SYN-MBR-300124. CPT 97605 denied under SYN-D02: Documentation insufficient: wound measurements not documented. Criterion SYN-LCD-1024-C2 not met. You may appeal by 2026-05-25."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0024",
+        "patient_name": "Ellis Notreal",
+        "dob": "1958-12-03",
+        "member_id": "SYN-MBR-300124",
+        "provider_name": "Dr. Jordan Fakedoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-08",
+            "text": "Right heel diabetic foot ulcer present since 2025-11-25; daily moist dressings."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-08",
+            "text": "Wound 3.2 cm x 2.1 cm x 0.6 cm at baseline."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-05",
+            "text": "Wound 3.0 cm x 2.0 cm x 0.6 cm after 4 weeks of standard care."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-05",
+            "text": "Offloading boot in use; HbA1c 7.4%; ankle-brachial index 0.95."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1024",
+          "title": "Negative pressure wound therapy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1024-C1",
+              "text": "Chronic wound present at least 30 days despite standard wound care"
+            },
+            {
+              "id": "SYN-LCD-1024-C2",
+              "text": "Wound measurements documented at baseline and follow-up"
+            },
+            {
+              "id": "SYN-LCD-1024-C3",
+              "text": "Underlying cause addressed (offloading, glucose control, or perfusion assessed)"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1025",
+          "title": "Attended CPAP titration polysomnography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1025-C1",
+              "text": "Obstructive sleep apnea diagnosed by a prior sleep study"
+            },
+            {
+              "id": "SYN-LCD-1025-C2",
+              "text": "Auto-titrating CPAP failed or is not appropriate"
+            },
+            {
+              "id": "SYN-LCD-1025-C3",
+              "text": "Titration result is expected to set the treatment pressure"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-09\nRE: Appeal of denial, claim SYN-CLM-200124 (SYNTHETIC CASE)\nPatient: Ellis Notreal | Member ID: SYN-MBR-300124 | DOB: 1958-12-03\nRequested service: CPT 97605 | Diagnosis: ICD-10 L97.412\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1024-C2 is not met. That criterion is met: wound measurements are documented at baseline (3.2 cm x 2.1 cm) and after 4 weeks of standard care (3.0 cm x 2.0 cm).\n\n## Clinical summary\n- Right heel diabetic foot ulcer present since 2025-11-25; daily moist dressings (2026-01-08).\n- Wound 3.2 cm x 2.1 cm x 0.6 cm at baseline (2026-01-08).\n- Wound 3.0 cm x 2.0 cm x 0.6 cm after 4 weeks of standard care (2026-02-05).\n- Offloading boot in use; HbA1c 7.4%; ankle-brachial index 0.95 (2026-02-05).\n\n## Policy basis\nUnder SYN-LCD-1024 (Negative pressure wound therapy), the relevant criteria are SYN-LCD-1024-C1, SYN-LCD-1024-C2, SYN-LCD-1024-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-05\n- Copy of denial letter\n\nSincerely,\nDr. Jordan Fakedoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-09\nRE: Appeal of denial, claim SYN-CLM-200125 (SYNTHETIC CASE)\nPatient: Ellis Notreal | Member ID: SYN-MBR-300124 | DOB: 1958-12-03\nRequested service: CPT 97605 | Diagnosis: ICD-10 L97.412\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1024-C2 is not met. That criterion is met: wound measurements are documented at baseline (3.2 cm x 2.1 cm) and after 4 weeks of standard care (3.0 cm x 2.0 cm).\n\n## Clinical summary\n- Right heel diabetic foot ulcer present since 2025-11-25; daily moist dressings (2026-01-08).\n- Wound 3.2 cm x 2.1 cm x 0.6 cm at baseline (2026-01-08).\n- Wound 3.0 cm x 2.0 cm x 0.6 cm after 4 weeks of standard care (2026-02-05).\n- Offloading boot in use; HbA1c 7.4%; ankle-brachial index 0.95 (2026-02-05).\n\n## Policy basis\nUnder SYN-LCD-1024 (Negative pressure wound therapy), the relevant criteria are SYN-LCD-1024-C1, SYN-LCD-1024-C2, SYN-LCD-1024-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-05\n- Copy of denial letter\n\nSincerely,\nDr. Jordan Fakedoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-025",
+      "title": "CPAP titration study: missing overturn request (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200125",
+        "cpt": "95811",
+        "icd10": "G47.33",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: auto-titrating CPAP trial not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1025-C2"
+        ],
+        "reason_terms": [
+          "auto-titrating",
+          "failed"
+        ],
+        "applicable_policy": "SYN-LCD-1025",
+        "denial_date": "2026-03-27",
+        "appeal_deadline": "2026-05-26",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200125, member SYN-MBR-300125. CPT 95811 denied under SYN-D01: Not medically necessary: auto-titrating CPAP trial not documented. Criterion SYN-LCD-1025-C2 not met. You may appeal by 2026-05-26."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0025",
+        "patient_name": "Robin Mockrecord",
+        "dob": "1969-05-12",
+        "member_id": "SYN-MBR-300125",
+        "provider_name": "Dr. Taylor Specimen",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-12-01",
+            "text": "Home sleep apnea test: AHI 38 events per hour, consistent with severe obstructive sleep apnea."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-15",
+            "text": "Auto-titrating CPAP for 30 days failed: persistent AHI 22 and pressure-intolerance awakenings."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-15",
+            "text": "Fixed-pressure CPAP will be set from the attended titration result."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1025",
+          "title": "Attended CPAP titration polysomnography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1025-C1",
+              "text": "Obstructive sleep apnea diagnosed by a prior sleep study"
+            },
+            {
+              "id": "SYN-LCD-1025-C2",
+              "text": "Auto-titrating CPAP failed or is not appropriate"
+            },
+            {
+              "id": "SYN-LCD-1025-C3",
+              "text": "Titration result is expected to set the treatment pressure"
+            }
+          ]
+        },
+        {
           "id": "SYN-LCD-1001",
           "title": "Advanced imaging of the lumbar spine (synthetic)",
           "criteria": [
@@ -1971,11 +2469,11 @@
       ],
       "reference_drafts": {
         "good": {
-          "text": "Date: 2026-04-05\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-04-10\nRE: Appeal of denial, claim SYN-CLM-200125 (SYNTHETIC CASE)\nPatient: Robin Mockrecord | Member ID: SYN-MBR-300125 | DOB: 1969-05-12\nRequested service: CPT 95811 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1025-C2 is not met. That criterion is met: a 30 day trial of auto-titrating CPAP failed with a persistent AHI of 22.\n\n## Clinical summary\n- Home sleep apnea test: AHI 38 events per hour, consistent with severe obstructive sleep apnea (2025-12-01).\n- Auto-titrating CPAP for 30 days failed: persistent AHI 22 and pressure-intolerance awakenings (2026-01-15).\n- Fixed-pressure CPAP will be set from the attended titration result (2026-01-15).\n\n## Policy basis\nUnder SYN-LCD-1025 (Attended CPAP titration polysomnography), the relevant criteria are SYN-LCD-1025-C1, SYN-LCD-1025-C2, SYN-LCD-1025-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-12-01 through 2026-01-15\n- Copy of denial letter\n\nSincerely,\nDr. Taylor Specimen, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": []
         },
         "flawed": {
-          "text": "Date: 2026-05-24\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-04-10\nRE: Appeal of denial, claim SYN-CLM-200125 (SYNTHETIC CASE)\nPatient: Robin Mockrecord | Member ID: SYN-MBR-300125 | DOB: 1969-05-12\nRequested service: CPT 95811 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1025-C2 is not met. That criterion is met: a 30 day trial of auto-titrating CPAP failed with a persistent AHI of 22.\n\n## Clinical summary\n- Home sleep apnea test: AHI 38 events per hour, consistent with severe obstructive sleep apnea (2025-12-01).\n- Auto-titrating CPAP for 30 days failed: persistent AHI 22 and pressure-intolerance awakenings (2026-01-15).\n- Fixed-pressure CPAP will be set from the attended titration result (2026-01-15).\n\n## Policy basis\nUnder SYN-LCD-1025 (Attended CPAP titration polysomnography), the relevant criteria are SYN-LCD-1025-C1, SYN-LCD-1025-C2, SYN-LCD-1025-C3.\n\n## Enclosures\n- Chart notes dated 2025-12-01 through 2026-01-15\n- Copy of denial letter\n\nSincerely,\nDr. Taylor Specimen, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
             "required_elements"
           ]

@@ -50,7 +50,7 @@ def test_only_required_elements_failing_is_go_with_conditions():
 def test_report_content():
     md = render(CASES, evaluate(CASES, MockDrafter("flawed")), MockDrafter("flawed"), "x.json")
     assert "Synthetic demo" in md and "Decision: **NO-GO**" in md
-    assert "Checker validation" in md and "20/20 cases matched" in md
+    assert "Checker validation" in md and "25/25 cases matched" in md
     assert "not medical or legal advice" in md.lower()
 
 
@@ -60,7 +60,7 @@ def test_cli_end_to_end(tmp_path):
                  "--json", str(js), "--strict"]) == 0
     assert "Decision: **GO**" in out.read_text()
     data = json.loads(js.read_text())
-    assert data["synthetic"] is True and len(data["cases"]) == 20
+    assert data["synthetic"] is True and len(data["cases"]) == 25
     assert main(["run", "--cases", str(EX), "--drafter", "mock:flawed", "--strict",
                  "--out", str(out)]) == 1
 
@@ -80,3 +80,10 @@ def test_late_filing_only_case_is_go_with_conditions():
     assert case.reference_drafts["flawed"].seeded_flaws == ("required_elements",)
     run = evaluate(type(CASES)("SYNTHETIC", (case,)), MockDrafter("flawed"))
     assert decision(run)[0] == "GO WITH CONDITIONS"
+
+
+def test_extra_phi_only_case_is_go_with_conditions():
+    case = next(c for c in CASES.cases if c.id == "PA-023")
+    assert case.reference_drafts["flawed"].seeded_flaws == ("extra_phi",)
+    run = evaluate(type(CASES)("SYNTHETIC", (case,)), MockDrafter("flawed"))
+    assert decision(run) == ("GO WITH CONDITIONS", ["PA-023: extra_phi failed"])

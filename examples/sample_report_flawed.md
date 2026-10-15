@@ -1,8 +1,8 @@
 # Prior-auth appeal evaluation report
 
-- Dataset: `synthetic_cases.json` (20 cases)
+- Dataset: `synthetic_cases.json` (25 cases)
 - Drafter: `mock:flawed`
-- Generated: 2026-10-15 17:52 UTC
+- Generated: 2026-10-15 19:53 UTC
 
 > **Synthetic demo.** Cases are invented and the mock drafter replays fixed reference letters, so this report shows the format and that the checkers fire on seeded flaws. It is not a measurement of any model.
 
@@ -26,6 +26,9 @@
 - PA-017: identifiers_match failed
 - PA-018: facts_in_chart failed
 - PA-019: denial_reason_addressed failed
+- PA-021: denial_reason_addressed failed
+- PA-022: citations failed
+- PA-024: identifiers_match failed
 
 _Deterministic checks are a floor, not a replacement for human review. A GO does not mean the letters are good. Not medical or legal advice._
 
@@ -33,36 +36,42 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 
 | Check | Severity | Cases failed |
 |---|---|---|
-| citations | critical | 3/20 |
-| facts_in_chart | critical | 5/20 |
-| denial_reason_addressed | critical | 3/20 |
-| identifiers_match | critical | 7/20 |
-| required_elements | major | 3/20 |
+| citations | critical | 4/25 |
+| facts_in_chart | critical | 5/25 |
+| denial_reason_addressed | critical | 4/25 |
+| identifiers_match | critical | 8/25 |
+| required_elements | major | 4/25 |
+| extra_phi | major | 1/25 |
 
 ## Per-case results
 
-| Case | Service | citations | facts_in_chart | denial_reason_addressed | identifiers_match | required_elements | Status |
-|---|---|---|---|---|---|---|---|
-| PA-001 | CPT 72148 | FAIL | pass | pass | pass | pass | FAIL |
-| PA-002 | CPT 95810 | FAIL | pass | pass | pass | pass | FAIL |
-| PA-003 | CPT 27447 | pass | FAIL | pass | pass | pass | FAIL |
-| PA-004 | CPT 64483 | pass | FAIL | pass | pass | pass | FAIL |
-| PA-005 | CPT 78452 | pass | pass | FAIL | pass | pass | FAIL |
-| PA-006 | CPT 70553 | pass | pass | FAIL | pass | pass | FAIL |
-| PA-007 | CPT 71250 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-008 | CPT 45378 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-009 | CPT 93306 | pass | pass | pass | pass | FAIL | FAIL (minor) |
-| PA-010 | CPT 29881 | pass | pass | pass | FAIL | FAIL | FAIL |
-| PA-011 | CPT 73221 | pass | FAIL | pass | pass | pass | FAIL |
-| PA-012 | CPT 93798 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-013 | CPT 43239 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-014 | CPT 72141 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-015 | CPT 94760 | pass | FAIL | pass | pass | pass | FAIL |
-| PA-016 | CPT 73721 | FAIL | pass | pass | pass | pass | FAIL |
-| PA-017 | CPT 94010 | pass | pass | pass | FAIL | pass | FAIL |
-| PA-018 | CPT 93880 | pass | FAIL | pass | pass | pass | FAIL |
-| PA-019 | CPT 77080 | pass | pass | FAIL | pass | pass | FAIL |
-| PA-020 | CPT 93970 | pass | pass | pass | pass | FAIL | FAIL (minor) |
+| Case | Service | citations | facts_in_chart | denial_reason_addressed | identifiers_match | required_elements | extra_phi | Status |
+|---|---|---|---|---|---|---|---|---|
+| PA-001 | CPT 72148 | FAIL | pass | pass | pass | pass | pass | FAIL |
+| PA-002 | CPT 95810 | FAIL | pass | pass | pass | pass | pass | FAIL |
+| PA-003 | CPT 27447 | pass | FAIL | pass | pass | pass | pass | FAIL |
+| PA-004 | CPT 64483 | pass | FAIL | pass | pass | pass | pass | FAIL |
+| PA-005 | CPT 78452 | pass | pass | FAIL | pass | pass | pass | FAIL |
+| PA-006 | CPT 70553 | pass | pass | FAIL | pass | pass | pass | FAIL |
+| PA-007 | CPT 71250 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-008 | CPT 45378 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-009 | CPT 93306 | pass | pass | pass | pass | FAIL | pass | FAIL (minor) |
+| PA-010 | CPT 29881 | pass | pass | pass | FAIL | FAIL | pass | FAIL |
+| PA-011 | CPT 73221 | pass | FAIL | pass | pass | pass | pass | FAIL |
+| PA-012 | CPT 93798 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-013 | CPT 43239 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-014 | CPT 72141 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-015 | CPT 94760 | pass | FAIL | pass | pass | pass | pass | FAIL |
+| PA-016 | CPT 73721 | FAIL | pass | pass | pass | pass | pass | FAIL |
+| PA-017 | CPT 94010 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-018 | CPT 93880 | pass | FAIL | pass | pass | pass | pass | FAIL |
+| PA-019 | CPT 77080 | pass | pass | FAIL | pass | pass | pass | FAIL |
+| PA-020 | CPT 93970 | pass | pass | pass | pass | FAIL | pass | FAIL (minor) |
+| PA-021 | CPT 66984 | pass | pass | FAIL | pass | pass | pass | FAIL |
+| PA-022 | CPT 78815 | FAIL | pass | pass | pass | pass | pass | FAIL |
+| PA-023 | CPT 95165 | pass | pass | pass | pass | pass | FAIL | FAIL (minor) |
+| PA-024 | CPT 97605 | pass | pass | pass | FAIL | pass | pass | FAIL |
+| PA-025 | CPT 95811 | pass | pass | pass | pass | FAIL | pass | FAIL (minor) |
 
 ## Findings
 
@@ -151,6 +160,26 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 - **required_elements** (major)
   - letter dated 2026-05-24 is after the appeal deadline 2026-05-21
 
+### PA-021: Cataract surgery, right eye: multiple unmet (synthetic)
+- **denial_reason_addressed** (critical)
+  - response does not cite the unmet criterion SYN-LCD-1021-C2
+
+### PA-022: PET/CT for lymphoma restaging: citation real looking ncd (synthetic)
+- **citations** (critical)
+  - cites policy NCD-220.6.17, which is not in the provided policy set
+
+### PA-023: Allergen immunotherapy: extra phi ssn (synthetic)
+- **extra_phi** (major)
+  - SSN '900-00-0023' is not in the chart or denial letter (minimum necessary)
+
+### PA-024: Negative pressure wound therapy: near miss claim (synthetic)
+- **identifiers_match** (critical)
+  - claim_id is SYN-CLM-200125, expected SYN-CLM-200124
+
+### PA-025: CPAP titration study: missing overturn request (synthetic)
+- **required_elements** (major)
+  - no explicit request to overturn/reverse the denial
+
 ## Checker validation (seeded flaws, mock drafter only)
 
 | Case | Seeded flaws | Checks that failed | Match |
@@ -175,5 +204,10 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 | PA-018 | facts_in_chart | facts_in_chart | yes |
 | PA-019 | denial_reason_addressed | denial_reason_addressed | yes |
 | PA-020 | required_elements | required_elements | yes |
+| PA-021 | denial_reason_addressed | denial_reason_addressed | yes |
+| PA-022 | citations | citations | yes |
+| PA-023 | extra_phi | extra_phi | yes |
+| PA-024 | identifiers_match | identifiers_match | yes |
+| PA-025 | required_elements | required_elements | yes |
 
-20/20 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.
+25/25 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.
