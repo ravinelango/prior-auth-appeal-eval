@@ -95,7 +95,8 @@ def test_reason_requires_criterion_and_terms(case, good_letter):
 
 
 def test_reason_criterion_missing_but_terms_present(case, good_letter):
-    bad = good_letter.replace("stating that\nSYN-LCD-9001-C2 is not met", "stating that it is unmet")
+    bad = good_letter.replace(
+        "stating that\nSYN-LCD-9001-C2 is not met", "stating that it is unmet")
     r = check_denial_reason(case, bad)
     assert [f for f in r.findings if "unmet criterion" in f]
 
@@ -142,7 +143,8 @@ def test_late_filing_flagged(case, good_letter):
     late = good_letter.replace("Date: 2026-03-20", "Date: 2026-05-02")
     r = check_required_elements(case, late)
     assert not r.passed and "after the appeal deadline" in r.findings[0]
-    assert check_required_elements(case, good_letter.replace("Date: 2026-03-20", "Date: 2026-05-01")).passed
+    on_deadline = good_letter.replace("Date: 2026-03-20", "Date: 2026-05-01")
+    assert check_required_elements(case, on_deadline).passed
 
 
 def test_sections_helper():

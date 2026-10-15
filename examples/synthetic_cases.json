@@ -1,0 +1,1016 @@
+{
+  "label": "SYNTHETIC EXAMPLE DATA: invented patients, claims, policies and letters for testing. Not real PHI, payer policy or Medicare NCD/LCD text.",
+  "cases": [
+    {
+      "id": "PA-001",
+      "title": "Lumbar spine MRI: citation invented (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200101",
+        "cpt": "72148",
+        "icd10": "M54.16",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: conservative therapy not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1001-C2"
+        ],
+        "reason_terms": [
+          "physical therapy",
+          "6 weeks"
+        ],
+        "applicable_policy": "SYN-LCD-1001",
+        "denial_date": "2026-03-03",
+        "appeal_deadline": "2026-05-02",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200101, member SYN-MBR-300101. CPT 72148 denied under SYN-D01: Not medically necessary: conservative therapy not documented. Criterion SYN-LCD-1001-C2 not met. You may appeal by 2026-05-02."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0001",
+        "patient_name": "Dana Testwell",
+        "dob": "1968-03-14",
+        "member_id": "SYN-MBR-300101",
+        "provider_name": "Dr. Lee Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-05",
+            "text": "Low back pain radiating to the left leg, onset 2025-11-20."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-05",
+            "text": "Straight leg raise positive on the left at 40 degrees."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-12",
+            "text": "Started physical therapy, 2 sessions per week."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-23",
+            "text": "Completed 6 weeks of physical therapy (12 sessions); pain remains 7/10."
+          },
+          {
+            "id": "F5",
+            "date": "2026-02-23",
+            "text": "Naproxen 500 mg twice daily for 6 weeks without relief."
+          },
+          {
+            "id": "F6",
+            "date": "2026-02-23",
+            "text": "Mild left ankle dorsiflexion weakness, 4/5."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1001",
+          "title": "Advanced imaging of the lumbar spine (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1001-C1",
+              "text": "Radicular low back pain lasting at least 6 weeks"
+            },
+            {
+              "id": "SYN-LCD-1001-C2",
+              "text": "At least 6 weeks of documented conservative therapy (physical therapy or supervised exercise, plus medication)"
+            },
+            {
+              "id": "SYN-LCD-1001-C3",
+              "text": "Neurological deficit, red-flag finding, or planned intervention"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1002",
+          "title": "Attended polysomnography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1002-C1",
+              "text": "Clinical suspicion of obstructive sleep apnea documented with a validated screening score"
+            },
+            {
+              "id": "SYN-LCD-1002-C2",
+              "text": "Home sleep apnea testing is contraindicated or was technically inadequate"
+            },
+            {
+              "id": "SYN-LCD-1002-C3",
+              "text": "Significant cardiopulmonary or neuromuscular comorbidity"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-17\nRE: Appeal of denial, claim SYN-CLM-200101 (SYNTHETIC CASE)\nPatient: Dana Testwell | Member ID: SYN-MBR-300101 | DOB: 1968-03-14\nRequested service: CPT 72148 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1001-C2 is not met. That criterion is met: the chart documents 6 weeks of physical therapy (12 sessions) and 6 weeks of naproxen without relief.\n\n## Clinical summary\n- Low back pain radiating to the left leg, onset 2025-11-20 (2026-01-05).\n- Straight leg raise positive on the left at 40 degrees (2026-01-05).\n- Started physical therapy, 2 sessions per week (2026-01-12).\n- Completed 6 weeks of physical therapy (12 sessions); pain remains 7/10 (2026-02-23).\n- Naproxen 500 mg twice daily for 6 weeks without relief (2026-02-23).\n- Mild left ankle dorsiflexion weakness, 4/5 (2026-02-23).\n\n## Policy basis\nUnder SYN-LCD-1001 (Advanced imaging of the lumbar spine), the relevant criteria are SYN-LCD-1001-C1, SYN-LCD-1001-C2, SYN-LCD-1001-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-05 through 2026-02-23\n- Copy of denial letter\n\nSincerely,\nDr. Lee Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-17\nRE: Appeal of denial, claim SYN-CLM-200101 (SYNTHETIC CASE)\nPatient: Dana Testwell | Member ID: SYN-MBR-300101 | DOB: 1968-03-14\nRequested service: CPT 72148 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1001-C2 is not met. That criterion is met: the chart documents 6 weeks of physical therapy (12 sessions) and 6 weeks of naproxen without relief.\n\n## Clinical summary\n- Low back pain radiating to the left leg, onset 2025-11-20 (2026-01-05).\n- Straight leg raise positive on the left at 40 degrees (2026-01-05).\n- Started physical therapy, 2 sessions per week (2026-01-12).\n- Completed 6 weeks of physical therapy (12 sessions); pain remains 7/10 (2026-02-23).\n- Naproxen 500 mg twice daily for 6 weeks without relief (2026-02-23).\n- Mild left ankle dorsiflexion weakness, 4/5 (2026-02-23).\n\n## Policy basis\nUnder LCD L99999 (Advanced imaging of the lumbar spine), the relevant criteria are SYN-LCD-1001-C1, SYN-LCD-1001-C2, SYN-LCD-1001-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-05 through 2026-02-23\n- Copy of denial letter\n\nSincerely,\nDr. Lee Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-002",
+      "title": "Attended sleep study: citation wrong policy (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200102",
+        "cpt": "95810",
+        "icd10": "G47.30",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: home sleep testing not shown to be inadequate",
+        "unmet_criteria": [
+          "SYN-LCD-1002-C2"
+        ],
+        "reason_terms": [
+          "home sleep",
+          "inadequate"
+        ],
+        "applicable_policy": "SYN-LCD-1002",
+        "denial_date": "2026-03-04",
+        "appeal_deadline": "2026-05-03",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200102, member SYN-MBR-300102. CPT 95810 denied under SYN-D01: Not medically necessary: home sleep testing not shown to be inadequate. Criterion SYN-LCD-1002-C2 not met. You may appeal by 2026-05-03."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0002",
+        "patient_name": "Riley Mockson",
+        "dob": "1959-07-22",
+        "member_id": "SYN-MBR-300102",
+        "provider_name": "Dr. Avery Specimen",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-10",
+            "text": "Excessive daytime sleepiness; Epworth score 14."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-10",
+            "text": "STOP-BANG score 6."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-02",
+            "text": "Home sleep apnea test attempted; recording was technically inadequate (under 4 hours of usable signal)."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-02",
+            "text": "Heart failure with reduced ejection fraction, EF 35%."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1002",
+          "title": "Attended polysomnography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1002-C1",
+              "text": "Clinical suspicion of obstructive sleep apnea documented with a validated screening score"
+            },
+            {
+              "id": "SYN-LCD-1002-C2",
+              "text": "Home sleep apnea testing is contraindicated or was technically inadequate"
+            },
+            {
+              "id": "SYN-LCD-1002-C3",
+              "text": "Significant cardiopulmonary or neuromuscular comorbidity"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1003",
+          "title": "Total knee arthroplasty (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1003-C1",
+              "text": "Radiographic advanced osteoarthritis (Kellgren-Lawrence grade 3 or 4)"
+            },
+            {
+              "id": "SYN-LCD-1003-C2",
+              "text": "At least 3 months of documented non-operative treatment"
+            },
+            {
+              "id": "SYN-LCD-1003-C3",
+              "text": "Functional limitation affecting daily activities"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-18\nRE: Appeal of denial, claim SYN-CLM-200102 (SYNTHETIC CASE)\nPatient: Riley Mockson | Member ID: SYN-MBR-300102 | DOB: 1959-07-22\nRequested service: CPT 95810 | Diagnosis: ICD-10 G47.30\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1002-C2 is not met. That criterion is met: the home sleep apnea test on 2026-02-02 was technically inadequate, and the patient has heart failure.\n\n## Clinical summary\n- Excessive daytime sleepiness; Epworth score 14 (2026-01-10).\n- STOP-BANG score 6 (2026-01-10).\n- Home sleep apnea test attempted; recording was technically inadequate (under 4 hours of usable signal) (2026-02-02).\n- Heart failure with reduced ejection fraction, EF 35% (2026-02-02).\n\n## Policy basis\nUnder SYN-LCD-1002 (Attended polysomnography), the relevant criteria are SYN-LCD-1002-C1, SYN-LCD-1002-C2, SYN-LCD-1002-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-10 through 2026-02-02\n- Copy of denial letter\n\nSincerely,\nDr. Avery Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-18\nRE: Appeal of denial, claim SYN-CLM-200102 (SYNTHETIC CASE)\nPatient: Riley Mockson | Member ID: SYN-MBR-300102 | DOB: 1959-07-22\nRequested service: CPT 95810 | Diagnosis: ICD-10 G47.30\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1002-C2 is not met. That criterion is met: the home sleep apnea test on 2026-02-02 was technically inadequate, and the patient has heart failure.\n\n## Clinical summary\n- Excessive daytime sleepiness; Epworth score 14 (2026-01-10).\n- STOP-BANG score 6 (2026-01-10).\n- Home sleep apnea test attempted; recording was technically inadequate (under 4 hours of usable signal) (2026-02-02).\n- Heart failure with reduced ejection fraction, EF 35% (2026-02-02).\n\n## Policy basis\nUnder SYN-LCD-1003 (Attended polysomnography), the relevant criteria are SYN-LCD-1002-C1, SYN-LCD-1002-C2, SYN-LCD-1002-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-10 through 2026-02-02\n- Copy of denial letter\n\nSincerely,\nDr. Avery Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-003",
+      "title": "Total knee replacement: fact numeric (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200103",
+        "cpt": "27447",
+        "icd10": "M17.11",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: non-operative treatment duration not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1003-C2"
+        ],
+        "reason_terms": [
+          "non-operative",
+          "3 months"
+        ],
+        "applicable_policy": "SYN-LCD-1003",
+        "denial_date": "2026-03-05",
+        "appeal_deadline": "2026-05-04",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200103, member SYN-MBR-300103. CPT 27447 denied under SYN-D01: Not medically necessary: non-operative treatment duration not documented. Criterion SYN-LCD-1003-C2 not met. You may appeal by 2026-05-04."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0003",
+        "patient_name": "Jordan Sample",
+        "dob": "1955-11-03",
+        "member_id": "SYN-MBR-300103",
+        "provider_name": "Dr. Kim Fictional",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-11-04",
+            "text": "Right knee pain with walking; X-ray shows Kellgren-Lawrence grade 4 osteoarthritis."
+          },
+          {
+            "id": "F2",
+            "date": "2025-11-04",
+            "text": "Unable to climb stairs without a handrail; walking limited to one block."
+          },
+          {
+            "id": "F3",
+            "date": "2025-11-18",
+            "text": "Started weight-bearing exercise program and acetaminophen."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-10",
+            "text": "Intra-articular corticosteroid injection given 2025-12-15 with relief lasting 2 weeks."
+          },
+          {
+            "id": "F5",
+            "date": "2026-02-10",
+            "text": "Completed 12 weeks of non-operative treatment including exercise, bracing and one injection."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1003",
+          "title": "Total knee arthroplasty (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1003-C1",
+              "text": "Radiographic advanced osteoarthritis (Kellgren-Lawrence grade 3 or 4)"
+            },
+            {
+              "id": "SYN-LCD-1003-C2",
+              "text": "At least 3 months of documented non-operative treatment"
+            },
+            {
+              "id": "SYN-LCD-1003-C3",
+              "text": "Functional limitation affecting daily activities"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1004",
+          "title": "Lumbar transforaminal epidural injection (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1004-C1",
+              "text": "Radicular pain for at least 4 weeks with imaging or exam correlation"
+            },
+            {
+              "id": "SYN-LCD-1004-C2",
+              "text": "Pain of at least 4/10 with functional impairment"
+            },
+            {
+              "id": "SYN-LCD-1004-C3",
+              "text": "No contraindication such as anticoagulation or active infection"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-19\nRE: Appeal of denial, claim SYN-CLM-200103 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-300103 | DOB: 1955-11-03\nRequested service: CPT 27447 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1003-C2 is not met. That criterion is met: the patient completed 12 weeks (more than 3 months) of non-operative treatment.\n\n## Clinical summary\n- Right knee pain with walking; X-ray shows Kellgren-Lawrence grade 4 osteoarthritis (2025-11-04).\n- Unable to climb stairs without a handrail; walking limited to one block (2025-11-04).\n- Started weight-bearing exercise program and acetaminophen (2025-11-18).\n- Intra-articular corticosteroid injection given 2025-12-15 with relief lasting 2 weeks (2026-02-10).\n- Completed 12 weeks of non-operative treatment including exercise, bracing and one injection (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1003 (Total knee arthroplasty), the relevant criteria are SYN-LCD-1003-C1, SYN-LCD-1003-C2, SYN-LCD-1003-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-04 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Kim Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-19\nRE: Appeal of denial, claim SYN-CLM-200103 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-300103 | DOB: 1955-11-03\nRequested service: CPT 27447 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1003-C2 is not met. That criterion is met: the patient completed 12 weeks (more than 3 months) of non-operative treatment.\n\n## Clinical summary\n- Right knee pain with walking; X-ray shows Kellgren-Lawrence grade 4 osteoarthritis (2025-11-04).\n- Unable to climb stairs without a handrail; walking limited to one block (2025-11-04).\n- Started weight-bearing exercise program and acetaminophen (2025-11-18).\n- Intra-articular corticosteroid injection given 2025-12-15 with relief lasting 2 weeks (2026-02-10).\n- Completed 12 weeks of non-operative treatment including exercise, bracing and one injection (2026-02-10).\n- Completed 26 weeks of supervised physical therapy (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1003 (Total knee arthroplasty), the relevant criteria are SYN-LCD-1003-C1, SYN-LCD-1003-C2, SYN-LCD-1003-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-04 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Kim Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-004",
+      "title": "Lumbar epidural steroid injection: fact nonnumeric (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200104",
+        "cpt": "64483",
+        "icd10": "M51.16",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: absence of contraindications not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1004-C3"
+        ],
+        "reason_terms": [
+          "anticoagulants",
+          "infection"
+        ],
+        "applicable_policy": "SYN-LCD-1004",
+        "denial_date": "2026-03-06",
+        "appeal_deadline": "2026-05-05",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200104, member SYN-MBR-300104. CPT 64483 denied under SYN-D02: Documentation insufficient: absence of contraindications not documented. Criterion SYN-LCD-1004-C3 not met. You may appeal by 2026-05-05."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0004",
+        "patient_name": "Casey Fakename",
+        "dob": "1972-05-30",
+        "member_id": "SYN-MBR-300104",
+        "provider_name": "Dr. Pat Demo",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-20",
+            "text": "Right leg radicular pain for 8 weeks; MRI shows L5-S1 disc protrusion contacting the right S1 root."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-20",
+            "text": "Pain 8/10; unable to sit longer than 15 minutes."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-03",
+            "text": "Not on anticoagulants or antiplatelet agents; no signs of infection; afebrile."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-03",
+            "text": "Platelet count 240 and INR 1.0."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1004",
+          "title": "Lumbar transforaminal epidural injection (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1004-C1",
+              "text": "Radicular pain for at least 4 weeks with imaging or exam correlation"
+            },
+            {
+              "id": "SYN-LCD-1004-C2",
+              "text": "Pain of at least 4/10 with functional impairment"
+            },
+            {
+              "id": "SYN-LCD-1004-C3",
+              "text": "No contraindication such as anticoagulation or active infection"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1005",
+          "title": "Myocardial perfusion SPECT (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1005-C1",
+              "text": "Intermediate or high pretest probability of coronary disease"
+            },
+            {
+              "id": "SYN-LCD-1005-C2",
+              "text": "Resting ECG uninterpretable or patient unable to exercise adequately"
+            },
+            {
+              "id": "SYN-LCD-1005-C3",
+              "text": "Prior non-invasive testing non-diagnostic"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-20\nRE: Appeal of denial, claim SYN-CLM-200104 (SYNTHETIC CASE)\nPatient: Casey Fakename | Member ID: SYN-MBR-300104 | DOB: 1972-05-30\nRequested service: CPT 64483 | Diagnosis: ICD-10 M51.16\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1004-C3 is not met. That criterion is met: the chart documents that the patient takes no anticoagulants and has no signs of infection (INR 1.0).\n\n## Clinical summary\n- Right leg radicular pain for 8 weeks; MRI shows L5-S1 disc protrusion contacting the right S1 root (2026-01-20).\n- Pain 8/10; unable to sit longer than 15 minutes (2026-01-20).\n- Not on anticoagulants or antiplatelet agents; no signs of infection; afebrile (2026-02-03).\n- Platelet count 240 and INR 1.0 (2026-02-03).\n\n## Policy basis\nUnder SYN-LCD-1004 (Lumbar transforaminal epidural injection), the relevant criteria are SYN-LCD-1004-C1, SYN-LCD-1004-C2, SYN-LCD-1004-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-20 through 2026-02-03\n- Copy of denial letter\n\nSincerely,\nDr. Pat Demo, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-20\nRE: Appeal of denial, claim SYN-CLM-200104 (SYNTHETIC CASE)\nPatient: Casey Fakename | Member ID: SYN-MBR-300104 | DOB: 1972-05-30\nRequested service: CPT 64483 | Diagnosis: ICD-10 M51.16\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1004-C3 is not met. That criterion is met: the chart documents that the patient takes no anticoagulants and has no signs of infection (INR 1.0).\n\n## Clinical summary\n- Right leg radicular pain for 8 weeks; MRI shows L5-S1 disc protrusion contacting the right S1 root (2026-01-20).\n- Pain 8/10; unable to sit longer than 15 minutes (2026-01-20).\n- Not on anticoagulants or antiplatelet agents; no signs of infection; afebrile (2026-02-03).\n- Platelet count 240 and INR 1.0 (2026-02-03).\n- Documented history of prior lumbar surgery with retained hardware (2026-02-03).\n\n## Policy basis\nUnder SYN-LCD-1004 (Lumbar transforaminal epidural injection), the relevant criteria are SYN-LCD-1004-C1, SYN-LCD-1004-C2, SYN-LCD-1004-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-20 through 2026-02-03\n- Copy of denial letter\n\nSincerely,\nDr. Pat Demo, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-005",
+      "title": "Myocardial perfusion imaging: reason unaddressed (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200105",
+        "cpt": "78452",
+        "icd10": "R07.9",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: stress imaging rationale not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1005-C2"
+        ],
+        "reason_terms": [
+          "unable to exercise",
+          "ECG"
+        ],
+        "applicable_policy": "SYN-LCD-1005",
+        "denial_date": "2026-03-07",
+        "appeal_deadline": "2026-05-06",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200105, member SYN-MBR-300105. CPT 78452 denied under SYN-D01: Not medically necessary: stress imaging rationale not documented. Criterion SYN-LCD-1005-C2 not met. You may appeal by 2026-05-06."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0005",
+        "patient_name": "Morgan Demo",
+        "dob": "1963-09-09",
+        "member_id": "SYN-MBR-300105",
+        "provider_name": "Dr. Sam Notreal",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-12",
+            "text": "Exertional chest pressure for 3 weeks; 62-year-old with hypertension and diabetes."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-12",
+            "text": "Resting ECG shows left bundle branch block."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-12",
+            "text": "Unable to complete treadmill exercise: severe knee osteoarthritis limits walking to 2 minutes."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-12",
+            "text": "Estimated pretest probability of coronary disease: intermediate."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1005",
+          "title": "Myocardial perfusion SPECT (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1005-C1",
+              "text": "Intermediate or high pretest probability of coronary disease"
+            },
+            {
+              "id": "SYN-LCD-1005-C2",
+              "text": "Resting ECG uninterpretable or patient unable to exercise adequately"
+            },
+            {
+              "id": "SYN-LCD-1005-C3",
+              "text": "Prior non-invasive testing non-diagnostic"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1006",
+          "title": "Brain MRI with and without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1006-C1",
+              "text": "New-onset seizure with focal features or abnormal neurological exam"
+            },
+            {
+              "id": "SYN-LCD-1006-C2",
+              "text": "Prior CT or EEG non-diagnostic or insufficient for the clinical question"
+            },
+            {
+              "id": "SYN-LCD-1006-C3",
+              "text": "Age over 40 with new-onset seizure, or known malignancy"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-21\nRE: Appeal of denial, claim SYN-CLM-200105 (SYNTHETIC CASE)\nPatient: Morgan Demo | Member ID: SYN-MBR-300105 | DOB: 1963-09-09\nRequested service: CPT 78452 | Diagnosis: ICD-10 R07.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1005-C2 is not met. That criterion is met: the resting ECG shows left bundle branch block and the patient is unable to exercise adequately because of knee osteoarthritis.\n\n## Clinical summary\n- Exertional chest pressure for 3 weeks; 62-year-old with hypertension and diabetes (2026-02-12).\n- Resting ECG shows left bundle branch block (2026-02-12).\n- Unable to complete treadmill exercise: severe knee osteoarthritis limits walking to 2 minutes (2026-02-12).\n- Estimated pretest probability of coronary disease: intermediate (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1005 (Myocardial perfusion SPECT), the relevant criteria are SYN-LCD-1005-C1, SYN-LCD-1005-C2, SYN-LCD-1005-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-12 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Sam Notreal, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-21\nRE: Appeal of denial, claim SYN-CLM-200105 (SYNTHETIC CASE)\nPatient: Morgan Demo | Member ID: SYN-MBR-300105 | DOB: 1963-09-09\nRequested service: CPT 78452 | Diagnosis: ICD-10 R07.9\n\n## Response to denial reason\nWe believe this service is medically appropriate for our patient and ask the plan to review the request promptly.\n\n## Clinical summary\n- Exertional chest pressure for 3 weeks; 62-year-old with hypertension and diabetes (2026-02-12).\n- Resting ECG shows left bundle branch block (2026-02-12).\n- Unable to complete treadmill exercise: severe knee osteoarthritis limits walking to 2 minutes (2026-02-12).\n- Estimated pretest probability of coronary disease: intermediate (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1005 (Myocardial perfusion SPECT), the relevant criteria are SYN-LCD-1005-C1, SYN-LCD-1005-C2, SYN-LCD-1005-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-12 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Sam Notreal, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-006",
+      "title": "Brain MRI after first seizure: criterion not cited (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200106",
+        "cpt": "70553",
+        "icd10": "R56.9",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: focal features not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1006-C1"
+        ],
+        "reason_terms": [
+          "focal",
+          "neurological exam"
+        ],
+        "applicable_policy": "SYN-LCD-1006",
+        "denial_date": "2026-03-08",
+        "appeal_deadline": "2026-05-07",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200106, member SYN-MBR-300106. CPT 70553 denied under SYN-D01: Not medically necessary: focal features not documented. Criterion SYN-LCD-1006-C1 not met. You may appeal by 2026-05-07."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0006",
+        "patient_name": "Taylor Placeholder",
+        "dob": "1971-02-17",
+        "member_id": "SYN-MBR-300106",
+        "provider_name": "Dr. Robin Dummy",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-18",
+            "text": "First seizure 2026-02-17: witnessed left arm jerking lasting about 2 minutes."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-18",
+            "text": "Neurological exam: mild left facial droop."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-18",
+            "text": "Head CT without contrast read as no acute abnormality."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-18",
+            "text": "Age 54."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1006",
+          "title": "Brain MRI with and without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1006-C1",
+              "text": "New-onset seizure with focal features or abnormal neurological exam"
+            },
+            {
+              "id": "SYN-LCD-1006-C2",
+              "text": "Prior CT or EEG non-diagnostic or insufficient for the clinical question"
+            },
+            {
+              "id": "SYN-LCD-1006-C3",
+              "text": "Age over 40 with new-onset seizure, or known malignancy"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1007",
+          "title": "Chest CT for pulmonary nodule follow-up (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1007-C1",
+              "text": "Solitary pulmonary nodule of 6 mm or larger on prior imaging"
+            },
+            {
+              "id": "SYN-LCD-1007-C2",
+              "text": "Follow-up interval consistent with accepted guidance for nodule size and risk"
+            },
+            {
+              "id": "SYN-LCD-1007-C3",
+              "text": "Risk factors documented (smoking history, prior malignancy)"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-22\nRE: Appeal of denial, claim SYN-CLM-200106 (SYNTHETIC CASE)\nPatient: Taylor Placeholder | Member ID: SYN-MBR-300106 | DOB: 1971-02-17\nRequested service: CPT 70553 | Diagnosis: ICD-10 R56.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1006-C1 is not met. That criterion is met: the seizure had focal features (left arm jerking) and the neurological exam is abnormal (left facial droop).\n\n## Clinical summary\n- First seizure 2026-02-17: witnessed left arm jerking lasting about 2 minutes (2026-02-18).\n- Neurological exam: mild left facial droop (2026-02-18).\n- Head CT without contrast read as no acute abnormality (2026-02-18).\n- Age 54 (2026-02-18).\n\n## Policy basis\nUnder SYN-LCD-1006 (Brain MRI with and without contrast), the relevant criteria are SYN-LCD-1006-C1, SYN-LCD-1006-C2, SYN-LCD-1006-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-18 through 2026-02-18\n- Copy of denial letter\n\nSincerely,\nDr. Robin Dummy, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-22\nRE: Appeal of denial, claim SYN-CLM-200106 (SYNTHETIC CASE)\nPatient: Taylor Placeholder | Member ID: SYN-MBR-300106 | DOB: 1971-02-17\nRequested service: CPT 70553 | Diagnosis: ICD-10 R56.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D01, stating that a criterion is not met. That is not correct: the seizure had focal features (left arm jerking) and the neurological exam is abnormal (left facial droop).\n\n## Clinical summary\n- First seizure 2026-02-17: witnessed left arm jerking lasting about 2 minutes (2026-02-18).\n- Neurological exam: mild left facial droop (2026-02-18).\n- Head CT without contrast read as no acute abnormality (2026-02-18).\n- Age 54 (2026-02-18).\n\n## Policy basis\nUnder SYN-LCD-1006 (Brain MRI with and without contrast), the relevant criteria are SYN-LCD-1006-C1, SYN-LCD-1006-C2, SYN-LCD-1006-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-18 through 2026-02-18\n- Copy of denial letter\n\nSincerely,\nDr. Robin Dummy, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-007",
+      "title": "Follow-up chest CT: wrong member (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200107",
+        "cpt": "71250",
+        "icd10": "R91.1",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: follow-up interval not supported",
+        "unmet_criteria": [
+          "SYN-LCD-1007-C2"
+        ],
+        "reason_terms": [
+          "interval",
+          "guideline"
+        ],
+        "applicable_policy": "SYN-LCD-1007",
+        "denial_date": "2026-03-09",
+        "appeal_deadline": "2026-05-08",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200107, member SYN-MBR-300107. CPT 71250 denied under SYN-D01: Not medically necessary: follow-up interval not supported. Criterion SYN-LCD-1007-C2 not met. You may appeal by 2026-05-08."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0007",
+        "patient_name": "Alex Notreal",
+        "dob": "1950-12-01",
+        "member_id": "SYN-MBR-300107",
+        "provider_name": "Dr. Jamie Specimen",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-08-14",
+            "text": "Chest X-ray: 8 mm nodule in the right upper lobe."
+          },
+          {
+            "id": "F2",
+            "date": "2025-08-14",
+            "text": "Former smoker, 30 pack-years."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-20",
+            "text": "Follow-up CT is due 6 months after the 2025-08-14 finding."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1007",
+          "title": "Chest CT for pulmonary nodule follow-up (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1007-C1",
+              "text": "Solitary pulmonary nodule of 6 mm or larger on prior imaging"
+            },
+            {
+              "id": "SYN-LCD-1007-C2",
+              "text": "Follow-up interval consistent with accepted guidance for nodule size and risk"
+            },
+            {
+              "id": "SYN-LCD-1007-C3",
+              "text": "Risk factors documented (smoking history, prior malignancy)"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1008",
+          "title": "Diagnostic colonoscopy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1008-C1",
+              "text": "Rectal bleeding persisting over 2 weeks, or bleeding with anemia"
+            },
+            {
+              "id": "SYN-LCD-1008-C2",
+              "text": "Age 45 or older, or alarm features"
+            },
+            {
+              "id": "SYN-LCD-1008-C3",
+              "text": "No colonoscopy in the past 10 years unless newly indicated"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-23\nRE: Appeal of denial, claim SYN-CLM-200107 (SYNTHETIC CASE)\nPatient: Alex Notreal | Member ID: SYN-MBR-300107 | DOB: 1950-12-01\nRequested service: CPT 71250 | Diagnosis: ICD-10 R91.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1007-C2 is not met. That criterion is met: a 6 month follow-up interval fits guideline-based surveillance for an 8 mm nodule in a former heavy smoker.\n\n## Clinical summary\n- Chest X-ray: 8 mm nodule in the right upper lobe (2025-08-14).\n- Former smoker, 30 pack-years (2025-08-14).\n- Follow-up CT is due 6 months after the 2025-08-14 finding (2026-02-20).\n\n## Policy basis\nUnder SYN-LCD-1007 (Chest CT for pulmonary nodule follow-up), the relevant criteria are SYN-LCD-1007-C1, SYN-LCD-1007-C2, SYN-LCD-1007-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-08-14 through 2026-02-20\n- Copy of denial letter\n\nSincerely,\nDr. Jamie Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-23\nRE: Appeal of denial, claim SYN-CLM-200107 (SYNTHETIC CASE)\nPatient: Alex Notreal | Member ID: SYN-MBR-300114 | DOB: 1950-12-01\nRequested service: CPT 71250 | Diagnosis: ICD-10 R91.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1007-C2 is not met. That criterion is met: a 6 month follow-up interval fits guideline-based surveillance for an 8 mm nodule in a former heavy smoker.\n\n## Clinical summary\n- Chest X-ray: 8 mm nodule in the right upper lobe (2025-08-14).\n- Former smoker, 30 pack-years (2025-08-14).\n- Follow-up CT is due 6 months after the 2025-08-14 finding (2026-02-20).\n\n## Policy basis\nUnder SYN-LCD-1007 (Chest CT for pulmonary nodule follow-up), the relevant criteria are SYN-LCD-1007-C1, SYN-LCD-1007-C2, SYN-LCD-1007-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-08-14 through 2026-02-20\n- Copy of denial letter\n\nSincerely,\nDr. Jamie Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-008",
+      "title": "Diagnostic colonoscopy: wrong cpt (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200108",
+        "cpt": "45378",
+        "icd10": "K62.5",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: bleeding duration and anemia not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1008-C1"
+        ],
+        "reason_terms": [
+          "bleeding",
+          "anemia"
+        ],
+        "applicable_policy": "SYN-LCD-1008",
+        "denial_date": "2026-03-10",
+        "appeal_deadline": "2026-05-09",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200108, member SYN-MBR-300108. CPT 45378 denied under SYN-D02: Documentation insufficient: bleeding duration and anemia not documented. Criterion SYN-LCD-1008-C1 not met. You may appeal by 2026-05-09."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0008",
+        "patient_name": "Jamie Dummy",
+        "dob": "1966-04-25",
+        "member_id": "SYN-MBR-300108",
+        "provider_name": "Dr. Casey Mockdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-27",
+            "text": "Bright red rectal bleeding for 5 weeks."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-27",
+            "text": "Hemoglobin 10.2 g/dL, consistent with iron-deficiency anemia."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-27",
+            "text": "Age 51; no prior colonoscopy."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1008",
+          "title": "Diagnostic colonoscopy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1008-C1",
+              "text": "Rectal bleeding persisting over 2 weeks, or bleeding with anemia"
+            },
+            {
+              "id": "SYN-LCD-1008-C2",
+              "text": "Age 45 or older, or alarm features"
+            },
+            {
+              "id": "SYN-LCD-1008-C3",
+              "text": "No colonoscopy in the past 10 years unless newly indicated"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1009",
+          "title": "Complete echocardiography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1009-C1",
+              "text": "New or worsening heart failure symptoms"
+            },
+            {
+              "id": "SYN-LCD-1009-C2",
+              "text": "No echocardiogram in the prior 12 months unless there is a clinical change"
+            },
+            {
+              "id": "SYN-LCD-1009-C3",
+              "text": "Result expected to change management"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-24\nRE: Appeal of denial, claim SYN-CLM-200108 (SYNTHETIC CASE)\nPatient: Jamie Dummy | Member ID: SYN-MBR-300108 | DOB: 1966-04-25\nRequested service: CPT 45378 | Diagnosis: ICD-10 K62.5\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1008-C1 is not met. That criterion is met: the chart documents 5 weeks of rectal bleeding with iron-deficiency anemia.\n\n## Clinical summary\n- Bright red rectal bleeding for 5 weeks (2026-01-27).\n- Hemoglobin 10.2 g/dL, consistent with iron-deficiency anemia (2026-01-27).\n- Age 51; no prior colonoscopy (2026-01-27).\n\n## Policy basis\nUnder SYN-LCD-1008 (Diagnostic colonoscopy), the relevant criteria are SYN-LCD-1008-C1, SYN-LCD-1008-C2, SYN-LCD-1008-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-27 through 2026-01-27\n- Copy of denial letter\n\nSincerely,\nDr. Casey Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-24\nRE: Appeal of denial, claim SYN-CLM-200108 (SYNTHETIC CASE)\nPatient: Jamie Dummy | Member ID: SYN-MBR-300108 | DOB: 1966-04-25\nRequested service: CPT 45380 | Diagnosis: ICD-10 K62.5\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1008-C1 is not met. That criterion is met: the chart documents 5 weeks of rectal bleeding with iron-deficiency anemia.\n\n## Clinical summary\n- Bright red rectal bleeding for 5 weeks (2026-01-27).\n- Hemoglobin 10.2 g/dL, consistent with iron-deficiency anemia (2026-01-27).\n- Age 51; no prior colonoscopy (2026-01-27).\n\n## Policy basis\nUnder SYN-LCD-1008 (Diagnostic colonoscopy), the relevant criteria are SYN-LCD-1008-C1, SYN-LCD-1008-C2, SYN-LCD-1008-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-27 through 2026-01-27\n- Copy of denial letter\n\nSincerely,\nDr. Casey Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-009",
+      "title": "Transthoracic echocardiogram: missing elements (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200109",
+        "cpt": "93306",
+        "icd10": "I50.9",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: change since prior echocardiogram not shown",
+        "unmet_criteria": [
+          "SYN-LCD-1009-C2"
+        ],
+        "reason_terms": [
+          "clinical change",
+          "prior echocardiogram"
+        ],
+        "applicable_policy": "SYN-LCD-1009",
+        "denial_date": "2026-03-11",
+        "appeal_deadline": "2026-05-10",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200109, member SYN-MBR-300109. CPT 93306 denied under SYN-D02: Documentation insufficient: change since prior echocardiogram not shown. Criterion SYN-LCD-1009-C2 not met. You may appeal by 2026-05-10."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0009",
+        "patient_name": "Sam Fictional",
+        "dob": "1948-08-19",
+        "member_id": "SYN-MBR-300109",
+        "provider_name": "Dr. Alex Testdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-05",
+            "text": "Prior echocardiogram 2025-03-04 showed EF 45%."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-05",
+            "text": "New orthopnea and 6 kg weight gain over 2 weeks."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-05",
+            "text": "BNP 980 pg/mL."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-05",
+            "text": "Diuretic dose increased; further medication changes depend on EF."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1009",
+          "title": "Complete echocardiography (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1009-C1",
+              "text": "New or worsening heart failure symptoms"
+            },
+            {
+              "id": "SYN-LCD-1009-C2",
+              "text": "No echocardiogram in the prior 12 months unless there is a clinical change"
+            },
+            {
+              "id": "SYN-LCD-1009-C3",
+              "text": "Result expected to change management"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1010",
+          "title": "Knee arthroscopy with meniscectomy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1010-C1",
+              "text": "Mechanical symptoms (locking or catching) documented"
+            },
+            {
+              "id": "SYN-LCD-1010-C2",
+              "text": "MRI confirming a meniscal tear"
+            },
+            {
+              "id": "SYN-LCD-1010-C3",
+              "text": "Failure of at least 6 weeks of non-operative treatment"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-25\nRE: Appeal of denial, claim SYN-CLM-200109 (SYNTHETIC CASE)\nPatient: Sam Fictional | Member ID: SYN-MBR-300109 | DOB: 1948-08-19\nRequested service: CPT 93306 | Diagnosis: ICD-10 I50.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1009-C2 is not met. That criterion is met: there has been a clinical change since the prior echocardiogram of 2025-03-04: new orthopnea and 6 kg weight gain.\n\n## Clinical summary\n- Prior echocardiogram 2025-03-04 showed EF 45% (2026-02-05).\n- New orthopnea and 6 kg weight gain over 2 weeks (2026-02-05).\n- BNP 980 pg/mL (2026-02-05).\n- Diuretic dose increased; further medication changes depend on EF (2026-02-05).\n\n## Policy basis\nUnder SYN-LCD-1009 (Complete echocardiography), the relevant criteria are SYN-LCD-1009-C1, SYN-LCD-1009-C2, SYN-LCD-1009-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-05 through 2026-02-05\n- Copy of denial letter\n\nSincerely,\nDr. Alex Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-25\nRE: Appeal of denial, claim SYN-CLM-200109 (SYNTHETIC CASE)\nPatient: Sam Fictional | Member ID: SYN-MBR-300109 | DOB: 1948-08-19\nRequested service: CPT 93306 | Diagnosis: ICD-10 I50.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1009-C2 is not met. That criterion is met: there has been a clinical change since the prior echocardiogram of 2025-03-04: new orthopnea and 6 kg weight gain.\n\n## Clinical summary\n- Prior echocardiogram 2025-03-04 showed EF 45% (2026-02-05).\n- New orthopnea and 6 kg weight gain over 2 weeks (2026-02-05).\n- BNP 980 pg/mL (2026-02-05).\n- Diuretic dose increased; further medication changes depend on EF (2026-02-05).\n\n## Policy basis\nUnder SYN-LCD-1009 (Complete echocardiography), the relevant criteria are SYN-LCD-1009-C1, SYN-LCD-1009-C2, SYN-LCD-1009-C3. We request that the denial be overturned and the service authorized.\n\nThank you for your attention.\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-010",
+      "title": "Knee arthroscopy: late and incomplete (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200110",
+        "cpt": "29881",
+        "icd10": "M23.221",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: non-operative treatment failure not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1010-C3"
+        ],
+        "reason_terms": [
+          "6 weeks",
+          "non-operative"
+        ],
+        "applicable_policy": "SYN-LCD-1010",
+        "denial_date": "2026-03-12",
+        "appeal_deadline": "2026-05-11",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200110, member SYN-MBR-300110. CPT 29881 denied under SYN-D01: Not medically necessary: non-operative treatment failure not documented. Criterion SYN-LCD-1010-C3 not met. You may appeal by 2026-05-11."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0010",
+        "patient_name": "Robin Specimen",
+        "dob": "1980-10-12",
+        "member_id": "SYN-MBR-300110",
+        "provider_name": "Dr. Morgan Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-08",
+            "text": "Right knee locking and catching for 10 weeks."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-08",
+            "text": "MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-26",
+            "text": "Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1010",
+          "title": "Knee arthroscopy with meniscectomy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1010-C1",
+              "text": "Mechanical symptoms (locking or catching) documented"
+            },
+            {
+              "id": "SYN-LCD-1010-C2",
+              "text": "MRI confirming a meniscal tear"
+            },
+            {
+              "id": "SYN-LCD-1010-C3",
+              "text": "Failure of at least 6 weeks of non-operative treatment"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1001",
+          "title": "Advanced imaging of the lumbar spine (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1001-C1",
+              "text": "Radicular low back pain lasting at least 6 weeks"
+            },
+            {
+              "id": "SYN-LCD-1001-C2",
+              "text": "At least 6 weeks of documented conservative therapy (physical therapy or supervised exercise, plus medication)"
+            },
+            {
+              "id": "SYN-LCD-1001-C3",
+              "text": "Neurological deficit, red-flag finding, or planned intervention"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-26\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.221\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-20\nRE: Appeal of denial, claim SYN-CLM-200110 (SYNTHETIC CASE)\nPatient: Robin Specimen | Member ID: SYN-MBR-300110 | DOB: 1980-10-12\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.222\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1010-C3 is not met. That criterion is met: the patient completed 6 weeks of non-operative treatment with physical therapy and the locking episodes persist.\n\n## Clinical summary\n- Right knee locking and catching for 10 weeks (2026-01-08).\n- MRI 2026-01-06 shows complex tear of the posterior horn of the medial meniscus (2026-01-08).\n- Completed 6 weeks of non-operative treatment with physical therapy; locking episodes persist (2026-02-26).\n\n## Policy basis\nUnder SYN-LCD-1010 (Knee arthroscopy with meniscectomy), the relevant criteria are SYN-LCD-1010-C1, SYN-LCD-1010-C2, SYN-LCD-1010-C3.\n\n## Enclosures\n- Chart notes dated 2026-01-08 through 2026-02-26\n- Copy of denial letter\n\nSincerely,\nDr. Morgan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match",
+            "required_elements"
+          ]
+        }
+      }
+    }
+  ]
+}

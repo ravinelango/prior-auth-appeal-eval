@@ -1,0 +1,294 @@
+"""Generate examples/synthetic_cases.json.
+
+Everything here is SYNTHETIC. Patients, claims, member IDs, policies and clinicians are
+invented; the policies are written for testing and are NOT real Medicare (NCD/LCD) or payer
+text. Cases are assembled from templates so the dataset is reproducible, and each case ships a
+"good" reference draft and a "flawed" one with exactly the seeded flaws listed.
+
+Run:  python scripts/build_example_cases.py > examples/synthetic_cases.json
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from datetime import date, timedelta
+
+CPT = "{cpt}"
+NPI = "NPI SYN-0000 (synthetic)"
+REQUEST = "We request that the denial be overturned and the service authorized."
+GENERIC = ("We believe this service is medically appropriate for our patient and ask the plan "
+           "to review the request promptly.")
+
+# (name, dob, provider, title, cpt, icd, policy_title, criteria, unmet(1-based), code,
+#  reason_text, reason_terms, facts[(date,text)], response_core, flaw)
+S = [
+    ("Dana Testwell", "1968-03-14", "Dr. Lee Placeholder", "Lumbar spine MRI", "72148", "M54.16",
+     "Advanced imaging of the lumbar spine (synthetic)",
+     ["Radicular low back pain lasting at least 6 weeks",
+      "At least 6 weeks of documented conservative therapy (physical therapy or supervised "
+      "exercise, plus medication)",
+      "Neurological deficit, red-flag finding, or planned intervention"],
+     2, "SYN-D01", "Not medically necessary: conservative therapy not documented",
+     ["physical therapy", "6 weeks"],
+     [("2026-01-05", "Low back pain radiating to the left leg, onset 2025-11-20."),
+      ("2026-01-05", "Straight leg raise positive on the left at 40 degrees."),
+      ("2026-01-12", "Started physical therapy, 2 sessions per week."),
+      ("2026-02-23", "Completed 6 weeks of physical therapy (12 sessions); pain remains 7/10."),
+      ("2026-02-23", "Naproxen 500 mg twice daily for 6 weeks without relief."),
+      ("2026-02-23", "Mild left ankle dorsiflexion weakness, 4/5.")],
+     "the chart documents 6 weeks of physical therapy (12 sessions) and 6 weeks of naproxen "
+     "without relief",
+     {"kind": "citation_invented"}),
+    ("Riley Mockson", "1959-07-22", "Dr. Avery Specimen", "Attended sleep study", "95810",
+     "G47.30", "Attended polysomnography (synthetic)",
+     ["Clinical suspicion of obstructive sleep apnea documented with a validated screening score",
+      "Home sleep apnea testing is contraindicated or was technically inadequate",
+      "Significant cardiopulmonary or neuromuscular comorbidity"],
+     2, "SYN-D01", "Not medically necessary: home sleep testing not shown to be inadequate",
+     ["home sleep", "inadequate"],
+     [("2026-01-10", "Excessive daytime sleepiness; Epworth score 14."),
+      ("2026-01-10", "STOP-BANG score 6."),
+      ("2026-02-02", "Home sleep apnea test attempted; recording was technically inadequate "
+                     "(under 4 hours of usable signal)."),
+      ("2026-02-02", "Heart failure with reduced ejection fraction, EF 35%.")],
+     "the home sleep apnea test on 2026-02-02 was technically inadequate, and the patient has "
+     "heart failure",
+     {"kind": "citation_wrong_policy"}),
+    ("Jordan Sample", "1955-11-03", "Dr. Kim Fictional", "Total knee replacement", "27447",
+     "M17.11", "Total knee arthroplasty (synthetic)",
+     ["Radiographic advanced osteoarthritis (Kellgren-Lawrence grade 3 or 4)",
+      "At least 3 months of documented non-operative treatment",
+      "Functional limitation affecting daily activities"],
+     2, "SYN-D01", "Not medically necessary: non-operative treatment duration not documented",
+     ["non-operative", "3 months"],
+     [("2025-11-04", "Right knee pain with walking; X-ray shows Kellgren-Lawrence grade 4 "
+                     "osteoarthritis."),
+      ("2025-11-04", "Unable to climb stairs without a handrail; walking limited to one block."),
+      ("2025-11-18", "Started weight-bearing exercise program and acetaminophen."),
+      ("2026-02-10", "Intra-articular corticosteroid injection given 2025-12-15 with relief "
+                     "lasting 2 weeks."),
+      ("2026-02-10", "Completed 12 weeks of non-operative treatment including exercise, bracing "
+                     "and one injection.")],
+     "the patient completed 12 weeks (more than 3 months) of non-operative treatment",
+     {"kind": "fact_numeric",
+      "bullet": "Completed 26 weeks of supervised physical therapy (2026-02-10)."}),
+    ("Casey Fakename", "1972-05-30", "Dr. Pat Demo", "Lumbar epidural steroid injection",
+     "64483", "M51.16", "Lumbar transforaminal epidural injection (synthetic)",
+     ["Radicular pain for at least 4 weeks with imaging or exam correlation",
+      "Pain of at least 4/10 with functional impairment",
+      "No contraindication such as anticoagulation or active infection"],
+     3, "SYN-D02", "Documentation insufficient: absence of contraindications not documented",
+     ["anticoagulants", "infection"],
+     [("2026-01-20", "Right leg radicular pain for 8 weeks; MRI shows L5-S1 disc protrusion "
+                     "contacting the right S1 root."),
+      ("2026-01-20", "Pain 8/10; unable to sit longer than 15 minutes."),
+      ("2026-02-03", "Not on anticoagulants or antiplatelet agents; no signs of infection; "
+                     "afebrile."),
+      ("2026-02-03", "Platelet count 240 and INR 1.0.")],
+     "the chart documents that the patient takes no anticoagulants and has no signs of "
+     "infection (INR 1.0)",
+     {"kind": "fact_nonnumeric",
+      "bullet": "Documented history of prior lumbar surgery with retained hardware "
+                "(2026-02-03)."}),
+    ("Morgan Demo", "1963-09-09", "Dr. Sam Notreal", "Myocardial perfusion imaging", "78452",
+     "R07.9", "Myocardial perfusion SPECT (synthetic)",
+     ["Intermediate or high pretest probability of coronary disease",
+      "Resting ECG uninterpretable or patient unable to exercise adequately",
+      "Prior non-invasive testing non-diagnostic"],
+     2, "SYN-D01", "Not medically necessary: stress imaging rationale not documented",
+     ["unable to exercise", "ECG"],
+     [("2026-02-12", "Exertional chest pressure for 3 weeks; 62-year-old with hypertension and "
+                     "diabetes."),
+      ("2026-02-12", "Resting ECG shows left bundle branch block."),
+      ("2026-02-12", "Unable to complete treadmill exercise: severe knee osteoarthritis limits "
+                     "walking to 2 minutes."),
+      ("2026-02-12", "Estimated pretest probability of coronary disease: intermediate.")],
+     "the resting ECG shows left bundle branch block and the patient is unable to exercise "
+     "adequately because of knee osteoarthritis",
+     {"kind": "reason_unaddressed"}),
+    ("Taylor Placeholder", "1971-02-17", "Dr. Robin Dummy", "Brain MRI after first seizure",
+     "70553", "R56.9", "Brain MRI with and without contrast (synthetic)",
+     ["New-onset seizure with focal features or abnormal neurological exam",
+      "Prior CT or EEG non-diagnostic or insufficient for the clinical question",
+      "Age over 40 with new-onset seizure, or known malignancy"],
+     1, "SYN-D01", "Not medically necessary: focal features not documented",
+     ["focal", "neurological exam"],
+     [("2026-02-18", "First seizure 2026-02-17: witnessed left arm jerking lasting about "
+                     "2 minutes."),
+      ("2026-02-18", "Neurological exam: mild left facial droop."),
+      ("2026-02-18", "Head CT without contrast read as no acute abnormality."),
+      ("2026-02-18", "Age 54.")],
+     "the seizure had focal features (left arm jerking) and the neurological exam is abnormal "
+     "(left facial droop)",
+     {"kind": "criterion_not_cited"}),
+    ("Alex Notreal", "1950-12-01", "Dr. Jamie Specimen", "Follow-up chest CT", "71250",
+     "R91.1", "Chest CT for pulmonary nodule follow-up (synthetic)",
+     ["Solitary pulmonary nodule of 6 mm or larger on prior imaging",
+      "Follow-up interval consistent with accepted guidance for nodule size and risk",
+      "Risk factors documented (smoking history, prior malignancy)"],
+     2, "SYN-D01", "Not medically necessary: follow-up interval not supported",
+     ["interval", "guideline"],
+     [("2025-08-14", "Chest X-ray: 8 mm nodule in the right upper lobe."),
+      ("2025-08-14", "Former smoker, 30 pack-years."),
+      ("2026-02-20", "Follow-up CT is due 6 months after the 2025-08-14 finding.")],
+     "a 6 month follow-up interval fits guideline-based surveillance for an 8 mm nodule in a "
+     "former heavy smoker",
+     {"kind": "wrong_member"}),
+    ("Jamie Dummy", "1966-04-25", "Dr. Casey Mockdoc", "Diagnostic colonoscopy", "45378",
+     "K62.5", "Diagnostic colonoscopy (synthetic)",
+     ["Rectal bleeding persisting over 2 weeks, or bleeding with anemia",
+      "Age 45 or older, or alarm features",
+      "No colonoscopy in the past 10 years unless newly indicated"],
+     1, "SYN-D02", "Documentation insufficient: bleeding duration and anemia not documented",
+     ["bleeding", "anemia"],
+     [("2026-01-27", "Bright red rectal bleeding for 5 weeks."),
+      ("2026-01-27", "Hemoglobin 10.2 g/dL, consistent with iron-deficiency anemia."),
+      ("2026-01-27", "Age 51; no prior colonoscopy.")],
+     "the chart documents 5 weeks of rectal bleeding with iron-deficiency anemia",
+     {"kind": "wrong_cpt", "to": "45380"}),
+    ("Sam Fictional", "1948-08-19", "Dr. Alex Testdoc", "Transthoracic echocardiogram", "93306",
+     "I50.9", "Complete echocardiography (synthetic)",
+     ["New or worsening heart failure symptoms",
+      "No echocardiogram in the prior 12 months unless there is a clinical change",
+      "Result expected to change management"],
+     2, "SYN-D02", "Documentation insufficient: change since prior echocardiogram not shown",
+     ["clinical change", "prior echocardiogram"],
+     [("2026-02-05", "Prior echocardiogram 2025-03-04 showed EF 45%."),
+      ("2026-02-05", "New orthopnea and 6 kg weight gain over 2 weeks."),
+      ("2026-02-05", "BNP 980 pg/mL."),
+      ("2026-02-05", "Diuretic dose increased; further medication changes depend on EF.")],
+     "there has been a clinical change since the prior echocardiogram of 2025-03-04: new "
+     "orthopnea and 6 kg weight gain",
+     {"kind": "missing_elements"}),
+    ("Robin Specimen", "1980-10-12", "Dr. Morgan Placeholder", "Knee arthroscopy", "29881",
+     "M23.221", "Knee arthroscopy with meniscectomy (synthetic)",
+     ["Mechanical symptoms (locking or catching) documented",
+      "MRI confirming a meniscal tear",
+      "Failure of at least 6 weeks of non-operative treatment"],
+     3, "SYN-D01", "Not medically necessary: non-operative treatment failure not documented",
+     ["6 weeks", "non-operative"],
+     [("2026-01-08", "Right knee locking and catching for 10 weeks."),
+      ("2026-01-08", "MRI 2026-01-06 shows complex tear of the posterior horn of the medial "
+                     "meniscus."),
+      ("2026-02-26", "Completed 6 weeks of non-operative treatment with physical therapy; "
+                     "locking episodes persist.")],
+     "the patient completed 6 weeks of non-operative treatment with physical therapy and the "
+     "locking episodes persist",
+     {"kind": "late_and_incomplete", "icd": "M23.222"}),
+]
+
+
+def pid(n: int) -> str:
+    return f"SYN-LCD-{1000 + n}"
+
+
+def policy(i: int) -> dict:
+    s = S[i]
+    return {"id": pid(i + 1), "title": s[6],
+            "criteria": [{"id": f"{pid(i + 1)}-C{k + 1}", "text": t} for k, t in enumerate(s[7])]}
+
+
+def render(c: dict, *, date_s, response, bullets, policy_ref, crit_ids, request, enclosures,
+           signature, patient_name, member, claim, cpt, icd) -> str:
+    out = [f"Date: {date_s}",
+           f"RE: Appeal of denial, claim {claim} (SYNTHETIC CASE)",
+           f"Patient: {patient_name} | Member ID: {member} | DOB: {c['dob']}",
+           f"Requested service: CPT {cpt} | Diagnosis: ICD-10 {icd}", "",
+           "## Response to denial reason", response, "",
+           "## Clinical summary", *[f"- {b}" for b in bullets], "",
+           "## Policy basis",
+           f"Under {policy_ref} ({c['policy_title']}), the relevant criteria are "
+           f"{crit_ids}. {request}".rstrip(), ""]
+    if enclosures:
+        out += ["## Enclosures", *[f"- {e}" for e in enclosures], ""]
+    out += signature
+    return "\n".join(out) + "\n"
+
+
+def build() -> dict:
+    cases = []
+    for i, s in enumerate(S):
+        (name, dob, prov, title, cpt, icd, ptitle, crits, unmet, code, rtext, rterms, facts,
+         core, flaw) = s
+        n = i + 1
+        policy_id = pid(n)
+        distract = pid(n % len(S) + 1)
+        claim, member = f"SYN-CLM-{200100 + n}", f"SYN-MBR-{300100 + n}"
+        denial_dt = date(2026, 3, 2) + timedelta(days=n)
+        deadline = denial_dt + timedelta(days=60)
+        filed = denial_dt + timedelta(days=14)
+        unmet_ids = [f"{policy_id}-C{unmet}"]
+        crit_ids = ", ".join(f"{policy_id}-C{k + 1}" for k in range(len(crits)))
+        bullets = [f"{t[:-1] if t.endswith('.') else t} ({d})." for d, t in facts]
+        response = (f"The plan denied this request under {code} ({rtext.split(':')[0]}), stating "
+                    f"that {unmet_ids[0]} is not met. That criterion is met: {core}.")
+        encl = [f"Chart notes dated {facts[0][0]} through {facts[-1][0]}", "Copy of denial letter"]
+        base = dict(date_s=str(filed), response=response, bullets=bullets,
+                    policy_ref=policy_id, crit_ids=crit_ids, request=REQUEST, enclosures=encl,
+                    signature=["Sincerely,", f"{prov}, {NPI}"], patient_name=name, member=member,
+                    claim=claim, cpt=cpt, icd=icd)
+        ctx = {"dob": dob, "policy_title": ptitle.replace(" (synthetic)", "")}
+        good = render(ctx, **base)
+        f = dict(base)
+        kind, flaws = flaw["kind"], []
+        if kind == "citation_invented":
+            f["policy_ref"], flaws = "LCD L99999", ["citations"]
+        elif kind == "citation_wrong_policy":
+            f["policy_ref"], flaws = distract, ["citations"]
+        elif kind == "fact_numeric":
+            f["bullets"] = bullets + [flaw["bullet"]]
+            flaws = ["facts_in_chart"]
+        elif kind == "fact_nonnumeric":
+            f["bullets"] = bullets + [flaw["bullet"]]
+            flaws = ["facts_in_chart"]
+        elif kind == "reason_unaddressed":
+            f["response"], flaws = GENERIC, ["denial_reason_addressed"]
+        elif kind == "criterion_not_cited":
+            f["response"] = (f"The plan denied this request under {code}, stating that a "
+                             f"criterion is not met. That is not correct: {core}.")
+            flaws = ["denial_reason_addressed"]
+        elif kind == "wrong_member":
+            f["member"], flaws = f"SYN-MBR-{300100 + n + 7}", ["identifiers_match"]
+        elif kind == "wrong_cpt":
+            f["cpt"], flaws = flaw["to"], ["identifiers_match"]
+        elif kind == "missing_elements":
+            f["enclosures"], f["signature"] = [], ["Thank you for your attention."]
+            flaws = ["required_elements"]
+        elif kind == "late_and_incomplete":
+            f["date_s"] = str(deadline + timedelta(days=9))
+            f["request"], f["icd"] = "", flaw["icd"]
+            flaws = ["identifiers_match", "required_elements"]
+        cases.append({
+            "id": f"PA-{n:03d}",
+            "title": f"{title}: {kind.replace('_', ' ')} (synthetic)",
+            "denial": {
+                "claim_id": claim, "cpt": cpt, "icd10": icd, "reason_code": code,
+                "reason_text": rtext, "unmet_criteria": unmet_ids, "reason_terms": rterms,
+                "applicable_policy": policy_id, "denial_date": str(denial_dt),
+                "appeal_deadline": str(deadline),
+                "letter_text": (f"SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). "
+                                f"Claim {claim}, member {member}. CPT {cpt} denied under {code}: "
+                                f"{rtext}. Criterion {unmet_ids[0]} not met. You may appeal "
+                                f"by {deadline}."),
+            },
+            "chart": {
+                "patient_id": f"SYN-PT-{n:04d}", "patient_name": name, "dob": dob,
+                "member_id": member, "provider_name": prov,
+                "facts": [{"id": f"F{k + 1}", "date": d, "text": t}
+                          for k, (d, t) in enumerate(facts)],
+            },
+            "policies": [policy(i), policy(n % len(S))],
+            "reference_drafts": {
+                "good": {"text": good, "seeded_flaws": []},
+                "flawed": {"text": render(ctx, **f), "seeded_flaws": flaws},
+            },
+        })
+    return {"label": "SYNTHETIC EXAMPLE DATA: invented patients, claims, policies and letters "
+                     "for testing. Not real PHI, payer policy or Medicare NCD/LCD text.",
+            "cases": cases}
+
+
+if __name__ == "__main__":
+    json.dump(build(), sys.stdout, indent=2)
+    sys.stdout.write("\n")
