@@ -3,6 +3,7 @@ import pytest
 from prior_auth_eval.checks import (
     check_citations,
     check_denial_reason,
+    check_extra_phi,
     check_facts,
     check_identifiers,
     check_required_elements,
@@ -11,13 +12,14 @@ from prior_auth_eval.checks import (
     run_checks,
     sections,
 )
+from prior_auth_eval.schema import parse_case
 
 
 def test_good_letter_passes_everything(case, good_letter):
     results = run_checks(case, good_letter)
     assert [r.name for r in results] == [
         "citations", "facts_in_chart", "denial_reason_addressed", "identifiers_match",
-        "required_elements"]
+        "required_elements", "extra_phi"]
     assert all(r.passed for r in results), [(r.name, r.findings) for r in results if not r.passed]
 
 
@@ -189,3 +191,41 @@ def test_chart_negation_restated_with_negation_is_ok(case_dict, good_letter):
 def test_near_miss_member_id_is_flagged(case, good_letter):
     r = check_identifiers(case, good_letter.replace("SYN-MBR-900001", "SYN-MBR-900002"))
     assert not r.passed and any(f.startswith("member_id") for f in r.findings)
+
+
+# ---- extra PHI / minimum necessary
+def test_extra_phi_passes_on_good_letter(case, good_letter):
+    r = check_extra_phi(case, good_letter)
+    assert r.passed and r.severity == "major"
+
+
+@pytest.mark.parametrize("snippet,kind", [
+    ("SSN: 900-00-0021", "SSN"),
+    ("Call the patient at 555-555-0142.", "phone number"),
+    ("Call the patient at (555) 555-0142.", "phone number"),
+    ("Email pat.example@example.org with questions.", "email address"),
+    ("Home address: 742 Placeholder Lane, Faketown.", "street address"),
+])
+def test_extra_phi_flags_identifiers_not_in_source(case, good_letter, snippet, kind):
+    bad = good_letter.replace("## Response to denial reason",
+                              f"{snippet}\n\n## Response to denial reason")
+    r = check_extra_phi(case, bad)
+    assert not r.passed and any(f.startswith(kind) for f in r.findings), r.findings
+
+
+def test_extra_phi_allows_identifiers_found_in_chart_or_denial(case_dict, good_letter):
+    case_dict["chart"]["facts"].append({
+        "id": "f3", "date": "2026-02-23",
+        "text": "Caregiver contact on file: 555-555-0142, 742 Placeholder Lane.",
+    })
+    case_dict["denial"]["letter_text"] += " Questions: appeals@example.org."
+    case2 = parse_case(case_dict)
+    ok = good_letter.replace(
+        "## Enclosures",
+        "Contact: (555) 555-0142, 742 Placeholder Lane, appeals@example.org.\n\n## Enclosures")
+    assert check_extra_phi(case2, ok).passed
+
+
+def test_extra_phi_ignores_dates_and_synthetic_ids(case, good_letter):
+    ok = good_letter + "\nSee claim SYN-CLM-900001 dated 2026-03-02 and NPI SYN-0000.\n"
+    assert check_extra_phi(case, ok).passed

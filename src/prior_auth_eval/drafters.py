@@ -16,6 +16,8 @@ from .schema import Case
 PROMPT = """You are drafting a prior-authorization appeal letter for the provider.
 Use ONLY the facts in the chart and ONLY the policies in the provided policy set.
 Do not invent clinical facts, policy numbers or criteria.
+Include only the identifiers the appeal needs (minimum necessary): no SSNs, phone numbers,
+email addresses or street addresses that are not in the chart or denial letter.
 
 Denial letter:
 {denial}

@@ -14,7 +14,9 @@ Output contract the checkers rely on (give this to the drafter):
 
 These checks are a floor, not a verdict. They are intentionally literal: they catch
 fabricated citations, ungrounded numbers/terms, wrong identifiers and missing parts, and
-they will also flag some legitimate paraphrases. Human review is still required.
+they will also flag some legitimate paraphrases. The extra-PHI check is a pattern floor for
+SSNs, phone numbers, emails and street addresses not found in the source material; it is not a
+full minimum-necessary review. Human review is still required.
 """
 
 from __future__ import annotations
@@ -268,12 +270,56 @@ def check_required_elements(case: Case, letter: str) -> CheckResult:
     return res
 
 
+# ---------------------------------------------------------------- 6. extra PHI
+
+_PHI_RX = {
+    "SSN": re.compile(r"(?<![\w-])\d{3}-\d{2}-\d{4}(?![\w-])"),
+    "phone number": re.compile(
+        r"(?<![\w-])(?:\+?1[-. ]?)?(?:\(\d{3}\)\s?|\d{3}[-. ])\d{3}[-. ]\d{4}(?![\w-])"),
+    "email address": re.compile(r"\b[\w.+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+\b"),
+    "street address": re.compile(
+        r"\b\d{1,6}\s+(?:[A-Z][A-Za-z'-]*\.?\s+){1,4}"
+        r"(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Drive|Court|Ct|Place|Pl|"
+        r"Way|Terrace|Circle|Parkway|Pkwy|Highway|Hwy)\b\.?"),
+}
+
+
+def _phi_key(kind: str, value: str) -> str:
+    if kind in ("SSN", "phone number"):
+        digits = re.sub(r"\D", "", value)
+        return digits[-10:] if kind == "phone number" else digits
+    return re.sub(r"\s+", " ", value.strip().rstrip(".")).lower()
+
+
+def check_extra_phi(case: Case, letter: str) -> CheckResult:
+    """Minimum-necessary floor: flag SSNs, phone numbers, emails and street addresses that the
+    letter adds but that appear nowhere in the chart or the denial letter.
+
+    Identifiers that are in the source material are allowed (the appeal may need them); this
+    only catches over-sharing of identifiers the drafter invented or pulled from elsewhere.
+    """
+    res = CheckResult("extra_phi", True, MAJOR)
+    ch = case.chart
+    source = " \n".join([*(f.text for f in ch.facts), case.denial.letter_text,
+                         ch.patient_name, ch.dob, ch.member_id, ch.provider_name])
+    for kind, rx in _PHI_RX.items():
+        allowed = {_phi_key(kind, m.group(0)) for m in rx.finditer(source)}
+        for m in rx.finditer(letter):
+            if _phi_key(kind, m.group(0)) not in allowed:
+                res.findings.append(
+                    f"{kind} '{m.group(0).strip()}' is not in the chart or denial letter "
+                    "(minimum necessary)")
+    res.findings = sorted(set(res.findings))
+    res.passed = not res.findings
+    return res
+
+
 # ---------------------------------------------------------------- run all
 
 CHECKS = (check_citations, check_facts, check_denial_reason, check_identifiers,
-          check_required_elements)
+          check_required_elements, check_extra_phi)
 CHECK_NAMES = ("citations", "facts_in_chart", "denial_reason_addressed", "identifiers_match",
-               "required_elements")
+               "required_elements", "extra_phi")
 
 
 def run_checks(case: Case, letter: str) -> list[CheckResult]:

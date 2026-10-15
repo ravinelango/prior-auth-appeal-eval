@@ -6,7 +6,8 @@
 **Deterministic checks for LLM-drafted prior-authorization appeal letters.** Given a denial,
 a patient chart and the policy criteria the drafter is allowed to cite, it checks whether the
 appeal draft invents a policy, invents a clinical fact, ignores the denial reason, gets an
-identifier wrong, or leaves out required parts, then rolls the results up into a go/no-go style
+identifier wrong, leaves out required parts, or over-shares identifiers the appeal does not
+need, then rolls the results up into a go/no-go style
 report.
 
 > **Everything here is synthetic.** Patients, members, claims, clinicians and policies are
@@ -37,9 +38,10 @@ either):
 | Denial reason not addressed | `denial_reason_addressed` | critical | The "Response to denial reason" section must cite each unmet criterion id and engage with the expected reason terms |
 | Wrong patient, claim, member, CPT or ICD | `identifiers_match` | critical | Extracted identifiers must equal the case's; missing ones are flagged |
 | Missing required elements | `required_elements` | major | Explicit request to overturn, enclosures list, signature with NPI, letter dated on or before the appeal deadline |
+| Extra PHI (minimum necessary) | `extra_phi` | major | SSNs, US phone numbers, email addresses and street-address strings in the letter must appear in the chart or denial letter; anything else is flagged as over-shared |
 
 **Decision rollup:** NO-GO if any critical check fails on any case; GO WITH CONDITIONS if only
-`required_elements` fails; GO otherwise.
+major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
 
 ## How it works
 1. **Cases** (`examples/synthetic_cases.json`): 20 synthetic denials, each with the denial
@@ -54,7 +56,7 @@ either):
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`), and
    `pae prompt` prints the exact drafting prompt and output format for a case.
-3. **Checks** (`checks.py`): the five deterministic checkers above.
+3. **Checks** (`checks.py`): the six deterministic checkers above.
 4. **Report** (`report.py`): per-check and per-case tables, findings, the decision, and, for
    the mock drafters, a validation table showing the checks fire on exactly the seeded flaws.
 
@@ -89,12 +91,15 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   flag legitimate paraphrases and will miss fluent but wrong claims built from chart words.
   Negation flips are caught only when a cue word ("no", "denies", "negative", ...) sits
   shortly before the term in the same chart sentence. Only bullets in "Clinical summary" are checked.
-- No judge model, no real-model results, no payer-specific rules, no PHI minimum-necessary
-  check yet.
+- The extra-PHI check is a pattern floor, not a minimum-necessary review: it looks only for
+  SSN, phone, email and street-address patterns that are not in the source material. It misses
+  other identifiers (account numbers, free-text family details, unneeded diagnoses) and does
+  not judge whether chart content that *is* present was needed.
+- No judge model, no real-model results, no payer-specific rules.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 20 synthetic cases, five checkers, mock drafter, report, CLI and
+**Early, v0.1.** Schema, 20 synthetic cases, six checkers, mock drafter, report, CLI and
 tests (all passing). **No real results.**
 
 ## Roadmap
@@ -102,7 +107,7 @@ tests (all passing). **No real results.**
 - Grow toward 25 synthetic cases
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
-- Minimum-necessary / extra-PHI check
+- ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
 - Real-drafter adapters and a published scorecard once real runs exist
 
 ## License
