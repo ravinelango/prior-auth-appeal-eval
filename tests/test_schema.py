@@ -1,40 +1,45 @@
-import copy
+import json
 
 import pytest
 
-from prior_auth_appeal_eval.schema import CaseError, parse_case
-
-BASE = {
-    "case_id": "PA-900",
-    "synthetic": True,
-    "patient": {"name": "Test Patient", "dob": "1970-01-01", "member_id": "SYN000"},
-    "request": {"cpt": ["00000"], "icd10": ["Z00.00"]},
-    "denial": {"reason_code": "MN", "reason_text": "test", "cited_policy": "SYN-POL-1"},
-    "chart_facts": [{"id": "F1", "text": "fact one"}, {"id": "F2", "text": "fact two"}],
-    "policy_ids": ["SYN-POL-1"],
-    "required_elements": ["member_id"],
-}
+from prior_auth_eval.schema import load_cases, parse_case
 
 
-def test_parses_valid_case():
-    case = parse_case(copy.deepcopy(BASE))
-    assert case.case_id == "PA-900"
-    assert case.fact("F2").text == "fact two"
-    assert case.fact("F9") is None
+def test_parse_case_ok(case):
+    assert case.denial.applicable_policy == "SYN-LCD-9001"
+    assert case.policy("SYN-LCD-9002").title.startswith("Sleep")
+    assert "SYN-LCD-9001-C2" in case.criterion_ids()
 
 
-@pytest.mark.parametrize(
-    "mutate, msg",
-    [
-        (lambda d: d.pop("denial"), "missing keys"),
-        (lambda d: d.update(synthetic=False), "synthetic"),
-        (lambda d: d.update(case_id="X-1"), "case_id"),
-        (lambda d: d["chart_facts"].append({"id": "F1", "text": "dup"}), "unique"),
-        (lambda d: d["denial"].update(cited_policy="SYN-POL-404"), "cited_policy"),
-    ],
-)
-def test_rejects_bad_case(mutate, msg):
-    data = copy.deepcopy(BASE)
-    mutate(data)
-    with pytest.raises(CaseError, match=msg):
-        parse_case(data)
+def test_missing_field_is_reported(case_dict):
+    del case_dict["denial"]["reason_code"]
+    with pytest.raises(ValueError, match="reason_code"):
+        parse_case(case_dict)
+
+
+def test_applicable_policy_must_be_in_set(case_dict):
+    case_dict["denial"]["applicable_policy"] = "SYN-LCD-0000"
+    with pytest.raises(ValueError, match="applicable_policy"):
+        parse_case(case_dict)
+
+
+def test_unmet_criteria_must_exist(case_dict):
+    case_dict["denial"]["unmet_criteria"] = ["SYN-LCD-9001-C7"]
+    with pytest.raises(ValueError, match="unmet criteria"):
+        parse_case(case_dict)
+
+
+def test_duplicate_ids(tmp_path, case_dict):
+    p = tmp_path / "c.json"
+    p.write_text(json.dumps({"cases": [case_dict, case_dict]}))
+    with pytest.raises(ValueError, match="duplicate"):
+        load_cases(p)
+
+
+def test_reference_drafts_loaded(tmp_path, case_dict):
+    case_dict["reference_drafts"] = {"flawed": {"text": "x", "seeded_flaws": ["citation"]}}
+    p = tmp_path / "c.json"
+    p.write_text(json.dumps({"label": "SYNTHETIC", "cases": [case_dict]}))
+    cs = load_cases(p)
+    assert cs.label == "SYNTHETIC"
+    assert cs.cases[0].reference_drafts["flawed"].seeded_flaws == ("citation",)
