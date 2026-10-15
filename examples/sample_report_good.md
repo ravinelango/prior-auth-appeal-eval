@@ -1,8 +1,8 @@
 # Prior-auth appeal evaluation report
 
-- Dataset: `synthetic_cases.json` (15 cases)
+- Dataset: `synthetic_cases.json` (20 cases)
 - Drafter: `mock:good`
-- Generated: 2026-10-15 14:24 UTC
+- Generated: 2026-10-15 17:52 UTC
 
 > **Synthetic demo.** Cases are invented and the mock drafter replays fixed reference letters, so this report shows the format and that the checkers fire on seeded flaws. It is not a measurement of any model.
 
@@ -14,11 +14,11 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 
 | Check | Severity | Cases failed |
 |---|---|---|
-| citations | critical | 0/15 |
-| facts_in_chart | critical | 0/15 |
-| denial_reason_addressed | critical | 0/15 |
-| identifiers_match | critical | 0/15 |
-| required_elements | major | 0/15 |
+| citations | critical | 0/20 |
+| facts_in_chart | critical | 0/20 |
+| denial_reason_addressed | critical | 0/20 |
+| identifiers_match | critical | 0/20 |
+| required_elements | major | 0/20 |
 
 ## Per-case results
 
@@ -39,6 +39,11 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 | PA-013 | CPT 43239 | pass | pass | pass | pass | pass | PASS |
 | PA-014 | CPT 72141 | pass | pass | pass | pass | pass | PASS |
 | PA-015 | CPT 94760 | pass | pass | pass | pass | pass | PASS |
+| PA-016 | CPT 73721 | pass | pass | pass | pass | pass | PASS |
+| PA-017 | CPT 94010 | pass | pass | pass | pass | pass | PASS |
+| PA-018 | CPT 93880 | pass | pass | pass | pass | pass | PASS |
+| PA-019 | CPT 77080 | pass | pass | pass | pass | pass | PASS |
+| PA-020 | CPT 93970 | pass | pass | pass | pass | pass | PASS |
 
 ## Findings
 
@@ -62,5 +67,10 @@ No findings.
 | PA-013 | - | - | yes |
 | PA-014 | - | - | yes |
 | PA-015 | - | - | yes |
+| PA-016 | - | - | yes |
+| PA-017 | - | - | yes |
+| PA-018 | - | - | yes |
+| PA-019 | - | - | yes |
+| PA-020 | - | - | yes |
 
-15/15 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.
+20/20 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.

@@ -243,6 +243,70 @@ S = [
      {"kind": "paraphrase_flip",
       "bullet": "Resting SpO2 improved to 96 percent on room air after the recent "
                 "exacerbation (2026-02-10)."}),
+    ("Avery Testcase", "1977-03-03", "Dr. Reese Placeholder", "Right hip MRI", "73721",
+     "M25.551", "MRI of the hip without contrast (synthetic)",
+     ["Hip pain for at least 6 weeks with limited range of motion",
+      "Plain radiographs obtained and non-diagnostic",
+      "At least 6 weeks of conservative therapy"],
+     2, "SYN-D02", "Documentation insufficient: plain radiograph result not documented",
+     ["radiographs", "non-diagnostic"],
+     [("2026-01-19", "Right hip pain for 9 weeks; internal rotation limited and painful."),
+      ("2026-01-19", "Plain radiographs of the right hip were non-diagnostic."),
+      ("2026-02-27", "Completed 6 weeks of physical therapy; pain remains 6/10.")],
+     "plain radiographs of the right hip on 2026-01-19 were non-diagnostic",
+     {"kind": "citation_bad_criterion"}),
+    ("Quinn Mockdata", "1964-06-17", "Dr. Ellis Specimen", "Spirometry", "94010", "R06.02",
+     "Spirometry for unexplained dyspnea (synthetic)",
+     ["Unexplained dyspnea or chronic cough for at least 8 weeks",
+      "Exam and chest imaging do not explain the symptoms",
+      "Result expected to guide treatment"],
+     1, "SYN-D01", "Not medically necessary: symptom duration not documented",
+     ["dyspnea", "8 weeks"],
+     [("2026-01-22", "Exertional dyspnea and dry cough for 12 weeks."),
+      ("2026-01-22", "Chest X-ray clear; cardiac exam normal."),
+      ("2026-01-22", "Inhaler choice depends on the spirometry result.")],
+     "the chart documents exertional dyspnea and cough for 12 weeks, longer than 8 weeks",
+     {"kind": "wrong_patient_name", "to": "Riley Mockson"}),
+    ("Jesse Samplecase", "1958-10-30", "Dr. Rowan Fictional", "Carotid duplex ultrasound",
+     "93880", "G45.9", "Carotid duplex ultrasound (synthetic)",
+     ["Focal neurological symptoms suggesting TIA or stroke",
+      "Carotid bruit or symptoms in a carotid territory",
+      "Patient is a candidate for intervention if stenosis is found"],
+     1, "SYN-D01", "Not medically necessary: focal neurological symptoms not documented",
+     ["focal", "transient"],
+     [("2026-02-09", "Transient right hand weakness and slurred speech lasting 20 minutes on "
+                     "2026-02-08."),
+      ("2026-02-09", "Left carotid bruit on exam."),
+      ("2026-02-09", "Fit for carotid intervention if significant stenosis is found.")],
+     "the patient had a transient focal episode of right hand weakness and slurred speech on "
+     "2026-02-08",
+     {"kind": "date_shift",
+      "bullet": "Earlier transient episode of right hand weakness (2026-01-25)."}),
+    ("Morgan Testrecord", "1973-08-11", "Dr. Sky Mockdoc", "Bone density scan", "77080",
+     "M81.0", "Dual-energy X-ray absorptiometry (synthetic)",
+     ["Age 65 or older, or a risk factor such as long-term glucocorticoid use",
+      "No DXA in the prior 2 years unless newly indicated",
+      "Result expected to change management"],
+     1, "SYN-D02", "Documentation insufficient: glucocorticoid exposure not documented",
+     ["glucocorticoid", "prednisone"],
+     [("2026-01-30", "Prednisone 10 mg daily for 7 months for polymyalgia rheumatica."),
+      ("2026-01-30", "No prior DXA."),
+      ("2026-01-30", "Bisphosphonate decision depends on the DXA result.")],
+     "the patient has taken prednisone 10 mg daily for 7 months, which is long-term "
+     "glucocorticoid use",
+     {"kind": "reason_terms_missing"}),
+    ("Harper Notacase", "1966-02-14", "Dr. Logan Testdoc", "Lower extremity venous duplex",
+     "93970", "I87.2", "Venous duplex for chronic venous disease (synthetic)",
+     ["Symptomatic varicose veins or venous insufficiency",
+      "At least 3 months of compression therapy",
+      "Intervention is being considered"],
+     2, "SYN-D01", "Not medically necessary: compression therapy not documented",
+     ["compression", "3 months"],
+     [("2025-11-03", "Aching and swelling of both legs with visible varicose veins."),
+      ("2026-02-12", "Wore prescribed compression stockings daily for 3 months without relief."),
+      ("2026-02-12", "Referred to vascular surgery to consider ablation.")],
+     "the patient wore compression stockings daily for 3 months without relief",
+     {"kind": "late_filing"}),
 ]
 
 
@@ -341,6 +405,24 @@ def build() -> dict:
         elif kind == "paraphrase_flip":
             f["bullets"] = bullets + [flaw["bullet"]]
             flaws = ["facts_in_chart"]
+        elif kind == "citation_bad_criterion":
+            # Real policy, but a criterion number the policy does not have.
+            f["crit_ids"] = f"{crit_ids}, {policy_id}-C{len(crits) + 1}"
+            flaws = ["citations"]
+        elif kind == "wrong_patient_name":
+            # Patient name pasted from another case; every id still matches.
+            f["patient_name"], flaws = flaw["to"], ["identifiers_match"]
+        elif kind == "date_shift":
+            f["bullets"] = bullets + [flaw["bullet"]]
+            flaws = ["facts_in_chart"]
+        elif kind == "reason_terms_missing":
+            # Cites the unmet criterion but never engages with what the plan said was missing.
+            f["response"] = (f"The plan denied this request under {code}, stating that "
+                             f"{unmet_ids[0]} is not met. We respectfully disagree with this "
+                             f"determination and ask the plan to reconsider.")
+            flaws = ["denial_reason_addressed"]
+        elif kind == "late_filing":
+            f["date_s"], flaws = str(deadline + timedelta(days=3)), ["required_elements"]
         cases.append({
             "id": f"PA-{n:03d}",
             "title": f"{title}: {kind.replace('_', ' ')} (synthetic)",

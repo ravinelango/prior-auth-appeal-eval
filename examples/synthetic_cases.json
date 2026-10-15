@@ -1471,6 +1471,486 @@
           ]
         },
         {
+          "id": "SYN-LCD-1016",
+          "title": "MRI of the hip without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1016-C1",
+              "text": "Hip pain for at least 6 weeks with limited range of motion"
+            },
+            {
+              "id": "SYN-LCD-1016-C2",
+              "text": "Plain radiographs obtained and non-diagnostic"
+            },
+            {
+              "id": "SYN-LCD-1016-C3",
+              "text": "At least 6 weeks of conservative therapy"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n- Resting SpO2 improved to 96 percent on room air after the recent exacerbation (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-016",
+      "title": "Right hip MRI: citation bad criterion (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200116",
+        "cpt": "73721",
+        "icd10": "M25.551",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: plain radiograph result not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1016-C2"
+        ],
+        "reason_terms": [
+          "radiographs",
+          "non-diagnostic"
+        ],
+        "applicable_policy": "SYN-LCD-1016",
+        "denial_date": "2026-03-18",
+        "appeal_deadline": "2026-05-17",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200116, member SYN-MBR-300116. CPT 73721 denied under SYN-D02: Documentation insufficient: plain radiograph result not documented. Criterion SYN-LCD-1016-C2 not met. You may appeal by 2026-05-17."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0016",
+        "patient_name": "Avery Testcase",
+        "dob": "1977-03-03",
+        "member_id": "SYN-MBR-300116",
+        "provider_name": "Dr. Reese Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-19",
+            "text": "Right hip pain for 9 weeks; internal rotation limited and painful."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-19",
+            "text": "Plain radiographs of the right hip were non-diagnostic."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-27",
+            "text": "Completed 6 weeks of physical therapy; pain remains 6/10."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1016",
+          "title": "MRI of the hip without contrast (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1016-C1",
+              "text": "Hip pain for at least 6 weeks with limited range of motion"
+            },
+            {
+              "id": "SYN-LCD-1016-C2",
+              "text": "Plain radiographs obtained and non-diagnostic"
+            },
+            {
+              "id": "SYN-LCD-1016-C3",
+              "text": "At least 6 weeks of conservative therapy"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1017",
+          "title": "Spirometry for unexplained dyspnea (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1017-C1",
+              "text": "Unexplained dyspnea or chronic cough for at least 8 weeks"
+            },
+            {
+              "id": "SYN-LCD-1017-C2",
+              "text": "Exam and chest imaging do not explain the symptoms"
+            },
+            {
+              "id": "SYN-LCD-1017-C3",
+              "text": "Result expected to guide treatment"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-01\nRE: Appeal of denial, claim SYN-CLM-200116 (SYNTHETIC CASE)\nPatient: Avery Testcase | Member ID: SYN-MBR-300116 | DOB: 1977-03-03\nRequested service: CPT 73721 | Diagnosis: ICD-10 M25.551\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1016-C2 is not met. That criterion is met: plain radiographs of the right hip on 2026-01-19 were non-diagnostic.\n\n## Clinical summary\n- Right hip pain for 9 weeks; internal rotation limited and painful (2026-01-19).\n- Plain radiographs of the right hip were non-diagnostic (2026-01-19).\n- Completed 6 weeks of physical therapy; pain remains 6/10 (2026-02-27).\n\n## Policy basis\nUnder SYN-LCD-1016 (MRI of the hip without contrast), the relevant criteria are SYN-LCD-1016-C1, SYN-LCD-1016-C2, SYN-LCD-1016-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-19 through 2026-02-27\n- Copy of denial letter\n\nSincerely,\nDr. Reese Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-01\nRE: Appeal of denial, claim SYN-CLM-200116 (SYNTHETIC CASE)\nPatient: Avery Testcase | Member ID: SYN-MBR-300116 | DOB: 1977-03-03\nRequested service: CPT 73721 | Diagnosis: ICD-10 M25.551\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1016-C2 is not met. That criterion is met: plain radiographs of the right hip on 2026-01-19 were non-diagnostic.\n\n## Clinical summary\n- Right hip pain for 9 weeks; internal rotation limited and painful (2026-01-19).\n- Plain radiographs of the right hip were non-diagnostic (2026-01-19).\n- Completed 6 weeks of physical therapy; pain remains 6/10 (2026-02-27).\n\n## Policy basis\nUnder SYN-LCD-1016 (MRI of the hip without contrast), the relevant criteria are SYN-LCD-1016-C1, SYN-LCD-1016-C2, SYN-LCD-1016-C3, SYN-LCD-1016-C4. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-19 through 2026-02-27\n- Copy of denial letter\n\nSincerely,\nDr. Reese Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-017",
+      "title": "Spirometry: wrong patient name (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200117",
+        "cpt": "94010",
+        "icd10": "R06.02",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: symptom duration not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1017-C1"
+        ],
+        "reason_terms": [
+          "dyspnea",
+          "8 weeks"
+        ],
+        "applicable_policy": "SYN-LCD-1017",
+        "denial_date": "2026-03-19",
+        "appeal_deadline": "2026-05-18",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200117, member SYN-MBR-300117. CPT 94010 denied under SYN-D01: Not medically necessary: symptom duration not documented. Criterion SYN-LCD-1017-C1 not met. You may appeal by 2026-05-18."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0017",
+        "patient_name": "Quinn Mockdata",
+        "dob": "1964-06-17",
+        "member_id": "SYN-MBR-300117",
+        "provider_name": "Dr. Ellis Specimen",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-22",
+            "text": "Exertional dyspnea and dry cough for 12 weeks."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-22",
+            "text": "Chest X-ray clear; cardiac exam normal."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-22",
+            "text": "Inhaler choice depends on the spirometry result."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1017",
+          "title": "Spirometry for unexplained dyspnea (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1017-C1",
+              "text": "Unexplained dyspnea or chronic cough for at least 8 weeks"
+            },
+            {
+              "id": "SYN-LCD-1017-C2",
+              "text": "Exam and chest imaging do not explain the symptoms"
+            },
+            {
+              "id": "SYN-LCD-1017-C3",
+              "text": "Result expected to guide treatment"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1018",
+          "title": "Carotid duplex ultrasound (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1018-C1",
+              "text": "Focal neurological symptoms suggesting TIA or stroke"
+            },
+            {
+              "id": "SYN-LCD-1018-C2",
+              "text": "Carotid bruit or symptoms in a carotid territory"
+            },
+            {
+              "id": "SYN-LCD-1018-C3",
+              "text": "Patient is a candidate for intervention if stenosis is found"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-02\nRE: Appeal of denial, claim SYN-CLM-200117 (SYNTHETIC CASE)\nPatient: Quinn Mockdata | Member ID: SYN-MBR-300117 | DOB: 1964-06-17\nRequested service: CPT 94010 | Diagnosis: ICD-10 R06.02\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1017-C1 is not met. That criterion is met: the chart documents exertional dyspnea and cough for 12 weeks, longer than 8 weeks.\n\n## Clinical summary\n- Exertional dyspnea and dry cough for 12 weeks (2026-01-22).\n- Chest X-ray clear; cardiac exam normal (2026-01-22).\n- Inhaler choice depends on the spirometry result (2026-01-22).\n\n## Policy basis\nUnder SYN-LCD-1017 (Spirometry for unexplained dyspnea), the relevant criteria are SYN-LCD-1017-C1, SYN-LCD-1017-C2, SYN-LCD-1017-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-22 through 2026-01-22\n- Copy of denial letter\n\nSincerely,\nDr. Ellis Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-02\nRE: Appeal of denial, claim SYN-CLM-200117 (SYNTHETIC CASE)\nPatient: Riley Mockson | Member ID: SYN-MBR-300117 | DOB: 1964-06-17\nRequested service: CPT 94010 | Diagnosis: ICD-10 R06.02\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1017-C1 is not met. That criterion is met: the chart documents exertional dyspnea and cough for 12 weeks, longer than 8 weeks.\n\n## Clinical summary\n- Exertional dyspnea and dry cough for 12 weeks (2026-01-22).\n- Chest X-ray clear; cardiac exam normal (2026-01-22).\n- Inhaler choice depends on the spirometry result (2026-01-22).\n\n## Policy basis\nUnder SYN-LCD-1017 (Spirometry for unexplained dyspnea), the relevant criteria are SYN-LCD-1017-C1, SYN-LCD-1017-C2, SYN-LCD-1017-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-22 through 2026-01-22\n- Copy of denial letter\n\nSincerely,\nDr. Ellis Specimen, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-018",
+      "title": "Carotid duplex ultrasound: date shift (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200118",
+        "cpt": "93880",
+        "icd10": "G45.9",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: focal neurological symptoms not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1018-C1"
+        ],
+        "reason_terms": [
+          "focal",
+          "transient"
+        ],
+        "applicable_policy": "SYN-LCD-1018",
+        "denial_date": "2026-03-20",
+        "appeal_deadline": "2026-05-19",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200118, member SYN-MBR-300118. CPT 93880 denied under SYN-D01: Not medically necessary: focal neurological symptoms not documented. Criterion SYN-LCD-1018-C1 not met. You may appeal by 2026-05-19."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0018",
+        "patient_name": "Jesse Samplecase",
+        "dob": "1958-10-30",
+        "member_id": "SYN-MBR-300118",
+        "provider_name": "Dr. Rowan Fictional",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-09",
+            "text": "Transient right hand weakness and slurred speech lasting 20 minutes on 2026-02-08."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-09",
+            "text": "Left carotid bruit on exam."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-09",
+            "text": "Fit for carotid intervention if significant stenosis is found."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1018",
+          "title": "Carotid duplex ultrasound (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1018-C1",
+              "text": "Focal neurological symptoms suggesting TIA or stroke"
+            },
+            {
+              "id": "SYN-LCD-1018-C2",
+              "text": "Carotid bruit or symptoms in a carotid territory"
+            },
+            {
+              "id": "SYN-LCD-1018-C3",
+              "text": "Patient is a candidate for intervention if stenosis is found"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1019",
+          "title": "Dual-energy X-ray absorptiometry (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1019-C1",
+              "text": "Age 65 or older, or a risk factor such as long-term glucocorticoid use"
+            },
+            {
+              "id": "SYN-LCD-1019-C2",
+              "text": "No DXA in the prior 2 years unless newly indicated"
+            },
+            {
+              "id": "SYN-LCD-1019-C3",
+              "text": "Result expected to change management"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-03\nRE: Appeal of denial, claim SYN-CLM-200118 (SYNTHETIC CASE)\nPatient: Jesse Samplecase | Member ID: SYN-MBR-300118 | DOB: 1958-10-30\nRequested service: CPT 93880 | Diagnosis: ICD-10 G45.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1018-C1 is not met. That criterion is met: the patient had a transient focal episode of right hand weakness and slurred speech on 2026-02-08.\n\n## Clinical summary\n- Transient right hand weakness and slurred speech lasting 20 minutes on 2026-02-08 (2026-02-09).\n- Left carotid bruit on exam (2026-02-09).\n- Fit for carotid intervention if significant stenosis is found (2026-02-09).\n\n## Policy basis\nUnder SYN-LCD-1018 (Carotid duplex ultrasound), the relevant criteria are SYN-LCD-1018-C1, SYN-LCD-1018-C2, SYN-LCD-1018-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-09 through 2026-02-09\n- Copy of denial letter\n\nSincerely,\nDr. Rowan Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-03\nRE: Appeal of denial, claim SYN-CLM-200118 (SYNTHETIC CASE)\nPatient: Jesse Samplecase | Member ID: SYN-MBR-300118 | DOB: 1958-10-30\nRequested service: CPT 93880 | Diagnosis: ICD-10 G45.9\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1018-C1 is not met. That criterion is met: the patient had a transient focal episode of right hand weakness and slurred speech on 2026-02-08.\n\n## Clinical summary\n- Transient right hand weakness and slurred speech lasting 20 minutes on 2026-02-08 (2026-02-09).\n- Left carotid bruit on exam (2026-02-09).\n- Fit for carotid intervention if significant stenosis is found (2026-02-09).\n- Earlier transient episode of right hand weakness (2026-01-25).\n\n## Policy basis\nUnder SYN-LCD-1018 (Carotid duplex ultrasound), the relevant criteria are SYN-LCD-1018-C1, SYN-LCD-1018-C2, SYN-LCD-1018-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-09 through 2026-02-09\n- Copy of denial letter\n\nSincerely,\nDr. Rowan Fictional, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-019",
+      "title": "Bone density scan: reason terms missing (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200119",
+        "cpt": "77080",
+        "icd10": "M81.0",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: glucocorticoid exposure not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1019-C1"
+        ],
+        "reason_terms": [
+          "glucocorticoid",
+          "prednisone"
+        ],
+        "applicable_policy": "SYN-LCD-1019",
+        "denial_date": "2026-03-21",
+        "appeal_deadline": "2026-05-20",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200119, member SYN-MBR-300119. CPT 77080 denied under SYN-D02: Documentation insufficient: glucocorticoid exposure not documented. Criterion SYN-LCD-1019-C1 not met. You may appeal by 2026-05-20."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0019",
+        "patient_name": "Morgan Testrecord",
+        "dob": "1973-08-11",
+        "member_id": "SYN-MBR-300119",
+        "provider_name": "Dr. Sky Mockdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-30",
+            "text": "Prednisone 10 mg daily for 7 months for polymyalgia rheumatica."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-30",
+            "text": "No prior DXA."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-30",
+            "text": "Bisphosphonate decision depends on the DXA result."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1019",
+          "title": "Dual-energy X-ray absorptiometry (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1019-C1",
+              "text": "Age 65 or older, or a risk factor such as long-term glucocorticoid use"
+            },
+            {
+              "id": "SYN-LCD-1019-C2",
+              "text": "No DXA in the prior 2 years unless newly indicated"
+            },
+            {
+              "id": "SYN-LCD-1019-C3",
+              "text": "Result expected to change management"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-1020",
+          "title": "Venous duplex for chronic venous disease (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1020-C1",
+              "text": "Symptomatic varicose veins or venous insufficiency"
+            },
+            {
+              "id": "SYN-LCD-1020-C2",
+              "text": "At least 3 months of compression therapy"
+            },
+            {
+              "id": "SYN-LCD-1020-C3",
+              "text": "Intervention is being considered"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-04\nRE: Appeal of denial, claim SYN-CLM-200119 (SYNTHETIC CASE)\nPatient: Morgan Testrecord | Member ID: SYN-MBR-300119 | DOB: 1973-08-11\nRequested service: CPT 77080 | Diagnosis: ICD-10 M81.0\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1019-C1 is not met. That criterion is met: the patient has taken prednisone 10 mg daily for 7 months, which is long-term glucocorticoid use.\n\n## Clinical summary\n- Prednisone 10 mg daily for 7 months for polymyalgia rheumatica (2026-01-30).\n- No prior DXA (2026-01-30).\n- Bisphosphonate decision depends on the DXA result (2026-01-30).\n\n## Policy basis\nUnder SYN-LCD-1019 (Dual-energy X-ray absorptiometry), the relevant criteria are SYN-LCD-1019-C1, SYN-LCD-1019-C2, SYN-LCD-1019-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-30 through 2026-01-30\n- Copy of denial letter\n\nSincerely,\nDr. Sky Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-04\nRE: Appeal of denial, claim SYN-CLM-200119 (SYNTHETIC CASE)\nPatient: Morgan Testrecord | Member ID: SYN-MBR-300119 | DOB: 1973-08-11\nRequested service: CPT 77080 | Diagnosis: ICD-10 M81.0\n\n## Response to denial reason\nThe plan denied this request under SYN-D02, stating that SYN-LCD-1019-C1 is not met. We respectfully disagree with this determination and ask the plan to reconsider.\n\n## Clinical summary\n- Prednisone 10 mg daily for 7 months for polymyalgia rheumatica (2026-01-30).\n- No prior DXA (2026-01-30).\n- Bisphosphonate decision depends on the DXA result (2026-01-30).\n\n## Policy basis\nUnder SYN-LCD-1019 (Dual-energy X-ray absorptiometry), the relevant criteria are SYN-LCD-1019-C1, SYN-LCD-1019-C2, SYN-LCD-1019-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-01-30 through 2026-01-30\n- Copy of denial letter\n\nSincerely,\nDr. Sky Mockdoc, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-020",
+      "title": "Lower extremity venous duplex: late filing (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-200120",
+        "cpt": "93970",
+        "icd10": "I87.2",
+        "reason_code": "SYN-D01",
+        "reason_text": "Not medically necessary: compression therapy not documented",
+        "unmet_criteria": [
+          "SYN-LCD-1020-C2"
+        ],
+        "reason_terms": [
+          "compression",
+          "3 months"
+        ],
+        "applicable_policy": "SYN-LCD-1020",
+        "denial_date": "2026-03-22",
+        "appeal_deadline": "2026-05-21",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-200120, member SYN-MBR-300120. CPT 93970 denied under SYN-D01: Not medically necessary: compression therapy not documented. Criterion SYN-LCD-1020-C2 not met. You may appeal by 2026-05-21."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0020",
+        "patient_name": "Harper Notacase",
+        "dob": "1966-02-14",
+        "member_id": "SYN-MBR-300120",
+        "provider_name": "Dr. Logan Testdoc",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-11-03",
+            "text": "Aching and swelling of both legs with visible varicose veins."
+          },
+          {
+            "id": "F2",
+            "date": "2026-02-12",
+            "text": "Wore prescribed compression stockings daily for 3 months without relief."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-12",
+            "text": "Referred to vascular surgery to consider ablation."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-1020",
+          "title": "Venous duplex for chronic venous disease (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-1020-C1",
+              "text": "Symptomatic varicose veins or venous insufficiency"
+            },
+            {
+              "id": "SYN-LCD-1020-C2",
+              "text": "At least 3 months of compression therapy"
+            },
+            {
+              "id": "SYN-LCD-1020-C3",
+              "text": "Intervention is being considered"
+            }
+          ]
+        },
+        {
           "id": "SYN-LCD-1001",
           "title": "Advanced imaging of the lumbar spine (synthetic)",
           "criteria": [
@@ -1491,13 +1971,13 @@
       ],
       "reference_drafts": {
         "good": {
-          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-04-05\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": []
         },
         "flawed": {
-          "text": "Date: 2026-03-31\nRE: Appeal of denial, claim SYN-CLM-200115 (SYNTHETIC CASE)\nPatient: Drew Notreal | Member ID: SYN-MBR-300115 | DOB: 1954-04-02\nRequested service: CPT 94760 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nThe plan denied this request under SYN-D02 (Documentation insufficient), stating that SYN-LCD-1015-C2 is not met. That criterion is met: resting SpO2 is 86 percent on room air, below the 88 percent threshold.\n\n## Clinical summary\n- COPD with recent exacerbation requiring steroids (2026-02-10).\n- Resting SpO2 86 percent on room air (2026-02-10).\n- On optimized inhaler therapy including LABA/LAMA (2026-02-10).\n- Walks 20 meters before stopping for dyspnea (2026-02-10).\n- Resting SpO2 improved to 96 percent on room air after the recent exacerbation (2026-02-10).\n\n## Policy basis\nUnder SYN-LCD-1015 (Pulse oximetry for home oxygen), the relevant criteria are SYN-LCD-1015-C1, SYN-LCD-1015-C2, SYN-LCD-1015-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2026-02-10 through 2026-02-10\n- Copy of denial letter\n\nSincerely,\nDr. Harper Testdoc, NPI SYN-0000 (synthetic)\n",
+          "text": "Date: 2026-05-24\nRE: Appeal of denial, claim SYN-CLM-200120 (SYNTHETIC CASE)\nPatient: Harper Notacase | Member ID: SYN-MBR-300120 | DOB: 1966-02-14\nRequested service: CPT 93970 | Diagnosis: ICD-10 I87.2\n\n## Response to denial reason\nThe plan denied this request under SYN-D01 (Not medically necessary), stating that SYN-LCD-1020-C2 is not met. That criterion is met: the patient wore compression stockings daily for 3 months without relief.\n\n## Clinical summary\n- Aching and swelling of both legs with visible varicose veins (2025-11-03).\n- Wore prescribed compression stockings daily for 3 months without relief (2026-02-12).\n- Referred to vascular surgery to consider ablation (2026-02-12).\n\n## Policy basis\nUnder SYN-LCD-1020 (Venous duplex for chronic venous disease), the relevant criteria are SYN-LCD-1020-C1, SYN-LCD-1020-C2, SYN-LCD-1020-C3. We request that the denial be overturned and the service authorized.\n\n## Enclosures\n- Chart notes dated 2025-11-03 through 2026-02-12\n- Copy of denial letter\n\nSincerely,\nDr. Logan Testdoc, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
-            "facts_in_chart"
+            "required_elements"
           ]
         }
       }

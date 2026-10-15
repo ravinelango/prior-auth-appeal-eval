@@ -1,8 +1,8 @@
 # Prior-auth appeal evaluation report
 
-- Dataset: `synthetic_cases.json` (15 cases)
+- Dataset: `synthetic_cases.json` (20 cases)
 - Drafter: `mock:flawed`
-- Generated: 2026-10-15 14:24 UTC
+- Generated: 2026-10-15 17:52 UTC
 
 > **Synthetic demo.** Cases are invented and the mock drafter replays fixed reference letters, so this report shows the format and that the checkers fire on seeded flaws. It is not a measurement of any model.
 
@@ -22,6 +22,10 @@
 - PA-013: identifiers_match failed
 - PA-014: identifiers_match failed
 - PA-015: facts_in_chart failed
+- PA-016: citations failed
+- PA-017: identifiers_match failed
+- PA-018: facts_in_chart failed
+- PA-019: denial_reason_addressed failed
 
 _Deterministic checks are a floor, not a replacement for human review. A GO does not mean the letters are good. Not medical or legal advice._
 
@@ -29,11 +33,11 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 
 | Check | Severity | Cases failed |
 |---|---|---|
-| citations | critical | 2/15 |
-| facts_in_chart | critical | 4/15 |
-| denial_reason_addressed | critical | 2/15 |
-| identifiers_match | critical | 6/15 |
-| required_elements | major | 2/15 |
+| citations | critical | 3/20 |
+| facts_in_chart | critical | 5/20 |
+| denial_reason_addressed | critical | 3/20 |
+| identifiers_match | critical | 7/20 |
+| required_elements | major | 3/20 |
 
 ## Per-case results
 
@@ -54,6 +58,11 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 | PA-013 | CPT 43239 | pass | pass | pass | FAIL | pass | FAIL |
 | PA-014 | CPT 72141 | pass | pass | pass | FAIL | pass | FAIL |
 | PA-015 | CPT 94760 | pass | FAIL | pass | pass | pass | FAIL |
+| PA-016 | CPT 73721 | FAIL | pass | pass | pass | pass | FAIL |
+| PA-017 | CPT 94010 | pass | pass | pass | FAIL | pass | FAIL |
+| PA-018 | CPT 93880 | pass | FAIL | pass | pass | pass | FAIL |
+| PA-019 | CPT 77080 | pass | pass | FAIL | pass | pass | FAIL |
+| PA-020 | CPT 93970 | pass | pass | pass | pass | FAIL | FAIL (minor) |
 
 ## Findings
 
@@ -122,6 +131,26 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 - **facts_in_chart** (critical)
   - number(s) not in chart ['96']: "Resting SpO2 improved to 96 percent on room air after the recent exacerbation (2026-02-10)."
 
+### PA-016: Right hip MRI: citation bad criterion (synthetic)
+- **citations** (critical)
+  - cites criterion SYN-LCD-1016-C4, which does not exist in SYN-LCD-1016
+
+### PA-017: Spirometry: wrong patient name (synthetic)
+- **identifiers_match** (critical)
+  - patient_name is Riley Mockson, expected Quinn Mockdata
+
+### PA-018: Carotid duplex ultrasound: date shift (synthetic)
+- **facts_in_chart** (critical)
+  - number(s) not in chart ['2026-01-25']: "Earlier transient episode of right hand weakness (2026-01-25)."
+
+### PA-019: Bone density scan: reason terms missing (synthetic)
+- **denial_reason_addressed** (critical)
+  - response engages with 0/2 expected terms (missing: ['glucocorticoid', 'prednisone'])
+
+### PA-020: Lower extremity venous duplex: late filing (synthetic)
+- **required_elements** (major)
+  - letter dated 2026-05-24 is after the appeal deadline 2026-05-21
+
 ## Checker validation (seeded flaws, mock drafter only)
 
 | Case | Seeded flaws | Checks that failed | Match |
@@ -141,5 +170,10 @@ _Deterministic checks are a floor, not a replacement for human review. A GO does
 | PA-013 | identifiers_match | identifiers_match | yes |
 | PA-014 | identifiers_match | identifiers_match | yes |
 | PA-015 | facts_in_chart | facts_in_chart | yes |
+| PA-016 | citations | citations | yes |
+| PA-017 | identifiers_match | identifiers_match | yes |
+| PA-018 | facts_in_chart | facts_in_chart | yes |
+| PA-019 | denial_reason_addressed | denial_reason_addressed | yes |
+| PA-020 | required_elements | required_elements | yes |
 
-15/15 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.
+20/20 cases matched. This validates the checkers against flaws written by the same author; it says nothing about real model output.
