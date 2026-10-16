@@ -58,7 +58,9 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    the explicit request to overturn.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
-   `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`), and
+   `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
+   `openai` / `openai:MODEL` posts `build_prompt(case)` to an OpenAI-compatible chat
+   endpoint (`OPENAI_API_KEY`, optional `OPENAI_BASE_URL`; `pip install -e '.[openai]'`).
    `pae prompt` prints the exact drafting prompt and output format for a case.
 3. **Checks** (`checks.py`): the six deterministic checkers above.
 4. **Report** (`report.py`): per-check and per-case tables, findings, the decision, and, for
@@ -77,8 +79,26 @@ pytest -q
 [`examples/sample_report_flawed.md`](examples/sample_report_flawed.md) and
 [`examples/sample_report_good.md`](examples/sample_report_good.md).
 
-To evaluate a real model: print each case's prompt with `pae prompt`, save each reply as
-`DIR/<case id>.txt`, then run with `--drafter files:DIR`.
+To evaluate a real model, either:
+
+```bash
+# Option A: OpenAI-compatible API (adapter present; no published scorecard yet)
+pip install -e '.[openai]'
+export OPENAI_API_KEY=sk-...          # required
+# export OPENAI_BASE_URL=https://...  # optional compatible endpoint
+pae run --cases examples/synthetic_cases.json --drafter openai --out reports/openai.md
+# or: --drafter openai:gpt-4o-mini
+```
+
+```bash
+# Option B: generate letters elsewhere, then score them offline
+pae prompt --cases examples/synthetic_cases.json --case-id PA-001
+# save each reply as DIR/<case id>.txt
+pae run --cases examples/synthetic_cases.json --drafter files:DIR --out reports/files.md
+```
+
+**Do not publish fabricated pass rates.** A scorecard belongs only after real runs with a
+real key; the adapter is wired for that, but this repo still ships mock-only sample reports.
 
 ## Letter format the checks expect
 Sections `## Response to denial reason`, `## Clinical summary` (one `- ` bullet per clinical
@@ -99,12 +119,12 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   SSN, phone, email and street-address patterns that are not in the source material. It misses
   other identifiers (account numbers, free-text family details, unneeded diagnoses) and does
   not judge whether chart content that *is* present was needed.
-- No judge model, no real-model results, no payer-specific rules.
+- No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 25 synthetic cases, six checkers, mock drafter, report, CLI and
-tests (all passing). **No real results.**
+**Early, v0.1.** Schema, 25 synthetic cases, six checkers, mock / files / OpenAI-compatible
+drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
@@ -114,7 +134,8 @@ tests (all passing). **No real results.**
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
-- Real-drafter adapters and a published scorecard once real runs exist
+- OpenAI-compatible drafter adapter present (`openai` / `openai:MODEL`); published
+  scorecard still blocked on real runs with a real key
 
 ## License
 MIT © Ravin Elango

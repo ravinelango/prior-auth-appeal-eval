@@ -2,12 +2,13 @@
 
 A drafter takes a Case and returns the appeal letter text. The mock drafter replays the
 reference drafts shipped with each case, so the whole pipeline runs offline and
-deterministically. Real LLM adapters are intentionally not shipped in v0.1; implement
-``Drafter`` and register it in ``get_drafter`` (or write letters to files and use ``files:DIR``).
+deterministically. ``openai[:MODEL]`` posts to an OpenAI-compatible chat endpoint when you
+have a key; ``files:DIR`` reads letters you produced elsewhere.
 """
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Protocol
 
@@ -96,11 +97,51 @@ class FilesDrafter:
         return path.read_text(encoding="utf-8")
 
 
+class OpenAIDrafter:
+    """Posts chat completions to an OpenAI-compatible API.
+
+    Needs ``OPENAI_API_KEY``. Optional ``OPENAI_BASE_URL`` points at a compatible
+    endpoint (Azure OpenAI proxy, local server, etc.). The ``openai`` package is an
+    optional dependency (``pip install -e '.[openai]'``).
+    """
+
+    DEFAULT_MODEL = "gpt-4o-mini"
+
+    def __init__(self, model: str = DEFAULT_MODEL, temperature: float = 0.0):
+        from openai import OpenAI  # optional dependency
+
+        if not os.environ.get("OPENAI_API_KEY"):
+            raise RuntimeError("OPENAI_API_KEY is not set")
+        kwargs: dict[str, str] = {}
+        base = os.environ.get("OPENAI_BASE_URL")
+        if base:
+            kwargs["base_url"] = base
+        self.client = OpenAI(**kwargs)
+        self.model = model
+        self.temperature = temperature
+        self.name = f"openai:{model}"
+
+    def draft(self, case: Case) -> str:
+        resp = self.client.chat.completions.create(
+            model=self.model,
+            temperature=self.temperature,
+            messages=[{"role": "user", "content": build_prompt(case)}],
+        )
+        text = (resp.choices[0].message.content or "").strip()
+        if not text:
+            raise ValueError(f"{self.name}: empty completion content")
+        return text
+
+
 def get_drafter(spec: str) -> Drafter:
-    """spec: 'mock[:good|flawed]' or 'files:DIR'."""
+    """spec: 'mock[:good|flawed]', 'files:DIR', or 'openai[:MODEL]'."""
     kind, _, arg = spec.partition(":")
     if kind == "mock":
         return MockDrafter(arg or "good")
     if kind == "files" and arg:
         return FilesDrafter(arg)
-    raise ValueError(f"unknown drafter {spec!r} (use mock:good, mock:flawed or files:DIR)")
+    if kind == "openai":
+        return OpenAIDrafter(arg or OpenAIDrafter.DEFAULT_MODEL)
+    raise ValueError(
+        f"unknown drafter {spec!r} (use mock:good, mock:flawed, files:DIR or openai[:MODEL])"
+    )
