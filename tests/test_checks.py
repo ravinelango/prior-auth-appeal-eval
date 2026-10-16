@@ -245,3 +245,22 @@ def test_extra_phi_allows_identifiers_found_in_chart_or_denial(case_dict, good_l
 def test_extra_phi_ignores_dates_and_synthetic_ids(case, good_letter):
     ok = good_letter + "\nSee claim SYN-CLM-900001 dated 2026-03-02 and NPI SYN-0000.\n"
     assert check_extra_phi(case, ok).passed
+
+
+def test_laterality_swap_is_flagged(case, good_letter):
+    bad = good_letter.replace("radiating to the left leg", "radiating to the right leg")
+    assert bad != good_letter
+    r = check_facts(case, bad)
+    assert not r.passed and any("laterality" in f and "right" in f for f in r.findings)
+
+
+def test_relative_swap_is_flagged(case_dict, good_letter):
+    case_dict["chart"]["facts"].append(
+        {"id": "f3", "date": "2026-01-05", "text": "Father had lumbar stenosis."})
+    c = parse_case(case_dict)
+    ok = good_letter.replace("## Policy basis",
+                             "- Father had lumbar stenosis (2026-01-05).\n\n## Policy basis")
+    assert check_facts(c, ok).passed
+    bad = ok.replace("- Father had", "- Brother had")
+    r = check_facts(c, bad)
+    assert not r.passed and any("brother" in f for f in r.findings)

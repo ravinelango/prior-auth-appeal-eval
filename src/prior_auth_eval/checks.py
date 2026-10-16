@@ -142,6 +142,19 @@ def _negated_words(text: str) -> set[str]:
     return out
 
 
+# Words where a one-word swap changes the clinical meaning (whose history, which side). A single
+# swapped word stays under UNSEEN_RATIO, so these must appear in the chart verbatim.
+_PINNED = re.compile(
+    r"\b(mother|father|sister|brother|daughter|son|aunt|uncle|niece|nephew|cousin|"
+    r"grandmother|grandfather|maternal|paternal|sibling|left|right|bilateral|unilateral)s?\b",
+    re.IGNORECASE,
+)
+
+
+def _pinned_terms(text: str) -> set[str]:
+    return {m.group(1).lower() for m in _PINNED.finditer(text)}
+
+
 def check_facts(case: Case, letter: str) -> CheckResult:
     """Every bullet under '## Clinical summary' must be traceable to the chart."""
     res = CheckResult("facts_in_chart", True, CRITICAL)
@@ -158,6 +171,7 @@ def check_facts(case: Case, letter: str) -> CheckResult:
     chart_asserted = set().union(*(_words(f.text) - _negated_words(f.text)
                                    for f in case.chart.facts))
     chart_negated = _negated_words(chart_text) - chart_asserted
+    chart_pinned = _pinned_terms(chart_text)
     for b in bullets(block):
         bad_nums = sorted(n for n in _numbers(b) if n not in chart_nums)
         words = _words(b)
@@ -165,11 +179,15 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         ratio = len(unseen) / len(words) if words else 0.0
         bullet_negated = _negated_words(b)
         flipped = sorted(w for w in words if w in chart_negated and w not in bullet_negated)
+        swapped = sorted(_pinned_terms(b) - chart_pinned)
         if bad_nums:
             res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
         elif flipped:
             res.findings.append(
                 f"possible negation flip of chart-negated term(s) {flipped}: \"{b}\"")
+        elif swapped:
+            res.findings.append(
+                f"relative/laterality term(s) not in chart {swapped}: \"{b}\"")
         elif ratio > UNSEEN_RATIO:
             res.findings.append(f"term(s) not in chart {unseen}: \"{b}\"")
     res.passed = not res.findings

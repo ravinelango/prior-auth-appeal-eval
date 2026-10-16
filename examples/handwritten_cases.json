@@ -308,17 +308,11 @@
         "flawed": {
           "text": "Date: 2026-03-30\nRE: Appeal of the denial of BRCA1/BRCA2 gene testing, claim SYN-CLM-500128 (SYNTHETIC CASE)\nPatient: Sky Fabricato | Member ID: SYN-MBR-400128 | DOB: 1988-11-30\nRequested service: CPT 81163 | Diagnosis: ICD-10 Z80.3\n\n## Response to denial reason\nYour denial under SYN-D02 says SYN-LCD-2028-C2 is unmet because pre-test genetic counseling was not documented. The patient had a pre-test genetic counseling visit with a certified genetic counselor on 2026-02-03 and signed informed consent at that visit.\n\n## Clinical summary\n- No personal history of cancer (2026-01-12).\n- Sister diagnosed with breast cancer at age 44; maternal aunt diagnosed with ovarian cancer at age 52 (2026-01-12).\n- Pre-test genetic counseling with a certified genetic counselor; informed consent signed (2026-02-03).\n- A positive result would change screening to annual breast MRI and prompt a risk-reducing surgery discussion (2026-02-03).\n\n## Policy basis\nTesting is governed by SYN-LCD-2028 (Hereditary breast and ovarian cancer gene testing). SYN-LCD-2028-C1, SYN-LCD-2028-C2 and SYN-LCD-2028-C3 are each met, so we ask that the denial be overturned.\n\n## Enclosures\n- Genetic counseling note dated 2026-02-03\n- Family history note dated 2026-01-12\n- Copy of the denial letter\n\nSincerely,\nDr. Ira Testcase, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
+            "facts_in_chart",
             "identifiers_match"
           ]
         }
-      },
-      "known_checker_gaps": [
-        {
-          "check": "facts_in_chart",
-          "flaw": "Clinical summary says 'Sister' where the chart says 'Mother'.",
-          "why_missed": "Only one content word changed, so the unseen-term ratio stays under the threshold. Relationship and laterality swaps need a claim-level or judge check."
-        }
-      ]
+      }
     }
   ]
 }
