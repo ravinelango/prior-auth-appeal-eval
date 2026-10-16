@@ -153,7 +153,11 @@ def check_facts(case: Case, letter: str) -> CheckResult:
     chart_text = " ".join(f"{f.date} {f.text}" for f in case.chart.facts)
     chart_nums = _numbers(chart_text)
     chart_words = _words(chart_text) | _words(case.chart.patient_name)
-    chart_negated = _negated_words(chart_text)
+    # A term only counts as chart-negated if no chart fact also asserts it. Otherwise
+    # "No personal history of cancer" would flag every family-history mention of cancer.
+    chart_asserted = set().union(*(_words(f.text) - _negated_words(f.text)
+                                   for f in case.chart.facts))
+    chart_negated = _negated_words(chart_text) - chart_asserted
     for b in bullets(block):
         bad_nums = sorted(n for n in _numbers(b) if n not in chart_nums)
         words = _words(b)

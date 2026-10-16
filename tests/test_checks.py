@@ -188,6 +188,22 @@ def test_chart_negation_restated_with_negation_is_ok(case_dict, good_letter):
     assert check_facts(case2, inject).passed
 
 
+def test_term_negated_in_one_fact_but_asserted_in_another_is_not_a_flip(case_dict, good_letter):
+    """'No personal history of cancer' must not flag a family-history mention of cancer."""
+    from prior_auth_eval.schema import parse_case
+    case_dict["chart"]["facts"] += [
+        {"id": "f3", "date": "2026-02-03", "text": "No personal history of cancer."},
+        {"id": "f4", "date": "2026-02-03",
+         "text": "Mother diagnosed with breast cancer at age 44."},
+    ]
+    case2 = parse_case(case_dict)
+    inject = good_letter.replace(
+        "## Clinical summary\n",
+        "## Clinical summary\n- Mother diagnosed with breast cancer at age 44 (2026-02-03).\n",
+    )
+    assert check_facts(case2, inject).passed
+
+
 def test_near_miss_member_id_is_flagged(case, good_letter):
     r = check_identifiers(case, good_letter.replace("SYN-MBR-900001", "SYN-MBR-900002"))
     assert not r.passed and any(f.startswith("member_id") for f in r.findings)
