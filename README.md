@@ -34,7 +34,7 @@ either):
 | Failure mode | Check | Severity | How it is detected |
 |---|---|---|---|
 | Invented or wrong policy citation | `citations` | critical | Every LCD/NCD-style reference must be in the provided policy set, must be the policy that governs the denial, and any cited criterion must exist; the governing policy must be cited |
-| Clinical fact not in the chart | `facts_in_chart` | critical | Each bullet under "Clinical summary": every number and date must appear in the chart, and the share of content words absent from the chart must be small |
+| Clinical fact not in the chart | `facts_in_chart` | critical | Each bullet under "Clinical summary": every number and date must appear in the chart, family-relationship and laterality words (mother, sister, left, right...) must appear in the chart, and the share of content words absent from the chart must be small |
 | Denial reason not addressed | `denial_reason_addressed` | critical | The "Response to denial reason" section must cite each unmet criterion id and engage with the expected reason terms |
 | Wrong patient, claim, member, CPT or ICD | `identifiers_match` | critical | Extracted identifiers must equal the case's; missing ones are flagged |
 | Missing required elements | `required_elements` | major | Explicit request to overturn, enclosures list, signature with NPI, letter dated on or before the appeal deadline |
@@ -59,8 +59,10 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    `examples/handwritten_cases.json` adds PA-026..PA-028, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
-   for "Sister" in the family history, which the checks do **not** catch; it is recorded
-   under `known_checker_gaps` and a test keeps it visible until a claim-level check closes it.
+   for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
+   changed word stays under the unseen-term ratio), so relationship and laterality words are
+   now pinned to the chart. Any future miss goes under `known_checker_gaps`, and a test keeps
+   it visible until a check closes it.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -128,14 +130,14 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 25 synthetic cases, six checkers, mock / files / OpenAI-compatible
+**Early, v0.1.** Schema, 28 synthetic cases (25 generated, 3 hand-written), six checkers, mock / files / OpenAI-compatible
 drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates
+  templates (started: PA-026..PA-028; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
