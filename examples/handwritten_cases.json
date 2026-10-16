@@ -1,0 +1,324 @@
+{
+  "label": "SYNTHETIC EXAMPLE DATA: hand-written appeal letters for invented patients, claims and policies. Not real PHI, payer policy or Medicare NCD/LCD text.",
+  "cases": [
+    {
+      "id": "PA-026",
+      "title": "Sleeve gastrectomy: hand-written letter, invented history (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500126",
+        "cpt": "43775",
+        "icd10": "E66.01",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: preoperative psychological evaluation not documented",
+        "unmet_criteria": [
+          "SYN-LCD-2026-C3"
+        ],
+        "reason_terms": [
+          "psychological evaluation",
+          "cleared"
+        ],
+        "applicable_policy": "SYN-LCD-2026",
+        "denial_date": "2026-03-10",
+        "appeal_deadline": "2026-05-09",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500126, member SYN-MBR-400126. CPT 43775 denied under SYN-D02: Documentation insufficient: preoperative psychological evaluation not documented. Criterion SYN-LCD-2026-C3 not met. You may appeal by 2026-05-09."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0026",
+        "member_id": "SYN-MBR-400126",
+        "patient_name": "Morgan Notaperson",
+        "dob": "1979-08-09",
+        "provider_name": "Dr. Sam Placeholderova",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-07-14",
+            "text": "BMI 42.3; type 2 diabetes on metformin; obstructive sleep apnea on CPAP."
+          },
+          {
+            "id": "F2",
+            "date": "2025-08-04",
+            "text": "Enrolled in a dietitian-supervised weight management program with monthly visits."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-09",
+            "text": "Completed 6 monthly supervised program visits; weight down from 121 kg to 117 kg."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-20",
+            "text": "Preoperative psychological evaluation by a licensed psychologist: no contraindication to surgery; patient cleared."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-2026",
+          "title": "Bariatric surgery for severe obesity (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2026-C1",
+              "text": "BMI of at least 40, or at least 35 with an obesity-related comorbidity"
+            },
+            {
+              "id": "SYN-LCD-2026-C2",
+              "text": "Participation in a supervised weight-management program for at least 6 months within the past 2 years"
+            },
+            {
+              "id": "SYN-LCD-2026-C3",
+              "text": "Preoperative psychological evaluation clearing the patient for surgery"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-2027",
+          "title": "Spinal cord stimulator trial (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2027-C1",
+              "text": "Chronic neuropathic pain for at least 6 months, including after failed spine surgery"
+            },
+            {
+              "id": "SYN-LCD-2027-C2",
+              "text": "At least 6 months of failed conservative management (therapy and medication)"
+            },
+            {
+              "id": "SYN-LCD-2027-C3",
+              "text": "Psychological screening with no untreated major psychiatric or substance use disorder"
+            },
+            {
+              "id": "SYN-LCD-2027-C4",
+              "text": "A temporary percutaneous trial is planned before any permanent implant"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-24\nRE: Appeal of the denial of laparoscopic sleeve gastrectomy, claim SYN-CLM-500126 (SYNTHETIC CASE)\nPatient: Morgan Notaperson | Member ID: SYN-MBR-400126 | DOB: 1979-08-09\nRequested service: CPT 43775 | Diagnosis: ICD-10 E66.01\n\n## Response to denial reason\nThank you for taking another look at this request. Your letter of 2026-03-10 denied the sleeve gastrectomy under SYN-D02 because SYN-LCD-2026-C3, the preoperative psychological evaluation, was not documented. It was done: on 2026-02-20 a licensed psychologist completed the evaluation, found no contraindication to surgery and cleared the patient. The report was not attached to the original request and is enclosed now.\n\n## Clinical summary\n- BMI 42.3 with type 2 diabetes on metformin and obstructive sleep apnea on CPAP (2025-07-14).\n- Completed 6 monthly visits in a dietitian-supervised weight management program between 2025-08-04 and 2026-02-09; weight down from 121 kg to 117 kg.\n- Licensed psychologist found no contraindication to surgery and cleared the patient (2026-02-20).\n\n## Policy basis\nSYN-LCD-2026 (Bariatric surgery for severe obesity) sets three criteria, SYN-LCD-2026-C1 through SYN-LCD-2026-C3, and the chart meets all three. Please overturn the denial and authorize the procedure.\n\n## Enclosures\n- Psychological evaluation report dated 2026-02-20\n- Weight management program notes dated 2025-08-04 through 2026-02-09\n- Copy of the denial letter dated 2026-03-10\n\nSincerely,\nDr. Sam Placeholderova, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-24\nRE: Appeal of the denial of laparoscopic sleeve gastrectomy, claim SYN-CLM-500126 (SYNTHETIC CASE)\nPatient: Morgan Notaperson | Member ID: SYN-MBR-400126 | DOB: 1979-08-09\nRequested service: CPT 43775 | Diagnosis: ICD-10 E66.01\n\n## Response to denial reason\nThank you for taking another look at this request. Your letter of 2026-03-10 denied the sleeve gastrectomy under SYN-D02 because SYN-LCD-2026-C3, the preoperative psychological evaluation, was not documented. It was done: on 2026-02-20 a licensed psychologist completed the evaluation, found no contraindication to surgery and cleared the patient. The report was not attached to the original request and is enclosed now.\n\n## Clinical summary\n- BMI 42.3 with type 2 diabetes on metformin and obstructive sleep apnea on CPAP (2025-07-14).\n- Completed 6 monthly visits in a dietitian-supervised weight management program between 2025-08-04 and 2026-02-09; weight down from 121 kg to 117 kg.\n- Two earlier commercial diet programs over 3 years did not produce lasting weight loss.\n- Licensed psychologist found no contraindication to surgery and cleared the patient (2026-02-20).\n\n## Policy basis\nSYN-LCD-2026 (Bariatric surgery for severe obesity) sets three criteria, SYN-LCD-2026-C1 through SYN-LCD-2026-C3, and the chart meets all three. Please overturn the denial and authorize the procedure.\n\n## Enclosures\n- Psychological evaluation report dated 2026-02-20\n- Weight management program notes dated 2025-08-04 through 2026-02-09\n- Copy of the denial letter dated 2026-03-10\n\nSincerely,\nDr. Sam Placeholderova, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-027",
+      "title": "Spinal cord stimulator trial: hand-written letter answers the wrong criterion and adds a phone number (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500127",
+        "cpt": "63650",
+        "icd10": "M96.1",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: psychological screening not documented",
+        "unmet_criteria": [
+          "SYN-LCD-2027-C3"
+        ],
+        "reason_terms": [
+          "psychological screening",
+          "depression"
+        ],
+        "applicable_policy": "SYN-LCD-2027",
+        "denial_date": "2026-03-16",
+        "appeal_deadline": "2026-05-15",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500127, member SYN-MBR-400127. CPT 63650 denied under SYN-D02: Documentation insufficient: psychological screening not documented. Criterion SYN-LCD-2027-C3 not met. You may appeal by 2026-05-15."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0027",
+        "member_id": "SYN-MBR-400127",
+        "patient_name": "Avery Unrealton",
+        "dob": "1966-02-17",
+        "provider_name": "Dr. Noor Mockfield",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2025-04-02",
+            "text": "Persistent burning pain in the left leg since L5-S1 laminectomy on 2024-09-16."
+          },
+          {
+            "id": "F2",
+            "date": "2025-10-20",
+            "text": "Completed 6 months of physical therapy, gabapentin and duloxetine without adequate relief; pain 8/10."
+          },
+          {
+            "id": "F3",
+            "date": "2026-01-28",
+            "text": "Psychological screening by a pain psychologist: no untreated depression or substance use disorder; suitable for a neuromodulation trial."
+          },
+          {
+            "id": "F4",
+            "date": "2026-01-28",
+            "text": "Plan: 7-day percutaneous trial before any permanent implant."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-2027",
+          "title": "Spinal cord stimulator trial (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2027-C1",
+              "text": "Chronic neuropathic pain for at least 6 months, including after failed spine surgery"
+            },
+            {
+              "id": "SYN-LCD-2027-C2",
+              "text": "At least 6 months of failed conservative management (therapy and medication)"
+            },
+            {
+              "id": "SYN-LCD-2027-C3",
+              "text": "Psychological screening with no untreated major psychiatric or substance use disorder"
+            },
+            {
+              "id": "SYN-LCD-2027-C4",
+              "text": "A temporary percutaneous trial is planned before any permanent implant"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-2028",
+          "title": "Hereditary breast and ovarian cancer gene testing (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2028-C1",
+              "text": "Personal or family history meeting the plan's high-risk criteria"
+            },
+            {
+              "id": "SYN-LCD-2028-C2",
+              "text": "Pre-test genetic counseling by a qualified provider is documented"
+            },
+            {
+              "id": "SYN-LCD-2028-C3",
+              "text": "Results are expected to change medical management"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-02\nRE: Appeal of the denial of a spinal cord stimulator trial, claim SYN-CLM-500127 (SYNTHETIC CASE)\nPatient: Avery Unrealton | Member ID: SYN-MBR-400127 | DOB: 1966-02-17\nRequested service: CPT 63650 | Diagnosis: ICD-10 M96.1\n\n## Response to denial reason\nThe plan denied the stimulator trial under SYN-D02, stating that SYN-LCD-2027-C3 is not met because no psychological screening was documented. The screening is in the chart. A pain psychologist saw the patient on 2026-01-28, found no untreated depression or substance use disorder, and judged the patient suitable for a neuromodulation trial.\n\n## Clinical summary\n- Burning pain in the left leg since L5-S1 laminectomy on 2024-09-16 (2025-04-02).\n- 6 months of physical therapy, gabapentin and duloxetine without adequate relief; pain 8/10 (2025-10-20).\n- Pain psychologist screening: no untreated depression or substance use disorder; suitable for a neuromodulation trial (2026-01-28).\n- Plan is a 7-day percutaneous trial before any permanent implant (2026-01-28).\n\n## Policy basis\nThis request falls under SYN-LCD-2027 (Spinal cord stimulator trial), criteria SYN-LCD-2027-C1 to SYN-LCD-2027-C4. We ask the plan to overturn the denial and approve the trial.\n\n## Enclosures\n- Psychology screening note dated 2026-01-28\n- Pain clinic notes dated 2025-04-02 through 2026-01-28\n- Copy of the denial letter\n\nSincerely,\nDr. Noor Mockfield, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-04-02\nRE: Appeal of the denial of a spinal cord stimulator trial, claim SYN-CLM-500127 (SYNTHETIC CASE)\nPatient: Avery Unrealton | Member ID: SYN-MBR-400127 | DOB: 1966-02-17\nRequested service: CPT 63650 | Diagnosis: ICD-10 M96.1\n\n## Response to denial reason\nI am writing on behalf of my patient, who has lived with severe leg pain for well over a year. Under SYN-LCD-2027-C2 the plan asks for 6 months of failed conservative care, and the patient has completed physical therapy, gabapentin and duloxetine without adequate relief. Please call my office at (555) 013-2244 if you need anything further.\n\n## Clinical summary\n- Burning pain in the left leg since L5-S1 laminectomy on 2024-09-16 (2025-04-02).\n- 6 months of physical therapy, gabapentin and duloxetine without adequate relief; pain 8/10 (2025-10-20).\n- Pain psychologist screening: no untreated depression or substance use disorder; suitable for a neuromodulation trial (2026-01-28).\n- Plan is a 7-day percutaneous trial before any permanent implant (2026-01-28).\n\n## Policy basis\nThis request falls under SYN-LCD-2027 (Spinal cord stimulator trial), criteria SYN-LCD-2027-C1 to SYN-LCD-2027-C4. We ask the plan to overturn the denial and approve the trial.\n\n## Enclosures\n- Psychology screening note dated 2026-01-28\n- Pain clinic notes dated 2025-04-02 through 2026-01-28\n- Copy of the denial letter\n\nSincerely,\nDr. Noor Mockfield, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed",
+            "extra_phi"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PA-028",
+      "title": "BRCA gene testing: hand-written letter with near-miss CPT and a swapped relative (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500128",
+        "cpt": "81162",
+        "icd10": "Z80.3",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: pre-test genetic counseling not documented",
+        "unmet_criteria": [
+          "SYN-LCD-2028-C2"
+        ],
+        "reason_terms": [
+          "genetic counseling",
+          "pre-test"
+        ],
+        "applicable_policy": "SYN-LCD-2028",
+        "denial_date": "2026-03-12",
+        "appeal_deadline": "2026-05-11",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500128, member SYN-MBR-400128. CPT 81162 denied under SYN-D02: Documentation insufficient: pre-test genetic counseling not documented. Criterion SYN-LCD-2028-C2 not met. You may appeal by 2026-05-11."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0028",
+        "member_id": "SYN-MBR-400128",
+        "patient_name": "Sky Fabricato",
+        "dob": "1988-11-30",
+        "provider_name": "Dr. Ira Testcase",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-12",
+            "text": "No personal history of cancer."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-12",
+            "text": "Mother diagnosed with breast cancer at age 44; maternal aunt diagnosed with ovarian cancer at age 52."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-03",
+            "text": "Pre-test genetic counseling visit with a certified genetic counselor; informed consent signed."
+          },
+          {
+            "id": "F4",
+            "date": "2026-02-03",
+            "text": "A positive result would change screening to annual breast MRI and prompt a risk-reducing surgery discussion."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-2028",
+          "title": "Hereditary breast and ovarian cancer gene testing (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2028-C1",
+              "text": "Personal or family history meeting the plan's high-risk criteria"
+            },
+            {
+              "id": "SYN-LCD-2028-C2",
+              "text": "Pre-test genetic counseling by a qualified provider is documented"
+            },
+            {
+              "id": "SYN-LCD-2028-C3",
+              "text": "Results are expected to change medical management"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-2026",
+          "title": "Bariatric surgery for severe obesity (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2026-C1",
+              "text": "BMI of at least 40, or at least 35 with an obesity-related comorbidity"
+            },
+            {
+              "id": "SYN-LCD-2026-C2",
+              "text": "Participation in a supervised weight-management program for at least 6 months within the past 2 years"
+            },
+            {
+              "id": "SYN-LCD-2026-C3",
+              "text": "Preoperative psychological evaluation clearing the patient for surgery"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-03-30\nRE: Appeal of the denial of BRCA1/BRCA2 gene testing, claim SYN-CLM-500128 (SYNTHETIC CASE)\nPatient: Sky Fabricato | Member ID: SYN-MBR-400128 | DOB: 1988-11-30\nRequested service: CPT 81162 | Diagnosis: ICD-10 Z80.3\n\n## Response to denial reason\nYour denial under SYN-D02 says SYN-LCD-2028-C2 is unmet because pre-test genetic counseling was not documented. The patient had a pre-test genetic counseling visit with a certified genetic counselor on 2026-02-03 and signed informed consent at that visit.\n\n## Clinical summary\n- No personal history of cancer (2026-01-12).\n- Mother diagnosed with breast cancer at age 44; maternal aunt diagnosed with ovarian cancer at age 52 (2026-01-12).\n- Pre-test genetic counseling with a certified genetic counselor; informed consent signed (2026-02-03).\n- A positive result would change screening to annual breast MRI and prompt a risk-reducing surgery discussion (2026-02-03).\n\n## Policy basis\nTesting is governed by SYN-LCD-2028 (Hereditary breast and ovarian cancer gene testing). SYN-LCD-2028-C1, SYN-LCD-2028-C2 and SYN-LCD-2028-C3 are each met, so we ask that the denial be overturned.\n\n## Enclosures\n- Genetic counseling note dated 2026-02-03\n- Family history note dated 2026-01-12\n- Copy of the denial letter\n\nSincerely,\nDr. Ira Testcase, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-03-30\nRE: Appeal of the denial of BRCA1/BRCA2 gene testing, claim SYN-CLM-500128 (SYNTHETIC CASE)\nPatient: Sky Fabricato | Member ID: SYN-MBR-400128 | DOB: 1988-11-30\nRequested service: CPT 81163 | Diagnosis: ICD-10 Z80.3\n\n## Response to denial reason\nYour denial under SYN-D02 says SYN-LCD-2028-C2 is unmet because pre-test genetic counseling was not documented. The patient had a pre-test genetic counseling visit with a certified genetic counselor on 2026-02-03 and signed informed consent at that visit.\n\n## Clinical summary\n- No personal history of cancer (2026-01-12).\n- Sister diagnosed with breast cancer at age 44; maternal aunt diagnosed with ovarian cancer at age 52 (2026-01-12).\n- Pre-test genetic counseling with a certified genetic counselor; informed consent signed (2026-02-03).\n- A positive result would change screening to annual breast MRI and prompt a risk-reducing surgery discussion (2026-02-03).\n\n## Policy basis\nTesting is governed by SYN-LCD-2028 (Hereditary breast and ovarian cancer gene testing). SYN-LCD-2028-C1, SYN-LCD-2028-C2 and SYN-LCD-2028-C3 are each met, so we ask that the denial be overturned.\n\n## Enclosures\n- Genetic counseling note dated 2026-02-03\n- Family history note dated 2026-01-12\n- Copy of the denial letter\n\nSincerely,\nDr. Ira Testcase, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      },
+      "known_checker_gaps": [
+        {
+          "check": "facts_in_chart",
+          "flaw": "Clinical summary says 'Sister' where the chart says 'Mother'.",
+          "why_missed": "Only one content word changed, so the unseen-term ratio stays under the threshold. Relationship and laterality swaps need a claim-level or judge check."
+        }
+      ]
+    }
+  ]
+}

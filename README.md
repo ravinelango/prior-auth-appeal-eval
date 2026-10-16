@@ -56,6 +56,11 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
+   `examples/handwritten_cases.json` adds PA-026..PA-028, written by hand as prose letters
+   instead of from the templates: an invented diet history, a letter that argues the wrong
+   criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
+   for "Sister" in the family history, which the checks do **not** catch; it is recorded
+   under `known_checker_gaps` and a test keeps it visible until a claim-level check closes it.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
