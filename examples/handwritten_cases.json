@@ -313,6 +313,117 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-029",
+      "title": "Lumbar MRI: hand-written letter filed late that claims a planned injection was already given (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500129",
+        "cpt": "72148",
+        "icd10": "M54.16",
+        "reason_code": "SYN-D02",
+        "reason_text": "Documentation insufficient: at least 6 weeks of conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-2029-C2"
+        ],
+        "reason_terms": [
+          "conservative care",
+          "physical therapy"
+        ],
+        "applicable_policy": "SYN-LCD-2029",
+        "denial_date": "2026-03-16",
+        "appeal_deadline": "2026-05-15",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500129, member SYN-MBR-400129. CPT 72148 denied under SYN-D02: Documentation insufficient: at least 6 weeks of conservative care not documented. Criterion SYN-LCD-2029-C2 not met. You may appeal by 2026-05-15."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0029",
+        "member_id": "SYN-MBR-400129",
+        "patient_name": "Rowan Inventedson",
+        "dob": "1971-05-17",
+        "provider_name": "Dr. Quinn Samplewright",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-08",
+            "text": "Low back pain radiating down the left leg below the knee for 3 weeks, with numbness of the left foot."
+          },
+          {
+            "id": "F2",
+            "date": "2026-01-08",
+            "text": "Started naproxen 500 mg twice daily."
+          },
+          {
+            "id": "F3",
+            "date": "2026-02-26",
+            "text": "Completed 6 weeks of physical therapy (12 visits from 2026-01-15 to 2026-02-26)."
+          },
+          {
+            "id": "F4",
+            "date": "2026-03-02",
+            "text": "Leg pain unchanged after therapy; left ankle reflex reduced. MRI requested to plan a possible epidural injection or surgical referral."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-2029",
+          "title": "Advanced imaging for low back pain (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2029-C1",
+              "text": "Radicular symptoms or a neurologic deficit, or a red-flag finding"
+            },
+            {
+              "id": "SYN-LCD-2029-C2",
+              "text": "At least 6 weeks of conservative care (physical therapy and medication) without adequate improvement"
+            },
+            {
+              "id": "SYN-LCD-2029-C3",
+              "text": "Imaging results would change management, such as injection or surgical planning"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-2027",
+          "title": "Spinal cord stimulator trial (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2027-C1",
+              "text": "Chronic neuropathic pain for at least 6 months, including after failed spine surgery"
+            },
+            {
+              "id": "SYN-LCD-2027-C2",
+              "text": "At least 6 months of failed conservative management (therapy and medication)"
+            },
+            {
+              "id": "SYN-LCD-2027-C3",
+              "text": "Psychological screening with no untreated major psychiatric or substance use disorder"
+            },
+            {
+              "id": "SYN-LCD-2027-C4",
+              "text": "A temporary percutaneous trial is planned before any permanent implant"
+            }
+          ]
+        }
+      ],
+      "known_checker_gaps": [
+        {
+          "check": "facts_in_chart",
+          "flaw": "Clinical summary says the leg pain was unchanged after 'an epidural injection'. The chart only says an injection is being planned; every word in the claim appears in the chart, so the lexical check passes it."
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-04-02\nRE: Appeal of the denial of lumbar spine MRI, claim SYN-CLM-500129 (SYNTHETIC CASE)\nPatient: Rowan Inventedson | Member ID: SYN-MBR-400129 | DOB: 1971-05-17\nRequested service: CPT 72148 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-03-16 denied the MRI under SYN-D02, stating that SYN-LCD-2029-C2 was not met because conservative care was not documented. The chart documents it: the patient completed 6 weeks of physical therapy and took naproxen, and at the 2026-03-02 visit the leg pain was no better. Those notes were not sent with the first request and are enclosed now.\n\n## Clinical summary\n- Low back pain radiating down the left leg below the knee with numbness of the left foot (2026-01-08).\n- Naproxen 500 mg twice daily started (2026-01-08).\n- Completed 6 weeks of physical therapy, 12 visits (2026-01-15 to 2026-02-26).\n- Leg pain unchanged after therapy; left ankle reflex reduced; MRI requested to plan a possible epidural injection or surgical referral (2026-03-02).\n\n## Policy basis\nSYN-LCD-2029 (Advanced imaging for low back pain) governs this request. SYN-LCD-2029-C1, SYN-LCD-2029-C2 and SYN-LCD-2029-C3 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Physical therapy notes dated 2026-01-15 through 2026-02-26\n- Clinic notes dated 2026-01-08 and 2026-03-02\n- Copy of the denial letter dated 2026-03-16\n\nSincerely,\nDr. Quinn Samplewright, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-20\nRE: Appeal of the denial of lumbar spine MRI, claim SYN-CLM-500129 (SYNTHETIC CASE)\nPatient: Rowan Inventedson | Member ID: SYN-MBR-400129 | DOB: 1971-05-17\nRequested service: CPT 72148 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-03-16 denied the MRI under SYN-D02, stating that SYN-LCD-2029-C2 was not met because conservative care was not documented. The chart documents it: the patient completed 6 weeks of physical therapy and took naproxen, and at the 2026-03-02 visit the leg pain was no better. Those notes were not sent with the first request and are enclosed now.\n\n## Clinical summary\n- Low back pain radiating down the left leg below the knee with numbness of the left foot (2026-01-08).\n- Naproxen 500 mg twice daily started (2026-01-08).\n- Completed 6 weeks of physical therapy, 12 visits (2026-01-15 to 2026-02-26).\n- Leg pain unchanged after therapy and an epidural injection; left ankle reflex reduced; MRI requested to plan a possible epidural injection or surgical referral (2026-03-02).\n\n## Policy basis\nSYN-LCD-2029 (Advanced imaging for low back pain) governs this request. SYN-LCD-2029-C1, SYN-LCD-2029-C2 and SYN-LCD-2029-C3 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Physical therapy notes dated 2026-01-15 through 2026-02-26\n- Clinic notes dated 2026-01-08 and 2026-03-02\n- Copy of the denial letter dated 2026-03-16\n\nSincerely,\nDr. Quinn Samplewright, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
     }
   ]
 }
