@@ -264,3 +264,20 @@ def test_relative_swap_is_flagged(case_dict, good_letter):
     bad = ok.replace("- Father had", "- Brother had")
     r = check_facts(c, bad)
     assert not r.passed and any("brother" in f for f in r.findings)
+
+
+def test_planned_procedure_stated_as_done_is_flagged(case_dict, good_letter):
+    case_dict["chart"]["facts"].append({
+        "id": "f3", "date": "2026-02-03",
+        "text": "Referral placed; surgical consult planned for nerve decompression.",
+    })
+    c = parse_case(case_dict)
+    ok = good_letter.replace(
+        "## Policy basis",
+        "- Referral placed; surgical consult planned for nerve decompression (2026-02-03)."
+        "\n\n## Policy basis")
+    assert check_facts(c, ok).passed
+    bad = ok.replace("- Referral placed; surgical consult planned for",
+                     "- Referral placed; pain persisted after")
+    r = check_facts(c, bad)
+    assert not r.passed and any("only plans" in f and "decompression" in f for f in r.findings)

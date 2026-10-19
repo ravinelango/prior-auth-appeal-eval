@@ -155,6 +155,33 @@ def _pinned_terms(text: str) -> set[str]:
     return {m.group(1).lower() for m in _PINNED.finditer(text)}
 
 
+# Cues that a procedure or test is only intended, not done. A term the chart mentions only in
+# such a window must not appear in the letter as something that already happened.
+_PLAN_CUE = re.compile(
+    r"\b(?:plan|plans|planned|planning|possible|possibly|consider|considering|scheduled|"
+    r"pending|proposed|recommended|requested|candidate for|referred for)\b",
+    re.IGNORECASE,
+)
+
+
+def _plan_spans(text: str) -> list[tuple[int, int]]:
+    spans = []
+    for m in _PLAN_CUE.finditer(text):
+        window = re.split(r"[.;\n]", text[m.end():m.end() + 70], maxsplit=1)[0]
+        spans.append((m.start(), m.end() + len(window)))
+    return spans
+
+
+def _split_planned(text: str) -> tuple[set[str], set[str]]:
+    """(words inside a planning window, words outside every planning window)."""
+    spans = _plan_spans(text)
+    inside = set().union(*(_words(text[a:b]) for a, b in spans)) if spans else set()
+    masked = list(text)
+    for a, b in spans:
+        masked[a:b] = " " * (b - a)
+    return inside, _words("".join(masked))
+
+
 def check_facts(case: Case, letter: str) -> CheckResult:
     """Every bullet under '## Clinical summary' must be traceable to the chart."""
     res = CheckResult("facts_in_chart", True, CRITICAL)
@@ -172,6 +199,12 @@ def check_facts(case: Case, letter: str) -> CheckResult:
                                    for f in case.chart.facts))
     chart_negated = _negated_words(chart_text) - chart_asserted
     chart_pinned = _pinned_terms(chart_text)
+    planned, done = set(), set()
+    for f in case.chart.facts:
+        inside, outside = _split_planned(f.text)
+        planned |= inside
+        done |= outside
+    chart_planned_only = planned - done
     for b in bullets(block):
         bad_nums = sorted(n for n in _numbers(b) if n not in chart_nums)
         words = _words(b)
@@ -180,6 +213,7 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         bullet_negated = _negated_words(b)
         flipped = sorted(w for w in words if w in chart_negated and w not in bullet_negated)
         swapped = sorted(_pinned_terms(b) - chart_pinned)
+        as_done = sorted(_split_planned(b)[1] & chart_planned_only)
         if bad_nums:
             res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
         elif flipped:
@@ -188,6 +222,9 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         elif swapped:
             res.findings.append(
                 f"relative/laterality term(s) not in chart {swapped}: \"{b}\"")
+        elif as_done:
+            res.findings.append(
+                f"chart only plans {as_done}; letter states it as done: \"{b}\"")
         elif ratio > UNSEEN_RATIO:
             res.findings.append(f"term(s) not in chart {unseen}: \"{b}\"")
     res.passed = not res.findings
