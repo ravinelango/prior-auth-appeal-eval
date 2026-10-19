@@ -1,5 +1,6 @@
 # prior-auth-appeal-eval
 
+[![CI](https://github.com/ravinelango/prior-auth-appeal-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/ravinelango/prior-auth-appeal-eval/actions/workflows/ci.yml)
 ![status](https://img.shields.io/badge/status-early%20(v0.1)-orange)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
