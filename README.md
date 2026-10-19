@@ -63,10 +63,13 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
    changed word stays under the unseen-term ratio), so relationship and laterality words are
    now pinned to the chart. Any future miss goes under `known_checker_gaps`, and a test keeps
-   it visible until a check closes it. PA-029 (lumbar MRI) is the first open gap: the flawed
-   letter is filed after the appeal deadline (caught by `required_elements`) and also says an
+   it visible until a check closes it. PA-029 (lumbar MRI) was the first: the flawed letter
+   is filed after the appeal deadline (caught by `required_elements`) and also says an
    epidural injection was already given when the chart only plans one. Every word of that
-   claim is in the chart, so `facts_in_chart` passes it.
+   claim is in the chart, so the lexical check passed it. `facts_in_chart` now tracks terms
+   the chart mentions only after a planning cue ("planned", "possible", "requested",
+   "scheduled", ...) and flags a bullet that states them outside such a cue, which closed the
+   gap. It is still a word-window heuristic, not a parser of clinical tense.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
