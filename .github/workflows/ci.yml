@@ -19,3 +19,5 @@ jobs:
       - run: pytest -q
       - name: Smoke test CLI with the offline mock drafter
         run: pae validate --cases examples/synthetic_cases.json && pae run --cases examples/synthetic_cases.json --drafter mock:good --strict --out reports/good.md && pae run --cases examples/synthetic_cases.json --drafter mock:flawed --out reports/flawed.md
+      - name: Smoke test CLI on the hand-written cases
+        run: pae validate --cases examples/handwritten_cases.json && pae run --cases examples/handwritten_cases.json --drafter mock:good --strict --out reports/handwritten_good.md && pae run --cases examples/handwritten_cases.json --drafter mock:flawed --out reports/handwritten_flawed.md
