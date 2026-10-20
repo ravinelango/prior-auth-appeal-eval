@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-030, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-031, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -77,7 +77,11 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    `facts_in_chart` now matches each dated bullet to the chart fact it most closely
    paraphrases (word overlap) and flags it when the bullet's date belongs to a different
    fact, which closed the gap. A bullet that blends several facts falls under the overlap
-   threshold and is not date-checked.
+   threshold and is not date-checked. PA-031 (knee MRI) is the third, and still open: the
+   flawed letter miscodes the diagnosis (caught by `identifiers_match`) and also says "nine
+   weeks" of conservative therapy where the chart says 7, which overstates the very criterion
+   the denial is about. The number check only reads digits, and one spelled-out word stays
+   under the unseen-term ratio, so `facts_in_chart` passes it.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -152,7 +156,7 @@ drafters, report, CLI and tests (all passing). **No published real-model results
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-030; more needed)
+  templates (started: PA-026..PA-031; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
