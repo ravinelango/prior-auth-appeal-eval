@@ -182,6 +182,32 @@ def _split_planned(text: str) -> tuple[set[str], set[str]]:
     return inside, _words("".join(masked))
 
 
+# A dated bullet that closely paraphrases one chart fact should carry that fact's date. Below
+# this Jaccard word overlap the bullet is treated as a summary of several facts and not checked.
+DATE_MATCH_MIN = 0.5
+
+
+def _misdated(facts, bullet: str) -> tuple[str, str] | None:
+    """(bullet date, expected date) when a bullet's date belongs to a different chart fact."""
+    dates = set(_DATE.findall(bullet))
+    words = _words(bullet)
+    if not dates or not words:
+        return None
+    scored = []
+    for f in facts:
+        fw = _words(f.text)
+        # A fact's own visit date and any date written in its text ("since 2025-11-20") count.
+        scored.append((len(words & fw) / len(words | fw) if fw else 0.0,
+                       {f.date, *_DATE.findall(f.text)}))
+    best = max(s for s, _ in scored)
+    if best < DATE_MATCH_MIN:
+        return None
+    expected = set().union(*(ds for s, ds in scored if s >= best - 1e-9))
+    if dates & expected:
+        return None
+    return sorted(dates)[0], ", ".join(sorted(expected))
+
+
 def check_facts(case: Case, letter: str) -> CheckResult:
     """Every bullet under '## Clinical summary' must be traceable to the chart."""
     res = CheckResult("facts_in_chart", True, CRITICAL)
@@ -214,6 +240,7 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         flipped = sorted(w for w in words if w in chart_negated and w not in bullet_negated)
         swapped = sorted(_pinned_terms(b) - chart_pinned)
         as_done = sorted(_split_planned(b)[1] & chart_planned_only)
+        misdated = _misdated(case.chart.facts, b)
         if bad_nums:
             res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
         elif flipped:
@@ -225,6 +252,9 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         elif as_done:
             res.findings.append(
                 f"chart only plans {as_done}; letter states it as done: \"{b}\"")
+        elif misdated:
+            res.findings.append(
+                f"dated {misdated[0]} but the matching chart fact is dated {misdated[1]}: \"{b}\"")
         elif ratio > UNSEEN_RATIO:
             res.findings.append(f"term(s) not in chart {unseen}: \"{b}\"")
     res.passed = not res.findings

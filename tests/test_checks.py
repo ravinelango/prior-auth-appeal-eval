@@ -281,3 +281,16 @@ def test_planned_procedure_stated_as_done_is_flagged(case_dict, good_letter):
                      "- Referral placed; pain persisted after")
     r = check_facts(c, bad)
     assert not r.passed and any("only plans" in f and "decompression" in f for f in r.findings)
+
+
+def test_bullet_dated_to_a_different_chart_fact_is_flagged(case, good_letter):
+    ok = good_letter.replace(
+        "## Policy basis",
+        "- Completed 6 weeks of physical therapy (12 sessions); pain 7/10 (2026-02-23)."
+        "\n\n## Policy basis")
+    assert check_facts(case, ok).passed
+    bad = ok.replace("pain 7/10 (2026-02-23)", "pain 7/10 (2026-01-05)")
+    r = check_facts(case, bad)
+    assert not r.passed and any("dated 2026-01-05" in f and "2026-02-23" in f for f in r.findings)
+    # A date written inside the fact text ("since 2025-11-20") is not a misdate.
+    assert check_facts(case, good_letter).passed

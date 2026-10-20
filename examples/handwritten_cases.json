@@ -490,12 +490,6 @@
           ]
         }
       ],
-      "known_checker_gaps": [
-        {
-          "check": "facts_in_chart",
-          "flaw": "Clinical summary dates the omeprazole start to 2026-03-16, the endoscopy request visit, instead of 2026-01-12. That reads as if the 8-week PPI trial the denial asks for had only just begun. The date is a real chart date and every word is in the chart, so the per-bullet check passes it; it does not check which fact a date belongs to."
-        }
-      ],
       "reference_drafts": {
         "good": {
           "text": "Date: 2026-04-08\nRE: Appeal of the denial of upper endoscopy, claim SYN-CLM-500130 (SYNTHETIC CASE)\nPatient: Sasha Mockridge | Member ID: SYN-MBR-400130 | DOB: 1968-09-22\nRequested service: CPT 43235 | Diagnosis: ICD-10 R13.10\n\n## Response to denial reason\nYour letter of 2026-03-30 denied the endoscopy under SYN-D02, stating that SYN-LCD-2031-C2 was not met because a trial of twice-daily proton pump inhibitor therapy was not documented. The chart documents it: omeprazole 20 mg twice daily was started on 2026-01-12, and after 9 weeks of it food still sticks several times a week. The medication list and both clinic notes are enclosed.\n\n## Clinical summary\n- Heartburn and food sticking in the lower chest for 2 months; no weight loss (2026-01-12).\n- Started omeprazole 20 mg twice daily (2026-01-12).\n- After 9 weeks of twice-daily omeprazole, food still sticks several times a week; heartburn improved (2026-03-16).\n- Upper endoscopy requested to evaluate a possible esophageal stricture (2026-03-16).\n\n## Policy basis\nSYN-LCD-2031 (Upper endoscopy for dysphagia and reflux) governs this request. SYN-LCD-2031-C1 and SYN-LCD-2031-C2 are met, and we ask that you overturn the denial and authorize the endoscopy.\n\n## Enclosures\n- Clinic notes dated 2026-01-12 and 2026-03-16\n- Medication list showing omeprazole 20 mg twice daily since 2026-01-12\n- Copy of the denial letter dated 2026-03-30\n\nSincerely,\nDr. Elliot Fabricant, NPI SYN-0000 (synthetic)\n",
@@ -504,7 +498,8 @@
         "flawed": {
           "text": "Date: 2026-04-08\nRE: Appeal of the denial of upper endoscopy, claim SYN-CLM-500130 (SYNTHETIC CASE)\nPatient: Sasha Mockridge | Member ID: SYN-MBR-400130 | DOB: 1968-09-22\nRequested service: CPT 43235 | Diagnosis: ICD-10 R13.10\n\n## Response to denial reason\nYour letter of 2026-03-30 denied the endoscopy under SYN-D02, stating that SYN-LCD-2031-C2 was not met because a trial of twice-daily proton pump inhibitor therapy was not documented. The chart documents it: omeprazole 20 mg twice daily was started on 2026-01-12, and after 9 weeks of it food still sticks several times a week. The medication list and both clinic notes are enclosed.\n\n## Clinical summary\n- Heartburn and food sticking in the lower chest for 2 months; no weight loss (2026-01-12).\n- Started omeprazole 20 mg twice daily (2026-03-16).\n- After 9 weeks of twice-daily omeprazole, food still sticks several times a week; heartburn improved (2026-03-16).\n- Upper endoscopy requested to evaluate a possible esophageal stricture (2026-03-16).\n\n## Policy basis\nSYN-LCD-2031 (Upper endoscopy for dysphagia and reflux) governs this request. SYN-LCD-2031-C1, SYN-LCD-2031-C2 and SYN-LCD-2031-C4 are met, and we ask that you overturn the denial and authorize the endoscopy.\n\n## Enclosures\n- Clinic notes dated 2026-01-12 and 2026-03-16\n- Medication list showing omeprazole 20 mg twice daily since 2026-01-12\n- Copy of the denial letter dated 2026-03-30\n\nSincerely,\nDr. Elliot Fabricant, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
-            "citations"
+            "citations",
+            "facts_in_chart"
           ]
         }
       }
