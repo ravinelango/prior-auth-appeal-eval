@@ -77,11 +77,13 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    `facts_in_chart` now matches each dated bullet to the chart fact it most closely
    paraphrases (word overlap) and flags it when the bullet's date belongs to a different
    fact, which closed the gap. A bullet that blends several facts falls under the overlap
-   threshold and is not date-checked. PA-031 (knee MRI) is the third, and still open: the
-   flawed letter miscodes the diagnosis (caught by `identifiers_match`) and also says "nine
-   weeks" of conservative therapy where the chart says 7, which overstates the very criterion
-   the denial is about. The number check only reads digits, and one spelled-out word stays
-   under the unseen-term ratio, so `facts_in_chart` passes it.
+   threshold and is not date-checked. PA-031 (knee MRI) is the third: the flawed letter
+   miscodes the diagnosis (caught by `identifiers_match`) and also says "nine weeks" of
+   conservative therapy where the chart says 7, which overstates the very criterion the
+   denial is about. The number check used to read digits only, so it passed. It now also
+   reads spelled-out numbers (zero to twenty and the round tens) when a unit follows them
+   ("nine weeks", "two visits"), so "one of the criteria" is not read as 1. That closed the
+   gap, and no hand-written case has an open checker gap right now.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
