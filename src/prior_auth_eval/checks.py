@@ -112,9 +112,22 @@ completed started continued presented present currently remains remained
 UNSEEN_RATIO = 0.34
 
 
+_SPELLED = {w: str(i) for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
+    "fifteen sixteen seventeen eighteen nineteen twenty".split())}
+_SPELLED.update({"thirty": "30", "forty": "40", "fifty": "50", "sixty": "60", "ninety": "90"})
+# Only count a spelled-out number when it quantifies something ("nine weeks", "two visits"),
+# so "one of the criteria" or "no one" does not read as the number 1.
+_SPELLED_QTY = re.compile(
+    r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:days?|weeks?|months?|years?|sessions?|"
+    r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?)\b)",
+    re.IGNORECASE)
+
+
 def _numbers(text: str) -> set[str]:
     dates = set(_DATE.findall(text))
     rest = _DATE.sub(" ", text)
+    rest = _SPELLED_QTY.sub(lambda m: f" {_SPELLED[m.group(1).lower()]} ", rest)
     return dates | set(_NUM.findall(rest))
 
 

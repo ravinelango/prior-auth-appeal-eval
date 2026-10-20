@@ -582,16 +582,11 @@
         "flawed": {
           "text": "Date: 2026-04-02\nRE: Appeal of the denial of right knee MRI, claim SYN-CLM-500131 (SYNTHETIC CASE)\nPatient: Jordan Placeholder | Member ID: SYN-MBR-400131 | DOB: 1979-05-14\nRequested service: CPT 73721 | Diagnosis: ICD-10 S83.242A\n\n## Response to denial reason\nYour letter of 2026-03-27 denied the MRI under SYN-D02, stating that SYN-LCD-2044-C2 was not met because 6 weeks of conservative therapy were not documented. The chart documents it: naproxen 500 mg twice daily and a home exercise program were started on 2026-02-02, and on 2026-03-23, after 7 weeks of both, the knee still locks and gives way. Both clinic notes are enclosed.\n\n## Clinical summary\n- Right knee pain and locking after a twisting injury 3 weeks earlier; positive McMurray test (2026-02-02).\n- Started naproxen 500 mg twice daily and a home exercise program (2026-02-02).\n- After nine weeks of naproxen and home exercises, the knee still locks and gives way (2026-03-23).\n- MRI of the right knee requested to evaluate a possible meniscal tear (2026-03-23).\n\n## Policy basis\nSYN-LCD-2044 (Knee MRI for suspected internal derangement) governs this request. SYN-LCD-2044-C1 and SYN-LCD-2044-C2 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Clinic notes dated 2026-02-02 and 2026-03-23\n- Copy of the denial letter dated 2026-03-27\n\nSincerely,\nDr. Morgan Testwell, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
+            "facts_in_chart",
             "identifiers_match"
           ]
         }
-      },
-      "known_checker_gaps": [
-        {
-          "check": "facts_in_chart",
-          "flaw": "Clinical summary says 'nine weeks' of conservative therapy where the chart says 7. The number check only reads digits, and one spelled-out word stays under the unseen-term ratio."
-        }
-      ]
+      }
     }
   ]
 }

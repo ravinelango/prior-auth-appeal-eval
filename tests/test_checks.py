@@ -60,6 +60,20 @@ def test_invented_number_is_flagged(case, good_letter):
     assert not r.passed and "9" in r.findings[0]
 
 
+def test_spelled_out_number_is_checked_against_chart(case, good_letter):
+    ok = good_letter.replace("6 weeks of physical therapy", "six weeks of physical therapy")
+    assert check_facts(case, ok).passed
+    bad = good_letter.replace("6 weeks of physical therapy", "nine weeks of physical therapy")
+    r = check_facts(case, bad)
+    assert not r.passed and "'9'" in r.findings[0]
+
+
+def test_spelled_out_word_without_a_unit_is_not_a_number():
+    from prior_auth_eval.checks import _numbers
+    assert _numbers("one of the criteria was met; no one disputes it") == set()
+    assert _numbers("Two-week trial, then three visits") == {"2", "3"}
+
+
 def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",
