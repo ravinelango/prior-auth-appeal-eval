@@ -70,11 +70,14 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    the chart mentions only after a planning cue ("planned", "possible", "requested",
    "scheduled", ...) and flags a bullet that states them outside such a cue, which closed the
    gap. It is still a word-window heuristic, not a parser of clinical tense. PA-030 (upper
-   endoscopy) is open: the flawed letter cites a criterion the policy does not have (caught by
-   `citations`) and also moves the omeprazole start date to the day the endoscopy was
-   requested, so the 8-week PPI trial reads as if it had just begun. That date is a real chart
-   date and every word is in the chart, so `facts_in_chart` passes it; it checks each bullet's
-   dates and words against the whole chart, not which fact a date belongs to.
+   endoscopy) was the second: the flawed letter cites a criterion the policy does not have
+   (caught by `citations`) and also moves the omeprazole start date to the day the endoscopy
+   was requested, so the 8-week PPI trial reads as if it had just begun. That date is a real
+   chart date and every word is in the chart, so the per-bullet check passed it.
+   `facts_in_chart` now matches each dated bullet to the chart fact it most closely
+   paraphrases (word overlap) and flags it when the bullet's date belongs to a different
+   fact, which closed the gap. A bullet that blends several facts falls under the overlap
+   threshold and is not date-checked.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
