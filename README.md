@@ -83,11 +83,14 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    denial is about. The number check used to read digits only, so it passed. It now also
    reads spelled-out numbers (zero to twenty and the round tens) when a unit follows them
    ("nine weeks", "two visits"), so "one of the criteria" is not read as 1. That closed the
-   gap. PA-032 (in-lab sleep study) is open: the flawed letter cites a criterion the policy
-   does not have (caught by `citations`) and also drops "suspected" from the chart's
+   gap. PA-032 (in-lab sleep study) is the fourth: the flawed letter cites a criterion the
+   policy does not have (caught by `citations`) and also drops "suspected" from the chart's
    "suspected obstructive sleep apnea", so a working diagnosis reads as established. Every
-   word is still in the chart, so `facts_in_chart` passes it. It is listed under
-   `known_checker_gaps` until a check for dropped hedges closes it.
+   word is still in the chart, so the per-bullet check passed it. `facts_in_chart` now
+   collects terms the chart mentions only after a hedge cue ("suspected", "probable",
+   "rule out", "concern for", ...) and flags a bullet that states them with no hedge in
+   front, which closed the gap. Any hedge word counts, so "probable" for "suspected" passes.
+   No hand-written case has an open checker gap right now.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
