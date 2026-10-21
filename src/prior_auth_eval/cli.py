@@ -63,12 +63,21 @@ def main(argv: list[str] | None = None) -> int:
     else:
         sys.stdout.write(md)
     if a.json:
-        a.json.write_text(json.dumps({
-            "drafter": drafter.name, "decision": verdict, "reasons": reasons,
-            "synthetic": cases.label.upper().startswith("SYNTHETIC"),
-            "cases": [{"id": e.case.id, "status": e.status,
-                       "failed": [x.name for x in e.failed]} for e in evals],
-        }, indent=2))
+        a.json.write_text(
+            json.dumps(
+                {
+                    "drafter": drafter.name,
+                    "decision": verdict,
+                    "reasons": reasons,
+                    "synthetic": cases.label.upper().startswith("SYNTHETIC"),
+                    "cases": [
+                        {"id": e.case.id, "status": e.status, "failed": [x.name for x in e.failed]}
+                        for e in evals
+                    ],
+                },
+                indent=2,
+            )
+        )
     print(f"decision: {verdict}", file=sys.stderr)
     return 1 if a.strict and verdict != "GO" else 0
 

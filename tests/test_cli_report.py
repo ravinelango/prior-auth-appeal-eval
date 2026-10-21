@@ -56,13 +56,30 @@ def test_report_content():
 
 def test_cli_end_to_end(tmp_path):
     out, js = tmp_path / "r.md", tmp_path / "r.json"
-    assert main(["run", "--cases", str(EX), "--drafter", "mock:good", "--out", str(out),
-                 "--json", str(js), "--strict"]) == 0
+    assert (
+        main(
+            [
+                "run",
+                "--cases",
+                str(EX),
+                "--drafter",
+                "mock:good",
+                "--out",
+                str(out),
+                "--json",
+                str(js),
+                "--strict",
+            ]
+        )
+        == 0
+    )
     assert "Decision: **GO**" in out.read_text()
     data = json.loads(js.read_text())
     assert data["synthetic"] is True and len(data["cases"]) == 25
-    assert main(["run", "--cases", str(EX), "--drafter", "mock:flawed", "--strict",
-                 "--out", str(out)]) == 1
+    assert (
+        main(["run", "--cases", str(EX), "--drafter", "mock:flawed", "--strict", "--out", str(out)])
+        == 1
+    )
 
 
 def test_cli_validate_check_prompt(tmp_path, capsys):

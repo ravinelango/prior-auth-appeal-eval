@@ -41,6 +41,7 @@ class CheckResult:
 
 # ---------------------------------------------------------------- helpers
 
+
 def sections(text: str) -> dict[str, str]:
     """Split on '## Heading' lines. Keys are lower-cased headings."""
     out: dict[str, list[str]] = {}
@@ -56,8 +57,11 @@ def sections(text: str) -> dict[str, str]:
 
 
 def bullets(block: str) -> list[str]:
-    return [m.group(1).strip() for line in block.splitlines()
-            if (m := re.match(r"^\s*[-*]\s+(.*\S)\s*$", line))]
+    return [
+        m.group(1).strip()
+        for line in block.splitlines()
+        if (m := re.match(r"^\s*[-*]\s+(.*\S)\s*$", line))
+    ]
 
 
 # ---------------------------------------------------------------- 1. citations
@@ -88,7 +92,8 @@ def check_citations(case: Case, letter: str) -> CheckResult:
             res.findings.append(f"cites policy {pid}, which is not in the provided policy set")
         elif pid != applicable:
             res.findings.append(
-                f"cites {pid}, which exists but does not govern this denial ({applicable})")
+                f"cites {pid}, which exists but does not govern this denial ({applicable})"
+            )
         elif crit and crit not in case.criterion_ids():
             res.findings.append(f"cites criterion {crit}, which does not exist in {pid}")
     if applicable not in {pid for pid, _ in cites}:
@@ -103,25 +108,32 @@ def check_citations(case: Case, letter: str) -> CheckResult:
 _DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 _NUM = re.compile(r"\d+(?:\.\d+)?")
 _WORD = re.compile(r"[a-z]{4,}")
-_STOP = set("""
+_STOP = set(
+    """
 patient patients with that this from have been were was documented documents history shows
 showed shown record records chart noted note notes reports reported after before during over
 since than then also both each their there which while into onto upon about during
 completed started continued presented present currently remains remained
-""".split())
+""".split()
+)
 UNSEEN_RATIO = 0.34
 
 
-_SPELLED = {w: str(i) for i, w in enumerate(
-    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
-    "fifteen sixteen seventeen eighteen nineteen twenty".split())}
+_SPELLED = {
+    w: str(i)
+    for i, w in enumerate(
+        "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen "
+        "fifteen sixteen seventeen eighteen nineteen twenty".split()
+    )
+}
 _SPELLED.update({"thirty": "30", "forty": "40", "fifty": "50", "sixty": "60", "ninety": "90"})
 # Only count a spelled-out number when it quantifies something ("nine weeks", "two visits"),
 # so "one of the criteria" or "no one" does not read as the number 1.
 _SPELLED_QTY = re.compile(
     r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:days?|weeks?|months?|years?|sessions?|"
     r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?)\b)",
-    re.IGNORECASE)
+    re.IGNORECASE,
+)
 
 
 def _numbers(text: str) -> set[str]:
@@ -150,7 +162,7 @@ def _negated_words(text: str) -> set[str]:
     """
     out: set[str] = set()
     for m in _NEG_CUE.finditer(text):
-        window = re.split(r"[.;\n]", text[m.end():m.end() + 70], maxsplit=1)[0]
+        window = re.split(r"[.;\n]", text[m.end() : m.end() + 70], maxsplit=1)[0]
         out |= _words(window)
     return out
 
@@ -180,7 +192,7 @@ _PLAN_CUE = re.compile(
 def _plan_spans(text: str, cue: re.Pattern = _PLAN_CUE) -> list[tuple[int, int]]:
     spans = []
     for m in cue.finditer(text):
-        window = re.split(r"[.;\n]", text[m.end():m.end() + 70], maxsplit=1)[0]
+        window = re.split(r"[.;\n]", text[m.end() : m.end() + 70], maxsplit=1)[0]
         spans.append((m.start(), m.end() + len(window)))
     return spans
 
@@ -219,8 +231,9 @@ def _misdated(facts, bullet: str) -> tuple[str, str] | None:
     for f in facts:
         fw = _words(f.text)
         # A fact's own visit date and any date written in its text ("since 2025-11-20") count.
-        scored.append((len(words & fw) / len(words | fw) if fw else 0.0,
-                       {f.date, *_DATE.findall(f.text)}))
+        scored.append(
+            (len(words & fw) / len(words | fw) if fw else 0.0, {f.date, *_DATE.findall(f.text)})
+        )
     best = max(s for s, _ in scored)
     if best < DATE_MATCH_MIN:
         return None
@@ -243,8 +256,9 @@ def check_facts(case: Case, letter: str) -> CheckResult:
     chart_words = _words(chart_text) | _words(case.chart.patient_name)
     # A term only counts as chart-negated if no chart fact also asserts it. Otherwise
     # "No personal history of cancer" would flag every family-history mention of cancer.
-    chart_asserted = set().union(*(_words(f.text) - _negated_words(f.text)
-                                   for f in case.chart.facts))
+    chart_asserted = set().union(
+        *(_words(f.text) - _negated_words(f.text) for f in case.chart.facts)
+    )
     chart_negated = _negated_words(chart_text) - chart_asserted
     chart_pinned = _pinned_terms(chart_text)
     planned, done = set(), set()
@@ -271,29 +285,29 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         unhedged = sorted(_split_planned(b, _HEDGE_CUE)[1] & chart_hedged_only)
         misdated = _misdated(case.chart.facts, b)
         if bad_nums:
-            res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
+            res.findings.append(f'number(s) not in chart {bad_nums}: "{b}"')
         elif flipped:
-            res.findings.append(
-                f"possible negation flip of chart-negated term(s) {flipped}: \"{b}\"")
+            res.findings.append(f'possible negation flip of chart-negated term(s) {flipped}: "{b}"')
         elif swapped:
-            res.findings.append(
-                f"relative/laterality term(s) not in chart {swapped}: \"{b}\"")
+            res.findings.append(f'relative/laterality term(s) not in chart {swapped}: "{b}"')
         elif as_done:
-            res.findings.append(
-                f"chart only plans {as_done}; letter states it as done: \"{b}\"")
+            res.findings.append(f'chart only plans {as_done}; letter states it as done: "{b}"')
         elif unhedged:
             res.findings.append(
-                f"chart only suspects {unhedged}; letter states it as established: \"{b}\"")
+                f'chart only suspects {unhedged}; letter states it as established: "{b}"'
+            )
         elif misdated:
             res.findings.append(
-                f"dated {misdated[0]} but the matching chart fact is dated {misdated[1]}: \"{b}\"")
+                f'dated {misdated[0]} but the matching chart fact is dated {misdated[1]}: "{b}"'
+            )
         elif ratio > UNSEEN_RATIO:
-            res.findings.append(f"term(s) not in chart {unseen}: \"{b}\"")
+            res.findings.append(f'term(s) not in chart {unseen}: "{b}"')
     res.passed = not res.findings
     return res
 
 
 # ---------------------------------------------------------------- 3. denial reason
+
 
 def check_denial_reason(case: Case, letter: str) -> CheckResult:
     res = CheckResult("denial_reason_addressed", True, CRITICAL)
@@ -311,7 +325,8 @@ def check_denial_reason(case: Case, letter: str) -> CheckResult:
     if len(hit) * 2 < len(terms):
         res.findings.append(
             f"response engages with {len(hit)}/{len(terms)} expected terms "
-            f"(missing: {[t for t in terms if t not in hit]})")
+            f"(missing: {[t for t in terms if t not in hit]})"
+        )
     res.passed = not res.findings
     return res
 
@@ -338,8 +353,10 @@ def extract_identifiers(letter: str) -> dict[str, list[str]]:
 def check_identifiers(case: Case, letter: str) -> CheckResult:
     res = CheckResult("identifiers_match", True, CRITICAL)
     expected = {
-        "claim_id": case.denial.claim_id, "member_id": case.chart.member_id,
-        "cpt": case.denial.cpt, "icd10": case.denial.icd10,
+        "claim_id": case.denial.claim_id,
+        "member_id": case.chart.member_id,
+        "cpt": case.denial.cpt,
+        "icd10": case.denial.icd10,
         "patient_name": case.chart.patient_name,
     }
     found = extract_identifiers(letter)
@@ -358,8 +375,9 @@ def check_identifiers(case: Case, letter: str) -> CheckResult:
 
 # ---------------------------------------------------------------- 5. required elements
 
-_OVERTURN = re.compile(r"\b(overturn|reverse (?:the|this) denial|reversal of (?:the|this) denial)",
-                       re.IGNORECASE)
+_OVERTURN = re.compile(
+    r"\b(overturn|reverse (?:the|this) denial|reversal of (?:the|this) denial)", re.IGNORECASE
+)
 
 
 def _parse_date(s: str) -> date | None:
@@ -376,8 +394,10 @@ def check_required_elements(case: Case, letter: str) -> CheckResult:
         res.findings.append("no explicit request to overturn/reverse the denial")
     if not bullets(secs.get("enclosures", "")):
         res.findings.append("no '## Enclosures' list")
-    if not (re.search(r"\bSincerely\b", letter, re.IGNORECASE)
-            and re.search(r"\bNPI\s*[:#]?\s*\S+", letter)):
+    if not (
+        re.search(r"\bSincerely\b", letter, re.IGNORECASE)
+        and re.search(r"\bNPI\s*[:#]?\s*\S+", letter)
+    ):
         res.findings.append("no signature block with provider NPI")
     m = re.search(r"^Date:\s*(\S+)", letter, re.MULTILINE)
     filed = _parse_date(m.group(1)) if m else None
@@ -386,7 +406,8 @@ def check_required_elements(case: Case, letter: str) -> CheckResult:
         res.findings.append("no parseable 'Date: YYYY-MM-DD' line")
     elif deadline and filed > deadline:
         res.findings.append(
-            f"letter dated {filed} is after the appeal deadline {case.denial.appeal_deadline}")
+            f"letter dated {filed} is after the appeal deadline {case.denial.appeal_deadline}"
+        )
     res.passed = not res.findings
     return res
 
@@ -396,12 +417,14 @@ def check_required_elements(case: Case, letter: str) -> CheckResult:
 _PHI_RX = {
     "SSN": re.compile(r"(?<![\w-])\d{3}-\d{2}-\d{4}(?![\w-])"),
     "phone number": re.compile(
-        r"(?<![\w-])(?:\+?1[-. ]?)?(?:\(\d{3}\)\s?|\d{3}[-. ])\d{3}[-. ]\d{4}(?![\w-])"),
+        r"(?<![\w-])(?:\+?1[-. ]?)?(?:\(\d{3}\)\s?|\d{3}[-. ])\d{3}[-. ]\d{4}(?![\w-])"
+    ),
     "email address": re.compile(r"\b[\w.+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+\b"),
     "street address": re.compile(
         r"\b\d{1,6}\s+(?:[A-Z][A-Za-z'-]*\.?\s+){1,4}"
         r"(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Drive|Court|Ct|Place|Pl|"
-        r"Way|Terrace|Circle|Parkway|Pkwy|Highway|Hwy)\b\.?"),
+        r"Way|Terrace|Circle|Parkway|Pkwy|Highway|Hwy)\b\.?"
+    ),
 }
 
 
@@ -421,15 +444,24 @@ def check_extra_phi(case: Case, letter: str) -> CheckResult:
     """
     res = CheckResult("extra_phi", True, MAJOR)
     ch = case.chart
-    source = " \n".join([*(f.text for f in ch.facts), case.denial.letter_text,
-                         ch.patient_name, ch.dob, ch.member_id, ch.provider_name])
+    source = " \n".join(
+        [
+            *(f.text for f in ch.facts),
+            case.denial.letter_text,
+            ch.patient_name,
+            ch.dob,
+            ch.member_id,
+            ch.provider_name,
+        ]
+    )
     for kind, rx in _PHI_RX.items():
         allowed = {_phi_key(kind, m.group(0)) for m in rx.finditer(source)}
         for m in rx.finditer(letter):
             if _phi_key(kind, m.group(0)) not in allowed:
                 res.findings.append(
                     f"{kind} '{m.group(0).strip()}' is not in the chart or denial letter "
-                    "(minimum necessary)")
+                    "(minimum necessary)"
+                )
     res.findings = sorted(set(res.findings))
     res.passed = not res.findings
     return res
@@ -437,10 +469,22 @@ def check_extra_phi(case: Case, letter: str) -> CheckResult:
 
 # ---------------------------------------------------------------- run all
 
-CHECKS = (check_citations, check_facts, check_denial_reason, check_identifiers,
-          check_required_elements, check_extra_phi)
-CHECK_NAMES = ("citations", "facts_in_chart", "denial_reason_addressed", "identifiers_match",
-               "required_elements", "extra_phi")
+CHECKS = (
+    check_citations,
+    check_facts,
+    check_denial_reason,
+    check_identifiers,
+    check_required_elements,
+    check_extra_phi,
+)
+CHECK_NAMES = (
+    "citations",
+    "facts_in_chart",
+    "denial_reason_addressed",
+    "identifiers_match",
+    "required_elements",
+    "extra_phi",
+)
 
 
 def run_checks(case: Case, letter: str) -> list[CheckResult]:

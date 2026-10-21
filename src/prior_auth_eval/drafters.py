@@ -59,11 +59,14 @@ def build_prompt(case: Case) -> str:
     chart = "\n".join(f"- {f.date}: {f.text}" for f in case.chart.facts)
     pols = "\n".join(
         f"{p.id} {p.title}\n" + "\n".join(f"  {c.id}: {c.text}" for c in p.criteria)
-        for p in case.policies)
-    header = (f"Patient: {case.chart.patient_name} | Member ID: {case.chart.member_id} | "
-              f"DOB: {case.chart.dob} | Provider: {case.chart.provider_name} | "
-              f"Claim {case.denial.claim_id} | CPT {case.denial.cpt} | ICD-10 {case.denial.icd10} "
-              f"| Appeal deadline {case.denial.appeal_deadline}")
+        for p in case.policies
+    )
+    header = (
+        f"Patient: {case.chart.patient_name} | Member ID: {case.chart.member_id} | "
+        f"DOB: {case.chart.dob} | Provider: {case.chart.provider_name} | "
+        f"Claim {case.denial.claim_id} | CPT {case.denial.cpt} | ICD-10 {case.denial.icd10} "
+        f"| Appeal deadline {case.denial.appeal_deadline}"
+    )
     return PROMPT.format(denial=f"{header}\n{case.denial.letter_text}", chart=chart, policies=pols)
 
 

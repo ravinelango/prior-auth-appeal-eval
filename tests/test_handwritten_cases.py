@@ -23,8 +23,11 @@ def test_handwritten_set_is_synthetic_and_does_not_reuse_generated_ids():
 
 @pytest.mark.parametrize("case", CASES.cases, ids=lambda c: c.id)
 def test_good_handwritten_letter_passes(case):
-    failed = [(r.name, r.findings) for r in run_checks(case, case.reference_drafts["good"].text)
-              if not r.passed]
+    failed = [
+        (r.name, r.findings)
+        for r in run_checks(case, case.reference_drafts["good"].text)
+        if not r.passed
+    ]
     assert failed == []
 
 

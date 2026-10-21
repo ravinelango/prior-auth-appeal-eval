@@ -24,8 +24,11 @@ def test_dataset_is_labeled_synthetic_and_sized():
 
 @pytest.mark.parametrize("case", CASES.cases, ids=lambda c: c.id)
 def test_good_reference_draft_passes_all_checks(case):
-    failed = [(r.name, r.findings) for r in run_checks(case, case.reference_drafts["good"].text)
-              if not r.passed]
+    failed = [
+        (r.name, r.findings)
+        for r in run_checks(case, case.reference_drafts["good"].text)
+        if not r.passed
+    ]
     assert failed == []
 
 
@@ -48,8 +51,9 @@ def test_multi_unmet_case_names_both_criteria_and_flaw_answers_one():
     flawed = case.reference_drafts["flawed"].text
     assert case.denial.unmet_criteria[0] in flawed
     (r,) = [r for r in run_checks(case, flawed) if r.name == "denial_reason_addressed"]
-    assert r.findings == [f"response does not cite the unmet criterion "
-                          f"{case.denial.unmet_criteria[1]}"]
+    assert r.findings == [
+        f"response does not cite the unmet criterion {case.denial.unmet_criteria[1]}"
+    ]
 
 
 def test_no_real_looking_policy_ids_in_provided_sets():
@@ -59,6 +63,10 @@ def test_no_real_looking_policy_ids_in_provided_sets():
 
 
 def test_committed_dataset_matches_generator():
-    out = subprocess.run([sys.executable, str(ROOT / "scripts" / "build_example_cases.py")],
-                         capture_output=True, text=True, check=True).stdout
+    out = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_example_cases.py")],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
     assert json.loads(out) == json.loads((ROOT / "examples" / "synthetic_cases.json").read_text())

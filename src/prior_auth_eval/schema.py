@@ -100,11 +100,28 @@ def parse_case(d: dict) -> Case:
     cid = str(d.get("id", "?"))
     _req(d, ("id", "title", "denial", "chart", "policies"), f"case {cid}")
     dn, ch = d["denial"], d["chart"]
-    _req(dn, ("claim_id", "cpt", "icd10", "reason_code", "reason_text", "unmet_criteria",
-              "reason_terms", "applicable_policy", "denial_date", "appeal_deadline",
-              "letter_text"), f"case {cid} denial")
-    _req(ch, ("patient_id", "patient_name", "dob", "member_id", "provider_name", "facts"),
-         f"case {cid} chart")
+    _req(
+        dn,
+        (
+            "claim_id",
+            "cpt",
+            "icd10",
+            "reason_code",
+            "reason_text",
+            "unmet_criteria",
+            "reason_terms",
+            "applicable_policy",
+            "denial_date",
+            "appeal_deadline",
+            "letter_text",
+        ),
+        f"case {cid} denial",
+    )
+    _req(
+        ch,
+        ("patient_id", "patient_name", "dob", "member_id", "provider_name", "facts"),
+        f"case {cid} chart",
+    )
     policies = tuple(
         Policy(p["id"], p["title"], tuple(Criterion(c["id"], c["text"]) for c in p["criteria"]))
         for p in d["policies"]
@@ -113,15 +130,24 @@ def parse_case(d: dict) -> Case:
         id=cid,
         title=str(d["title"]),
         denial=Denial(
-            claim_id=dn["claim_id"], cpt=str(dn["cpt"]), icd10=dn["icd10"],
-            reason_code=dn["reason_code"], reason_text=dn["reason_text"],
-            unmet_criteria=tuple(dn["unmet_criteria"]), reason_terms=tuple(dn["reason_terms"]),
-            applicable_policy=dn["applicable_policy"], denial_date=dn["denial_date"],
-            appeal_deadline=dn["appeal_deadline"], letter_text=dn["letter_text"],
+            claim_id=dn["claim_id"],
+            cpt=str(dn["cpt"]),
+            icd10=dn["icd10"],
+            reason_code=dn["reason_code"],
+            reason_text=dn["reason_text"],
+            unmet_criteria=tuple(dn["unmet_criteria"]),
+            reason_terms=tuple(dn["reason_terms"]),
+            applicable_policy=dn["applicable_policy"],
+            denial_date=dn["denial_date"],
+            appeal_deadline=dn["appeal_deadline"],
+            letter_text=dn["letter_text"],
         ),
         chart=Chart(
-            patient_id=ch["patient_id"], patient_name=ch["patient_name"], dob=ch["dob"],
-            member_id=ch["member_id"], provider_name=ch["provider_name"],
+            patient_id=ch["patient_id"],
+            patient_name=ch["patient_name"],
+            dob=ch["dob"],
+            member_id=ch["member_id"],
+            provider_name=ch["provider_name"],
             facts=tuple(ChartFact(f["id"], f["date"], f["text"]) for f in ch["facts"]),
         ),
         policies=policies,

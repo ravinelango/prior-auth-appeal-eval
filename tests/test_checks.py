@@ -18,15 +18,22 @@ from prior_auth_eval.schema import parse_case
 def test_good_letter_passes_everything(case, good_letter):
     results = run_checks(case, good_letter)
     assert [r.name for r in results] == [
-        "citations", "facts_in_chart", "denial_reason_addressed", "identifiers_match",
-        "required_elements", "extra_phi"]
+        "citations",
+        "facts_in_chart",
+        "denial_reason_addressed",
+        "identifiers_match",
+        "required_elements",
+        "extra_phi",
+    ]
     assert all(r.passed for r in results), [(r.name, r.findings) for r in results if not r.passed]
 
 
 # ---- citations
 def test_extract_citations_normalizes():
     assert extract_citations("see LCD L99999 and syn-lcd-9001-c2") == [
-        ("LCD-L99999", None), ("SYN-LCD-9001", "SYN-LCD-9001-C2")]
+        ("LCD-L99999", None),
+        ("SYN-LCD-9001", "SYN-LCD-9001-C2"),
+    ]
 
 
 def test_invented_policy_is_flagged(case, good_letter):
@@ -54,8 +61,9 @@ def test_missing_governing_policy_is_flagged(case):
 
 # ---- facts
 def test_invented_number_is_flagged(case, good_letter):
-    bad = good_letter.replace("6 weeks of physical therapy (12 sessions)",
-                              "9 weeks of physical therapy (12 sessions)")
+    bad = good_letter.replace(
+        "6 weeks of physical therapy (12 sessions)", "9 weeks of physical therapy (12 sessions)"
+    )
     r = check_facts(case, bad)
     assert not r.passed and "9" in r.findings[0]
 
@@ -70,6 +78,7 @@ def test_spelled_out_number_is_checked_against_chart(case, good_letter):
 
 def test_spelled_out_word_without_a_unit_is_not_a_number():
     from prior_auth_eval.checks import _numbers
+
     assert _numbers("one of the criteria was met; no one disputes it") == set()
     assert _numbers("Two-week trial, then three visits") == {"2", "3"}
 
@@ -78,7 +87,8 @@ def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",
         "- Patient previously underwent lumbar fusion surgery with persistent hardware pain.\n\n"
-        "## Policy basis")
+        "## Policy basis",
+    )
     r = check_facts(case, bad)
     assert not r.passed and "fusion" in r.findings[0]
 
@@ -86,7 +96,8 @@ def test_invented_clinical_term_is_flagged(case, good_letter):
 def test_light_paraphrase_is_tolerated(case, good_letter):
     ok = good_letter.replace(
         "- Low back pain radiating to the left leg since 2025-11-20.",
-        "- Low back pain that radiates to the left leg, present since 2025-11-20.")
+        "- Low back pain that radiates to the left leg, present since 2025-11-20.",
+    )
     assert check_facts(case, ok).passed
 
 
@@ -105,14 +116,16 @@ def test_reason_requires_criterion_and_terms(case, good_letter):
         "The plan denied this request under SYN-D01 (Not medically necessary), stating that\n"
         "SYN-LCD-9001-C2 is not met. The chart documents 6 weeks of physical therapy without "
         "relief.",
-        "We believe this service is appropriate and ask for prompt review.")
+        "We believe this service is appropriate and ask for prompt review.",
+    )
     r = check_denial_reason(case, generic)
     assert not r.passed and len(r.findings) == 2
 
 
 def test_reason_criterion_missing_but_terms_present(case, good_letter):
     bad = good_letter.replace(
-        "stating that\nSYN-LCD-9001-C2 is not met", "stating that it is unmet")
+        "stating that\nSYN-LCD-9001-C2 is not met", "stating that it is unmet"
+    )
     r = check_denial_reason(case, bad)
     assert [f for f in r.findings if "unmet criterion" in f]
 
@@ -128,13 +141,16 @@ def test_identifier_extraction(good_letter):
     assert ids["icd10"] == ["M54.16"] and ids["patient_name"] == ["Pat Example"]
 
 
-@pytest.mark.parametrize("old,new,key", [
-    ("SYN-MBR-900001", "SYN-MBR-900002", "member_id"),
-    ("SYN-CLM-900001", "SYN-CLM-900009", "claim_id"),
-    ("CPT 72148", "CPT 72149", "cpt"),
-    ("ICD-10 M54.16", "ICD-10 M54.17", "icd10"),
-    ("Patient: Pat Example", "Patient: Pat Someoneelse", "patient_name"),
-])
+@pytest.mark.parametrize(
+    "old,new,key",
+    [
+        ("SYN-MBR-900001", "SYN-MBR-900002", "member_id"),
+        ("SYN-CLM-900001", "SYN-CLM-900009", "claim_id"),
+        ("CPT 72148", "CPT 72149", "cpt"),
+        ("ICD-10 M54.16", "ICD-10 M54.17", "icd10"),
+        ("Patient: Pat Example", "Patient: Pat Someoneelse", "patient_name"),
+    ],
+)
 def test_wrong_identifier_flagged(case, good_letter, old, new, key):
     r = check_identifiers(case, good_letter.replace(old, new))
     assert not r.passed and any(f.startswith(key) for f in r.findings)
@@ -168,14 +184,17 @@ def test_sections_helper():
     assert s["a b"] == "x" and s["c"] == "y" and s["_header"] == "head"
 
 
-
 def test_negation_flip_is_flagged(case_dict, good_letter):
     """Chart says 'not on anticoagulants'; asserting the patient is on them fails."""
     from prior_auth_eval.schema import parse_case
-    case_dict["chart"]["facts"].append({
-        "id": "f3", "date": "2026-02-03",
-        "text": "Not on anticoagulants or antiplatelet agents; no signs of infection.",
-    })
+
+    case_dict["chart"]["facts"].append(
+        {
+            "id": "f3",
+            "date": "2026-02-03",
+            "text": "Not on anticoagulants or antiplatelet agents; no signs of infection.",
+        }
+    )
     case2 = parse_case(case_dict)
     inject = good_letter.replace(
         "## Clinical summary\n",
@@ -189,15 +208,18 @@ def test_negation_flip_is_flagged(case_dict, good_letter):
 
 def test_chart_negation_restated_with_negation_is_ok(case_dict, good_letter):
     from prior_auth_eval.schema import parse_case
-    case_dict["chart"]["facts"].append({
-        "id": "f3", "date": "2026-02-03",
-        "text": "Not on anticoagulants; no signs of infection.",
-    })
+
+    case_dict["chart"]["facts"].append(
+        {
+            "id": "f3",
+            "date": "2026-02-03",
+            "text": "Not on anticoagulants; no signs of infection.",
+        }
+    )
     case2 = parse_case(case_dict)
     inject = good_letter.replace(
         "## Clinical summary\n",
-        "## Clinical summary\n"
-        "- Not on anticoagulants; no signs of infection (2026-02-03).\n",
+        "## Clinical summary\n- Not on anticoagulants; no signs of infection (2026-02-03).\n",
     )
     assert check_facts(case2, inject).passed
 
@@ -205,10 +227,14 @@ def test_chart_negation_restated_with_negation_is_ok(case_dict, good_letter):
 def test_term_negated_in_one_fact_but_asserted_in_another_is_not_a_flip(case_dict, good_letter):
     """'No personal history of cancer' must not flag a family-history mention of cancer."""
     from prior_auth_eval.schema import parse_case
+
     case_dict["chart"]["facts"] += [
         {"id": "f3", "date": "2026-02-03", "text": "No personal history of cancer."},
-        {"id": "f4", "date": "2026-02-03",
-         "text": "Mother diagnosed with breast cancer at age 44."},
+        {
+            "id": "f4",
+            "date": "2026-02-03",
+            "text": "Mother diagnosed with breast cancer at age 44.",
+        },
     ]
     case2 = parse_case(case_dict)
     inject = good_letter.replace(
@@ -229,30 +255,38 @@ def test_extra_phi_passes_on_good_letter(case, good_letter):
     assert r.passed and r.severity == "major"
 
 
-@pytest.mark.parametrize("snippet,kind", [
-    ("SSN: 900-00-0021", "SSN"),
-    ("Call the patient at 555-555-0142.", "phone number"),
-    ("Call the patient at (555) 555-0142.", "phone number"),
-    ("Email pat.example@example.org with questions.", "email address"),
-    ("Home address: 742 Placeholder Lane, Faketown.", "street address"),
-])
+@pytest.mark.parametrize(
+    "snippet,kind",
+    [
+        ("SSN: 900-00-0021", "SSN"),
+        ("Call the patient at 555-555-0142.", "phone number"),
+        ("Call the patient at (555) 555-0142.", "phone number"),
+        ("Email pat.example@example.org with questions.", "email address"),
+        ("Home address: 742 Placeholder Lane, Faketown.", "street address"),
+    ],
+)
 def test_extra_phi_flags_identifiers_not_in_source(case, good_letter, snippet, kind):
-    bad = good_letter.replace("## Response to denial reason",
-                              f"{snippet}\n\n## Response to denial reason")
+    bad = good_letter.replace(
+        "## Response to denial reason", f"{snippet}\n\n## Response to denial reason"
+    )
     r = check_extra_phi(case, bad)
     assert not r.passed and any(f.startswith(kind) for f in r.findings), r.findings
 
 
 def test_extra_phi_allows_identifiers_found_in_chart_or_denial(case_dict, good_letter):
-    case_dict["chart"]["facts"].append({
-        "id": "f3", "date": "2026-02-23",
-        "text": "Caregiver contact on file: 555-555-0142, 742 Placeholder Lane.",
-    })
+    case_dict["chart"]["facts"].append(
+        {
+            "id": "f3",
+            "date": "2026-02-23",
+            "text": "Caregiver contact on file: 555-555-0142, 742 Placeholder Lane.",
+        }
+    )
     case_dict["denial"]["letter_text"] += " Questions: appeals@example.org."
     case2 = parse_case(case_dict)
     ok = good_letter.replace(
         "## Enclosures",
-        "Contact: (555) 555-0142, 742 Placeholder Lane, appeals@example.org.\n\n## Enclosures")
+        "Contact: (555) 555-0142, 742 Placeholder Lane, appeals@example.org.\n\n## Enclosures",
+    )
     assert check_extra_phi(case2, ok).passed
 
 
@@ -270,10 +304,12 @@ def test_laterality_swap_is_flagged(case, good_letter):
 
 def test_relative_swap_is_flagged(case_dict, good_letter):
     case_dict["chart"]["facts"].append(
-        {"id": "f3", "date": "2026-01-05", "text": "Father had lumbar stenosis."})
+        {"id": "f3", "date": "2026-01-05", "text": "Father had lumbar stenosis."}
+    )
     c = parse_case(case_dict)
-    ok = good_letter.replace("## Policy basis",
-                             "- Father had lumbar stenosis (2026-01-05).\n\n## Policy basis")
+    ok = good_letter.replace(
+        "## Policy basis", "- Father had lumbar stenosis (2026-01-05).\n\n## Policy basis"
+    )
     assert check_facts(c, ok).passed
     bad = ok.replace("- Father had", "- Brother had")
     r = check_facts(c, bad)
@@ -281,18 +317,23 @@ def test_relative_swap_is_flagged(case_dict, good_letter):
 
 
 def test_planned_procedure_stated_as_done_is_flagged(case_dict, good_letter):
-    case_dict["chart"]["facts"].append({
-        "id": "f3", "date": "2026-02-03",
-        "text": "Referral placed; surgical consult planned for nerve decompression.",
-    })
+    case_dict["chart"]["facts"].append(
+        {
+            "id": "f3",
+            "date": "2026-02-03",
+            "text": "Referral placed; surgical consult planned for nerve decompression.",
+        }
+    )
     c = parse_case(case_dict)
     ok = good_letter.replace(
         "## Policy basis",
         "- Referral placed; surgical consult planned for nerve decompression (2026-02-03)."
-        "\n\n## Policy basis")
+        "\n\n## Policy basis",
+    )
     assert check_facts(c, ok).passed
-    bad = ok.replace("- Referral placed; surgical consult planned for",
-                     "- Referral placed; pain persisted after")
+    bad = ok.replace(
+        "- Referral placed; surgical consult planned for", "- Referral placed; pain persisted after"
+    )
     r = check_facts(c, bad)
     assert not r.passed and any("only plans" in f and "decompression" in f for f in r.findings)
 
@@ -301,7 +342,8 @@ def test_bullet_dated_to_a_different_chart_fact_is_flagged(case, good_letter):
     ok = good_letter.replace(
         "## Policy basis",
         "- Completed 6 weeks of physical therapy (12 sessions); pain 7/10 (2026-02-23)."
-        "\n\n## Policy basis")
+        "\n\n## Policy basis",
+    )
     assert check_facts(case, ok).passed
     bad = ok.replace("pain 7/10 (2026-02-23)", "pain 7/10 (2026-01-05)")
     r = check_facts(case, bad)
@@ -311,14 +353,18 @@ def test_bullet_dated_to_a_different_chart_fact_is_flagged(case, good_letter):
 
 
 def test_suspected_diagnosis_stated_as_established_is_flagged(case_dict, good_letter):
-    case_dict["chart"]["facts"].append({
-        "id": "f3", "date": "2026-02-03",
-        "text": "Numbness in the foot; suspected peripheral neuropathy.",
-    })
+    case_dict["chart"]["facts"].append(
+        {
+            "id": "f3",
+            "date": "2026-02-03",
+            "text": "Numbness in the foot; suspected peripheral neuropathy.",
+        }
+    )
     c = parse_case(case_dict)
     ok = good_letter.replace(
         "## Policy basis",
-        "- Numbness in the foot; suspected peripheral neuropathy (2026-02-03).\n\n## Policy basis")
+        "- Numbness in the foot; suspected peripheral neuropathy (2026-02-03).\n\n## Policy basis",
+    )
     assert check_facts(c, ok).passed
     # Any hedge word keeps it honest, not only the chart's exact one.
     assert check_facts(c, ok.replace("suspected peripheral", "probable peripheral")).passed

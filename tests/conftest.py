@@ -9,30 +9,51 @@ def make_case_dict() -> dict:
         "id": "T-1",
         "title": "Synthetic test case",
         "denial": {
-            "claim_id": "SYN-CLM-900001", "cpt": "72148", "icd10": "M54.16",
-            "reason_code": "SYN-D01", "reason_text": "Not medically necessary",
+            "claim_id": "SYN-CLM-900001",
+            "cpt": "72148",
+            "icd10": "M54.16",
+            "reason_code": "SYN-D01",
+            "reason_text": "Not medically necessary",
             "unmet_criteria": ["SYN-LCD-9001-C2"],
             "reason_terms": ["physical therapy", "6 weeks"],
             "applicable_policy": "SYN-LCD-9001",
-            "denial_date": "2026-03-02", "appeal_deadline": "2026-05-01",
+            "denial_date": "2026-03-02",
+            "appeal_deadline": "2026-05-01",
             "letter_text": "Denied: criterion SYN-LCD-9001-C2 not met.",
         },
         "chart": {
-            "patient_id": "P-1", "patient_name": "Pat Example", "dob": "1970-01-01",
-            "member_id": "SYN-MBR-900001", "provider_name": "Dr. Sam Placeholder",
+            "patient_id": "P-1",
+            "patient_name": "Pat Example",
+            "dob": "1970-01-01",
+            "member_id": "SYN-MBR-900001",
+            "provider_name": "Dr. Sam Placeholder",
             "facts": [
-                {"id": "f1", "date": "2026-01-05",
-                 "text": "Low back pain radiating to the left leg since 2025-11-20."},
-                {"id": "f2", "date": "2026-02-23",
-                 "text": "Completed 6 weeks of physical therapy (12 sessions); pain 7/10."},
+                {
+                    "id": "f1",
+                    "date": "2026-01-05",
+                    "text": "Low back pain radiating to the left leg since 2025-11-20.",
+                },
+                {
+                    "id": "f2",
+                    "date": "2026-02-23",
+                    "text": "Completed 6 weeks of physical therapy (12 sessions); pain 7/10.",
+                },
             ],
         },
         "policies": [
-            {"id": "SYN-LCD-9001", "title": "Lumbar imaging (synthetic)", "criteria": [
-                {"id": "SYN-LCD-9001-C1", "text": "Radicular pain for at least 6 weeks."},
-                {"id": "SYN-LCD-9001-C2", "text": "Documented conservative therapy."}]},
-            {"id": "SYN-LCD-9002", "title": "Sleep testing (synthetic)", "criteria": [
-                {"id": "SYN-LCD-9002-C1", "text": "Symptoms of sleep apnea."}]},
+            {
+                "id": "SYN-LCD-9001",
+                "title": "Lumbar imaging (synthetic)",
+                "criteria": [
+                    {"id": "SYN-LCD-9001-C1", "text": "Radicular pain for at least 6 weeks."},
+                    {"id": "SYN-LCD-9001-C2", "text": "Documented conservative therapy."},
+                ],
+            },
+            {
+                "id": "SYN-LCD-9002",
+                "title": "Sleep testing (synthetic)",
+                "criteria": [{"id": "SYN-LCD-9002-C1", "text": "Symptoms of sleep apnea."}],
+            },
         ],
     }
 
