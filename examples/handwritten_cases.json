@@ -587,6 +587,95 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-032",
+      "title": "Sleep study: hand-written letter that cites a criterion the policy lacks and states a suspected diagnosis as established (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500132",
+        "cpt": "95810",
+        "icd10": "R06.83",
+        "reason_code": "SYN-D07",
+        "reason_text": "Medical necessity not established: home sleep apnea test not attempted",
+        "unmet_criteria": [
+          "SYN-LCD-2051-C2"
+        ],
+        "reason_terms": [
+          "home sleep apnea test",
+          "not attempted"
+        ],
+        "applicable_policy": "SYN-LCD-2051",
+        "denial_date": "2026-04-28",
+        "appeal_deadline": "2026-06-27",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500132, member SYN-MBR-400132. CPT 95810 denied under SYN-D07: Medical necessity not established: home sleep apnea test not attempted. Criterion SYN-LCD-2051-C2 not met. You may appeal by 2026-06-27."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0032",
+        "member_id": "SYN-MBR-400132",
+        "patient_name": "Riley Sample",
+        "dob": "1968-10-09",
+        "provider_name": "Dr. Morgan Testwell",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-03-16",
+            "text": "Loud snoring and witnessed pauses in breathing at night; suspected obstructive sleep apnea."
+          },
+          {
+            "id": "F2",
+            "date": "2026-03-16",
+            "text": "Epworth Sleepiness Scale score of 15."
+          },
+          {
+            "id": "F3",
+            "date": "2026-04-20",
+            "text": "Home sleep apnea test on 2026-04-06 was technically inadequate, with only 2 hours of valid oximetry."
+          },
+          {
+            "id": "F4",
+            "date": "2026-04-20",
+            "text": "In-lab polysomnography requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-2051",
+          "title": "Polysomnography for suspected obstructive sleep apnea (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-2051-C1",
+              "text": "Symptoms suggesting obstructive sleep apnea, such as loud snoring, witnessed apneas, or excessive daytime sleepiness"
+            },
+            {
+              "id": "SYN-LCD-2051-C2",
+              "text": "A home sleep apnea test was attempted and was negative, inconclusive or technically inadequate, or is contraindicated"
+            },
+            {
+              "id": "SYN-LCD-2051-C3",
+              "text": "No in-lab polysomnography in the past 12 months"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-05-04\nRE: Appeal of the denial of in-lab polysomnography, claim SYN-CLM-500132 (SYNTHETIC CASE)\nPatient: Riley Sample | Member ID: SYN-MBR-400132 | DOB: 1968-10-09\nRequested service: CPT 95810 | Diagnosis: ICD-10 R06.83\n\n## Response to denial reason\nYour letter of 2026-04-28 denied the in-lab sleep study under SYN-D07, stating that SYN-LCD-2051-C2 was not met because a home sleep apnea test was not attempted. A home sleep apnea test was attempted on 2026-04-06 and was technically inadequate, with only 2 hours of valid oximetry. The report and the follow-up note are enclosed.\n\n## Clinical summary\n- Loud snoring and witnessed pauses in breathing at night; suspected obstructive sleep apnea (2026-03-16).\n- Epworth Sleepiness Scale score of 15 (2026-03-16).\n- Home sleep apnea test on 2026-04-06 was technically inadequate, with only 2 hours of valid oximetry (2026-04-20).\n- In-lab polysomnography requested (2026-04-20).\n\n## Policy basis\nSYN-LCD-2051 (Polysomnography for suspected obstructive sleep apnea) governs this request. SYN-LCD-2051-C1 and SYN-LCD-2051-C2 are met, and we ask that you overturn the denial and authorize the in-lab study.\n\n## Enclosures\n- Home sleep apnea test report dated 2026-04-06\n- Clinic notes dated 2026-03-16 and 2026-04-20\n- Copy of the denial letter dated 2026-04-28\n\nSincerely,\nDr. Morgan Testwell, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-04\nRE: Appeal of the denial of in-lab polysomnography, claim SYN-CLM-500132 (SYNTHETIC CASE)\nPatient: Riley Sample | Member ID: SYN-MBR-400132 | DOB: 1968-10-09\nRequested service: CPT 95810 | Diagnosis: ICD-10 R06.83\n\n## Response to denial reason\nYour letter of 2026-04-28 denied the in-lab sleep study under SYN-D07, stating that SYN-LCD-2051-C2 was not met because a home sleep apnea test was not attempted. A home sleep apnea test was attempted on 2026-04-06 and was technically inadequate, with only 2 hours of valid oximetry. The report and the follow-up note are enclosed.\n\n## Clinical summary\n- Loud snoring and witnessed pauses in breathing at night; obstructive sleep apnea (2026-03-16).\n- Epworth Sleepiness Scale score of 15 (2026-03-16).\n- Home sleep apnea test on 2026-04-06 was technically inadequate, with only 2 hours of valid oximetry (2026-04-20).\n- In-lab polysomnography requested (2026-04-20).\n\n## Policy basis\nSYN-LCD-2051 (Polysomnography for suspected obstructive sleep apnea) governs this request. SYN-LCD-2051-C1 and SYN-LCD-2051-C4 are met, and we ask that you overturn the denial and authorize the in-lab study.\n\n## Enclosures\n- Home sleep apnea test report dated 2026-04-06\n- Clinic notes dated 2026-03-16 and 2026-04-20\n- Copy of the denial letter dated 2026-04-28\n\nSincerely,\nDr. Morgan Testwell, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      },
+      "known_checker_gaps": [
+        {
+          "check": "facts_in_chart",
+          "flaw": "The first summary bullet drops 'suspected' and states obstructive sleep apnea as an established diagnosis; every word is still in the chart, so the lexical check passes it."
+        }
+      ]
     }
   ]
 }
