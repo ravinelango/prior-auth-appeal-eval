@@ -16,6 +16,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e '.[dev]'
       - run: ruff check .
+      - run: ruff format --check .
       - run: pytest -q
       - name: Smoke test CLI with the offline mock drafter
         run: pae validate --cases examples/synthetic_cases.json && pae run --cases examples/synthetic_cases.json --drafter mock:good --strict --out reports/good.md && pae run --cases examples/synthetic_cases.json --drafter mock:flawed --out reports/flawed.md
