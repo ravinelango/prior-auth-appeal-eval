@@ -35,12 +35,15 @@ def test_flawed_handwritten_letter_fails_exactly_the_seeded_checks(case):
     assert failed == sorted(flawed.seeded_flaws) and failed
 
 
-@pytest.mark.parametrize("cid", [k for k, v in RAW.items() if v.get("known_checker_gaps")])
-def test_known_checker_gaps_are_still_missed(cid):
+def test_known_checker_gaps_are_still_missed():
     """Documents flaws the deterministic checks do not catch. If one starts failing, the gap
-    was closed: move it into seeded_flaws."""
-    case = next(c for c in CASES.cases if c.id == cid)
-    results = {r.name: r for r in run_checks(case, case.reference_drafts["flawed"].text)}
-    for gap in RAW[cid]["known_checker_gaps"]:
-        assert gap["check"] in CHECK_NAMES
-        assert results[gap["check"]].passed, gap["flaw"]
+    was closed: move it into seeded_flaws. With no open gaps this passes instead of skipping."""
+    for cid, raw in RAW.items():
+        gaps = raw.get("known_checker_gaps", [])
+        if not gaps:
+            continue
+        case = next(c for c in CASES.cases if c.id == cid)
+        results = {r.name: r for r in run_checks(case, case.reference_drafts["flawed"].text)}
+        for gap in gaps:
+            assert gap["check"] in CHECK_NAMES, (cid, gap)
+            assert results[gap["check"]].passed, (cid, gap["flaw"])
