@@ -308,3 +308,20 @@ def test_bullet_dated_to_a_different_chart_fact_is_flagged(case, good_letter):
     assert not r.passed and any("dated 2026-01-05" in f and "2026-02-23" in f for f in r.findings)
     # A date written inside the fact text ("since 2025-11-20") is not a misdate.
     assert check_facts(case, good_letter).passed
+
+
+def test_suspected_diagnosis_stated_as_established_is_flagged(case_dict, good_letter):
+    case_dict["chart"]["facts"].append({
+        "id": "f3", "date": "2026-02-03",
+        "text": "Numbness in the foot; suspected peripheral neuropathy.",
+    })
+    c = parse_case(case_dict)
+    ok = good_letter.replace(
+        "## Policy basis",
+        "- Numbness in the foot; suspected peripheral neuropathy (2026-02-03).\n\n## Policy basis")
+    assert check_facts(c, ok).passed
+    # Any hedge word keeps it honest, not only the chart's exact one.
+    assert check_facts(c, ok.replace("suspected peripheral", "probable peripheral")).passed
+    bad = ok.replace("suspected peripheral", "peripheral")
+    r = check_facts(c, bad)
+    assert not r.passed and any("only suspects" in f and "neuropathy" in f for f in r.findings)

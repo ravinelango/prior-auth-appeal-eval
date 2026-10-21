@@ -666,16 +666,11 @@
         "flawed": {
           "text": "Date: 2026-05-04\nRE: Appeal of the denial of in-lab polysomnography, claim SYN-CLM-500132 (SYNTHETIC CASE)\nPatient: Riley Sample | Member ID: SYN-MBR-400132 | DOB: 1968-10-09\nRequested service: CPT 95810 | Diagnosis: ICD-10 R06.83\n\n## Response to denial reason\nYour letter of 2026-04-28 denied the in-lab sleep study under SYN-D07, stating that SYN-LCD-2051-C2 was not met because a home sleep apnea test was not attempted. A home sleep apnea test was attempted on 2026-04-06 and was technically inadequate, with only 2 hours of valid oximetry. The report and the follow-up note are enclosed.\n\n## Clinical summary\n- Loud snoring and witnessed pauses in breathing at night; obstructive sleep apnea (2026-03-16).\n- Epworth Sleepiness Scale score of 15 (2026-03-16).\n- Home sleep apnea test on 2026-04-06 was technically inadequate, with only 2 hours of valid oximetry (2026-04-20).\n- In-lab polysomnography requested (2026-04-20).\n\n## Policy basis\nSYN-LCD-2051 (Polysomnography for suspected obstructive sleep apnea) governs this request. SYN-LCD-2051-C1 and SYN-LCD-2051-C4 are met, and we ask that you overturn the denial and authorize the in-lab study.\n\n## Enclosures\n- Home sleep apnea test report dated 2026-04-06\n- Clinic notes dated 2026-03-16 and 2026-04-20\n- Copy of the denial letter dated 2026-04-28\n\nSincerely,\nDr. Morgan Testwell, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
-            "citations"
+            "citations",
+            "facts_in_chart"
           ]
         }
-      },
-      "known_checker_gaps": [
-        {
-          "check": "facts_in_chart",
-          "flaw": "The first summary bullet drops 'suspected' and states obstructive sleep apnea as an established diagnosis; every word is still in the chart, so the lexical check passes it."
-        }
-      ]
+      }
     }
   ]
 }

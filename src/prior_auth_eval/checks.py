@@ -177,22 +177,31 @@ _PLAN_CUE = re.compile(
 )
 
 
-def _plan_spans(text: str) -> list[tuple[int, int]]:
+def _plan_spans(text: str, cue: re.Pattern = _PLAN_CUE) -> list[tuple[int, int]]:
     spans = []
-    for m in _PLAN_CUE.finditer(text):
+    for m in cue.finditer(text):
         window = re.split(r"[.;\n]", text[m.end():m.end() + 70], maxsplit=1)[0]
         spans.append((m.start(), m.end() + len(window)))
     return spans
 
 
-def _split_planned(text: str) -> tuple[set[str], set[str]]:
-    """(words inside a planning window, words outside every planning window)."""
-    spans = _plan_spans(text)
+def _split_planned(text: str, cue: re.Pattern = _PLAN_CUE) -> tuple[set[str], set[str]]:
+    """(words inside a cue window, words outside every cue window). Defaults to planning cues."""
+    spans = _plan_spans(text, cue)
     inside = set().union(*(_words(text[a:b]) for a, b in spans)) if spans else set()
     masked = list(text)
     for a, b in spans:
         masked[a:b] = " " * (b - a)
     return inside, _words("".join(masked))
+
+
+# Cues that a diagnosis is only suspected. A term the chart mentions only after such a cue must
+# keep a hedge in the letter; dropping it ("suspected OSA" -> "OSA") overstates the chart.
+_HEDGE_CUE = re.compile(
+    r"\b(?:suspected|suspect|suspicion of|probable|probably|possible|possibly|likely|presumed|"
+    r"presumptive|questionable|rule out|r/o|concern for|concerning for|cannot exclude)\b",
+    re.IGNORECASE,
+)
 
 
 # A dated bullet that closely paraphrases one chart fact should carry that fact's date. Below
@@ -244,6 +253,12 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         planned |= inside
         done |= outside
     chart_planned_only = planned - done
+    hedged, plain = set(), set()
+    for f in case.chart.facts:
+        inside, outside = _split_planned(f.text, _HEDGE_CUE)
+        hedged |= inside
+        plain |= outside
+    chart_hedged_only = hedged - plain
     for b in bullets(block):
         bad_nums = sorted(n for n in _numbers(b) if n not in chart_nums)
         words = _words(b)
@@ -253,6 +268,7 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         flipped = sorted(w for w in words if w in chart_negated and w not in bullet_negated)
         swapped = sorted(_pinned_terms(b) - chart_pinned)
         as_done = sorted(_split_planned(b)[1] & chart_planned_only)
+        unhedged = sorted(_split_planned(b, _HEDGE_CUE)[1] & chart_hedged_only)
         misdated = _misdated(case.chart.facts, b)
         if bad_nums:
             res.findings.append(f"number(s) not in chart {bad_nums}: \"{b}\"")
@@ -265,6 +281,9 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         elif as_done:
             res.findings.append(
                 f"chart only plans {as_done}; letter states it as done: \"{b}\"")
+        elif unhedged:
+            res.findings.append(
+                f"chart only suspects {unhedged}; letter states it as established: \"{b}\"")
         elif misdated:
             res.findings.append(
                 f"dated {misdated[0]} but the matching chart fact is dated {misdated[1]}: \"{b}\"")
