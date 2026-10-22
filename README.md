@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-032, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-033, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -90,7 +90,12 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    collects terms the chart mentions only after a hedge cue ("suspected", "probable",
    "rule out", "concern for", ...) and flags a bullet that states them with no hedge in
    front, which closed the gap. Any hedge word counts, so "probable" for "suspected" passes.
-   No hand-written case has an open checker gap right now.
+   PA-033 (lumbar MRI) is open: the flawed letter misdates a physical therapy bullet (caught
+   by `facts_in_chart`) and also says SYN-LCD-3110-C3 is met when the chart records no
+   neurologic deficit and no planned surgery or injection. The criterion id is real, so
+   `citations` passes it, and the claim sits in the policy basis, not in a summary bullet, so
+   `facts_in_chart` never reads it. It stays under `known_checker_gaps` until some check ties
+   each criterion the letter calls met to chart evidence.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -165,7 +170,7 @@ drafters, report, CLI and tests (all passing). **No published real-model results
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-032; more needed)
+  templates (started: PA-026..PA-033; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
