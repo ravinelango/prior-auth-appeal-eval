@@ -21,12 +21,24 @@ def test_handwritten_set_is_synthetic_and_does_not_reuse_generated_ids():
         assert c.chart.member_id.startswith("SYN-MBR-") and "SYNTHETIC" in c.denial.letter_text
 
 
+def _known_fps(cid: str, draft: str) -> list[dict]:
+    return [fp for fp in RAW[cid].get("known_false_positives", []) if fp["draft"] == draft]
+
+
+def _is_known_fp(cid: str, draft: str, check: str, finding: str) -> bool:
+    return any(
+        fp["check"] == check and fp["finding_contains"] in finding for fp in _known_fps(cid, draft)
+    )
+
+
 @pytest.mark.parametrize("case", CASES.cases, ids=lambda c: c.id)
 def test_good_handwritten_letter_passes(case):
+    """Passes apart from documented false positives (see known_false_positives)."""
     failed = [
-        (r.name, r.findings)
+        (r.name, f)
         for r in run_checks(case, case.reference_drafts["good"].text)
-        if not r.passed
+        for f in r.findings
+        if not r.passed and not _is_known_fp(case.id, "good", r.name, f)
     ]
     assert failed == []
 
@@ -50,3 +62,15 @@ def test_known_checker_gaps_are_still_missed():
         for gap in gaps:
             assert gap["check"] in CHECK_NAMES, (cid, gap)
             assert results[gap["check"]].passed, (cid, gap["flaw"])
+
+
+def test_known_false_positives_still_fire():
+    """Documents correct letters the heuristics wrongly flag. If one stops firing, a check got
+    more precise: drop the entry. Keeps the false-positive cost of each heuristic visible."""
+    for cid, raw in RAW.items():
+        case = next(c for c in CASES.cases if c.id == cid)
+        for fp in raw.get("known_false_positives", []):
+            assert fp["check"] in CHECK_NAMES, (cid, fp)
+            results = {r.name: r for r in run_checks(case, case.reference_drafts[fp["draft"]].text)}
+            hits = [f for f in results[fp["check"]].findings if fp["finding_contains"] in f]
+            assert hits, (cid, fp["flaw"])

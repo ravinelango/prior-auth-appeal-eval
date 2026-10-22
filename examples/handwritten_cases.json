@@ -755,6 +755,97 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-034",
+      "title": "Continuous glucose monitor: hand-written letter whose education criterion is backed only in other words, plus an inflated episode count (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500134",
+        "cpt": "95250",
+        "icd10": "E11.649",
+        "reason_code": "SYN-D14",
+        "reason_text": "Medical necessity not established: problematic hypoglycemia not documented",
+        "unmet_criteria": [
+          "SYN-LCD-4120-C2"
+        ],
+        "reason_terms": [
+          "problematic hypoglycemia",
+          "not documented"
+        ],
+        "applicable_policy": "SYN-LCD-4120",
+        "denial_date": "2026-05-11",
+        "appeal_deadline": "2026-07-10",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500134, member SYN-MBR-400134. CPT 95250 denied under SYN-D14: Medical necessity not established: problematic hypoglycemia not documented. Criterion SYN-LCD-4120-C2 not met. You may appeal by 2026-07-10."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0034",
+        "member_id": "SYN-MBR-400134",
+        "patient_name": "Alex Fakename",
+        "dob": "1961-07-30",
+        "provider_name": "Dr. Sam Notreal",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-04-02",
+            "text": "Type 2 diabetes treated with basal-bolus insulin since 2023."
+          },
+          {
+            "id": "F2",
+            "date": "2026-05-04",
+            "text": "Three hypoglycemic episodes with glucose below 54 mg/dL in April, one needing help from her partner."
+          },
+          {
+            "id": "F3",
+            "date": "2026-03-10",
+            "text": "Attended a 4-session class with the clinic's diabetes teacher on insulin dosing and carb counting."
+          },
+          {
+            "id": "F4",
+            "date": "2026-05-04",
+            "text": "Continuous glucose monitor requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-4120",
+          "title": "Continuous glucose monitors for diabetes (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-4120-C1",
+              "text": "Diabetes mellitus treated with insulin"
+            },
+            {
+              "id": "SYN-LCD-4120-C2",
+              "text": "Problematic hypoglycemia, with at least one level 2 event (glucose below 54 mg/dL)"
+            },
+            {
+              "id": "SYN-LCD-4120-C3",
+              "text": "Completed diabetes self-management education"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-05-18\nRE: Appeal of the denial of a continuous glucose monitor, claim SYN-CLM-500134 (SYNTHETIC CASE)\nPatient: Alex Fakename | Member ID: SYN-MBR-400134 | DOB: 1961-07-30\nRequested service: CPT 95250 | Diagnosis: ICD-10 E11.649\n\n## Response to denial reason\nYour letter of 2026-05-11 denied the continuous glucose monitor under SYN-D14, stating that SYN-LCD-4120-C2 was not met because problematic hypoglycemia was not documented. Problematic hypoglycemia is documented: the chart records three hypoglycemic episodes with glucose below 54 mg/dL in April, one of which needed help from her partner. The glucose log is enclosed.\n\n## Clinical summary\n- Type 2 diabetes treated with basal-bolus insulin since 2023 (2026-04-02).\n- Three hypoglycemic episodes with glucose below 54 mg/dL in April, one needing help from her partner (2026-05-04).\n- Attended a 4-session class with the clinic's diabetes teacher on insulin dosing and carb counting (2026-03-10).\n- Continuous glucose monitor requested (2026-05-04).\n\n## Policy basis\nSYN-LCD-4120 (Continuous glucose monitors for diabetes) governs this request. SYN-LCD-4120-C1, SYN-LCD-4120-C2 and SYN-LCD-4120-C3 are met, and we ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Home glucose log for April 2026\n- Clinic notes dated 2026-03-10, 2026-04-02 and 2026-05-04\n- Copy of the denial letter dated 2026-05-11\n\nSincerely,\nDr. Sam Notreal, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-05-18\nRE: Appeal of the denial of a continuous glucose monitor, claim SYN-CLM-500134 (SYNTHETIC CASE)\nPatient: Alex Fakename | Member ID: SYN-MBR-400134 | DOB: 1961-07-30\nRequested service: CPT 95250 | Diagnosis: ICD-10 E11.649\n\n## Response to denial reason\nYour letter of 2026-05-11 denied the continuous glucose monitor under SYN-D14, stating that SYN-LCD-4120-C2 was not met because problematic hypoglycemia was not documented. Problematic hypoglycemia is documented: the chart records three hypoglycemic episodes with glucose below 54 mg/dL in April, one of which needed help from her partner. The glucose log is enclosed.\n\n## Clinical summary\n- Type 2 diabetes treated with basal-bolus insulin since 2023 (2026-04-02).\n- 5 hypoglycemic episodes with glucose below 54 mg/dL in April, one needing help from her partner (2026-05-04).\n- Attended a 4-session class with the clinic's diabetes teacher on insulin dosing and carb counting (2026-03-10).\n- Continuous glucose monitor requested (2026-05-04).\n\n## Policy basis\nSYN-LCD-4120 (Continuous glucose monitors for diabetes) governs this request. SYN-LCD-4120-C1 and SYN-LCD-4120-C2 are met, and we ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Home glucose log for April 2026\n- Clinic notes dated 2026-03-10, 2026-04-02 and 2026-05-04\n- Copy of the denial letter dated 2026-05-11\n\nSincerely,\nDr. Sam Notreal, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      },
+      "known_false_positives": [
+        {
+          "draft": "good",
+          "check": "citations",
+          "finding_contains": "SYN-LCD-4120-C3",
+          "flaw": "The chart backs C3 (diabetes self-management education) only as 'a 4-session class with the clinic's diabetes teacher'. None of C3's terms appear, so the criterion-support heuristic flags a claim a reviewer would accept."
+        }
+      ]
     }
   ]
 }
