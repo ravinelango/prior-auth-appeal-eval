@@ -82,6 +82,55 @@ def extract_citations(text: str) -> list[tuple[str, str | None]]:
     return out
 
 
+# Words too generic to show that the chart speaks to a criterion ("at least 6 weeks", "such as").
+_CRIT_GENERIC = set(
+    """
+least such without adequate improvement documented documentation weeks months days years
+lasting greater fewer more less within prior previous symptoms symptom examination
+""".split()
+)
+_MET = re.compile(r"\b(?:met|meets|satisfied|satisfies|fulfilled)\b", re.IGNORECASE)
+_NOT_MET = re.compile(
+    r"\b(?:not|never|un)\s*(?:been\s+)?(?:met|satisfied|fulfilled)\b", re.IGNORECASE
+)
+
+
+def _stems(text: str) -> set[str]:
+    """4-letter prefixes of content words plus short acronyms (BMI, CPAP), for loose matching.
+
+    The prefix lets "radicular" meet "radiating" and "planned" meet "plan"; it also lets
+    unrelated words collide, so a match is weak evidence, not proof.
+    """
+    acronyms = {a.lower() for a in re.findall(r"\b[A-Z]{2,5}\b", text)}
+    return {w[:4] for w in _words(text) - _CRIT_GENERIC} | acronyms
+
+
+def _unsupported_met_criteria(case: Case, letter: str) -> list[str]:
+    """Criteria the policy basis calls met that share no content word with the chart.
+
+    Words from the policy title are dropped first: they describe the requested service ("lumbar
+    spine MRI"), so a chart that merely requests it does not count as evidence. A heuristic
+    floor, not a medical judgment: any overlap counts as support, so a letter can still overstate
+    a criterion whose words happen to appear in the chart, and a chart that supports a criterion
+    in different words can be flagged.
+    """
+    block = sections(letter).get("policy basis", "")
+    chart = _stems(" ".join(f.text for f in case.chart.facts))
+    criteria = {c.id: (c.text, p.title) for p in case.policies for c in p.criteria}
+    out = []
+    for sentence in re.split(r"(?<=[.;])\s+|\n", block):
+        if not _MET.search(sentence) or _NOT_MET.search(sentence):
+            continue
+        for _, crit in extract_citations(sentence):
+            if crit not in criteria:
+                continue
+            text, title = criteria[crit]
+            terms = _stems(text) - _stems(title)
+            if terms and not terms & chart:
+                out.append(f"calls {crit} met, but none of its terms appear in the chart")
+    return out
+
+
 def check_citations(case: Case, letter: str) -> CheckResult:
     res = CheckResult("citations", True, CRITICAL)
     provided = {p.id for p in case.policies}
@@ -98,6 +147,7 @@ def check_citations(case: Case, letter: str) -> CheckResult:
             res.findings.append(f"cites criterion {crit}, which does not exist in {pid}")
     if applicable not in {pid for pid, _ in cites}:
         res.findings.append(f"never cites the governing policy {applicable}")
+    res.findings.extend(_unsupported_met_criteria(case, letter))
     res.findings = sorted(set(res.findings))
     res.passed = not res.findings
     return res

@@ -59,6 +59,32 @@ def test_missing_governing_policy_is_flagged(case):
     assert any("never cites" in f for f in r.findings)
 
 
+def _case_with_unsupported_criterion():
+    from conftest import make_case_dict
+
+    d = make_case_dict()
+    d["policies"][0]["criteria"].append(
+        {"id": "SYN-LCD-9001-C3", "text": "Progressive neurologic deficit or planned surgery."}
+    )
+    return parse_case(d)
+
+
+def test_met_criterion_with_no_chart_support_is_flagged():
+    case = _case_with_unsupported_criterion()
+    letter = "## Policy basis\nSYN-LCD-9001 governs. SYN-LCD-9001-C1 and SYN-LCD-9001-C3 are met.\n"
+    r = check_citations(case, letter)
+    assert r.findings == ["calls SYN-LCD-9001-C3 met, but none of its terms appear in the chart"]
+
+
+def test_criterion_called_not_met_or_outside_policy_basis_is_not_flagged():
+    case = _case_with_unsupported_criterion()
+    letter = (
+        "## Response to denial reason\nSYN-LCD-9001-C3 is met.\n"
+        "## Policy basis\nSYN-LCD-9001 governs; SYN-LCD-9001-C3 is not met.\n"
+    )
+    assert check_citations(case, letter).passed
+
+
 # ---- facts
 def test_invented_number_is_flagged(case, good_letter):
     bad = good_letter.replace(

@@ -750,16 +750,11 @@
         "flawed": {
           "text": "Date: 2026-04-13\nRE: Appeal of the denial of lumbar spine MRI, claim SYN-CLM-500133 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400133 | DOB: 1979-02-21\nRequested service: CPT 72148 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-04-06 denied the lumbar MRI under SYN-D11, stating that SYN-LCD-3110-C2 was not met because conservative therapy was not documented. Conservative therapy is documented: naproxen was started on 2026-02-02 and 6 weeks of physical therapy were completed by 2026-03-23 with persistent left leg pain. The therapy notes are enclosed.\n\n## Clinical summary\n- Low back pain radiating down the left leg for 3 months (2026-02-02).\n- Naproxen started and physical therapy begun (2026-02-02).\n- Completed 6 weeks of physical therapy with persistent left leg pain (2026-02-23).\n- Lumbar spine MRI requested (2026-03-23).\n\n## Policy basis\nSYN-LCD-3110 (Lumbar spine MRI for low back pain with radicular symptoms) governs this request. SYN-LCD-3110-C1, SYN-LCD-3110-C2 and SYN-LCD-3110-C3 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Physical therapy notes from 2026-02-09 to 2026-03-23\n- Clinic notes dated 2026-02-02 and 2026-03-23\n- Copy of the denial letter dated 2026-04-06\n\nSincerely,\nDr. Jordan Placeholder, NPI SYN-0000 (synthetic)\n",
           "seeded_flaws": [
+            "citations",
             "facts_in_chart"
           ]
         }
-      },
-      "known_checker_gaps": [
-        {
-          "check": "citations",
-          "flaw": "The policy basis claims SYN-LCD-3110-C3 is met, but the chart records no neurologic deficit and no planned surgery or injection. The criterion id is real, so the citation check passes it, and the claim is not a summary bullet, so facts_in_chart never reads it."
-        }
-      ]
+      }
     }
   ]
 }
