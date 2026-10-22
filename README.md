@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-033, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-034, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -98,7 +98,14 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    prefixes plus acronyms such as BMI, ignoring words from the policy title that only name
    the service). None of C3's terms appear, so it is flagged, which closed the gap. This is a
    loose keyword floor: one shared word counts as support, and a chart that backs a criterion
-   only in other words would be flagged.
+   only in other words would be flagged. PA-034 (continuous glucose monitor) measures that
+   cost: its good letter says the diabetes self-management education criterion is met, and
+   the chart backs it only as "a 4-session class with the clinic's diabetes teacher". No
+   criterion term appears, so `citations` flags a correct letter. Such misfires are listed
+   under `known_false_positives` in the case file; the good-letter test tolerates exactly
+   those findings, and a second test fails once a fix stops them firing, so the entry gets
+   removed. (The flawed PA-034 letter inflates the hypoglycemia count, caught by
+   `facts_in_chart`.)
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -173,7 +180,7 @@ drafters, report, CLI and tests (all passing). **No published real-model results
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-033; more needed)
+  templates (started: PA-026..PA-034; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
