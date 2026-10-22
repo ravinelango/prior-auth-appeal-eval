@@ -90,12 +90,15 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    collects terms the chart mentions only after a hedge cue ("suspected", "probable",
    "rule out", "concern for", ...) and flags a bullet that states them with no hedge in
    front, which closed the gap. Any hedge word counts, so "probable" for "suspected" passes.
-   PA-033 (lumbar MRI) is open: the flawed letter misdates a physical therapy bullet (caught
-   by `facts_in_chart`) and also says SYN-LCD-3110-C3 is met when the chart records no
-   neurologic deficit and no planned surgery or injection. The criterion id is real, so
-   `citations` passes it, and the claim sits in the policy basis, not in a summary bullet, so
-   `facts_in_chart` never reads it. It stays under `known_checker_gaps` until some check ties
-   each criterion the letter calls met to chart evidence.
+   PA-033 (lumbar MRI) is the fifth: the flawed letter misdates a physical therapy bullet
+   (caught by `facts_in_chart`) and also says SYN-LCD-3110-C3 is met when the chart records
+   no neurologic deficit and no planned surgery or injection. The criterion id is real and
+   the claim sits in the policy basis, so no check read it. `citations` now takes each
+   criterion the policy basis calls met and looks for any of its terms in the chart (4-letter
+   prefixes plus acronyms such as BMI, ignoring words from the policy title that only name
+   the service). None of C3's terms appear, so it is flagged, which closed the gap. This is a
+   loose keyword floor: one shared word counts as support, and a chart that backs a criterion
+   only in other words would be flagged.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
