@@ -109,6 +109,15 @@ def test_spelled_out_word_without_a_unit_is_not_a_number():
     assert _numbers("Two-week trial, then three visits") == {"2", "3"}
 
 
+def test_spelled_out_number_with_words_before_the_unit():
+    from prior_auth_eval.checks import _numbers
+
+    assert _numbers("Five hypoglycemic episodes despite adjustment") == {"5"}
+    assert _numbers("two prior PT courses") == {"2"}
+    # more than two words between number and unit is not read as a count
+    assert _numbers("one of the last few weeks") == set()
+
+
 def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",

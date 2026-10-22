@@ -178,9 +178,11 @@ _SPELLED = {
 }
 _SPELLED.update({"thirty": "30", "forty": "40", "fifty": "50", "sixty": "60", "ninety": "90"})
 # Only count a spelled-out number when it quantifies something ("nine weeks", "two visits"),
-# so "one of the criteria" or "no one" does not read as the number 1.
+# so "one of the criteria" or "no one" does not read as the number 1. Up to two words may sit
+# between the number and the count noun ("five hypoglycemic episodes", "two prior PT courses").
 _SPELLED_QTY = re.compile(
-    r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:days?|weeks?|months?|years?|sessions?|"
+    r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
+    r"(?:days?|weeks?|months?|years?|sessions?|"
     r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?)\b)",
     re.IGNORECASE,
 )
