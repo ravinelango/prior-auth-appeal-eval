@@ -85,6 +85,27 @@ def test_criterion_called_not_met_or_outside_policy_basis_is_not_flagged():
     assert check_citations(case, letter).passed
 
 
+def test_synonym_list_can_hide_an_overstated_education_criterion():
+    """Known checker gap, pinned so a fix shows up as a test change.
+
+    The chart only says the patient works as a teacher. "teacher" is in the education synonym
+    group, so a letter that calls an education criterion met is not flagged, even though no
+    education was documented.
+    """
+    from conftest import make_case_dict
+
+    d = make_case_dict()
+    d["policies"][0]["criteria"].append(
+        {"id": "SYN-LCD-9001-C3", "text": "Structured self-management education."}
+    )
+    d["chart"]["facts"].append(
+        {"id": "f3", "date": "2026-02-23", "text": "Works as a high school teacher."}
+    )
+    case = parse_case(d)
+    letter = "## Policy basis\nSYN-LCD-9001 governs. SYN-LCD-9001-C3 is met.\n"
+    assert check_citations(case, letter).passed  # gap: should be flagged
+
+
 # ---- facts
 def test_invented_number_is_flagged(case, good_letter):
     bad = good_letter.replace(
