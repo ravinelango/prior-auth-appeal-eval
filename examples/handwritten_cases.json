@@ -758,7 +758,7 @@
     },
     {
       "id": "PA-034",
-      "title": "Continuous glucose monitor: hand-written letter whose education criterion is backed only in other words, plus an inflated episode count (synthetic)",
+      "title": "Continuous glucose monitor: hand-written letter whose education criterion is backed only in other words (a class with the diabetes teacher), plus an inflated episode count (synthetic)",
       "denial": {
         "claim_id": "SYN-CLM-500134",
         "cpt": "95250",
@@ -838,14 +838,7 @@
           ]
         }
       },
-      "known_false_positives": [
-        {
-          "draft": "good",
-          "check": "citations",
-          "finding_contains": "SYN-LCD-4120-C3",
-          "flaw": "The chart backs C3 (diabetes self-management education) only as 'a 4-session class with the clinic's diabetes teacher'. None of C3's terms appear, so the criterion-support heuristic flags a claim a reviewer would accept."
-        }
-      ]
+      "known_false_positives": []
     },
     {
       "id": "PA-035",

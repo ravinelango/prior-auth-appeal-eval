@@ -95,6 +95,23 @@ _NOT_MET = re.compile(
 )
 
 
+# Small hand-picked groups of words a chart uses for the same thing a criterion names, as
+# 4-letter stems. A chart stem in a group counts as every stem in that group. Kept short and
+# generic on purpose: each entry widens what counts as support, so it can hide an overstated
+# criterion as easily as it removes a false flag.
+_CRIT_SYNONYMS = [
+    {"educ", "teac", "clas", "cour", "inst"},  # education: teacher, class, course, instruction
+]
+
+
+def _with_synonyms(stems: set[str]) -> set[str]:
+    out = set(stems)
+    for group in _CRIT_SYNONYMS:
+        if stems & group:
+            out |= group
+    return out
+
+
 def _stems(text: str) -> set[str]:
     """4-letter prefixes of content words plus short acronyms (BMI, CPAP), for loose matching.
 
@@ -115,7 +132,7 @@ def _unsupported_met_criteria(case: Case, letter: str) -> list[str]:
     in different words can be flagged.
     """
     block = sections(letter).get("policy basis", "")
-    chart = _stems(" ".join(f.text for f in case.chart.facts))
+    chart = _with_synonyms(_stems(" ".join(f.text for f in case.chart.facts)))
     criteria = {c.id: (c.text, p.title) for p in case.policies for c in p.criteria}
     out = []
     for sentence in re.split(r"(?<=[.;])\s+|\n", block):
