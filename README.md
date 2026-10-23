@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-035, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-036, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -111,6 +111,9 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    removed (PA-034's list is now empty). (The flawed PA-034 letter inflates the
    hypoglycemia count, caught by `facts_in_chart`.) PA-035 (lumbar MRI) has the flawed letter inflate a spelled-out count
    ("twelve physical therapy sessions", chart: eight), which `facts_in_chart` reads as 12.
+   PA-036 (shoulder MRI) has the flawed letter add a patient email address that is in
+   neither the chart nor the denial (caught by `extra_phi`) and drop the enclosures list
+   (caught by `required_elements`).
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -185,7 +188,7 @@ drafters, report, CLI and tests (all passing). **No published real-model results
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-035; more needed)
+  templates (started: PA-026..PA-036; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
