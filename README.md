@@ -98,14 +98,17 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    prefixes plus acronyms such as BMI, ignoring words from the policy title that only name
    the service). None of C3's terms appear, so it is flagged, which closed the gap. This is a
    loose keyword floor: one shared word counts as support, and a chart that backs a criterion
-   only in other words would be flagged. PA-034 (continuous glucose monitor) measures that
+   only in other words would be flagged. PA-034 (continuous glucose monitor) measured that
    cost: its good letter says the diabetes self-management education criterion is met, and
    the chart backs it only as "a 4-session class with the clinic's diabetes teacher". No
-   criterion term appears, so `citations` flags a correct letter. Such misfires are listed
-   under `known_false_positives` in the case file; the good-letter test tolerates exactly
-   those findings, and a second test fails once a fix stops them firing, so the entry gets
-   removed. (The flawed PA-034 letter inflates the hypoglycemia count, caught by
-   `facts_in_chart`.) PA-035 (lumbar MRI) has the flawed letter inflate a spelled-out count
+   criterion term appeared, so `citations` flagged a correct letter. A short synonym list
+   (`_CRIT_SYNONYMS`; for now only education, teacher, class, course, instruction) now lets
+   a chart word stand in for the criterion's word, which cleared it; each entry also widens
+   what counts as support, so the list stays small. Misfires like this are listed under
+   `known_false_positives` in the case file; the good-letter test tolerates exactly those
+   findings, and a second test fails once a fix stops them firing, so the entry gets
+   removed (PA-034's list is now empty). (The flawed PA-034 letter inflates the
+   hypoglycemia count, caught by `facts_in_chart`.) PA-035 (lumbar MRI) has the flawed letter inflate a spelled-out count
    ("twelve physical therapy sessions", chart: eight), which `facts_in_chart` reads as 12.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
