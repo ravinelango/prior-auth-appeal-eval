@@ -104,7 +104,8 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    criterion term appeared, so `citations` flagged a correct letter. A short synonym list
    (`_CRIT_SYNONYMS`; for now only education, teacher, class, course, instruction) now lets
    a chart word stand in for the criterion's word, which cleared it; each entry also widens
-   what counts as support, so the list stays small. Misfires like this are listed under
+   what counts as support, so the list stays small. `test_synonym_list_can_hide_an_overstated_education_criterion` pins that cost: a chart
+   that only says the patient works as a teacher lets a letter call an education criterion met. Misfires like this are listed under
    `known_false_positives` in the case file; the good-letter test tolerates exactly those
    findings, and a second test fails once a fix stops them firing, so the entry gets
    removed (PA-034's list is now empty). (The flawed PA-034 letter inflates the
