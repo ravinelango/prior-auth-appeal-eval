@@ -998,6 +998,85 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-037",
+      "title": "Cervical spine MRI: hand-written letter that moves the arm numbness to the wrong side (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500137",
+        "cpt": "72141",
+        "icd10": "M54.12",
+        "reason_code": "SYN-D17",
+        "reason_text": "Medical necessity not established: neurologic findings on exam not documented",
+        "unmet_criteria": [
+          "SYN-LCD-4250-C1"
+        ],
+        "reason_terms": [
+          "neurologic",
+          "not documented"
+        ],
+        "applicable_policy": "SYN-LCD-4250",
+        "denial_date": "2026-07-08",
+        "appeal_deadline": "2026-09-06",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500137, member SYN-MBR-400137. CPT 72141 denied under SYN-D17: Medical necessity not established: neurologic findings on exam not documented. Criterion SYN-LCD-4250-C1 not met. You may appeal by 2026-09-06."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0037",
+        "member_id": "SYN-MBR-400137",
+        "patient_name": "Riley Madeup",
+        "dob": "1975-02-11",
+        "provider_name": "Dr. Morgan Fictionale",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-04-15",
+            "text": "Neck pain radiating into the left arm for 8 weeks, with numbness in the left thumb and index finger."
+          },
+          {
+            "id": "F2",
+            "date": "2026-06-10",
+            "text": "Completed 6 weeks of physical therapy and naproxen without improvement."
+          },
+          {
+            "id": "F3",
+            "date": "2026-06-24",
+            "text": "Exam shows a diminished left biceps reflex and weakness of left wrist extension."
+          },
+          {
+            "id": "F4",
+            "date": "2026-06-24",
+            "text": "Cervical spine MRI requested to evaluate possible C6 nerve root compression."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-4250",
+          "title": "Cervical spine MRI for radiculopathy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-4250-C1",
+              "text": "Neurologic deficit on exam, such as reflex change, weakness, or sensory loss"
+            },
+            {
+              "id": "SYN-LCD-4250-C2",
+              "text": "At least 6 weeks of conservative therapy, including physical therapy or medication"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-07-20\nRE: Appeal of the denial of a cervical spine MRI, claim SYN-CLM-500137 (SYNTHETIC CASE)\nPatient: Riley Madeup | Member ID: SYN-MBR-400137 | DOB: 1975-02-11\nRequested service: CPT 72141 | Diagnosis: ICD-10 M54.12\n\n## Response to denial reason\nYour letter of 2026-07-08 denied the MRI under SYN-D17, stating that SYN-LCD-4250-C1 was not met because neurologic findings on exam were not documented. They are documented: the exam on 2026-06-24 found a diminished left biceps reflex and weakness of left wrist extension. The clinic note is enclosed.\n\n## Clinical summary\n- Neck pain radiating into the left arm for 8 weeks, with numbness in the left thumb and index finger (2026-04-15).\n- Completed 6 weeks of physical therapy and naproxen without improvement (2026-06-10).\n- Exam shows a diminished left biceps reflex and weakness of left wrist extension (2026-06-24).\n- Cervical spine MRI requested to evaluate possible C6 nerve root compression (2026-06-24).\n\n## Policy basis\nSYN-LCD-4250 (Cervical spine MRI for radiculopathy) governs this request. SYN-LCD-4250-C1 and SYN-LCD-4250-C2 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Clinic notes dated 2026-04-15 and 2026-06-24\n- Physical therapy note dated 2026-06-10\n- Copy of the denial letter dated 2026-07-08\n\nSincerely,\nDr. Morgan Fictionale, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-07-20\nRE: Appeal of the denial of a cervical spine MRI, claim SYN-CLM-500137 (SYNTHETIC CASE)\nPatient: Riley Madeup | Member ID: SYN-MBR-400137 | DOB: 1975-02-11\nRequested service: CPT 72141 | Diagnosis: ICD-10 M54.12\n\n## Response to denial reason\nYour letter of 2026-07-08 denied the MRI under SYN-D17, stating that SYN-LCD-4250-C1 was not met because neurologic findings on exam were not documented. They are documented: the exam on 2026-06-24 found a diminished right biceps reflex and weakness of right wrist extension. The clinic note is enclosed.\n\n## Clinical summary\n- Neck pain radiating into the left arm for 8 weeks, with numbness in the left thumb and index finger (2026-04-15).\n- Completed 6 weeks of physical therapy and naproxen without improvement (2026-06-10).\n- Exam shows a diminished right biceps reflex and weakness of right wrist extension (2026-06-24).\n- Cervical spine MRI requested to evaluate possible C6 nerve root compression (2026-06-24).\n\n## Policy basis\nSYN-LCD-4250 (Cervical spine MRI for radiculopathy) governs this request. SYN-LCD-4250-C1 and SYN-LCD-4250-C2 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Clinic notes dated 2026-04-15 and 2026-06-24\n- Physical therapy note dated 2026-06-10\n- Copy of the denial letter dated 2026-07-08\n\nSincerely,\nDr. Morgan Fictionale, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }
