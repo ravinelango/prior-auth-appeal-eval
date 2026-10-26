@@ -1077,6 +1077,85 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-038",
+      "title": "Brain MRI for headache: hand-written letter that invents a prior scan the chart says never happened (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500138",
+        "cpt": "70553",
+        "icd10": "R51.9",
+        "reason_code": "SYN-D18",
+        "reason_text": "Medical necessity not established: red flag features not documented",
+        "unmet_criteria": [
+          "SYN-NCD-5310-C1"
+        ],
+        "reason_terms": [
+          "red flag",
+          "not documented"
+        ],
+        "applicable_policy": "SYN-NCD-5310",
+        "denial_date": "2026-07-21",
+        "appeal_deadline": "2026-09-19",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500138, member SYN-MBR-400138. CPT 70553 denied under SYN-D18: Medical necessity not established: red flag features not documented. Criterion SYN-NCD-5310-C1 not met. You may appeal by 2026-09-19."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0038",
+        "member_id": "SYN-MBR-400138",
+        "patient_name": "Avery Inventa",
+        "dob": "1981-09-23",
+        "provider_name": "Dr. Jordan Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-04",
+            "text": "New daily headaches for 5 weeks that wake the patient from sleep and worsen with coughing."
+          },
+          {
+            "id": "F2",
+            "date": "2026-06-04",
+            "text": "No prior brain imaging."
+          },
+          {
+            "id": "F3",
+            "date": "2026-07-02",
+            "text": "Exam shows new numbness of the right hand; fundoscopic exam normal."
+          },
+          {
+            "id": "F4",
+            "date": "2026-07-02",
+            "text": "Brain MRI with and without contrast requested to evaluate a possible intracranial lesion."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-NCD-5310",
+          "title": "Brain MRI for headache with red flag features (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-NCD-5310-C1",
+              "text": "At least one red flag feature, such as headache that wakes the patient from sleep, worsening with cough or strain, or a new neurologic deficit"
+            },
+            {
+              "id": "SYN-NCD-5310-C2",
+              "text": "New daily headaches that began within the past 6 months"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-08-03\nRE: Appeal of the denial of a brain MRI, claim SYN-CLM-500138 (SYNTHETIC CASE)\nPatient: Avery Inventa | Member ID: SYN-MBR-400138 | DOB: 1981-09-23\nRequested service: CPT 70553 | Diagnosis: ICD-10 R51.9\n\n## Response to denial reason\nYour letter of 2026-07-21 denied the MRI under SYN-D18, stating that SYN-NCD-5310-C1 was not met because red flag features were not documented. They are documented: the headaches wake the patient from sleep and worsen with coughing, and the exam on 2026-07-02 found new numbness of the right hand. The clinic note is enclosed.\n\n## Clinical summary\n- New daily headaches for 5 weeks that wake the patient from sleep and worsen with coughing (2026-06-04).\n- No prior brain imaging (2026-06-04).\n- Exam shows new numbness of the right hand; fundoscopic exam normal (2026-07-02).\n- Brain MRI with and without contrast requested to evaluate a possible intracranial lesion (2026-07-02).\n\n## Policy basis\nSYN-NCD-5310 (Brain MRI for headache with red flag features, synthetic) governs this request. SYN-NCD-5310-C1 and SYN-NCD-5310-C2 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Clinic notes dated 2026-06-04 and 2026-07-02\n- Copy of the denial letter dated 2026-07-21\n\nSincerely,\nDr. Jordan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-08-03\nRE: Appeal of the denial of a brain MRI, claim SYN-CLM-500138 (SYNTHETIC CASE)\nPatient: Avery Inventa | Member ID: SYN-MBR-400138 | DOB: 1981-09-23\nRequested service: CPT 70553 | Diagnosis: ICD-10 R51.9\n\n## Response to denial reason\nYour letter of 2026-07-21 denied the MRI under SYN-D18, stating that SYN-NCD-5310-C1 was not met because red flag features were not documented. They are documented: the headaches wake the patient from sleep and worsen with coughing, and the exam on 2026-07-02 found new numbness of the right hand. The clinic note is enclosed.\n\n## Clinical summary\n- New daily headaches for 5 weeks that wake the patient from sleep and worsen with coughing (2026-06-04).\n- Prior brain imaging was unremarkable (2026-06-04).\n- Exam shows new numbness of the right hand; fundoscopic exam normal (2026-07-02).\n- Brain MRI with and without contrast requested to evaluate a possible intracranial lesion (2026-07-02).\n\n## Policy basis\nSYN-NCD-5310 (Brain MRI for headache with red flag features, synthetic) governs this request. SYN-NCD-5310-C1 and SYN-NCD-5310-C2 are met, and we ask that you overturn the denial and authorize the MRI.\n\n## Enclosures\n- Clinic notes dated 2026-06-04 and 2026-07-02\n- Copy of the denial letter dated 2026-07-21\n\nSincerely,\nDr. Jordan Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }
