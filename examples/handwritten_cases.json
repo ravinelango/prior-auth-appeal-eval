@@ -1156,6 +1156,90 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-039",
+      "title": "Total knee replacement: hand-written letter answers only one of the two unmet criteria in the denial (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500139",
+        "cpt": "27447",
+        "icd10": "M17.11",
+        "reason_code": "SYN-D19",
+        "reason_text": "Medical necessity not established: x-ray findings and conservative treatment not documented",
+        "unmet_criteria": [
+          "SYN-LCD-6120-C1",
+          "SYN-LCD-6120-C3"
+        ],
+        "reason_terms": [
+          "x-ray",
+          "conservative treatment"
+        ],
+        "applicable_policy": "SYN-LCD-6120",
+        "denial_date": "2026-08-18",
+        "appeal_deadline": "2026-10-17",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500139, member SYN-MBR-400139. CPT 27447 denied under SYN-D19: Medical necessity not established: x-ray findings and conservative treatment not documented. Criteria SYN-LCD-6120-C1 and SYN-LCD-6120-C3 not met. You may appeal by 2026-10-17."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0039",
+        "member_id": "SYN-MBR-400139",
+        "patient_name": "Rowan Halfway",
+        "dob": "1958-03-11",
+        "provider_name": "Dr. Sam Fictive",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-03-10",
+            "text": "Right knee pain for 2 years that limits walking to one block."
+          },
+          {
+            "id": "F2",
+            "date": "2026-03-10",
+            "text": "Standing x-ray of the right knee shows bone-on-bone narrowing of the medial joint space, Kellgren-Lawrence grade 4."
+          },
+          {
+            "id": "F3",
+            "date": "2026-07-14",
+            "text": "4 months of physical therapy, naproxen and one steroid injection without lasting relief."
+          },
+          {
+            "id": "F4",
+            "date": "2026-07-14",
+            "text": "Right total knee replacement requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-6120",
+          "title": "Total knee replacement for osteoarthritis (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-6120-C1",
+              "text": "Radiographic evidence of advanced osteoarthritis (Kellgren-Lawrence grade 3 or 4)"
+            },
+            {
+              "id": "SYN-LCD-6120-C2",
+              "text": "Pain or functional limitation that interferes with daily activities"
+            },
+            {
+              "id": "SYN-LCD-6120-C3",
+              "text": "At least 3 months of failed conservative treatment, such as physical therapy, anti-inflammatory medication or injections"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-09-08\nRE: Appeal of the denial of a total knee replacement, claim SYN-CLM-500139 (SYNTHETIC CASE)\nPatient: Rowan Halfway | Member ID: SYN-MBR-400139 | DOB: 1958-03-11\nRequested service: CPT 27447 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nYour letter of 2026-08-18 denied the surgery under SYN-D19, stating that SYN-LCD-6120-C1 and SYN-LCD-6120-C3 were not met because the x-ray findings and conservative treatment were not documented. Both are documented. For SYN-LCD-6120-C1, the standing x-ray of 2026-03-10 shows bone-on-bone narrowing of the medial joint space, Kellgren-Lawrence grade 4. For SYN-LCD-6120-C3, the patient completed 4 months of physical therapy, naproxen and a steroid injection without lasting relief. The x-ray report and clinic notes are enclosed.\n\n## Clinical summary\n- Right knee pain for 2 years that limits walking to one block (2026-03-10).\n- Standing x-ray of the right knee shows bone-on-bone narrowing of the medial joint space, Kellgren-Lawrence grade 4 (2026-03-10).\n- 4 months of physical therapy, naproxen and one steroid injection without lasting relief (2026-07-14).\n- Right total knee replacement requested (2026-07-14).\n\n## Policy basis\nSYN-LCD-6120 (Total knee replacement for osteoarthritis, synthetic) governs this request. SYN-LCD-6120-C1, SYN-LCD-6120-C2 and SYN-LCD-6120-C3 are met, and we ask that you overturn the denial and authorize the surgery.\n\n## Enclosures\n- Orthopedic notes dated 2026-03-10 and 2026-07-14\n- Right knee x-ray report dated 2026-03-10\n- Copy of the denial letter dated 2026-08-18\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-09-08\nRE: Appeal of the denial of a total knee replacement, claim SYN-CLM-500139 (SYNTHETIC CASE)\nPatient: Rowan Halfway | Member ID: SYN-MBR-400139 | DOB: 1958-03-11\nRequested service: CPT 27447 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nYour letter of 2026-08-18 denied the surgery under SYN-D19, stating that SYN-LCD-6120-C3 was not met because conservative treatment was not documented. It is documented: the patient completed 4 months of physical therapy, naproxen and a steroid injection without lasting relief. The clinic notes are enclosed.\n\n## Clinical summary\n- Right knee pain for 2 years that limits walking to one block (2026-03-10).\n- Standing x-ray of the right knee shows bone-on-bone narrowing of the medial joint space, Kellgren-Lawrence grade 4 (2026-03-10).\n- 4 months of physical therapy, naproxen and one steroid injection without lasting relief (2026-07-14).\n- Right total knee replacement requested (2026-07-14).\n\n## Policy basis\nSYN-LCD-6120 (Total knee replacement for osteoarthritis, synthetic) governs this request. SYN-LCD-6120-C1, SYN-LCD-6120-C2 and SYN-LCD-6120-C3 are met, and we ask that you overturn the denial and authorize the surgery.\n\n## Enclosures\n- Orthopedic notes dated 2026-03-10 and 2026-07-14\n- Right knee x-ray report dated 2026-03-10\n- Copy of the denial letter dated 2026-08-18\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
     }
   ]
 }
