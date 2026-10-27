@@ -185,7 +185,7 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 30 synthetic cases (25 generated, 5 hand-written), six checkers, mock / files / OpenAI-compatible
+**Early, v0.1.** Schema, 38 synthetic cases (25 generated, 13 hand-written), six checkers, mock / files / OpenAI-compatible
 drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
