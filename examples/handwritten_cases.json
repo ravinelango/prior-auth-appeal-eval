@@ -1396,6 +1396,84 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-042",
+      "title": "Home sleep apnea test: hand-written letter whose flawed draft adds the patient's home street address (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500142",
+        "cpt": "95806",
+        "icd10": "G47.33",
+        "reason_code": "SYN-D14",
+        "reason_text": "Medical necessity not established: sleep evaluation with a validated sleepiness score not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7160-C1"
+        ],
+        "reason_terms": [
+          "sleepiness"
+        ],
+        "applicable_policy": "SYN-LCD-7160",
+        "denial_date": "2026-09-22",
+        "appeal_deadline": "2026-11-21",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500142, member SYN-MBR-400142. CPT 95806 denied under SYN-D14: Medical necessity not established: sleep evaluation with a validated sleepiness score not documented. Criterion SYN-LCD-7160-C1 not met. You may appeal by 2026-11-21."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0042",
+        "member_id": "SYN-MBR-400142",
+        "patient_name": "Jordan Placeholder",
+        "dob": "1968-11-02",
+        "provider_name": "Dr. Sam Fictive",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-07-29",
+            "text": "Partner reports loud nightly snoring and witnessed pauses in breathing."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-11",
+            "text": "Sleep medicine visit: Epworth Sleepiness Scale score 14, BMI 33, neck circumference 17 inches."
+          },
+          {
+            "id": "F3",
+            "date": "2026-08-11",
+            "text": "No heart failure, chronic lung disease or neuromuscular disease documented."
+          },
+          {
+            "id": "F4",
+            "date": "2026-08-11",
+            "text": "Home sleep apnea test requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7160",
+          "title": "Home sleep apnea testing (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7160-C1",
+              "text": "Sleep evaluation documenting symptoms of obstructive sleep apnea and a validated sleepiness score"
+            },
+            {
+              "id": "SYN-LCD-7160-C2",
+              "text": "No significant cardiopulmonary or neuromuscular comorbidity that would require an attended study"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-14\nRE: Appeal of the denial of a home sleep apnea test, claim SYN-CLM-500142 (SYNTHETIC CASE)\nPatient: Jordan Placeholder | Member ID: SYN-MBR-400142 | DOB: 1968-11-02\nRequested service: CPT 95806 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-09-22 denied the test under SYN-D14, stating that SYN-LCD-7160-C1 was not met because a documented sleep evaluation with a validated sleepiness score was not on file. It is on file: at the sleep medicine visit on 2026-08-11 the patient scored 14 on the Epworth Sleepiness Scale, and the visit note records loud snoring and witnessed pauses in breathing. That note is enclosed.\n\n## Clinical summary\n- Partner reports loud nightly snoring and witnessed pauses in breathing (2026-07-29).\n- Sleep medicine visit: Epworth Sleepiness Scale score 14, BMI 33, neck circumference 17 inches (2026-08-11).\n- No heart failure, chronic lung disease or neuromuscular disease documented (2026-08-11).\n- Home sleep apnea test requested (2026-08-11).\n\n## Policy basis\nSYN-LCD-7160 (Home sleep apnea testing, synthetic) governs this request. SYN-LCD-7160-C1 and SYN-LCD-7160-C2 are met, and we ask that you overturn the denial and authorize the test.\n\n## Enclosures\n- Sleep medicine visit note dated 2026-08-11\n- Copy of the denial letter dated 2026-09-22\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-14\nRE: Appeal of the denial of a home sleep apnea test, claim SYN-CLM-500142 (SYNTHETIC CASE)\nPatient: Jordan Placeholder | Member ID: SYN-MBR-400142 | DOB: 1968-11-02\nHome address: 418 Willow Creek Road\nRequested service: CPT 95806 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-09-22 denied the test under SYN-D14, stating that SYN-LCD-7160-C1 was not met because a documented sleep evaluation with a validated sleepiness score was not on file. It is on file: at the sleep medicine visit on 2026-08-11 the patient scored 14 on the Epworth Sleepiness Scale, and the visit note records loud snoring and witnessed pauses in breathing. That note is enclosed.\n\n## Clinical summary\n- Partner reports loud nightly snoring and witnessed pauses in breathing (2026-07-29).\n- Sleep medicine visit: Epworth Sleepiness Scale score 14, BMI 33, neck circumference 17 inches (2026-08-11).\n- No heart failure, chronic lung disease or neuromuscular disease documented (2026-08-11).\n- Home sleep apnea test requested (2026-08-11).\n\n## Policy basis\nSYN-LCD-7160 (Home sleep apnea testing, synthetic) governs this request. SYN-LCD-7160-C1 and SYN-LCD-7160-C2 are met, and we ask that you overturn the denial and authorize the test.\n\n## Enclosures\n- Sleep medicine visit note dated 2026-08-11\n- Copy of the denial letter dated 2026-09-22\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "extra_phi"
+          ]
+        }
+      }
     }
   ]
 }
