@@ -1318,6 +1318,84 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-041",
+      "title": "Outpatient pulmonary rehabilitation: hand-written letter whose flawed draft claims a third criterion the policy does not have (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500141",
+        "cpt": "94625",
+        "icd10": "J44.1",
+        "reason_code": "SYN-D21",
+        "reason_text": "Medical necessity not established: spirometry confirming moderate or worse COPD not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7150-C1"
+        ],
+        "reason_terms": [
+          "spirometry"
+        ],
+        "applicable_policy": "SYN-LCD-7150",
+        "denial_date": "2026-09-10",
+        "appeal_deadline": "2026-11-09",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500141, member SYN-MBR-400141. CPT 94625 denied under SYN-D21: Medical necessity not established: spirometry confirming moderate or worse COPD not documented. Criterion SYN-LCD-7150-C1 not met. You may appeal by 2026-11-09."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0041",
+        "member_id": "SYN-MBR-400141",
+        "patient_name": "Rowan Exemplar",
+        "dob": "1955-03-17",
+        "provider_name": "Dr. Sam Fictive",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-20",
+            "text": "Hospitalized for a COPD exacerbation."
+          },
+          {
+            "id": "F2",
+            "date": "2026-07-08",
+            "text": "Spirometry: FEV1/FVC ratio 0.58, FEV1 52% predicted."
+          },
+          {
+            "id": "F3",
+            "date": "2026-08-04",
+            "text": "Pulmonology follow-up: dyspnea on exertion after one flight of stairs, stable on inhaled therapy, referred to supervised pulmonary rehabilitation."
+          },
+          {
+            "id": "F4",
+            "date": "2026-08-04",
+            "text": "Outpatient pulmonary rehabilitation, 24 sessions, requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7150",
+          "title": "Outpatient pulmonary rehabilitation (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7150-C1",
+              "text": "Moderate or worse COPD confirmed by spirometry (FEV1/FVC below 0.70 and FEV1 below 80% predicted)"
+            },
+            {
+              "id": "SYN-LCD-7150-C2",
+              "text": "Clinically stable and referred by the treating physician to a supervised program"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-05\nRE: Appeal of the denial of outpatient pulmonary rehabilitation, claim SYN-CLM-500141 (SYNTHETIC CASE)\nPatient: Rowan Exemplar | Member ID: SYN-MBR-400141 | DOB: 1955-03-17\nRequested service: CPT 94625 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nYour letter of 2026-09-10 denied the program under SYN-D21, stating that SYN-LCD-7150-C1 was not met because spirometry confirming moderate or worse COPD was not documented. It is documented: spirometry on 2026-07-08 showed an FEV1/FVC ratio of 0.58 and an FEV1 of 52% predicted, which is moderate obstruction. The spirometry report is enclosed.\n\n## Clinical summary\n- Hospitalized for a COPD exacerbation (2026-06-20).\n- Spirometry: FEV1/FVC ratio 0.58, FEV1 52% predicted (2026-07-08).\n- Pulmonology follow-up: dyspnea on exertion after one flight of stairs, stable on inhaled therapy, referred to supervised pulmonary rehabilitation (2026-08-04).\n- Outpatient pulmonary rehabilitation, 24 sessions, requested (2026-08-04).\n\n## Policy basis\nSYN-LCD-7150 (Outpatient pulmonary rehabilitation, synthetic) governs this request. SYN-LCD-7150-C1 and SYN-LCD-7150-C2 are met, and we ask that you overturn the denial and authorize the program.\n\n## Enclosures\n- Spirometry report dated 2026-07-08\n- Pulmonology note and rehabilitation referral dated 2026-08-04\n- Copy of the denial letter dated 2026-09-10\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-05\nRE: Appeal of the denial of outpatient pulmonary rehabilitation, claim SYN-CLM-500141 (SYNTHETIC CASE)\nPatient: Rowan Exemplar | Member ID: SYN-MBR-400141 | DOB: 1955-03-17\nRequested service: CPT 94625 | Diagnosis: ICD-10 J44.1\n\n## Response to denial reason\nYour letter of 2026-09-10 denied the program under SYN-D21, stating that SYN-LCD-7150-C1 was not met because spirometry confirming moderate or worse COPD was not documented. It is documented: spirometry on 2026-07-08 showed an FEV1/FVC ratio of 0.58 and an FEV1 of 52% predicted, which is moderate obstruction. The spirometry report is enclosed.\n\n## Clinical summary\n- Hospitalized for a COPD exacerbation (2026-06-20).\n- Spirometry: FEV1/FVC ratio 0.58, FEV1 52% predicted (2026-07-08).\n- Pulmonology follow-up: dyspnea on exertion after one flight of stairs, stable on inhaled therapy, referred to supervised pulmonary rehabilitation (2026-08-04).\n- Outpatient pulmonary rehabilitation, 24 sessions, requested (2026-08-04).\n\n## Policy basis\nSYN-LCD-7150 (Outpatient pulmonary rehabilitation, synthetic) governs this request. SYN-LCD-7150-C1, SYN-LCD-7150-C2 and SYN-LCD-7150-C3 are met, and we ask that you overturn the denial and authorize the program.\n\n## Enclosures\n- Spirometry report dated 2026-07-08\n- Pulmonology note and rehabilitation referral dated 2026-08-04\n- Copy of the denial letter dated 2026-09-10\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
     }
   ]
 }
