@@ -1240,6 +1240,84 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-040",
+      "title": "Outpatient cardiac rehabilitation: hand-written letter with a correct header but a transposed member ID in the body (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500140",
+        "cpt": "93798",
+        "icd10": "I21.4",
+        "reason_code": "SYN-D20",
+        "reason_text": "Medical necessity not established: qualifying cardiac event not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7140-C1"
+        ],
+        "reason_terms": [
+          "cardiac event"
+        ],
+        "applicable_policy": "SYN-LCD-7140",
+        "denial_date": "2026-08-27",
+        "appeal_deadline": "2026-10-26",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500140, member SYN-MBR-400140. CPT 93798 denied under SYN-D20: Medical necessity not established: qualifying cardiac event not documented. Criterion SYN-LCD-7140-C1 not met. You may appeal by 2026-10-26."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0040",
+        "member_id": "SYN-MBR-400140",
+        "patient_name": "Imogen Placeholder",
+        "dob": "1961-11-02",
+        "provider_name": "Dr. Sam Fictive",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-30",
+            "text": "Admitted with a non-ST-elevation myocardial infarction; one stent placed in the left anterior descending artery."
+          },
+          {
+            "id": "F2",
+            "date": "2026-07-03",
+            "text": "Discharged on aspirin, ticagrelor, atorvastatin and metoprolol."
+          },
+          {
+            "id": "F3",
+            "date": "2026-07-22",
+            "text": "Cardiology follow-up: no chest pain at rest, ejection fraction 50%, referred to supervised cardiac rehabilitation."
+          },
+          {
+            "id": "F4",
+            "date": "2026-07-22",
+            "text": "Outpatient cardiac rehabilitation, 36 sessions, requested."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7140",
+          "title": "Outpatient cardiac rehabilitation (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7140-C1",
+              "text": "A qualifying cardiac event, such as myocardial infarction or coronary stent placement, within the past 12 months"
+            },
+            {
+              "id": "SYN-LCD-7140-C2",
+              "text": "Clinically stable and referred by the treating physician to a supervised program"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-09-21\nRE: Appeal of the denial of outpatient cardiac rehabilitation, claim SYN-CLM-500140 (SYNTHETIC CASE)\nPatient: Imogen Placeholder | Member ID: SYN-MBR-400140 | DOB: 1961-11-02\nRequested service: CPT 93798 | Diagnosis: ICD-10 I21.4\n\n## Response to denial reason\nYour letter of 2026-08-27 denied the program under SYN-D20, stating that SYN-LCD-7140-C1 was not met because a qualifying cardiac event was not documented. It is documented: on 2026-06-30 the patient was admitted with a non-ST-elevation myocardial infarction and had a stent placed in the left anterior descending artery, within the 12 months the policy allows. The discharge summary for member SYN-MBR-400140 is enclosed.\n\n## Clinical summary\n- Admitted with a non-ST-elevation myocardial infarction; one stent placed in the left anterior descending artery (2026-06-30).\n- Discharged on aspirin, ticagrelor, atorvastatin and metoprolol (2026-07-03).\n- Cardiology follow-up: no chest pain at rest, ejection fraction 50%, referred to supervised cardiac rehabilitation (2026-07-22).\n- Outpatient cardiac rehabilitation, 36 sessions, requested (2026-07-22).\n\n## Policy basis\nSYN-LCD-7140 (Outpatient cardiac rehabilitation, synthetic) governs this request. SYN-LCD-7140-C1 and SYN-LCD-7140-C2 are met, and we ask that you overturn the denial and authorize the program.\n\n## Enclosures\n- Hospital discharge summary dated 2026-07-03\n- Cardiology note and rehabilitation referral dated 2026-07-22\n- Copy of the denial letter dated 2026-08-27\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-09-21\nRE: Appeal of the denial of outpatient cardiac rehabilitation, claim SYN-CLM-500140 (SYNTHETIC CASE)\nPatient: Imogen Placeholder | Member ID: SYN-MBR-400140 | DOB: 1961-11-02\nRequested service: CPT 93798 | Diagnosis: ICD-10 I21.4\n\n## Response to denial reason\nYour letter of 2026-08-27 denied the program under SYN-D20, stating that SYN-LCD-7140-C1 was not met because a qualifying cardiac event was not documented. It is documented: on 2026-06-30 the patient was admitted with a non-ST-elevation myocardial infarction and had a stent placed in the left anterior descending artery, within the 12 months the policy allows. The discharge summary for member SYN-MBR-401040 is enclosed.\n\n## Clinical summary\n- Admitted with a non-ST-elevation myocardial infarction; one stent placed in the left anterior descending artery (2026-06-30).\n- Discharged on aspirin, ticagrelor, atorvastatin and metoprolol (2026-07-03).\n- Cardiology follow-up: no chest pain at rest, ejection fraction 50%, referred to supervised cardiac rehabilitation (2026-07-22).\n- Outpatient cardiac rehabilitation, 36 sessions, requested (2026-07-22).\n\n## Policy basis\nSYN-LCD-7140 (Outpatient cardiac rehabilitation, synthetic) governs this request. SYN-LCD-7140-C1 and SYN-LCD-7140-C2 are met, and we ask that you overturn the denial and authorize the program.\n\n## Enclosures\n- Hospital discharge summary dated 2026-07-03\n- Cardiology note and rehabilitation referral dated 2026-07-22\n- Copy of the denial letter dated 2026-08-27\n\nSincerely,\nDr. Sam Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
     }
   ]
 }
