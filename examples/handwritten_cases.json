@@ -1474,6 +1474,84 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-043",
+      "title": "Bone density scan: hand-written letter whose flawed draft leaves out the enclosures list (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500143",
+        "cpt": "77080",
+        "icd10": "Z78.0",
+        "reason_code": "SYN-D15",
+        "reason_text": "Medical necessity not established: estrogen deficiency or clinical risk factor for osteoporosis not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7170-C1"
+        ],
+        "reason_terms": [
+          "risk factor"
+        ],
+        "applicable_policy": "SYN-LCD-7170",
+        "denial_date": "2026-10-02",
+        "appeal_deadline": "2026-12-01",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500143, member SYN-MBR-400143. CPT 77080 denied under SYN-D15: Medical necessity not established: estrogen deficiency or clinical risk factor for osteoporosis not documented. Criterion SYN-LCD-7170-C1 not met. You may appeal by 2026-12-01."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0043",
+        "member_id": "SYN-MBR-400143",
+        "patient_name": "Casey Example",
+        "dob": "1961-05-19",
+        "provider_name": "Dr. Lee Fictive",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-03",
+            "text": "Postmenopausal for more than one year."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-05",
+            "text": "Primary care visit: taking oral prednisone daily for polymyalgia rheumatica since February 2026."
+          },
+          {
+            "id": "F3",
+            "date": "2026-08-05",
+            "text": "No prior bone density scan on file."
+          },
+          {
+            "id": "F4",
+            "date": "2026-08-05",
+            "text": "DXA scan of hip and spine ordered."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7170",
+          "title": "Bone mass measurement (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7170-C1",
+              "text": "Postmenopausal estrogen deficiency or a clinical risk factor for osteoporosis, such as long-term prednisone or other glucocorticoid therapy"
+            },
+            {
+              "id": "SYN-LCD-7170-C2",
+              "text": "No prior covered bone density scan in the preceding 23 months"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-27\nRE: Appeal of the denial of a bone density scan, claim SYN-CLM-500143 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400143 | DOB: 1961-05-19\nRequested service: CPT 77080 | Diagnosis: ICD-10 Z78.0\n\n## Response to denial reason\nYour letter of 2026-10-02 denied the scan under SYN-D15, stating that SYN-LCD-7170-C1 was not met because no estrogen deficiency or other clinical risk factor for osteoporosis was documented. Both are documented. The patient is postmenopausal, and at the primary care visit on 2026-08-05 she was taking oral prednisone daily for polymyalgia rheumatica, a recognized risk factor for bone loss. The visit note is enclosed.\n\n## Clinical summary\n- Postmenopausal for more than one year (2026-06-03).\n- Primary care visit: taking oral prednisone daily for polymyalgia rheumatica since February 2026 (2026-08-05).\n- No prior bone density scan on file (2026-08-05).\n- DXA scan of hip and spine ordered (2026-08-05).\n\n## Policy basis\nSYN-LCD-7170 (Bone mass measurement, synthetic) governs this request. SYN-LCD-7170-C1 and SYN-LCD-7170-C2 are met, and we ask that you overturn the denial and authorize the scan.\n\n## Enclosures\n- Primary care visit note dated 2026-08-05\n- Copy of the denial letter dated 2026-10-02\n\nSincerely,\nDr. Lee Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-27\nRE: Appeal of the denial of a bone density scan, claim SYN-CLM-500143 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400143 | DOB: 1961-05-19\nRequested service: CPT 77080 | Diagnosis: ICD-10 Z78.0\n\n## Response to denial reason\nYour letter of 2026-10-02 denied the scan under SYN-D15, stating that SYN-LCD-7170-C1 was not met because no estrogen deficiency or other clinical risk factor for osteoporosis was documented. Both are documented. The patient is postmenopausal, and at the primary care visit on 2026-08-05 she was taking oral prednisone daily for polymyalgia rheumatica, a recognized risk factor for bone loss. The visit note is enclosed.\n\n## Clinical summary\n- Postmenopausal for more than one year (2026-06-03).\n- Primary care visit: taking oral prednisone daily for polymyalgia rheumatica since February 2026 (2026-08-05).\n- No prior bone density scan on file (2026-08-05).\n- DXA scan of hip and spine ordered (2026-08-05).\n\n## Policy basis\nSYN-LCD-7170 (Bone mass measurement, synthetic) governs this request. SYN-LCD-7170-C1 and SYN-LCD-7170-C2 are met, and we ask that you overturn the denial and authorize the scan.\n\nSincerely,\nDr. Lee Fictive, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
     }
   ]
 }
