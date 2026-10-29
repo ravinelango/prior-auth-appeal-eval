@@ -37,7 +37,7 @@ either):
 | Invented or wrong policy citation | `citations` | critical | Every LCD/NCD-style reference must be in the provided policy set, must be the policy that governs the denial, and any cited criterion must exist; the governing policy must be cited |
 | Clinical fact not in the chart | `facts_in_chart` | critical | Each bullet under "Clinical summary": every number and date must appear in the chart, family-relationship and laterality words (mother, sister, left, right...) must appear in the chart, and the share of content words absent from the chart must be small |
 | Denial reason not addressed | `denial_reason_addressed` | critical | The "Response to denial reason" section must cite each unmet criterion id and engage with the expected reason terms |
-| Wrong patient, claim, member, CPT or ICD | `identifiers_match` | critical | Extracted identifiers must equal the case's; missing ones are flagged |
+| Wrong patient, claim, member, CPT, ICD or DOB | `identifiers_match` | critical | Extracted identifiers must equal the case's; missing ones are flagged (DOB is checked only when the letter states one) |
 | Missing required elements | `required_elements` | major | Explicit request to overturn, enclosures list, signature with NPI, letter dated on or before the appeal deadline |
 | Extra PHI (minimum necessary) | `extra_phi` | major | SSNs, US phone numbers, email addresses and street-address strings in the letter must appear in the chart or denial letter; anything else is flagged as over-shared |
 

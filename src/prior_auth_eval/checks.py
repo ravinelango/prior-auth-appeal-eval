@@ -408,7 +408,10 @@ _RX = {
     "cpt": re.compile(r"\bCPT[:\s]*#?\s*(\d{5})\b", re.IGNORECASE),
     "icd10": re.compile(r"\bICD-?10[:\s]*([A-Z]\d{2}(?:\.\w{1,4})?)\b", re.IGNORECASE),
     "patient_name": re.compile(r"^Patient:\s*([^|\n]+?)\s*(?:\||$)", re.MULTILINE),
+    "dob": re.compile(r"\bDOB[:\s]*(\d{4}-\d{2}-\d{2})\b"),
 }
+# Identifiers that must match when present but are not required in every letter.
+_OPTIONAL_IDS = {"dob"}
 
 
 def extract_identifiers(letter: str) -> dict[str, list[str]]:
@@ -427,12 +430,13 @@ def check_identifiers(case: Case, letter: str) -> CheckResult:
         "cpt": case.denial.cpt,
         "icd10": case.denial.icd10,
         "patient_name": case.chart.patient_name,
+        "dob": case.chart.dob,
     }
     found = extract_identifiers(letter)
     for key, want in expected.items():
         vals = found[key]
         want_n = want.upper() if key != "patient_name" else want
-        if not vals:
+        if not vals and key not in _OPTIONAL_IDS:
             res.findings.append(f"{key} not found in the letter (expected {want})")
         for v in vals:
             if v != want_n:

@@ -205,6 +205,7 @@ def test_identifier_extraction(good_letter):
         ("CPT 72148", "CPT 72149", "cpt"),
         ("ICD-10 M54.16", "ICD-10 M54.17", "icd10"),
         ("Patient: Pat Example", "Patient: Pat Someoneelse", "patient_name"),
+        ("DOB: 1970-01-01", "DOB: 1970-01-07", "dob"),
     ],
 )
 def test_wrong_identifier_flagged(case, good_letter, old, new, key):
@@ -215,6 +216,11 @@ def test_wrong_identifier_flagged(case, good_letter, old, new, key):
 def test_missing_identifier_flagged(case, good_letter):
     r = check_identifiers(case, good_letter.replace("Member ID: SYN-MBR-900001", "Member ID: n/a"))
     assert any("member_id not found" in f for f in r.findings)
+
+
+def test_dob_is_optional_but_must_match_when_present(case, good_letter):
+    no_dob = good_letter.replace(" | DOB: 1970-01-01", "")
+    assert check_identifiers(case, no_dob).passed
 
 
 # ---- required elements
