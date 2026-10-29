@@ -1699,6 +1699,90 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-046",
+      "title": "Lumbar epidural steroid injection: hand-written letter whose flawed draft also cites a provided policy that does not govern the denial (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500146",
+        "cpt": "62323",
+        "icd10": "M54.16",
+        "reason_code": "SYN-D31",
+        "reason_text": "Medical necessity not established: conservative therapy not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7230-C2"
+        ],
+        "reason_terms": [
+          "conservative therapy",
+          "physical therapy"
+        ],
+        "applicable_policy": "SYN-LCD-7230",
+        "denial_date": "2026-10-14",
+        "appeal_deadline": "2026-12-13",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500146, member SYN-MBR-400146. CPT 62323 denied under SYN-D31: Medical necessity not established: conservative therapy not documented. Criterion SYN-LCD-7230-C2 not met. You may appeal by 2026-12-13."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0046",
+        "member_id": "SYN-MBR-400146",
+        "patient_name": "Morgan Sample",
+        "dob": "1966-11-02",
+        "provider_name": "Dr. Ari Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-08-18",
+            "text": "Left L5 radicular leg pain for seven weeks; straight leg raise positive on the left."
+          },
+          {
+            "id": "F2",
+            "date": "2026-09-29",
+            "text": "Daily naproxen and eight physical therapy visits over six weeks."
+          },
+          {
+            "id": "F3",
+            "date": "2026-10-02",
+            "text": "Follow-up: radicular leg pain persists despite therapy."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7230",
+          "title": "Lumbar epidural steroid injections (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7230-C1",
+              "text": "Radicular pain in a dermatomal pattern lasting at least four weeks"
+            },
+            {
+              "id": "SYN-LCD-7230-C2",
+              "text": "At least four weeks of conservative therapy, such as medication and physical therapy, has not relieved the pain"
+            }
+          ]
+        },
+        {
+          "id": "SYN-LCD-7240",
+          "title": "Lumbar facet joint interventions (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7240-C1",
+              "text": "Axial low back pain without a radicular component lasting at least three months"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of a lumbar epidural steroid injection, claim SYN-CLM-500146 (SYNTHETIC CASE)\nPatient: Morgan Sample | Member ID: SYN-MBR-400146 | DOB: 1966-11-02\nRequested service: CPT 62323 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-10-14 denied the injection under SYN-D31, stating that SYN-LCD-7230-C2 was not met because conservative therapy was not documented. The chart documents six weeks of conservative therapy before the request: daily naproxen and eight physical therapy visits, with radicular leg pain persisting at the follow-up visit. The physical therapy discharge note is enclosed.\n\n## Clinical summary\n- Left L5 radicular leg pain for seven weeks; straight leg raise positive on the left (2026-08-18).\n- Daily naproxen and eight physical therapy visits over six weeks (2026-09-29).\n- Follow-up: radicular leg pain persists despite therapy (2026-10-02).\n\n## Policy basis\nSYN-LCD-7230 (Lumbar epidural steroid injections, synthetic) governs this request. SYN-LCD-7230-C1 and SYN-LCD-7230-C2 are met, and we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-09-29\n- Copy of the denial letter dated 2026-10-14\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of a lumbar epidural steroid injection, claim SYN-CLM-500146 (SYNTHETIC CASE)\nPatient: Morgan Sample | Member ID: SYN-MBR-400146 | DOB: 1966-11-02\nRequested service: CPT 62323 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-10-14 denied the injection under SYN-D31, stating that SYN-LCD-7230-C2 was not met because conservative therapy was not documented. The chart documents six weeks of conservative therapy before the request: daily naproxen and eight physical therapy visits, with radicular leg pain persisting at the follow-up visit. The physical therapy discharge note is enclosed.\n\n## Clinical summary\n- Left L5 radicular leg pain for seven weeks; straight leg raise positive on the left (2026-08-18).\n- Daily naproxen and eight physical therapy visits over six weeks (2026-09-29).\n- Follow-up: radicular leg pain persists despite therapy (2026-10-02).\n\n## Policy basis\nSYN-LCD-7230 (Lumbar epidural steroid injections, synthetic) governs this request. SYN-LCD-7230-C1 and SYN-LCD-7230-C2 are met, and SYN-LCD-7240-C1 is also met, so we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-09-29\n- Copy of the denial letter dated 2026-10-14\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
     }
   ]
 }
