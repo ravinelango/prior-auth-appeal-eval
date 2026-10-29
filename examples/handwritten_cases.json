@@ -1625,6 +1625,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-045",
+      "title": "Shoulder physical therapy extension: hand-written letter whose flawed draft never answers the functional-progress denial reason (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500145",
+        "cpt": "97110",
+        "icd10": "M75.41",
+        "reason_code": "SYN-D22",
+        "reason_text": "Medical necessity not established: no measurable functional progress documented",
+        "unmet_criteria": [
+          "SYN-LCD-7190-C2"
+        ],
+        "reason_terms": [
+          "functional progress",
+          "flexion"
+        ],
+        "applicable_policy": "SYN-LCD-7190",
+        "denial_date": "2026-10-09",
+        "appeal_deadline": "2026-12-08",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500145, member SYN-MBR-400145. CPT 97110 denied under SYN-D22: Medical necessity not established: no measurable functional progress documented. Criterion SYN-LCD-7190-C2 not met. You may appeal by 2026-12-08."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0045",
+        "member_id": "SYN-MBR-400145",
+        "patient_name": "Casey Example",
+        "dob": "1971-03-19",
+        "provider_name": "Dr. Ari Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-08-04",
+            "text": "Right shoulder impingement; active flexion 95 degrees at initial physical therapy evaluation."
+          },
+          {
+            "id": "F2",
+            "date": "2026-09-25",
+            "text": "Twelve physical therapy visits completed with a home exercise program."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-29",
+            "text": "Re-evaluation: active flexion 140 degrees; able to reach an overhead shelf."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7190",
+          "title": "Outpatient physical therapy beyond the initial visit limit (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7190-C1",
+              "text": "A home exercise program is in place alongside supervised therapy"
+            },
+            {
+              "id": "SYN-LCD-7190-C2",
+              "text": "Re-evaluation documents measurable functional progress, such as gained range of motion"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of additional physical therapy visits, claim SYN-CLM-500145 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400145 | DOB: 1971-03-19\nRequested service: CPT 97110 | Diagnosis: ICD-10 M75.41\n\n## Response to denial reason\nYour letter of 2026-10-09 denied eight more visits under SYN-D22, stating that SYN-LCD-7190-C2 was not met because no measurable functional progress was documented. The progress note does document functional progress. Active shoulder flexion went from 95 degrees at the initial evaluation to 140 degrees at the re-evaluation, and the patient can now reach an overhead shelf, which was not possible before therapy. The re-evaluation note is enclosed.\n\n## Clinical summary\n- Right shoulder impingement; active flexion 95 degrees at initial physical therapy evaluation (2026-08-04).\n- Twelve physical therapy visits completed with a home exercise program (2026-09-25).\n- Re-evaluation: active flexion 140 degrees; able to reach an overhead shelf (2026-09-29).\n\n## Policy basis\nSYN-LCD-7190 (Outpatient physical therapy beyond the initial visit limit, synthetic) governs this request. SYN-LCD-7190-C1 and SYN-LCD-7190-C2 are met, and we ask that you overturn the denial and authorize the additional visits.\n\n## Enclosures\n- Physical therapy re-evaluation note dated 2026-09-29\n- Copy of the denial letter dated 2026-10-09\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of additional physical therapy visits, claim SYN-CLM-500145 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400145 | DOB: 1971-03-19\nRequested service: CPT 97110 | Diagnosis: ICD-10 M75.41\n\n## Response to denial reason\nYour letter of 2026-10-09 denied eight more visits under SYN-D22. The patient has been attending therapy as scheduled and the treating therapist recommends that the plan of care be completed. The re-evaluation note is enclosed.\n\n## Clinical summary\n- Right shoulder impingement; active flexion 95 degrees at initial physical therapy evaluation (2026-08-04).\n- Twelve physical therapy visits completed with a home exercise program (2026-09-25).\n- Re-evaluation: active flexion 140 degrees; able to reach an overhead shelf (2026-09-29).\n\n## Policy basis\nSYN-LCD-7190 (Outpatient physical therapy beyond the initial visit limit, synthetic) governs this request. SYN-LCD-7190-C1 and SYN-LCD-7190-C2 are met, and we ask that you overturn the denial and authorize the additional visits.\n\n## Enclosures\n- Physical therapy re-evaluation note dated 2026-09-29\n- Copy of the denial letter dated 2026-10-09\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
     }
   ]
 }
