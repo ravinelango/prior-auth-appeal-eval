@@ -1552,6 +1552,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-044",
+      "title": "Ambulatory ECG monitor: hand-written letter whose flawed draft has a one-digit slip in the DOB (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500144",
+        "cpt": "93224",
+        "icd10": "R00.2",
+        "reason_code": "SYN-D16",
+        "reason_text": "Medical necessity not established: no prior resting ECG documented",
+        "unmet_criteria": [
+          "SYN-LCD-7180-C1"
+        ],
+        "reason_terms": [
+          "resting ECG"
+        ],
+        "applicable_policy": "SYN-LCD-7180",
+        "denial_date": "2026-10-06",
+        "appeal_deadline": "2026-12-05",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500144, member SYN-MBR-400144. CPT 93224 denied under SYN-D16: Medical necessity not established: no prior resting ECG documented. Criterion SYN-LCD-7180-C1 not met. You may appeal by 2026-12-05."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0044",
+        "member_id": "SYN-MBR-400144",
+        "patient_name": "Morgan Sample",
+        "dob": "1958-11-08",
+        "provider_name": "Dr. Ari Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-07-22",
+            "text": "Palpitations several times a week for three months."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-12",
+            "text": "Cardiology visit: 12-lead resting ECG shows sinus rhythm; palpitations not captured."
+          },
+          {
+            "id": "F3",
+            "date": "2026-08-12",
+            "text": "48-hour ambulatory ECG monitor ordered."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7180",
+          "title": "Ambulatory ECG monitoring (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7180-C1",
+              "text": "A resting 12-lead ECG was performed and did not explain the symptoms"
+            },
+            {
+              "id": "SYN-LCD-7180-C2",
+              "text": "Symptoms such as palpitations occur often enough to be captured in 48 hours"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-28\nRE: Appeal of the denial of extended ambulatory ECG monitoring, claim SYN-CLM-500144 (SYNTHETIC CASE)\nPatient: Morgan Sample | Member ID: SYN-MBR-400144 | DOB: 1958-11-08\nRequested service: CPT 93224 | Diagnosis: ICD-10 R00.2\n\n## Response to denial reason\nYour letter of 2026-10-06 denied the monitor under SYN-D16, stating that SYN-LCD-7180-C1 was not met because no prior resting ECG was documented. A resting ECG was done. At the cardiology visit on 2026-08-12 a 12-lead resting ECG showed sinus rhythm and did not capture the palpitations, which is why longer monitoring was ordered. The ECG report is enclosed.\n\n## Clinical summary\n- Palpitations several times a week for three months (2026-07-22).\n- Cardiology visit: 12-lead resting ECG shows sinus rhythm; palpitations not captured (2026-08-12).\n- 48-hour ambulatory ECG monitor ordered (2026-08-12).\n\n## Policy basis\nSYN-LCD-7180 (Ambulatory ECG monitoring, synthetic) governs this request. SYN-LCD-7180-C1 and SYN-LCD-7180-C2 are met, and we ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Resting ECG report dated 2026-08-12\n- Copy of the denial letter dated 2026-10-06\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-28\nRE: Appeal of the denial of extended ambulatory ECG monitoring, claim SYN-CLM-500144 (SYNTHETIC CASE)\nPatient: Morgan Sample | Member ID: SYN-MBR-400144 | DOB: 1958-11-03\nRequested service: CPT 93224 | Diagnosis: ICD-10 R00.2\n\n## Response to denial reason\nYour letter of 2026-10-06 denied the monitor under SYN-D16, stating that SYN-LCD-7180-C1 was not met because no prior resting ECG was documented. A resting ECG was done. At the cardiology visit on 2026-08-12 a 12-lead resting ECG showed sinus rhythm and did not capture the palpitations, which is why longer monitoring was ordered. The ECG report is enclosed.\n\n## Clinical summary\n- Palpitations several times a week for three months (2026-07-22).\n- Cardiology visit: 12-lead resting ECG shows sinus rhythm; palpitations not captured (2026-08-12).\n- 48-hour ambulatory ECG monitor ordered (2026-08-12).\n\n## Policy basis\nSYN-LCD-7180 (Ambulatory ECG monitoring, synthetic) governs this request. SYN-LCD-7180-C1 and SYN-LCD-7180-C2 are met, and we ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Resting ECG report dated 2026-08-12\n- Copy of the denial letter dated 2026-10-06\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
     }
   ]
 }
