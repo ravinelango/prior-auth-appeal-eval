@@ -1783,6 +1783,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-047",
+      "title": "Endovenous ablation: hand-written letter whose flawed draft doubles a spelled-out compression trial length (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500147",
+        "cpt": "36475",
+        "icd10": "I83.811",
+        "reason_code": "SYN-D32",
+        "reason_text": "Medical necessity not established: compression therapy trial not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7250-C2"
+        ],
+        "reason_terms": [
+          "compression"
+        ],
+        "applicable_policy": "SYN-LCD-7250",
+        "denial_date": "2026-10-12",
+        "appeal_deadline": "2026-12-11",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500147, member SYN-MBR-400147. CPT 36475 denied under SYN-D32: Medical necessity not established: compression therapy trial not documented. Criterion SYN-LCD-7250-C2 not met. You may appeal by 2026-12-11."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0047",
+        "member_id": "SYN-MBR-400147",
+        "patient_name": "Casey Example",
+        "dob": "1971-03-15",
+        "provider_name": "Dr. Ari Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-05-20",
+            "text": "Aching and swelling of the right calf for five months; varicose veins on exam."
+          },
+          {
+            "id": "F2",
+            "date": "2026-06-03",
+            "text": "Duplex ultrasound: great saphenous vein reflux on the right."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-08",
+            "text": "Compression stockings worn daily for three months; aching and swelling persist."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7250",
+          "title": "Endovenous ablation for venous insufficiency (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7250-C1",
+              "text": "Symptomatic venous insufficiency with reflux confirmed on duplex ultrasound"
+            },
+            {
+              "id": "SYN-LCD-7250-C2",
+              "text": "At least three months of compression therapy has not relieved the symptoms"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of endovenous radiofrequency ablation, claim SYN-CLM-500147 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400147 | DOB: 1971-03-15\nRequested service: CPT 36475 | Diagnosis: ICD-10 I83.811\n\n## Response to denial reason\nYour letter of 2026-10-12 denied the ablation under SYN-D32, stating that SYN-LCD-7250-C2 was not met because a trial of compression stockings was not documented. The chart documents three months of prescribed compression stockings, after which the calf aching and swelling persisted. The vein clinic note documenting the stocking trial is enclosed.\n\n## Clinical summary\n- Aching and swelling of the right calf for five months; varicose veins on exam (2026-05-20).\n- Duplex ultrasound: great saphenous vein reflux on the right (2026-06-03).\n- Compression stockings worn daily for three months; aching and swelling persist (2026-09-08).\n\n## Policy basis\nSYN-LCD-7250 (Endovenous ablation for venous insufficiency, synthetic) governs this request. SYN-LCD-7250-C1 and SYN-LCD-7250-C2 are met, and we ask that you overturn the denial and authorize the ablation.\n\n## Enclosures\n- Vein clinic note dated 2026-09-08\n- Copy of the denial letter dated 2026-10-12\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-29\nRE: Appeal of the denial of endovenous radiofrequency ablation, claim SYN-CLM-500147 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400147 | DOB: 1971-03-15\nRequested service: CPT 36475 | Diagnosis: ICD-10 I83.811\n\n## Response to denial reason\nYour letter of 2026-10-12 denied the ablation under SYN-D32, stating that SYN-LCD-7250-C2 was not met because a trial of compression stockings was not documented. The chart documents six months of prescribed compression stockings, after which the calf aching and swelling persisted. The vein clinic note documenting the stocking trial is enclosed.\n\n## Clinical summary\n- Aching and swelling of the right calf for five months; varicose veins on exam (2026-05-20).\n- Duplex ultrasound: great saphenous vein reflux on the right (2026-06-03).\n- Compression stockings worn daily for six months; aching and swelling persist (2026-09-08).\n\n## Policy basis\nSYN-LCD-7250 (Endovenous ablation for venous insufficiency, synthetic) governs this request. SYN-LCD-7250-C1 and SYN-LCD-7250-C2 are met, and we ask that you overturn the denial and authorize the ablation.\n\n## Enclosures\n- Vein clinic note dated 2026-09-08\n- Copy of the denial letter dated 2026-10-12\n\nSincerely,\nDr. Ari Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }
