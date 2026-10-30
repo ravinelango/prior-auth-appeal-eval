@@ -2076,6 +2076,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-051",
+      "title": "Percutaneous lateral elbow tenotomy: hand-written letter whose flawed draft codes the right elbow (M77.11) instead of the left (M77.12) (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500151",
+        "cpt": "24357",
+        "icd10": "M77.12",
+        "reason_code": "SYN-D36",
+        "reason_text": "Medical necessity not established: six months of conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7290-C1"
+        ],
+        "reason_terms": [
+          "conservative care",
+          "six months"
+        ],
+        "applicable_policy": "SYN-LCD-7290",
+        "denial_date": "2026-10-20",
+        "appeal_deadline": "2026-12-19",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500151, member SYN-MBR-400151. CPT 24357 denied under SYN-D36: Medical necessity not established: six months of conservative care not documented. Criterion SYN-LCD-7290-C1 not met. You may appeal by 2026-12-19."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0051",
+        "member_id": "SYN-MBR-400151",
+        "patient_name": "Jordan Notreal",
+        "dob": "1971-03-14",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-10",
+            "text": "Pain at the left lateral epicondyle with painful resisted wrist extension; forearm strap and home eccentric exercise program started."
+          },
+          {
+            "id": "F2",
+            "date": "2026-05-05",
+            "text": "Corticosteroid injection at the left lateral epicondyle, with relief lasting about three weeks."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-22",
+            "text": "Pain persists at the left lateral epicondyle and now limits gripping tools at work."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7290",
+          "title": "Percutaneous lateral elbow tenotomy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7290-C1",
+              "text": "Symptoms persist after at least six months of conservative care"
+            },
+            {
+              "id": "SYN-LCD-7290-C2",
+              "text": "Pain limits daily or work use of the arm"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of percutaneous lateral elbow tenotomy, claim SYN-CLM-500151 (SYNTHETIC CASE)\nPatient: Jordan Notreal | Member ID: SYN-MBR-400151 | DOB: 1971-03-14\nRequested service: CPT 24357 | Diagnosis: ICD-10 M77.12\n\n## Response to denial reason\nYour letter of 2026-10-20 denied the tenotomy under SYN-D36, stating that SYN-LCD-7290-C1 was not met because six months of conservative care were not documented. The chart documents a forearm strap and a home eccentric exercise program from 2026-02-10, a corticosteroid injection on 2026-05-05, and persistent pain at the lateral epicondyle on 2026-09-22, more than six months later. The clinic notes are enclosed.\n\n## Clinical summary\n- Pain at the left lateral epicondyle with painful resisted wrist extension; forearm strap and home eccentric exercise program started (2026-02-10).\n- Corticosteroid injection at the left lateral epicondyle, with relief lasting about three weeks (2026-05-05).\n- Pain persists at the left lateral epicondyle and now limits gripping tools at work (2026-09-22).\n\n## Policy basis\nSYN-LCD-7290 (Percutaneous lateral elbow tenotomy, synthetic) governs this request. SYN-LCD-7290-C1 and SYN-LCD-7290-C2 are met, and we ask that you overturn the denial and authorize the tenotomy.\n\n## Enclosures\n- Clinic notes dated 2026-02-10, 2026-05-05 and 2026-09-22\n- Copy of the denial letter dated 2026-10-20\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of percutaneous lateral elbow tenotomy, claim SYN-CLM-500151 (SYNTHETIC CASE)\nPatient: Jordan Notreal | Member ID: SYN-MBR-400151 | DOB: 1971-03-14\nRequested service: CPT 24357 | Diagnosis: ICD-10 M77.11\n\n## Response to denial reason\nYour letter of 2026-10-20 denied the tenotomy under SYN-D36, stating that SYN-LCD-7290-C1 was not met because six months of conservative care were not documented. The chart documents a forearm strap and a home eccentric exercise program from 2026-02-10, a corticosteroid injection on 2026-05-05, and persistent pain at the lateral epicondyle on 2026-09-22, more than six months later. The clinic notes are enclosed.\n\n## Clinical summary\n- Pain at the left lateral epicondyle with painful resisted wrist extension; forearm strap and home eccentric exercise program started (2026-02-10).\n- Corticosteroid injection at the left lateral epicondyle, with relief lasting about three weeks (2026-05-05).\n- Pain persists at the left lateral epicondyle and now limits gripping tools at work (2026-09-22).\n\n## Policy basis\nSYN-LCD-7290 (Percutaneous lateral elbow tenotomy, synthetic) governs this request. SYN-LCD-7290-C1 and SYN-LCD-7290-C2 are met, and we ask that you overturn the denial and authorize the tenotomy.\n\n## Enclosures\n- Clinic notes dated 2026-02-10, 2026-05-05 and 2026-09-22\n- Copy of the denial letter dated 2026-10-20\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
     }
   ]
 }
