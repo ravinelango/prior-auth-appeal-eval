@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-048, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-049, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -139,6 +139,8 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    where the chart says three; `facts_in_chart` flags the summary bullet, the only check that fails.
    PA-048 (carpal tunnel release) has a flawed letter that ends with a thank-you and the doctor's
    name but no `Sincerely` block or NPI; `required_elements` flags the missing signature, the only check that fails.
+   PA-049 (trigger finger release) has a flawed letter that adds the patient's email address to the
+   header; `extra_phi` flags it because it is not in the chart or the denial, the only check that fails.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -206,14 +208,14 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 48 synthetic cases (25 generated, 23 hand-written), six checkers, mock / files / OpenAI-compatible
+**Early, v0.1.** Schema, 49 synthetic cases (25 generated, 24 hand-written), six checkers, mock / files / OpenAI-compatible
 drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-048; more needed)
+  templates (started: PA-026..PA-049; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
