@@ -1929,6 +1929,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-049",
+      "title": "Trigger finger release: hand-written letter whose flawed draft adds the patient's email address to the header (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500149",
+        "cpt": "26055",
+        "icd10": "M65.331",
+        "reason_code": "SYN-D34",
+        "reason_text": "Medical necessity not established: trial of corticosteroid injection not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7270-C1"
+        ],
+        "reason_terms": [
+          "corticosteroid injection"
+        ],
+        "applicable_policy": "SYN-LCD-7270",
+        "denial_date": "2026-10-16",
+        "appeal_deadline": "2026-12-15",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500149, member SYN-MBR-400149. CPT 26055 denied under SYN-D34: Medical necessity not established: trial of corticosteroid injection not documented. Criterion SYN-LCD-7270-C1 not met. You may appeal by 2026-12-15."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0049",
+        "member_id": "SYN-MBR-400149",
+        "patient_name": "Avery Mockford",
+        "dob": "1971-03-19",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-03",
+            "text": "Painful catching and locking of the right middle finger for five months."
+          },
+          {
+            "id": "F2",
+            "date": "2026-07-15",
+            "text": "Corticosteroid injection into the right middle finger flexor sheath."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-09",
+            "text": "Locking returned within six weeks of the injection; the finger now locks daily and must be straightened by hand."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7270",
+          "title": "Trigger finger release (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7270-C1",
+              "text": "Symptoms persist or recur after at least one corticosteroid injection"
+            },
+            {
+              "id": "SYN-LCD-7270-C2",
+              "text": "Locking or catching interferes with daily use of the hand"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of trigger finger release, claim SYN-CLM-500149 (SYNTHETIC CASE)\nPatient: Avery Mockford | Member ID: SYN-MBR-400149 | DOB: 1971-03-19\nRequested service: CPT 26055 | Diagnosis: ICD-10 M65.331\n\n## Response to denial reason\nYour letter of 2026-10-16 denied the release under SYN-D34, stating that SYN-LCD-7270-C1 was not met because a trial of corticosteroid injection was not documented. The chart documents a corticosteroid injection into the right middle finger flexor sheath, with locking that returned within six weeks. The procedure note is enclosed.\n\n## Clinical summary\n- Painful catching and locking of the right middle finger for five months (2026-06-03).\n- Corticosteroid injection into the right middle finger flexor sheath (2026-07-15).\n- Locking returned within six weeks of the injection; the finger now locks daily and must be straightened by hand (2026-09-09).\n\n## Policy basis\nSYN-LCD-7270 (Trigger finger release, synthetic) governs this request. SYN-LCD-7270-C1 and SYN-LCD-7270-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Injection procedure note dated 2026-07-15\n- Copy of the denial letter dated 2026-10-16\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of trigger finger release, claim SYN-CLM-500149 (SYNTHETIC CASE)\nPatient: Avery Mockford | Member ID: SYN-MBR-400149 | DOB: 1971-03-19\nPatient email: avery.mockford@example.org\nRequested service: CPT 26055 | Diagnosis: ICD-10 M65.331\n\n## Response to denial reason\nYour letter of 2026-10-16 denied the release under SYN-D34, stating that SYN-LCD-7270-C1 was not met because a trial of corticosteroid injection was not documented. The chart documents a corticosteroid injection into the right middle finger flexor sheath, with locking that returned within six weeks. The procedure note is enclosed.\n\n## Clinical summary\n- Painful catching and locking of the right middle finger for five months (2026-06-03).\n- Corticosteroid injection into the right middle finger flexor sheath (2026-07-15).\n- Locking returned within six weeks of the injection; the finger now locks daily and must be straightened by hand (2026-09-09).\n\n## Policy basis\nSYN-LCD-7270 (Trigger finger release, synthetic) governs this request. SYN-LCD-7270-C1 and SYN-LCD-7270-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Injection procedure note dated 2026-07-15\n- Copy of the denial letter dated 2026-10-16\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "extra_phi"
+          ]
+        }
+      }
     }
   ]
 }
