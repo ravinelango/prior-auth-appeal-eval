@@ -2002,6 +2002,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-050",
+      "title": "First dorsal compartment (de Quervain) release: hand-written letter whose flawed draft restates the pain but never answers the missing-splint reason (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500150",
+        "cpt": "25000",
+        "icd10": "M65.4",
+        "reason_code": "SYN-D35",
+        "reason_text": "Medical necessity not established: trial of thumb spica splint immobilization not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7280-C1"
+        ],
+        "reason_terms": [
+          "thumb spica splint",
+          "six weeks"
+        ],
+        "applicable_policy": "SYN-LCD-7280",
+        "denial_date": "2026-10-19",
+        "appeal_deadline": "2026-12-18",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500150, member SYN-MBR-400150. CPT 25000 denied under SYN-D35: Medical necessity not established: trial of thumb spica splint immobilization not documented. Criterion SYN-LCD-7280-C1 not met. You may appeal by 2026-12-18."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0050",
+        "member_id": "SYN-MBR-400150",
+        "patient_name": "Rowan Fakeley",
+        "dob": "1979-11-02",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-05-20",
+            "text": "Pain and swelling over the thumb side of the left wrist for four months; Finkelstein test positive."
+          },
+          {
+            "id": "F2",
+            "date": "2026-07-01",
+            "text": "Thumb spica splint worn full time for six weeks since 2026-05-20, with no improvement in pain."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-15",
+            "text": "Pain persists at the radial styloid and now prevents lifting a kettle or a child with the left hand."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7280",
+          "title": "First dorsal compartment release (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7280-C1",
+              "text": "Symptoms persist after at least six weeks of thumb spica splint immobilization"
+            },
+            {
+              "id": "SYN-LCD-7280-C2",
+              "text": "Pain limits daily use of the hand"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of first dorsal compartment release, claim SYN-CLM-500150 (SYNTHETIC CASE)\nPatient: Rowan Fakeley | Member ID: SYN-MBR-400150 | DOB: 1979-11-02\nRequested service: CPT 25000 | Diagnosis: ICD-10 M65.4\n\n## Response to denial reason\nYour letter of 2026-10-19 denied the release under SYN-D35, stating that SYN-LCD-7280-C1 was not met because a trial of thumb spica splint immobilization was not documented. The chart documents a thumb spica splint worn full time for six weeks with no improvement in pain. The clinic notes are enclosed.\n\n## Clinical summary\n- Pain and swelling over the thumb side of the left wrist for four months, with a positive Finkelstein test (2026-05-20).\n- Thumb spica splint worn full time for six weeks, with no improvement in pain (2026-05-20 to 2026-07-01).\n- Pain persists at the radial styloid and now prevents lifting a kettle or a child with the left hand (2026-09-15).\n\n## Policy basis\nSYN-LCD-7280 (First dorsal compartment release, synthetic) governs this request. SYN-LCD-7280-C1 and SYN-LCD-7280-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Clinic notes dated 2026-05-20, 2026-07-01 and 2026-09-15\n- Copy of the denial letter dated 2026-10-19\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of first dorsal compartment release, claim SYN-CLM-500150 (SYNTHETIC CASE)\nPatient: Rowan Fakeley | Member ID: SYN-MBR-400150 | DOB: 1979-11-02\nRequested service: CPT 25000 | Diagnosis: ICD-10 M65.4\n\n## Response to denial reason\nYour letter of 2026-10-19 denied the release under SYN-D35. The patient still has pain over the thumb side of the wrist, it limits lifting, and surgery is the right next step.\n\n## Clinical summary\n- Pain and swelling over the thumb side of the left wrist for four months, with a positive Finkelstein test (2026-05-20).\n- Thumb spica splint worn full time for six weeks, with no improvement in pain (2026-05-20 to 2026-07-01).\n- Pain persists at the radial styloid and now prevents lifting a kettle or a child with the left hand (2026-09-15).\n\n## Policy basis\nSYN-LCD-7280 (First dorsal compartment release, synthetic) governs this request. SYN-LCD-7280-C1 and SYN-LCD-7280-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Clinic notes dated 2026-05-20, 2026-07-01 and 2026-09-15\n- Copy of the denial letter dated 2026-10-19\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
     }
   ]
 }
