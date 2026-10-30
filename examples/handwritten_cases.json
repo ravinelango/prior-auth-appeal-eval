@@ -1856,6 +1856,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-048",
+      "title": "Carpal tunnel release: hand-written letter whose flawed draft closes without a signature block or provider NPI (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500148",
+        "cpt": "64721",
+        "icd10": "G56.01",
+        "reason_code": "SYN-D33",
+        "reason_text": "Medical necessity not established: nerve conduction testing not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7260-C2"
+        ],
+        "reason_terms": [
+          "nerve conduction"
+        ],
+        "applicable_policy": "SYN-LCD-7260",
+        "denial_date": "2026-10-14",
+        "appeal_deadline": "2026-12-13",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500148, member SYN-MBR-400148. CPT 64721 denied under SYN-D33: Medical necessity not established: nerve conduction testing not documented. Criterion SYN-LCD-7260-C2 not met. You may appeal by 2026-12-13."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0048",
+        "member_id": "SYN-MBR-400148",
+        "patient_name": "Robin Sample",
+        "dob": "1966-08-02",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-11",
+            "text": "Numbness and tingling of the right thumb, index and middle fingers for eight months, worse at night."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-25",
+            "text": "Night splinting and activity changes for ten weeks without relief."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-17",
+            "text": "Nerve conduction study: moderate median neuropathy at the right wrist."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7260",
+          "title": "Carpal tunnel release (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7260-C1",
+              "text": "Symptoms persist after at least six weeks of splinting or other conservative care"
+            },
+            {
+              "id": "SYN-LCD-7260-C2",
+              "text": "Median neuropathy at the wrist confirmed on nerve conduction testing"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of carpal tunnel release, claim SYN-CLM-500148 (SYNTHETIC CASE)\nPatient: Robin Sample | Member ID: SYN-MBR-400148 | DOB: 1966-08-02\nRequested service: CPT 64721 | Diagnosis: ICD-10 G56.01\n\n## Response to denial reason\nYour letter of 2026-10-14 denied the release under SYN-D33, stating that SYN-LCD-7260-C2 was not met because nerve conduction testing was not documented. The chart documents a nerve conduction study showing moderate median neuropathy at the right wrist. The study report is enclosed.\n\n## Clinical summary\n- Numbness and tingling of the right thumb, index and middle fingers for eight months, worse at night (2026-06-11).\n- Night splinting and activity changes for ten weeks without relief (2026-08-25).\n- Nerve conduction study: moderate median neuropathy at the right wrist (2026-09-17).\n\n## Policy basis\nSYN-LCD-7260 (Carpal tunnel release, synthetic) governs this request. SYN-LCD-7260-C1 and SYN-LCD-7260-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Nerve conduction study report dated 2026-09-17\n- Copy of the denial letter dated 2026-10-14\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-10-30\nRE: Appeal of the denial of carpal tunnel release, claim SYN-CLM-500148 (SYNTHETIC CASE)\nPatient: Robin Sample | Member ID: SYN-MBR-400148 | DOB: 1966-08-02\nRequested service: CPT 64721 | Diagnosis: ICD-10 G56.01\n\n## Response to denial reason\nYour letter of 2026-10-14 denied the release under SYN-D33, stating that SYN-LCD-7260-C2 was not met because nerve conduction testing was not documented. The chart documents a nerve conduction study showing moderate median neuropathy at the right wrist. The study report is enclosed.\n\n## Clinical summary\n- Numbness and tingling of the right thumb, index and middle fingers for eight months, worse at night (2026-06-11).\n- Night splinting and activity changes for ten weeks without relief (2026-08-25).\n- Nerve conduction study: moderate median neuropathy at the right wrist (2026-09-17).\n\n## Policy basis\nSYN-LCD-7260 (Carpal tunnel release, synthetic) governs this request. SYN-LCD-7260-C1 and SYN-LCD-7260-C2 are met, and we ask that you overturn the denial and authorize the release.\n\n## Enclosures\n- Nerve conduction study report dated 2026-09-17\n- Copy of the denial letter dated 2026-10-14\n\nThank you for your time.\nDr. Sam Placeholder\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
     }
   ]
 }
