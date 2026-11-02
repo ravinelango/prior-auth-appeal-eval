@@ -2150,6 +2150,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-052",
+      "title": "Partial plantar fasciectomy: hand-written letter whose flawed draft cites a criterion SYN-LCD-7305-C3 that the policy does not have (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500152",
+        "cpt": "28060",
+        "icd10": "M72.2",
+        "reason_code": "SYN-D37",
+        "reason_text": "Medical necessity not established: six months of conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7305-C1"
+        ],
+        "reason_terms": [
+          "conservative care",
+          "six months"
+        ],
+        "applicable_policy": "SYN-LCD-7305",
+        "denial_date": "2026-10-22",
+        "appeal_deadline": "2026-12-21",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500152, member SYN-MBR-400152. CPT 28060 denied under SYN-D37: Medical necessity not established: six months of conservative care not documented. Criterion SYN-LCD-7305-C1 not met. You may appeal by 2026-12-21."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0052",
+        "member_id": "SYN-MBR-400152",
+        "patient_name": "Riley Fictional",
+        "dob": "1966-08-21",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-01-12",
+            "text": "Heel pain at the right medial calcaneal tubercle, worst with the first steps in the morning; daily calf and plantar fascia stretching and prefabricated arch supports started."
+          },
+          {
+            "id": "F2",
+            "date": "2026-04-08",
+            "text": "Night splint added; heel pain unchanged after twelve weeks of stretching and arch supports."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-28",
+            "text": "Heel pain persists at the right medial calcaneal tubercle and now limits walking to about ten minutes."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7305",
+          "title": "Partial plantar fasciectomy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7305-C1",
+              "text": "Symptoms persist after at least six months of conservative care"
+            },
+            {
+              "id": "SYN-LCD-7305-C2",
+              "text": "Pain limits walking or standing"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-02\nRE: Appeal of the denial of partial plantar fasciectomy, claim SYN-CLM-500152 (SYNTHETIC CASE)\nPatient: Riley Fictional | Member ID: SYN-MBR-400152 | DOB: 1966-08-21\nRequested service: CPT 28060 | Diagnosis: ICD-10 M72.2\n\n## Response to denial reason\nYour letter of 2026-10-22 denied the fasciectomy under SYN-D37, stating that SYN-LCD-7305-C1 was not met because six months of conservative care were not documented. The chart documents daily stretching and arch supports from 2026-01-12, a night splint added on 2026-04-08, and persistent heel pain on 2026-09-28, more than eight months after care began. The clinic notes are enclosed.\n\n## Clinical summary\n- Heel pain at the right medial calcaneal tubercle, worst with the first steps in the morning; daily calf and plantar fascia stretching and prefabricated arch supports started. (2026-01-12).\n- Night splint added; heel pain unchanged after twelve weeks of stretching and arch supports. (2026-04-08).\n- Heel pain persists at the right medial calcaneal tubercle and now limits walking to about ten minutes. (2026-09-28).\n\n## Policy basis\nSYN-LCD-7305 (Partial plantar fasciectomy, synthetic) governs this request. SYN-LCD-7305-C1 and SYN-LCD-7305-C2 are met, and we ask that you overturn the denial and authorize the fasciectomy.\n\n## Enclosures\n- Clinic notes dated 2026-01-12, 2026-04-08 and 2026-09-28\n- Copy of the denial letter dated 2026-10-22\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-02\nRE: Appeal of the denial of partial plantar fasciectomy, claim SYN-CLM-500152 (SYNTHETIC CASE)\nPatient: Riley Fictional | Member ID: SYN-MBR-400152 | DOB: 1966-08-21\nRequested service: CPT 28060 | Diagnosis: ICD-10 M72.2\n\n## Response to denial reason\nYour letter of 2026-10-22 denied the fasciectomy under SYN-D37, stating that SYN-LCD-7305-C1 was not met because six months of conservative care were not documented. The chart documents daily stretching and arch supports from 2026-01-12, a night splint added on 2026-04-08, and persistent heel pain on 2026-09-28, more than eight months after care began. The clinic notes are enclosed.\n\n## Clinical summary\n- Heel pain at the right medial calcaneal tubercle, worst with the first steps in the morning; daily calf and plantar fascia stretching and prefabricated arch supports started. (2026-01-12).\n- Night splint added; heel pain unchanged after twelve weeks of stretching and arch supports. (2026-04-08).\n- Heel pain persists at the right medial calcaneal tubercle and now limits walking to about ten minutes. (2026-09-28).\n\n## Policy basis\nSYN-LCD-7305 (Partial plantar fasciectomy, synthetic) governs this request. SYN-LCD-7305-C1 and SYN-LCD-7305-C2 are met, and SYN-LCD-7305-C3 waives the conservative-care period when walking is limited. We ask that you overturn the denial and authorize the fasciectomy.\n\n## Enclosures\n- Clinic notes dated 2026-01-12, 2026-04-08 and 2026-09-28\n- Copy of the denial letter dated 2026-10-22\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
     }
   ]
 }
