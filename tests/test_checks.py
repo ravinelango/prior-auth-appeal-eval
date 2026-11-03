@@ -139,6 +139,13 @@ def test_spelled_out_number_with_words_before_the_unit():
     assert _numbers("one of the last few weeks") == set()
 
 
+def test_spelled_out_injection_count_is_a_number():
+    from prior_auth_eval.checks import _numbers
+
+    assert _numbers("One corticosteroid injection given") == {"1"}
+    assert _numbers("three corticosteroid injections given") == {"3"}
+
+
 def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",

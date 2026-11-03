@@ -200,7 +200,8 @@ _SPELLED.update({"thirty": "30", "forty": "40", "fifty": "50", "sixty": "60", "n
 _SPELLED_QTY = re.compile(
     r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
     r"(?:days?|weeks?|months?|years?|sessions?|"
-    r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?)\b)",
+    r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
+    r"injections?)\b)",
     re.IGNORECASE,
 )
 
