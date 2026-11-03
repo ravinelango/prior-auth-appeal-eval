@@ -313,6 +313,36 @@ def _misdated(facts, bullet: str) -> tuple[str, str] | None:
     return sorted(dates)[0], ", ".join(sorted(expected))
 
 
+def _miscounted(facts, bullet: str) -> list[str]:
+    """Numbers in a bullet that its closest-matching chart fact does not contain.
+
+    The chart-wide number check passes a bullet whose number appears anywhere in the chart, so
+    an inflated count ("two infusions") slips through when some other fact happens to say "every
+    two weeks". A bullet that closely paraphrases one fact (same overlap rule as the date check)
+    must take its numbers from that fact. Summaries below DATE_MATCH_MIN are not checked.
+    """
+    dates = set(_DATE.findall(bullet))
+    nums = _numbers(bullet) - dates
+    words = _words(bullet)
+    if not nums or not words:
+        return []
+    scored = []
+    for f in facts:
+        fw = _words(f.text)
+        score = len(words & fw) / len(words | fw) if fw else 0.0
+        # A bullet that merges facts ("between 2025-08-04 and 2026-02-09") may also take
+        # numbers from any fact whose date it cites.
+        cited = bool(dates & {f.date, *_DATE.findall(f.text)})
+        scored.append((score, cited, _numbers(f.text)))
+    best = max(s for s, _, _ in scored)
+    if best < DATE_MATCH_MIN:
+        return []
+    expected = set().union(
+        *(ns for s, cited, ns in scored if s >= DATE_MATCH_MIN or s >= best - 1e-9 or cited)
+    )
+    return sorted(nums - expected)
+
+
 def check_facts(case: Case, letter: str) -> CheckResult:
     """Every bullet under '## Clinical summary' must be traceable to the chart."""
     res = CheckResult("facts_in_chart", True, CRITICAL)
@@ -354,8 +384,11 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         as_done = sorted(_split_planned(b)[1] & chart_planned_only)
         unhedged = sorted(_split_planned(b, _HEDGE_CUE)[1] & chart_hedged_only)
         misdated = _misdated(case.chart.facts, b)
+        miscounted = [] if bad_nums else _miscounted(case.chart.facts, b)
         if bad_nums:
             res.findings.append(f'number(s) not in chart {bad_nums}: "{b}"')
+        elif miscounted:
+            res.findings.append(f'number(s) {miscounted} not in the matching chart fact: "{b}"')
         elif flipped:
             res.findings.append(f'possible negation flip of chart-negated term(s) {flipped}: "{b}"')
         elif swapped:
