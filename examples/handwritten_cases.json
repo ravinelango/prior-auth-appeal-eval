@@ -2224,6 +2224,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-053",
+      "title": "Morton's neuroma excision: hand-written letter whose flawed draft says three corticosteroid injections when the chart documents one (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500153",
+        "cpt": "28080",
+        "icd10": "G57.62",
+        "reason_code": "SYN-D38",
+        "reason_text": "Medical necessity not established: failed corticosteroid injection not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7306-C1"
+        ],
+        "reason_terms": [
+          "corticosteroid injection"
+        ],
+        "applicable_policy": "SYN-LCD-7306",
+        "denial_date": "2026-10-23",
+        "appeal_deadline": "2026-12-22",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500153, member SYN-MBR-400153. CPT 28080 denied under SYN-D38: Medical necessity not established: failed corticosteroid injection not documented. Criterion SYN-LCD-7306-C1 not met. You may appeal by 2026-12-22."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0053",
+        "member_id": "SYN-MBR-400153",
+        "patient_name": "Casey Fictional",
+        "dob": "1971-03-14",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-02-03",
+            "text": "Burning pain between the left third and fourth toes, worse in narrow shoes; wide-toe-box shoes and a metatarsal pad started."
+          },
+          {
+            "id": "F2",
+            "date": "2026-05-19",
+            "text": "One corticosteroid injection given into the left third intermetatarsal space."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-30",
+            "text": "Forefoot pain persists and now limits walking to about fifteen minutes."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7306",
+          "title": "Excision of interdigital neuroma (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7306-C1",
+              "text": "Symptoms persist after footwear changes and at least one corticosteroid injection"
+            },
+            {
+              "id": "SYN-LCD-7306-C2",
+              "text": "Pain limits walking or standing"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-03\nRE: Appeal of the denial of Morton's neuroma excision, claim SYN-CLM-500153 (SYNTHETIC CASE)\nPatient: Casey Fictional | Member ID: SYN-MBR-400153 | DOB: 1971-03-14\nRequested service: CPT 28080 | Diagnosis: ICD-10 G57.62\n\n## Response to denial reason\nYour letter of 2026-10-23 denied the excision under SYN-D38, stating that SYN-LCD-7306-C1 was not met because a corticosteroid injection was not documented. The chart documents one corticosteroid injection into the left third intermetatarsal space on 2026-05-19, after wide-toe-box shoes and a metatarsal pad started on 2026-02-03, with burning forefoot pain still present on 2026-09-30. The clinic notes are enclosed.\n\n## Clinical summary\n- Burning pain between the left third and fourth toes, worse in narrow shoes; wide-toe-box shoes and a metatarsal pad started. (2026-02-03).\n- One corticosteroid injection given into the left third intermetatarsal space. (2026-05-19).\n- Forefoot pain persists and now limits walking to about fifteen minutes. (2026-09-30).\n\n## Policy basis\nSYN-LCD-7306 (Excision of interdigital neuroma, synthetic) governs this request. SYN-LCD-7306-C1 and SYN-LCD-7306-C2 are met, and we ask that you overturn the denial and authorize the excision.\n\n## Enclosures\n- Clinic notes dated 2026-02-03, 2026-05-19 and 2026-09-30\n- Copy of the denial letter dated 2026-10-23\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-03\nRE: Appeal of the denial of Morton's neuroma excision, claim SYN-CLM-500153 (SYNTHETIC CASE)\nPatient: Casey Fictional | Member ID: SYN-MBR-400153 | DOB: 1971-03-14\nRequested service: CPT 28080 | Diagnosis: ICD-10 G57.62\n\n## Response to denial reason\nYour letter of 2026-10-23 denied the excision under SYN-D38, stating that SYN-LCD-7306-C1 was not met because a corticosteroid injection was not documented. The chart documents three corticosteroid injections into the left third intermetatarsal space on 2026-05-19, after wide-toe-box shoes and a metatarsal pad started on 2026-02-03, with burning forefoot pain still present on 2026-09-30. The clinic notes are enclosed.\n\n## Clinical summary\n- Burning pain between the left third and fourth toes, worse in narrow shoes; wide-toe-box shoes and a metatarsal pad started. (2026-02-03).\n- Three corticosteroid injections given into the left third intermetatarsal space. (2026-05-19).\n- Forefoot pain persists and now limits walking to about fifteen minutes. (2026-09-30).\n\n## Policy basis\nSYN-LCD-7306 (Excision of interdigital neuroma, synthetic) governs this request. SYN-LCD-7306-C1 and SYN-LCD-7306-C2 are met, and we ask that you overturn the denial and authorize the excision.\n\n## Enclosures\n- Clinic notes dated 2026-02-03, 2026-05-19 and 2026-09-30\n- Copy of the denial letter dated 2026-10-23\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }
