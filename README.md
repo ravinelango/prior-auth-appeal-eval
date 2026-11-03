@@ -154,7 +154,8 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    chart documents one; `facts_in_chart` flags the summary bullet, the only check that fails. A first draft
    of the chart said infusions were "planned every two weeks", and the flaw went unflagged: numbers are
    matched against every number in the chart, not the fact the bullet restates, so an unrelated "two"
-   elsewhere hides an inflated count. The case now avoids that collision; the limitation is listed below.
+   elsewhere hides an inflated count. `facts_in_chart` now also checks a bullet that closely restates one
+   fact against that fact's own numbers; a test keeps the "every two weeks" wording to cover it.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -218,8 +219,9 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   SSN, phone, email and street-address patterns that are not in the source material. It misses
   other identifiers (account numbers, free-text family details, unneeded diagnoses) and does
   not judge whether chart content that *is* present was needed.
-- `facts_in_chart` compares a letter's numbers with all numbers in the chart, not with the fact the
-  sentence restates, so an inflated count is missed when the same number appears elsewhere in the chart.
+- `facts_in_chart` checks a bullet's numbers against its matching fact only when the bullet closely
+  restates one fact (word overlap of at least 0.5) or cites its date. Looser summaries are still matched
+  against every number in the chart, so an inflated count there is missed if the number appears elsewhere.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
