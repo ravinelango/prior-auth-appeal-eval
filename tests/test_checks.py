@@ -146,6 +146,16 @@ def test_spelled_out_injection_count_is_a_number():
     assert _numbers("three corticosteroid injections given") == {"3"}
 
 
+def test_spelled_out_shots_infusions_and_admissions_are_numbers():
+    from prior_auth_eval.checks import _numbers
+
+    assert _numbers("two cortisone shots in the past year") == {"2"}
+    assert _numbers("four IV iron infusions") == {"4"}
+    assert _numbers("five radiation fractions") == {"5"}
+    assert _numbers("three COPD hospitalizations") == {"3"}
+    assert _numbers("two prior admissions for DKA") == {"2"}
+
+
 def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",

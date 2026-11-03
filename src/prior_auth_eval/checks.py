@@ -201,7 +201,7 @@ _SPELLED_QTY = re.compile(
     r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
     r"(?:days?|weeks?|months?|years?|sessions?|"
     r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
-    r"injections?)\b)",
+    r"injections?|shots?|infusions?|fractions?|hospitali[sz]ations?|admissions?)\b)",
     re.IGNORECASE,
 )
 
