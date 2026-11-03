@@ -57,7 +57,7 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    one, a citation to a real-looking NCD number that was never provided, an SSN pasted into the
    header (caught only by `extra_phi`), a one-digit near-miss claim ID, and a letter that drops
    the explicit request to overturn.
-   `examples/handwritten_cases.json` adds PA-026..PA-053, written by hand as prose letters
+   `examples/handwritten_cases.json` adds PA-026..PA-054, written by hand as prose letters
    instead of from the templates: an invented diet history, a letter that argues the wrong
    criterion and adds a phone number, and a near-miss CPT code. PA-028 also swaps "Mother"
    for "Sister" in the family history. The first version of `facts_in_chart` missed that (one
@@ -150,6 +150,11 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    PA-053 (Morton's neuroma excision) has a flawed letter that says three corticosteroid injections where
    the chart documents one; `facts_in_chart` flags the summary bullet, the only check that fails. Writing it
    showed the spelled-out number check did not count injections, so "injection(s)" is now a count noun.
+   PA-054 (implanted port placement) has a flawed letter that says two iron sucrose infusions where the
+   chart documents one; `facts_in_chart` flags the summary bullet, the only check that fails. A first draft
+   of the chart said infusions were "planned every two weeks", and the flaw went unflagged: numbers are
+   matched against every number in the chart, not the fact the bullet restates, so an unrelated "two"
+   elsewhere hides an inflated count. The case now avoids that collision; the limitation is listed below.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -213,18 +218,20 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   SSN, phone, email and street-address patterns that are not in the source material. It misses
   other identifiers (account numbers, free-text family details, unneeded diagnoses) and does
   not judge whether chart content that *is* present was needed.
+- `facts_in_chart` compares a letter's numbers with all numbers in the chart, not with the fact the
+  sentence restates, so an inflated count is missed when the same number appears elsewhere in the chart.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 53 synthetic cases (25 generated, 28 hand-written), six checkers, mock / files / OpenAI-compatible
+**Early, v0.1.** Schema, 54 synthetic cases (25 generated, 29 hand-written), six checkers, mock / files / OpenAI-compatible
 drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-053; more needed)
+  templates (started: PA-026..PA-054; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
