@@ -2297,6 +2297,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-054",
+      "title": "Implanted port placement: hand-written letter whose flawed draft says two iron infusions when the chart documents one (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500154",
+        "cpt": "36561",
+        "icd10": "D50.0",
+        "reason_code": "SYN-D39",
+        "reason_text": "Medical necessity not established: failed peripheral IV access during infusion not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7307-C1"
+        ],
+        "reason_terms": [
+          "peripheral IV"
+        ],
+        "applicable_policy": "SYN-LCD-7307",
+        "denial_date": "2026-10-26",
+        "appeal_deadline": "2026-12-25",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500154, member SYN-MBR-400154. CPT 36561 denied under SYN-D39: Medical necessity not established: failed peripheral IV access during infusion not documented. Criterion SYN-LCD-7307-C1 not met. You may appeal by 2026-12-25."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0054",
+        "member_id": "SYN-MBR-400154",
+        "patient_name": "Riley Fictional",
+        "dob": "1964-08-22",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-03-10",
+            "text": "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and IV iron sucrose infusions planned every other week for at least six months."
+          },
+          {
+            "id": "F2",
+            "date": "2026-06-02",
+            "text": "One iron sucrose infusion stopped early after the peripheral IV infiltrated; three further peripheral IV attempts failed."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-29",
+            "text": "Vein mapping shows no usable peripheral veins in either forearm; infusion schedule continues."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7307",
+          "title": "Implanted venous access port (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7307-C1",
+              "text": "Peripheral IV access failed during at least one infusion, or no usable peripheral veins are documented"
+            },
+            {
+              "id": "SYN-LCD-7307-C2",
+              "text": "IV therapy is planned for at least three months"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-03\nRE: Appeal of the denial of implanted port placement, claim SYN-CLM-500154 (SYNTHETIC CASE)\nPatient: Riley Fictional | Member ID: SYN-MBR-400154 | DOB: 1964-08-22\nRequested service: CPT 36561 | Diagnosis: ICD-10 D50.0\n\n## Response to denial reason\nYour letter of 2026-10-26 denied the port placement under SYN-D39, stating that SYN-LCD-7307-C1 was not met because failed peripheral IV access during an infusion was not documented. The chart documents one iron sucrose infusion stopped early on 2026-06-02 after the peripheral IV infiltrated, followed by three failed peripheral IV attempts, and vein mapping on 2026-09-29 found no usable forearm veins. The clinic notes are enclosed.\n\n## Clinical summary\n- Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and IV iron sucrose infusions planned every other week for at least six months. (2026-03-10).\n- One iron sucrose infusion stopped early after the peripheral IV infiltrated; three further peripheral IV attempts failed (2026-06-02).\n- Vein mapping shows no usable peripheral veins in either forearm; infusion schedule continues. (2026-09-29).\n\n## Policy basis\nSYN-LCD-7307 (Implanted venous access port, synthetic) governs this request. SYN-LCD-7307-C1 and SYN-LCD-7307-C2 are met, and we ask that you overturn the denial and authorize the port placement.\n\n## Enclosures\n- Clinic notes dated 2026-03-10, 2026-06-02 and 2026-09-29\n- Copy of the denial letter dated 2026-10-26\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-03\nRE: Appeal of the denial of implanted port placement, claim SYN-CLM-500154 (SYNTHETIC CASE)\nPatient: Riley Fictional | Member ID: SYN-MBR-400154 | DOB: 1964-08-22\nRequested service: CPT 36561 | Diagnosis: ICD-10 D50.0\n\n## Response to denial reason\nYour letter of 2026-10-26 denied the port placement under SYN-D39, stating that SYN-LCD-7307-C1 was not met because failed peripheral IV access during an infusion was not documented. The chart documents two iron sucrose infusions stopped early on 2026-06-02 after the peripheral IV infiltrated, followed by three failed peripheral IV attempts, and vein mapping on 2026-09-29 found no usable forearm veins. The clinic notes are enclosed.\n\n## Clinical summary\n- Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and IV iron sucrose infusions planned every other week for at least six months. (2026-03-10).\n- Two iron sucrose infusions stopped early after the peripheral IV infiltrated; three further peripheral IV attempts failed (2026-06-02).\n- Vein mapping shows no usable peripheral veins in either forearm; infusion schedule continues. (2026-09-29).\n\n## Policy basis\nSYN-LCD-7307 (Implanted venous access port, synthetic) governs this request. SYN-LCD-7307-C1 and SYN-LCD-7307-C2 are met, and we ask that you overturn the denial and authorize the port placement.\n\n## Enclosures\n- Clinic notes dated 2026-03-10, 2026-06-02 and 2026-09-29\n- Copy of the denial letter dated 2026-10-26\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }
