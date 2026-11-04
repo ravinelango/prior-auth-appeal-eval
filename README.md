@@ -222,6 +222,7 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - `facts_in_chart` checks a bullet's numbers against its matching fact only when the bullet closely
   restates one fact (word overlap of at least 0.5) or cites its date. Looser summaries are still matched
   against every number in the chart, so an inflated count there is missed if the number appears elsewhere.
+  `test_loose_summary_can_still_hide_an_inflated_count` pins one such miss, so the test fails once it is fixed.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
