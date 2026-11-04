@@ -93,3 +93,20 @@ def test_inflated_count_is_caught_even_when_another_fact_has_that_number():
     flawed = {r.name: r for r in run_checks(case, drafts["flawed"]["text"])}["facts_in_chart"]
     assert not flawed.passed
     assert any("not in the matching chart fact" in f and "Two iron" in f for f in flawed.findings)
+
+
+def test_loose_summary_can_still_hide_an_inflated_count():
+    """Known false negative, pinned so the README limitation stays true. Same reworded PA-054
+    chart as above, but the flawed bullet is rewritten as a loose, undated summary. It overlaps
+    no single fact enough to be matched, so its "two" is checked chart-wide, where F1's "every
+    two weeks" supplies a 2. If this starts failing, the gap is closed: update the README."""
+    raw = json.loads(json.dumps(RAW["PA-054"]))
+    raw["chart"]["facts"][0]["text"] = raw["chart"]["facts"][0]["text"].replace(
+        "every other week", "every two weeks"
+    )
+    case = parse_case(raw)
+    flawed = raw["reference_drafts"]["flawed"]["text"]
+    old = next(line for line in flawed.splitlines() if line.startswith("- Two iron"))
+    loose = "- Two infusions so far ended early after the IV infiltrated."
+    results = {r.name: r for r in run_checks(case, flawed.replace(old, loose))}
+    assert results["facts_in_chart"].passed, results["facts_in_chart"].findings
