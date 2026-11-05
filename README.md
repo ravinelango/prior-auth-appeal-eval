@@ -39,7 +39,7 @@ either):
 | Denial reason not addressed | `denial_reason_addressed` | critical | The "Response to denial reason" section must cite each unmet criterion id and engage with the expected reason terms |
 | Wrong patient, claim, member, CPT, ICD or DOB | `identifiers_match` | critical | Extracted identifiers must equal the case's; missing ones are flagged (DOB is checked only when the letter states one) |
 | Missing required elements | `required_elements` | major | Explicit request to overturn, enclosures list, signature with NPI, letter dated on or before the appeal deadline |
-| Extra PHI (minimum necessary) | `extra_phi` | major | SSNs, US phone numbers, email addresses and street-address strings in the letter must appear in the chart or denial letter; anything else is flagged as over-shared |
+| Extra PHI (minimum necessary) | `extra_phi` | major | SSNs, US phone numbers, email addresses, street-address strings and labeled medical record numbers (`MRN: ...`) in the letter must appear in the chart or denial letter; anything else is flagged as over-shared |
 
 **Decision rollup:** NO-GO if any critical check fails on any case; GO WITH CONDITIONS if only
 major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
@@ -216,8 +216,9 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   Negation flips are caught only when a cue word ("no", "denies", "negative", ...) sits
   shortly before the term in the same chart sentence. Only bullets in "Clinical summary" are checked.
 - The extra-PHI check is a pattern floor, not a minimum-necessary review: it looks only for
-  SSN, phone, email and street-address patterns that are not in the source material. It misses
-  other identifiers (account numbers, free-text family details, unneeded diagnoses) and does
+  SSN, phone, email, street-address and labeled medical-record-number patterns that are not in
+  the source material. It misses other identifiers (unlabeled MRNs, account numbers, free-text
+  family details, unneeded diagnoses) and does
   not judge whether chart content that *is* present was needed.
 - `facts_in_chart` checks a bullet's numbers against its matching fact only when the bullet closely
   restates one fact (word overlap of at least 0.5) or cites its date. Looser summaries are still matched
