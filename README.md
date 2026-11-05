@@ -152,10 +152,10 @@ major checks (`required_elements`, `extra_phi`) fail; GO otherwise.
    showed the spelled-out number check did not count injections, so "injection(s)" is now a count noun.
    PA-054 (implanted port placement) has a flawed letter that says two iron sucrose infusions where the
    chart documents one; `facts_in_chart` flags the summary bullet, the only check that fails. A first draft
-   of the chart said infusions were "planned every two weeks", and the flaw went unflagged: numbers are
-   matched against every number in the chart, not the fact the bullet restates, so an unrelated "two"
-   elsewhere hides an inflated count. `facts_in_chart` now also checks a bullet that closely restates one
-   fact against that fact's own numbers; a test keeps the "every two weeks" wording to cover it.
+   of the chart said infusions were "planned every two weeks", and the flaw went unflagged: numbers were
+   matched against every number in the chart, not the fact the bullet restates. `facts_in_chart` now checks
+   a close restatement against that fact's own numbers, and a looser undated summary against its
+   best-scoring vocabulary-overlapping fact(s); tests keep the "every two weeks" wording to cover both.
 2. **Drafter** (`drafters.py`): a small interface. The offline `mock:good` / `mock:flawed`
    drafters replay the reference drafts, so everything runs with no API keys.
    `files:DIR` reads letters you produced elsewhere (`DIR/<case id>.txt`).
@@ -220,10 +220,13 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   the source material. It misses other identifiers (unlabeled MRNs, account numbers, free-text
   family details, unneeded diagnoses) and does
   not judge whether chart content that *is* present was needed.
-- `facts_in_chart` checks a bullet's numbers against its matching fact only when the bullet closely
-  restates one fact (word overlap of at least 0.5) or cites its date. Looser summaries are still matched
-  against every number in the chart, so an inflated count there is missed if the number appears elsewhere.
-  `test_loose_summary_can_still_hide_an_inflated_count` pins one such miss, so the test fails once it is fixed.
+- `facts_in_chart` checks a bullet's numbers against its matching fact when the bullet closely
+  restates one fact (word overlap of at least 0.5) or cites its date. Looser undated summaries that
+  still share content words are checked against the best-scoring overlapping fact(s) only, so an
+  inflated count is no longer hidden by an unrelated "two" elsewhere in the chart. A remaining gap:
+  a loose summary whose strongest vocabulary overlap is with a fact that happens to carry the same
+  number, or one that shares no content words at all (chart-wide fallback), can still miss an
+  inflation.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
