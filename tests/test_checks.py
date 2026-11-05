@@ -351,6 +351,8 @@ def test_extra_phi_passes_on_good_letter(case, good_letter):
         ("Call the patient at (555) 555-0142.", "phone number"),
         ("Email pat.example@example.org with questions.", "email address"),
         ("Home address: 742 Placeholder Lane, Faketown.", "street address"),
+        ("MRN: 00482913", "medical record number"),
+        ("Medical record number #SYN-7730015 attached.", "medical record number"),
     ],
 )
 def test_extra_phi_flags_identifiers_not_in_source(case, good_letter, snippet, kind):
@@ -459,3 +461,13 @@ def test_suspected_diagnosis_stated_as_established_is_flagged(case_dict, good_le
     bad = ok.replace("suspected peripheral", "peripheral")
     r = check_facts(c, bad)
     assert not r.passed and any("only suspects" in f and "neuropathy" in f for f in r.findings)
+
+
+def test_extra_phi_allows_mrn_that_is_in_the_chart(case_dict, good_letter):
+    # Same digits written two ways ("MRN 00482913" in the chart, "MRN: 00482913" in the letter)
+    case_dict["chart"]["facts"][0]["text"] += " MRN 00482913."
+    case2 = parse_case(case_dict)
+    ok = good_letter.replace(
+        "## Response to denial reason", "MRN: 00482913\n\n## Response to denial reason"
+    )
+    assert check_extra_phi(case2, ok).passed

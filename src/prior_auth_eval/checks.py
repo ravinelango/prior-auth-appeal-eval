@@ -551,10 +551,16 @@ _PHI_RX = {
         r"(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Lane|Ln|Drive|Court|Ct|Place|Pl|"
         r"Way|Terrace|Circle|Parkway|Pkwy|Highway|Hwy)\b\.?"
     ),
+    "medical record number": re.compile(
+        r"\b(?:MRN|medical record (?:number|no\.?|#))[:#\s]*[A-Z]{0,3}-?\d{5,10}\b",
+        re.IGNORECASE,
+    ),
 }
 
 
 def _phi_key(kind: str, value: str) -> str:
+    if kind == "medical record number":
+        return re.sub(r"\D", "", value)
     if kind in ("SSN", "phone number"):
         digits = re.sub(r"\D", "", value)
         return digits[-10:] if kind == "phone number" else digits
@@ -562,8 +568,8 @@ def _phi_key(kind: str, value: str) -> str:
 
 
 def check_extra_phi(case: Case, letter: str) -> CheckResult:
-    """Minimum-necessary floor: flag SSNs, phone numbers, emails and street addresses that the
-    letter adds but that appear nowhere in the chart or the denial letter.
+    """Minimum-necessary floor: flag SSNs, phone numbers, emails, street addresses and medical
+    record numbers that the letter adds but that appear nowhere in the chart or the denial letter.
 
     Identifiers that are in the source material are allowed (the appeal may need them); this
     only catches over-sharing of identifiers the drafter invented or pulled from elsewhere.
