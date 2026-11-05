@@ -332,19 +332,22 @@ def _misdated(facts, bullet: str) -> tuple[str, str] | None:
     return sorted(dates)[0], ", ".join(sorted(expected))
 
 
-def _miscounted(facts, bullet: str) -> list[str]:
-    """Numbers in a bullet that its closest-matching chart fact does not contain.
+def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
+    """Numbers in a bullet that its closest/overlapping chart fact does not contain.
 
     The chart-wide number check passes a bullet whose number appears anywhere in the chart, so
     an inflated count ("two infusions") slips through when some other fact happens to say "every
-    two weeks". A bullet that closely paraphrases one fact (same overlap rule as the date check)
-    must take its numbers from that fact. Summaries below DATE_MATCH_MIN are not checked.
+    two weeks". A bullet that closely paraphrases one fact (Jaccard >= DATE_MATCH_MIN) must take
+    its numbers from that fact ("matching"). A looser undated summary that still shares content
+    words is checked against the best-scoring overlapping fact(s) only ("overlapping"), so a
+    weak single-word hit on an unrelated fact that carries the same number does not hide the
+    inflation. Bullets with no shared content words keep the chart-wide check.
     """
     dates = set(_DATE.findall(bullet))
     nums = _numbers(bullet) - dates
     words = _words(bullet)
     if not nums or not words:
-        return []
+        return None
     scored = []
     for f in facts:
         fw = _words(f.text)
@@ -355,11 +358,16 @@ def _miscounted(facts, bullet: str) -> list[str]:
         scored.append((score, cited, _numbers(f.text)))
     best = max(s for s, _, _ in scored)
     if best < DATE_MATCH_MIN:
-        return []
+        if best <= 0:
+            return None
+        expected = set().union(*(ns for s, _, ns in scored if s >= best - 1e-9))
+        bad = sorted(nums - expected)
+        return (bad, "overlapping") if bad else None
     expected = set().union(
         *(ns for s, cited, ns in scored if s >= DATE_MATCH_MIN or s >= best - 1e-9 or cited)
     )
-    return sorted(nums - expected)
+    bad = sorted(nums - expected)
+    return (bad, "matching") if bad else None
 
 
 def check_facts(case: Case, letter: str) -> CheckResult:
@@ -403,11 +411,17 @@ def check_facts(case: Case, letter: str) -> CheckResult:
         as_done = sorted(_split_planned(b)[1] & chart_planned_only)
         unhedged = sorted(_split_planned(b, _HEDGE_CUE)[1] & chart_hedged_only)
         misdated = _misdated(case.chart.facts, b)
-        miscounted = [] if bad_nums else _miscounted(case.chart.facts, b)
+        miscounted = None if bad_nums else _miscounted(case.chart.facts, b)
         if bad_nums:
             res.findings.append(f'number(s) not in chart {bad_nums}: "{b}"')
         elif miscounted:
-            res.findings.append(f'number(s) {miscounted} not in the matching chart fact: "{b}"')
+            bad, kind = miscounted
+            if kind == "matching":
+                res.findings.append(f'number(s) {bad} not in the matching chart fact: "{b}"')
+            else:
+                res.findings.append(
+                    f'number(s) {bad} not in the vocabulary-overlapping chart fact(s): "{b}"'
+                )
         elif flipped:
             res.findings.append(f'possible negation flip of chart-negated term(s) {flipped}: "{b}"')
         elif swapped:
