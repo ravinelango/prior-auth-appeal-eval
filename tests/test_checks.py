@@ -156,6 +156,15 @@ def test_spelled_out_shots_infusions_and_admissions_are_numbers():
     assert _numbers("two prior admissions for DKA") == {"2"}
 
 
+def test_spelled_out_compound_counts_and_hours_are_numbers():
+    from prior_auth_eval.checks import _numbers
+
+    assert _numbers("twenty-four hours of observation") == {"24"}
+    assert _numbers("thirty six weeks of conservative care") == {"36"}
+    assert _numbers("eighty days on the formulary agent") == {"80"}
+    assert _numbers("seventy-two hours after admission") == {"72"}
+
+
 def test_invented_clinical_term_is_flagged(case, good_letter):
     bad = good_letter.replace(
         "## Policy basis",

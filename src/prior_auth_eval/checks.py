@@ -193,23 +193,42 @@ _SPELLED = {
         "fifteen sixteen seventeen eighteen nineteen twenty".split()
     )
 }
-_SPELLED.update({"thirty": "30", "forty": "40", "fifty": "50", "sixty": "60", "ninety": "90"})
+_TENS = {
+    "twenty": 20,
+    "thirty": 30,
+    "forty": 40,
+    "fifty": 50,
+    "sixty": 60,
+    "seventy": 70,
+    "eighty": 80,
+    "ninety": 90,
+}
+_SPELLED.update({w: str(n) for w, n in _TENS.items()})
+# Compound counts such as "twenty-four hours" or "thirty six weeks".
+_COMPOUND = r"(?:" + "|".join(_TENS) + r")[ -](?:one|two|three|four|five|six|seven|eight|nine)"
 # Only count a spelled-out number when it quantifies something ("nine weeks", "two visits"),
 # so "one of the criteria" or "no one" does not read as the number 1. Up to two words may sit
 # between the number and the count noun ("five hypoglycemic episodes", "two prior PT courses").
 _SPELLED_QTY = re.compile(
-    r"\b(" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
-    r"(?:days?|weeks?|months?|years?|sessions?|"
+    r"\b(" + _COMPOUND + "|" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
+    r"(?:hours?|days?|weeks?|months?|years?|sessions?|"
     r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
     r"injections?|shots?|infusions?|fractions?|hospitali[sz]ations?|admissions?)\b)",
     re.IGNORECASE,
 )
 
 
+def _spelled_value(word: str) -> str:
+    parts = re.split(r"[ -]", word.lower())
+    if len(parts) == 2:
+        return str(_TENS[parts[0]] + int(_SPELLED[parts[1]]))
+    return _SPELLED[parts[0]]
+
+
 def _numbers(text: str) -> set[str]:
     dates = set(_DATE.findall(text))
     rest = _DATE.sub(" ", text)
-    rest = _SPELLED_QTY.sub(lambda m: f" {_SPELLED[m.group(1).lower()]} ", rest)
+    rest = _SPELLED_QTY.sub(lambda m: f" {_spelled_value(m.group(1))} ", rest)
     return dates | set(_NUM.findall(rest))
 
 
