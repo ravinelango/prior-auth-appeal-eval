@@ -114,3 +114,30 @@ def test_loose_summary_inflated_count_is_caught_via_vocabulary_overlap():
     assert any("vocabulary-overlapping" in f and ("Two" in f or "2" in f) for f in fic.findings), (
         fic.findings
     )
+
+
+def test_loose_summary_same_number_best_overlap_still_missed():
+    """Documents the remaining PA-055-style gap: a loose undated summary whose best vocabulary
+    overlap is with a fact that happens to carry the same number still slips through.
+
+    Chart F1 has "every three weeks" (a 3); F2 has one infiltrated infusion. The flawed bullet
+    claims three infiltrated infusions but shares more schedule/clinic words with F1, so the
+    overlapping-fact check accepts the 3. If this starts failing, the gap was closed: drop the
+    test and tighten the README limitation.
+    """
+    raw = json.loads(json.dumps(RAW["PA-054"]))
+    raw["chart"]["facts"][0]["text"] = (
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and "
+        "IV iron sucrose infusions continue every three weeks at the outpatient clinic for at "
+        "least six months."
+    )
+    case = parse_case(raw)
+    flawed = raw["reference_drafts"]["flawed"]["text"]
+    old = next(line for line in flawed.splitlines() if line.startswith("- Two iron"))
+    loose = (
+        "- Three iron sucrose infusions at the outpatient clinic stopped early after the "
+        "peripheral line infiltrated."
+    )
+    results = {r.name: r for r in run_checks(case, flawed.replace(old, loose))}
+    fic = results["facts_in_chart"]
+    assert fic.passed, fic.findings

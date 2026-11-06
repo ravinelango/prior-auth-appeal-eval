@@ -225,8 +225,9 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   still share content words are checked against the best-scoring overlapping fact(s) only, so an
   inflated count is no longer hidden by an unrelated "two" elsewhere in the chart. A remaining gap:
   a loose summary whose strongest vocabulary overlap is with a fact that happens to carry the same
-  number, or one that shares no content words at all (chart-wide fallback), can still miss an
-  inflation.
+  number (for example a schedule fact with "every three weeks" masking "three infusions"), or one
+  that shares no content words at all (chart-wide fallback), can still miss an inflation. Covered by
+  `test_loose_summary_same_number_best_overlap_still_missed`.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
