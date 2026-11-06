@@ -223,11 +223,12 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - `facts_in_chart` checks a bullet's numbers against its matching fact when the bullet closely
   restates one fact (word overlap of at least 0.5) or cites its date. Looser undated summaries that
   still share content words are checked against the best-scoring overlapping fact(s) only, so an
-  inflated count is no longer hidden by an unrelated "two" elsewhere in the chart. A remaining gap:
-  a loose summary whose strongest vocabulary overlap is with a fact that happens to carry the same
-  number (for example a schedule fact with "every three weeks" masking "three infusions"), or one
-  that shares no content words at all (chart-wide fallback), can still miss an inflation. Covered by
-  `test_loose_summary_same_number_best_overlap_still_missed`.
+  inflated count is no longer hidden by an unrelated "two" elsewhere in the chart. When the bullet
+  scopes a number with a count noun ("three infusions"), that number must appear in the overlapping
+  fact with the same count-noun role — a schedule fact's "every three weeks" does not cover it
+  (`test_loose_summary_same_number_different_count_noun_is_caught`). A remaining gap: a loose
+  summary that shares no content words at all still falls back to the chart-wide number check, and
+  a bare number with no count noun on either side is still accepted by presence alone.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
