@@ -207,10 +207,11 @@ _SPELLED.update({w: str(n) for w, n in _TENS.items()})
 # Compound counts such as "twenty-four hours" or "thirty six weeks".
 _COMPOUND = r"(?:" + "|".join(_TENS) + r")[ -](?:one|two|three|four|five|six|seven|eight|nine)"
 # Only count a spelled-out number when it quantifies something ("nine weeks", "two visits"),
-# so "one of the criteria" or "no one" does not read as the number 1. Up to two words may sit
-# between the number and the count noun ("five hypoglycemic episodes", "two prior PT courses").
+# so "one of the criteria" or "no one" does not read as the number 1. Up to three words may sit
+# between the number and the count noun ("five hypoglycemic episodes", "two prior PT courses",
+# "three further peripheral IV attempts").
 _SPELLED_QTY = re.compile(
-    r"\b(" + _COMPOUND + "|" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,2}"
+    r"\b(" + _COMPOUND + "|" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,3}"
     r"(?:hours?|days?|weeks?|months?|years?|sessions?|"
     r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
     r"injections?|shots?|infusions?|fractions?|hospitali[sz]ations?|admissions?)\b)",

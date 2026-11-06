@@ -135,7 +135,9 @@ def test_spelled_out_number_with_words_before_the_unit():
 
     assert _numbers("Five hypoglycemic episodes despite adjustment") == {"5"}
     assert _numbers("two prior PT courses") == {"2"}
-    # more than two words between number and unit is not read as a count
+    # Route abbreviations (IV) sit between the number and the count noun.
+    assert _numbers("three further peripheral IV attempts failed") == {"3"}
+    # more than three words between number and unit is not read as a count
     assert _numbers("one of the last few weeks") == set()
 
 
