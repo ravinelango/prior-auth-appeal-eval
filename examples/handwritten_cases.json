@@ -2370,6 +2370,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-055",
+      "title": "Home sleep study: hand-written letter whose flawed draft drops the chart hedge and states suspected OSA as established (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500155",
+        "cpt": "95800",
+        "icd10": "G47.33",
+        "reason_code": "SYN-D40",
+        "reason_text": "Medical necessity not established: signs of sleep-disordered breathing not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7310-C1"
+        ],
+        "reason_terms": [
+          "sleep-disordered breathing",
+          "snoring"
+        ],
+        "applicable_policy": "SYN-LCD-7310",
+        "denial_date": "2026-10-28",
+        "appeal_deadline": "2026-12-27",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500155, member SYN-MBR-400155. CPT 95800 denied under SYN-D40: Medical necessity not established: signs of sleep-disordered breathing not documented. Criterion SYN-LCD-7310-C1 not met. You may appeal by 2026-12-27."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0055",
+        "member_id": "SYN-MBR-400155",
+        "patient_name": "Casey Specimen",
+        "dob": "1979-03-14",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-07-08",
+            "text": "Loud snoring and witnessed pauses in breathing for about nine months; Epworth sleepiness score 14."
+          },
+          {
+            "id": "F2",
+            "date": "2026-09-02",
+            "text": "BMI 34; neck circumference 43 cm; no prior formal sleep testing."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-02",
+            "text": "Suspected obstructive sleep apnea; home sleep apnea testing ordered."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7310",
+          "title": "Home sleep apnea testing (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7310-C1",
+              "text": "Clinical signs of sleep-disordered breathing are documented (snoring, witnessed apneas, or elevated sleepiness score)"
+            },
+            {
+              "id": "SYN-LCD-7310-C2",
+              "text": "No prior formal sleep testing is available for the current presentation"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-04\nRE: Appeal of the denial of home sleep apnea testing, claim SYN-CLM-500155 (SYNTHETIC CASE)\nPatient: Casey Specimen | Member ID: SYN-MBR-400155 | DOB: 1979-03-14\nRequested service: CPT 95800 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-10-28 denied home sleep apnea testing under SYN-D40, stating that SYN-LCD-7310-C1 was not met because signs of sleep-disordered breathing were not documented. The chart documents loud snoring and witnessed pauses for about nine months, an Epworth score of 14, and suspected obstructive sleep apnea with home testing ordered. Clinic notes are enclosed.\n\n## Clinical summary\n- Loud snoring and witnessed pauses in breathing for about nine months; Epworth sleepiness score 14 (2026-07-08).\n- BMI 34; neck circumference 43 cm; no prior formal sleep testing (2026-09-02).\n- Suspected obstructive sleep apnea; home sleep apnea testing ordered (2026-09-02).\n\n## Policy basis\nSYN-LCD-7310 (Home sleep apnea testing, synthetic) governs this request. SYN-LCD-7310-C1 and SYN-LCD-7310-C2 are met, and we ask that you overturn the denial and authorize the home study.\n\n## Enclosures\n- Clinic notes dated 2026-07-08 and 2026-09-02\n- Copy of the denial letter dated 2026-10-28\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-04\nRE: Appeal of the denial of home sleep apnea testing, claim SYN-CLM-500155 (SYNTHETIC CASE)\nPatient: Casey Specimen | Member ID: SYN-MBR-400155 | DOB: 1979-03-14\nRequested service: CPT 95800 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-10-28 denied home sleep apnea testing under SYN-D40, stating that SYN-LCD-7310-C1 was not met because signs of sleep-disordered breathing were not documented. The chart documents loud snoring and witnessed pauses for about nine months, an Epworth score of 14, and obstructive sleep apnea with home testing ordered. Clinic notes are enclosed.\n\n## Clinical summary\n- Loud snoring and witnessed pauses in breathing for about nine months; Epworth sleepiness score 14 (2026-07-08).\n- BMI 34; neck circumference 43 cm; no prior formal sleep testing (2026-09-02).\n- Obstructive sleep apnea; home sleep apnea testing ordered (2026-09-02).\n\n## Policy basis\nSYN-LCD-7310 (Home sleep apnea testing, synthetic) governs this request. SYN-LCD-7310-C1 and SYN-LCD-7310-C2 are met, and we ask that you overturn the denial and authorize the home study.\n\n## Enclosures\n- Clinic notes dated 2026-07-08 and 2026-09-02\n- Copy of the denial letter dated 2026-10-28\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "facts_in_chart"
+          ]
+        }
+      }
     }
   ]
 }

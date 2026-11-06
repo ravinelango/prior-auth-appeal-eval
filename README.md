@@ -231,14 +231,14 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
 ## Status
-**Early, v0.1.** Schema, 54 synthetic cases (25 generated, 29 hand-written), six checkers, mock / files / OpenAI-compatible
+**Early, v0.1.** Schema, 55 synthetic cases (25 generated, 30 hand-written), six checkers, mock / files / OpenAI-compatible
 drafters, report, CLI and tests (all passing). **No published real-model results.**
 
 ## Roadmap
 - ~~More cases with harder seeded flaws (negation flips, near-miss identifiers)~~ (done)
 - ~~Grow to 25 synthetic cases~~ (done: 25 cases, including multi-criterion denials)
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
-  templates (started: PA-026..PA-054; more needed)
+  templates (started: PA-026..PA-055; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
   (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
