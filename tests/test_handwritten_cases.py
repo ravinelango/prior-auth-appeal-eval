@@ -116,14 +116,13 @@ def test_loose_summary_inflated_count_is_caught_via_vocabulary_overlap():
     )
 
 
-def test_loose_summary_same_number_best_overlap_still_missed():
-    """Documents the remaining PA-055-style gap: a loose undated summary whose best vocabulary
-    overlap is with a fact that happens to carry the same number still slips through.
+def test_loose_summary_same_number_different_count_noun_is_caught():
+    """A loose undated summary must not borrow a schedule fact's number for a different count noun.
 
-    Chart F1 has "every three weeks" (a 3); F2 has one infiltrated infusion. The flawed bullet
-    claims three infiltrated infusions but shares more schedule/clinic words with F1, so the
-    overlapping-fact check accepts the 3. If this starts failing, the gap was closed: drop the
-    test and tighten the README limitation.
+    Chart F1 has "every three weeks" (a 3) and shares outpatient/clinic words with the bullet;
+    F2 has one infiltrated infusion (and a separate "three attempts"). The flawed bullet claims
+    three infiltrated infusions. Count-noun role matching rejects F1's weeks-3 and F2's
+    attempts-3, so the inflation is flagged on the overlapping-fact path.
     """
     raw = json.loads(json.dumps(RAW["PA-054"]))
     raw["chart"]["facts"][0]["text"] = (
@@ -140,4 +139,7 @@ def test_loose_summary_same_number_best_overlap_still_missed():
     )
     results = {r.name: r for r in run_checks(case, flawed.replace(old, loose))}
     fic = results["facts_in_chart"]
-    assert fic.passed, fic.findings
+    assert not fic.passed
+    assert any(
+        "vocabulary-overlapping" in f and ("Three" in f or "3" in f) for f in fic.findings
+    ), fic.findings

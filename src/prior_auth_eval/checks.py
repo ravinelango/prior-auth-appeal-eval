@@ -210,11 +210,21 @@ _COMPOUND = r"(?:" + "|".join(_TENS) + r")[ -](?:one|two|three|four|five|six|sev
 # so "one of the criteria" or "no one" does not read as the number 1. Up to three words may sit
 # between the number and the count noun ("five hypoglycemic episodes", "two prior PT courses",
 # "three further peripheral IV attempts").
+_COUNT_NOUN = (
+    r"hours?|days?|weeks?|months?|years?|sessions?|"
+    r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
+    r"injections?|shots?|infusions?|fractions?|hospitali[sz]ations?|admissions?"
+)
 _SPELLED_QTY = re.compile(
     r"\b(" + _COMPOUND + "|" + "|".join(_SPELLED) + r")(?:[ -]+)(?=(?:[a-z]+[ -]+){0,3}"
-    r"(?:hours?|days?|weeks?|months?|years?|sessions?|"
-    r"visits?|doses?|times|trials?|courses?|cycles?|episodes?|medications?|attempts?|"
-    r"injections?|shots?|infusions?|fractions?|hospitali[sz]ations?|admissions?)\b)",
+    r"(?:" + _COUNT_NOUN + r")\b)",
+    re.IGNORECASE,
+)
+# Digit or spelled quantity + its count noun (same 0-3 word gap). Used so "three weeks" does
+# not justify "three infusions" when a loose summary overlaps a schedule fact.
+_NUM_HEAD = re.compile(
+    r"\b(" + _COMPOUND + "|" + "|".join(_SPELLED) + r"|\d+(?:\.\d+)?)"
+    r"(?:[ -]+)(?:[a-z]+[ -]+){0,3}(" + _COUNT_NOUN + r")\b",
     re.IGNORECASE,
 )
 
@@ -231,6 +241,34 @@ def _numbers(text: str) -> set[str]:
     rest = _DATE.sub(" ", text)
     rest = _SPELLED_QTY.sub(lambda m: f" {_spelled_value(m.group(1))} ", rest)
     return dates | set(_NUM.findall(rest))
+
+
+def _head_stem(noun: str) -> str:
+    """Rough singular stem so 'infusions' meets 'infusion'."""
+    n = noun.lower()
+    if n.endswith("ies") and len(n) > 4:
+        return n[:-3] + "y"
+    if n.endswith("s") and not n.endswith("ss") and len(n) > 3:
+        return n[:-1]
+    return n
+
+
+def _number_heads(text: str) -> dict[str, set[str]]:
+    """Map each quantity in text to the count-noun stem(s) it attaches to.
+
+    "every three weeks" -> {"3": {"week"}}; "two iron sucrose infusions" -> {"2": {"infusion"}}.
+    Bare numbers with no count noun are omitted so callers can fall back to unscoped presence.
+    """
+    rest = _DATE.sub(" ", text)
+    out: dict[str, set[str]] = {}
+    for m in _NUM_HEAD.finditer(rest):
+        raw, noun = m.group(1), m.group(2)
+        key = _spelled_value(raw) if re.search(r"[a-zA-Z]", raw) else raw
+        # Normalize "20" from compounds; strip leading zeros on pure digits except plain 0.
+        if re.fullmatch(r"\d+(?:\.\d+)?", key):
+            key = key if "." in key else str(int(key))
+        out.setdefault(key, set()).add(_head_stem(noun))
+    return out
 
 
 def _words(text: str) -> set[str]:
@@ -333,6 +371,28 @@ def _misdated(facts, bullet: str) -> tuple[str, str] | None:
     return sorted(dates)[0], ", ".join(sorted(expected))
 
 
+def _fact_numbers_for_bullet(bullet: str, fact_text: str) -> set[str]:
+    """Numbers in fact_text that can justify the same numbers in bullet.
+
+    When the bullet scopes a number with a count noun ("three infusions"), only a fact
+    occurrence of that number with the same count-noun stem counts. That stops a schedule
+    fact's "every three weeks" from covering an inflated "three infusions". Bare numbers
+    (no count noun on the bullet, or no count noun on the fact) keep the old presence rule.
+    """
+    b_heads = _number_heads(bullet)
+    f_heads = _number_heads(fact_text)
+    out: set[str] = set()
+    for n in _numbers(fact_text) - set(_DATE.findall(fact_text)):
+        bh = b_heads.get(n)
+        if not bh:
+            out.add(n)
+            continue
+        fh = f_heads.get(n)
+        if fh is None or bh & fh:
+            out.add(n)
+    return out
+
+
 def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
     """Numbers in a bullet that its closest/overlapping chart fact does not contain.
 
@@ -342,7 +402,9 @@ def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
     its numbers from that fact ("matching"). A looser undated summary that still shares content
     words is checked against the best-scoring overlapping fact(s) only ("overlapping"), so a
     weak single-word hit on an unrelated fact that carries the same number does not hide the
-    inflation. Bullets with no shared content words keep the chart-wide check.
+    inflation. On both paths, a count-noun role must match when the bullet names one ("three
+    infusions" is not covered by "three weeks"). Bullets with no shared content words keep the
+    chart-wide check.
     """
     dates = set(_DATE.findall(bullet))
     nums = _numbers(bullet) - dates
@@ -356,7 +418,7 @@ def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
         # A bullet that merges facts ("between 2025-08-04 and 2026-02-09") may also take
         # numbers from any fact whose date it cites.
         cited = bool(dates & {f.date, *_DATE.findall(f.text)})
-        scored.append((score, cited, _numbers(f.text)))
+        scored.append((score, cited, _fact_numbers_for_bullet(bullet, f.text)))
     best = max(s for s, _, _ in scored)
     if best < DATE_MATCH_MIN:
         if best <= 0:
