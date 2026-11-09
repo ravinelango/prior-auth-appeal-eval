@@ -226,9 +226,10 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   inflated count is no longer hidden by an unrelated "two" elsewhere in the chart. When the bullet
   scopes a number with a count noun ("three infusions"), that number must appear in the overlapping
   fact with the same count-noun role — a schedule fact's "every three weeks" does not cover it
-  (`test_loose_summary_same_number_different_count_noun_is_caught`). A remaining gap: a loose
-  summary that shares no content words at all still falls back to the chart-wide number check, and
-  a bare number with no count noun on either side is still accepted by presence alone.
+  (`test_loose_summary_same_number_different_count_noun_is_caught`). A loose summary that
+  shares no content words with any fact is checked against the whole chart, with the same
+  count-noun rule (`test_zero_share_bullet_count_noun_must_match_somewhere_in_chart`). A remaining
+  gap: a bare number with no count noun on either side is still accepted by presence alone.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
