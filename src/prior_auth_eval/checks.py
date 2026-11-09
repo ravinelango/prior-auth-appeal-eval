@@ -403,8 +403,8 @@ def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
     words is checked against the best-scoring overlapping fact(s) only ("overlapping"), so a
     weak single-word hit on an unrelated fact that carries the same number does not hide the
     inflation. On both paths, a count-noun role must match when the bullet names one ("three
-    infusions" is not covered by "three weeks"). Bullets with no shared content words keep the
-    chart-wide check.
+    infusions" is not covered by "three weeks"). Bullets with no shared content words are checked
+    against every fact ("chart-wide"), still with the count-noun role rule.
     """
     dates = set(_DATE.findall(bullet))
     nums = _numbers(bullet) - dates
@@ -422,7 +422,11 @@ def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
     best = max(s for s, _, _ in scored)
     if best < DATE_MATCH_MIN:
         if best <= 0:
-            return None
+            # No shared content words: fall back to the whole chart, but still require a
+            # count-noun role match, so "3 visits" is not covered by "every three weeks".
+            expected = set().union(*(ns for _, _, ns in scored))
+            bad = sorted(nums - expected)
+            return (bad, "chart-wide") if bad else None
         expected = set().union(*(ns for s, _, ns in scored if s >= best - 1e-9))
         bad = sorted(nums - expected)
         return (bad, "overlapping") if bad else None
@@ -481,6 +485,10 @@ def check_facts(case: Case, letter: str) -> CheckResult:
             bad, kind = miscounted
             if kind == "matching":
                 res.findings.append(f'number(s) {bad} not in the matching chart fact: "{b}"')
+            elif kind == "chart-wide":
+                res.findings.append(
+                    f'number(s) {bad} not in any chart fact with the same count noun: "{b}"'
+                )
             else:
                 res.findings.append(
                     f'number(s) {bad} not in the vocabulary-overlapping chart fact(s): "{b}"'

@@ -143,3 +143,25 @@ def test_loose_summary_same_number_different_count_noun_is_caught():
     assert any(
         "vocabulary-overlapping" in f and ("Three" in f or "3" in f) for f in fic.findings
     ), fic.findings
+
+
+def test_zero_share_bullet_count_noun_must_match_somewhere_in_chart():
+    """A bullet that shares no content words with any fact ("Riley Fictional: 3 visits.") used to
+    fall back to bare chart-wide presence, so F1's "every three weeks" covered "3 visits" and
+    the only unseen word kept it under UNSEEN_RATIO. The chart-wide fallback now keeps the
+    count-noun role rule, so the made-up visit count is flagged."""
+    raw = json.loads(json.dumps(RAW["PA-054"]))
+    raw["chart"]["facts"][0]["text"] = (
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and "
+        "IV iron sucrose infusions continue every three weeks at the outpatient clinic for at "
+        "least six months."
+    )
+    case = parse_case(raw)
+    good = raw["reference_drafts"]["good"]["text"]
+    assert {r.name: r for r in run_checks(case, good)}["facts_in_chart"].passed
+    lines = good.splitlines()
+    head = next(i for i, line in enumerate(lines) if line.lower().startswith("## clinical summary"))
+    lines.insert(head + 1, f"- {raw['chart']['patient_name']}: 3 visits.")
+    fic = {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
+    assert not fic.passed
+    assert any("same count noun" in f and "3 visits" in f for f in fic.findings), fic.findings
