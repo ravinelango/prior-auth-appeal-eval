@@ -371,21 +371,29 @@ def _misdated(facts, bullet: str) -> tuple[str, str] | None:
     return sorted(dates)[0], ", ".join(sorted(expected))
 
 
-def _fact_numbers_for_bullet(bullet: str, fact_text: str) -> set[str]:
+def _bare_numbers(text: str) -> set[str]:
+    """Numbers in text that are not attached to a count noun ("3" in "3 of 4", not "3 weeks")."""
+    return _numbers(_NUM_HEAD.sub(" ", _DATE.sub(" ", text)))
+
+
+def _fact_numbers_for_bullet(bullet: str, fact_text: str, strict_bare: bool = False) -> set[str]:
     """Numbers in fact_text that can justify the same numbers in bullet.
 
     When the bullet scopes a number with a count noun ("three infusions"), only a fact
     occurrence of that number with the same count-noun stem counts. That stops a schedule
-    fact's "every three weeks" from covering an inflated "three infusions". Bare numbers
-    (no count noun on the bullet, or no count noun on the fact) keep the old presence rule.
+    fact's "every three weeks" from covering an inflated "three infusions". A bare bullet
+    number (no count noun) is covered by any fact occurrence, unless strict_bare is set: then
+    the fact must also use it bare, so "3 of them" is not covered by "every three weeks".
     """
     b_heads = _number_heads(bullet)
     f_heads = _number_heads(fact_text)
+    f_bare = _bare_numbers(fact_text) if strict_bare else set()
     out: set[str] = set()
     for n in _numbers(fact_text) - set(_DATE.findall(fact_text)):
         bh = b_heads.get(n)
         if not bh:
-            out.add(n)
+            if not strict_bare or n in f_bare:
+                out.add(n)
             continue
         fh = f_heads.get(n)
         if fh is None or bh & fh:
@@ -424,7 +432,11 @@ def _miscounted(facts, bullet: str) -> tuple[list[str], str] | None:
         if best <= 0:
             # No shared content words: fall back to the whole chart, but still require a
             # count-noun role match, so "3 visits" is not covered by "every three weeks".
-            expected = set().union(*(ns for _, _, ns in scored))
+            # With nothing tying the bullet to a fact, a bare number must also appear bare
+            # in some fact; a chart 3 that only ever means "three weeks" does not cover it.
+            expected = set().union(
+                *(_fact_numbers_for_bullet(bullet, f.text, strict_bare=True) for f in facts)
+            )
             bad = sorted(nums - expected)
             return (bad, "chart-wide") if bad else None
         expected = set().union(*(ns for s, _, ns in scored if s >= best - 1e-9))
@@ -487,7 +499,8 @@ def check_facts(case: Case, letter: str) -> CheckResult:
                 res.findings.append(f'number(s) {bad} not in the matching chart fact: "{b}"')
             elif kind == "chart-wide":
                 res.findings.append(
-                    f'number(s) {bad} not in any chart fact with the same count noun: "{b}"'
+                    f"number(s) {bad} not in any chart fact with the same count noun "
+                    f'(or used bare): "{b}"'
                 )
             else:
                 res.findings.append(

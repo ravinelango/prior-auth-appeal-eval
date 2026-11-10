@@ -167,25 +167,34 @@ def test_zero_share_bullet_count_noun_must_match_somewhere_in_chart():
     assert any("same count noun" in f and "3 visits" in f for f in fic.findings), fic.findings
 
 
-def test_bare_number_with_no_count_noun_still_accepted_by_presence():
-    """Documents the remaining bare-number gap. When neither the bullet nor the chart ties a
-    number to a count noun role the bullet names, the number is accepted if it appears anywhere
-    in the chart.
-
-    Here the bullet "Riley Fictional: 3 of them." names no count noun, so F1's "every three
-    weeks" still covers its 3. If this starts failing, the gap was closed: drop the test and
-    update the README limitation.
-    """
+def _pa054_with_bare_bullet(fact_text: str):
     raw = json.loads(json.dumps(RAW["PA-054"]))
-    raw["chart"]["facts"][0]["text"] = (
+    raw["chart"]["facts"][0]["text"] = fact_text
+    case = parse_case(raw)
+    lines = raw["reference_drafts"]["good"]["text"].splitlines()
+    head = next(i for i, line in enumerate(lines) if line.lower().startswith("## clinical summary"))
+    lines.insert(head + 1, f"- {raw['chart']['patient_name']}: 3 of them.")
+    return {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
+
+
+def test_zero_share_bare_number_not_covered_by_unit_scoped_chart_number():
+    """A bullet that shares no content words with any fact and ties its number to no count noun
+    ("3 of them") is not covered by a chart 3 that only ever means "every three weeks"."""
+    fic = _pa054_with_bare_bullet(
         "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and "
         "IV iron sucrose infusions continue every three weeks at the outpatient clinic for at "
         "least six months."
     )
-    case = parse_case(raw)
-    good = raw["reference_drafts"]["good"]["text"]
-    lines = good.splitlines()
-    head = next(i for i, line in enumerate(lines) if line.lower().startswith("## clinical summary"))
-    lines.insert(head + 1, f"- {raw['chart']['patient_name']}: 3 of them.")
-    fic = {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
+    assert not fic.passed
+    assert any("used bare" in f and "3 of them" in f for f in fic.findings), fic.findings
+
+
+def test_zero_share_bare_number_covered_by_bare_chart_number():
+    """The same bullet passes when some fact also uses 3 bare (synthetic "ferritin low on 3 of 3
+    draws"), so the stricter fallback does not reject every bare number."""
+    fic = _pa054_with_bare_bullet(
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance; "
+        "ferritin low on 3 of 3 draws; IV iron sucrose infusions continue at the outpatient "
+        "clinic for at least six months."
+    )
     assert fic.passed, fic.findings
