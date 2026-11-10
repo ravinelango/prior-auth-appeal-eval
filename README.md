@@ -228,10 +228,11 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   fact with the same count-noun role — a schedule fact's "every three weeks" does not cover it
   (`test_loose_summary_same_number_different_count_noun_is_caught`). A loose summary that
   shares no content words with any fact is checked against the whole chart, with the same
-  count-noun rule (`test_zero_share_bullet_count_noun_must_match_somewhere_in_chart`). A remaining
-  gap: a number the bullet does not tie to a count noun ("3 of them") is still accepted by presence
-  alone, even when the chart's 3 is "every three weeks"
-  (`test_bare_number_with_no_count_noun_still_accepted_by_presence`).
+  count-noun rule (`test_zero_share_bullet_count_noun_must_match_somewhere_in_chart`). On that
+  chart-wide fallback a bare bullet number ("3 of them") must also appear bare in some fact, so a chart 3 that only means
+  "every three weeks" does not cover it
+  (`test_zero_share_bare_number_not_covered_by_unit_scoped_chart_number`). A bare number in a
+  bullet that does overlap a fact still keeps the presence rule against that fact.
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
