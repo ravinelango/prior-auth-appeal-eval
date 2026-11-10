@@ -229,7 +229,9 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   (`test_loose_summary_same_number_different_count_noun_is_caught`). A loose summary that
   shares no content words with any fact is checked against the whole chart, with the same
   count-noun rule (`test_zero_share_bullet_count_noun_must_match_somewhere_in_chart`). A remaining
-  gap: a bare number with no count noun on either side is still accepted by presence alone.
+  gap: a number the bullet does not tie to a count noun ("3 of them") is still accepted by presence
+  alone, even when the chart's 3 is "every three weeks"
+  (`test_bare_number_with_no_count_noun_still_accepted_by_presence`).
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 

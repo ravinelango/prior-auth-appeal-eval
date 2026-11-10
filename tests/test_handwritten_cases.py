@@ -165,3 +165,27 @@ def test_zero_share_bullet_count_noun_must_match_somewhere_in_chart():
     fic = {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
     assert not fic.passed
     assert any("same count noun" in f and "3 visits" in f for f in fic.findings), fic.findings
+
+
+def test_bare_number_with_no_count_noun_still_accepted_by_presence():
+    """Documents the remaining bare-number gap. When neither the bullet nor the chart ties a
+    number to a count noun role the bullet names, the number is accepted if it appears anywhere
+    in the chart.
+
+    Here the bullet "Riley Fictional: 3 of them." names no count noun, so F1's "every three
+    weeks" still covers its 3. If this starts failing, the gap was closed: drop the test and
+    update the README limitation.
+    """
+    raw = json.loads(json.dumps(RAW["PA-054"]))
+    raw["chart"]["facts"][0]["text"] = (
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and "
+        "IV iron sucrose infusions continue every three weeks at the outpatient clinic for at "
+        "least six months."
+    )
+    case = parse_case(raw)
+    good = raw["reference_drafts"]["good"]["text"]
+    lines = good.splitlines()
+    head = next(i for i, line in enumerate(lines) if line.lower().startswith("## clinical summary"))
+    lines.insert(head + 1, f"- {raw['chart']['patient_name']}: 3 of them.")
+    fic = {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
+    assert fic.passed, fic.findings
