@@ -198,3 +198,40 @@ def test_zero_share_bare_number_covered_by_bare_chart_number():
         "clinic for at least six months."
     )
     assert fic.passed, fic.findings
+
+
+def _pa054_with_bullet(fact_text: str, bullet: str):
+    raw = json.loads(json.dumps(RAW["PA-054"]))
+    raw["chart"]["facts"][0]["text"] = fact_text
+    case = parse_case(raw)
+    lines = raw["reference_drafts"]["good"]["text"].splitlines()
+    head = next(i for i, line in enumerate(lines) if line.lower().startswith("## clinical summary"))
+    lines.insert(head + 1, f"- {bullet}")
+    return {r.name: r for r in run_checks(case, "\n".join(lines))}["facts_in_chart"]
+
+
+def test_overlapping_bare_number_paraphrase_of_count_noun_fact_is_accepted():
+    """On the overlapping path a bare bullet number is checked by presence in that fact, so a
+    reworded count ("IV iron sucrose infusions to date: 3") still matches a fact that says
+    "3 IV iron sucrose infusions given". This is why the strict bare rule stays on the
+    chart-wide fallback only."""
+    fic = _pa054_with_bullet(
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance; "
+        "3 IV iron sucrose infusions given at the outpatient clinic; plan for at least six months.",
+        "IV iron sucrose infusions to date: 3.",
+    )
+    assert fic.passed, fic.findings
+
+
+def test_overlapping_bare_number_still_accepted_by_presence_gap():
+    """Documents the remaining overlap-path gap. The same bare bullet is also accepted when the
+    overlapping fact's 3 only means "every three weeks", because presence ignores the role.
+    If this starts failing, the gap was closed: drop the test and update the README limitation.
+    """
+    fic = _pa054_with_bullet(
+        "Iron deficiency anemia from chronic blood loss; oral iron stopped for intolerance and "
+        "IV iron sucrose infusions continue every three weeks at the outpatient clinic for at "
+        "least six months.",
+        "IV iron sucrose infusions to date: 3.",
+    )
+    assert fic.passed, fic.findings
