@@ -2444,6 +2444,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-056",
+      "title": "Knee hyaluronic acid injection: hand-written letter whose flawed draft argues the X-ray but never answers the conservative-therapy reason (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500156",
+        "cpt": "20610",
+        "icd10": "M17.11",
+        "reason_code": "SYN-D41",
+        "reason_text": "Medical necessity not established: failure of conservative therapy not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7320-C1"
+        ],
+        "reason_terms": [
+          "physical therapy",
+          "naproxen"
+        ],
+        "applicable_policy": "SYN-LCD-7320",
+        "denial_date": "2026-10-30",
+        "appeal_deadline": "2026-12-29",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500156, member SYN-MBR-400156. CPT 20610 denied under SYN-D41: Medical necessity not established: failure of conservative therapy not documented. Criterion SYN-LCD-7320-C1 not met. You may appeal by 2026-12-29."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0056",
+        "member_id": "SYN-MBR-400156",
+        "patient_name": "Jordan Testcase",
+        "dob": "1961-06-22",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-04-14",
+            "text": "Right knee pain with walking for two years; X-ray shows medial joint space narrowing and osteophytes."
+          },
+          {
+            "id": "F2",
+            "date": "2026-06-09",
+            "text": "Completed eight weeks of supervised physical therapy since 2026-04-14 and daily oral naproxen, with no meaningful relief."
+          },
+          {
+            "id": "F3",
+            "date": "2026-08-18",
+            "text": "Corticosteroid injection to the right knee gave relief for three weeks only."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7320",
+          "title": "Knee hyaluronic acid injection (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7320-C1",
+              "text": "Symptoms persist after conservative therapy, including physical therapy and an oral anti-inflammatory"
+            },
+            {
+              "id": "SYN-LCD-7320-C2",
+              "text": "Radiographic evidence of knee osteoarthritis is documented"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-10\nRE: Appeal of the denial of a knee hyaluronic acid injection, claim SYN-CLM-500156 (SYNTHETIC CASE)\nPatient: Jordan Testcase | Member ID: SYN-MBR-400156 | DOB: 1961-06-22\nRequested service: CPT 20610 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nYour letter of 2026-10-30 denied the injection under SYN-D41, stating that SYN-LCD-7320-C1 was not met because failure of conservative therapy was not documented. The chart documents eight weeks of supervised physical therapy and daily oral naproxen with no meaningful relief, followed by a corticosteroid injection that helped for three weeks only. The therapy notes are enclosed.\n\n## Clinical summary\n- Right knee pain with walking for two years; X-ray shows medial joint space narrowing and osteophytes (2026-04-14).\n- Supervised physical therapy for eight weeks and daily oral naproxen, with no meaningful relief (2026-04-14 to 2026-06-09).\n- Corticosteroid injection to the right knee gave relief for three weeks only (2026-08-18).\n\n## Policy basis\nSYN-LCD-7320 (Knee hyaluronic acid injection, synthetic) governs this request. SYN-LCD-7320-C1 and SYN-LCD-7320-C2 are met, and we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Clinic and therapy notes dated 2026-04-14, 2026-06-09 and 2026-08-18\n- Copy of the denial letter dated 2026-10-30\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-10\nRE: Appeal of the denial of a knee hyaluronic acid injection, claim SYN-CLM-500156 (SYNTHETIC CASE)\nPatient: Jordan Testcase | Member ID: SYN-MBR-400156 | DOB: 1961-06-22\nRequested service: CPT 20610 | Diagnosis: ICD-10 M17.11\n\n## Response to denial reason\nYour letter of 2026-10-30 denied the injection under SYN-D41. The X-ray shows medial joint space narrowing and osteophytes, the knee still hurts with walking, and an injection is the right next step.\n\n## Clinical summary\n- Right knee pain with walking for two years; X-ray shows medial joint space narrowing and osteophytes (2026-04-14).\n- Supervised physical therapy for eight weeks and daily oral naproxen, with no meaningful relief (2026-04-14 to 2026-06-09).\n- Corticosteroid injection to the right knee gave relief for three weeks only (2026-08-18).\n\n## Policy basis\nSYN-LCD-7320 (Knee hyaluronic acid injection, synthetic) governs this request. SYN-LCD-7320-C1 and SYN-LCD-7320-C2 are met, and we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Clinic and therapy notes dated 2026-04-14, 2026-06-09 and 2026-08-18\n- Copy of the denial letter dated 2026-10-30\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
     }
   ]
 }
