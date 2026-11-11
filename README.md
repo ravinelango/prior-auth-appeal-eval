@@ -232,7 +232,10 @@ signature. See `src/prior_auth_eval/checks.py` for the contract.
   chart-wide fallback a bare bullet number ("3 of them") must also appear bare in some fact, so a chart 3 that only means
   "every three weeks" does not cover it
   (`test_zero_share_bare_number_not_covered_by_unit_scoped_chart_number`). A bare number in a
-  bullet that does overlap a fact still keeps the presence rule against that fact.
+  bullet that does overlap a fact still keeps the presence rule against that fact, so a reworded
+  count ("infusions to date: 3") is accepted
+  (`test_overlapping_bare_number_paraphrase_of_count_noun_fact_is_accepted`), but so is a 3 that
+  only means "every three weeks" there (`test_overlapping_bare_number_still_accepted_by_presence_gap`).
 - No judge model, no published real-model results, no payer-specific rules. An OpenAI-compatible drafter adapter is present for local runs when you have a key.
 - **Not medical or legal advice.** Nothing here determines coverage or appeal strategy.
 
