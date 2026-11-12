@@ -179,6 +179,13 @@ pytest -q
 [`examples/sample_report_flawed.md`](examples/sample_report_flawed.md) and
 [`examples/sample_report_good.md`](examples/sample_report_good.md).
 
+`--label-sheet FILE` also writes a [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit)
+JSONL sheet: one row per letter with `persuasive` and `complete` criteria (the judgment calls
+the deterministic checks cannot make) and every label left blank. A human fills each label
+with `pass` or `fail`; then `jck run --data FILE --judge ...` measures how well an LLM judge
+agrees with them. jck refuses the sheet while any label is blank, so an unlabeled sheet
+cannot produce a calibration number. No labeled sheet or judge result is published yet.
+
 To evaluate a real model, either:
 
 ```bash
@@ -249,7 +256,8 @@ drafters, report, CLI and tests (all passing). **No published real-model results
 - Hand-written (non-template) cases and letters, so recall is not measured on the author's own
   templates (started: PA-026..PA-056; more needed)
 - Calibrated LLM-as-judge for persuasiveness and completeness, validated against human labels
-  (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit))
+  (see [judge-calibration-kit](https://github.com/ravinelango/judge-calibration-kit); started:
+  `pae run --label-sheet` exports the blank labeling sheet; labels and judge runs still needed)
 - ~~Minimum-necessary / extra-PHI check~~ (done: pattern-level `extra_phi`)
 - OpenAI-compatible drafter adapter present (`openai` / `openai:MODEL`); published
   scorecard still blocked on real runs with a real key
