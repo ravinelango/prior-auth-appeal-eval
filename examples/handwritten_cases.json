@@ -2592,6 +2592,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-058",
+      "title": "Sleep study with CPAP titration: hand-written letter whose flawed draft never asks the plan to overturn the denial (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500158",
+        "cpt": "95811",
+        "icd10": "G47.33",
+        "reason_code": "SYN-D43",
+        "reason_text": "Medical necessity not established: diagnostic home sleep test not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7340-C1"
+        ],
+        "reason_terms": [
+          "home sleep test",
+          "obstructive sleep apnea"
+        ],
+        "applicable_policy": "SYN-LCD-7340",
+        "denial_date": "2026-11-04",
+        "appeal_deadline": "2027-01-03",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500158, member SYN-MBR-400158. CPT 95811 denied under SYN-D43: Medical necessity not established: diagnostic home sleep test not documented. Criterion SYN-LCD-7340-C1 not met. You may appeal by 2027-01-03."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0058",
+        "member_id": "SYN-MBR-400158",
+        "patient_name": "Jordan Sample",
+        "dob": "1968-05-21",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-06-10",
+            "text": "Loud snoring and daytime sleepiness reported by the patient and partner; Epworth Sleepiness Scale score of 14."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-05",
+            "text": "Home sleep test showed obstructive sleep apnea with an apnea-hypopnea index of 22 events per hour."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-12",
+            "text": "In-lab CPAP titration ordered to set the pressure before starting home CPAP."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7340",
+          "title": "Attended sleep study with CPAP titration (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7340-C1",
+              "text": "A diagnostic home sleep test has shown obstructive sleep apnea"
+            },
+            {
+              "id": "SYN-LCD-7340-C2",
+              "text": "The study is ordered to titrate positive airway pressure therapy"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-12\nRE: Appeal of the denial of an attended sleep study with CPAP titration, claim SYN-CLM-500158 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-400158 | DOB: 1968-05-21\nRequested service: CPT 95811 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-11-04 denied the study under SYN-D43, stating that SYN-LCD-7340-C1 was not met because a diagnostic home sleep test was not documented. The chart documents a home sleep test on 2026-08-05 that showed obstructive sleep apnea, and the in-lab study was ordered on 2026-09-12 to set the CPAP pressure. The home sleep test report is enclosed.\n\n## Clinical summary\n- Loud snoring and daytime sleepiness reported by the patient and partner; Epworth Sleepiness Scale score of 14 (2026-06-10).\n- Home sleep test showed obstructive sleep apnea with an apnea-hypopnea index of 22 events per hour (2026-08-05).\n- In-lab CPAP titration ordered to set the pressure before starting home CPAP (2026-09-12).\n\n## Policy basis\nSYN-LCD-7340 (Attended sleep study with CPAP titration, synthetic) governs this request. SYN-LCD-7340-C1 and SYN-LCD-7340-C2 are met, and we ask that you overturn the denial and authorize the study.\n\n## Enclosures\n- Home sleep test report dated 2026-08-05\n- Clinic notes dated 2026-06-10 and 2026-09-12\n- Copy of the denial letter dated 2026-11-04\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-12\nRE: Appeal of the denial of an attended sleep study with CPAP titration, claim SYN-CLM-500158 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-400158 | DOB: 1968-05-21\nRequested service: CPT 95811 | Diagnosis: ICD-10 G47.33\n\n## Response to denial reason\nYour letter of 2026-11-04 denied the study under SYN-D43, stating that SYN-LCD-7340-C1 was not met because a diagnostic home sleep test was not documented. The chart documents a home sleep test on 2026-08-05 that showed obstructive sleep apnea, and the in-lab study was ordered on 2026-09-12 to set the CPAP pressure. The home sleep test report is enclosed.\n\n## Clinical summary\n- Loud snoring and daytime sleepiness reported by the patient and partner; Epworth Sleepiness Scale score of 14 (2026-06-10).\n- Home sleep test showed obstructive sleep apnea with an apnea-hypopnea index of 22 events per hour (2026-08-05).\n- In-lab CPAP titration ordered to set the pressure before starting home CPAP (2026-09-12).\n\n## Policy basis\nSYN-LCD-7340 (Attended sleep study with CPAP titration, synthetic) governs this request. SYN-LCD-7340-C1 and SYN-LCD-7340-C2 are met, and we would be grateful if you could take another look at this request.\n\n## Enclosures\n- Home sleep test report dated 2026-08-05\n- Clinic notes dated 2026-06-10 and 2026-09-12\n- Copy of the denial letter dated 2026-11-04\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "required_elements"
+          ]
+        }
+      }
     }
   ]
 }
