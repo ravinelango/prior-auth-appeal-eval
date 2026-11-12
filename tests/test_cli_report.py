@@ -108,8 +108,19 @@ def test_extra_phi_only_case_is_go_with_conditions():
 
 def test_label_sheet_writes_one_blank_jck_row_per_letter(tmp_path, capsys):
     sheet = tmp_path / "labels" / "sheet.jsonl"
-    rc = main(["run", "--cases", str(EX), "--drafter", "mock:flawed",
-               "--out", str(tmp_path / "r.md"), "--label-sheet", str(sheet)])
+    rc = main(
+        [
+            "run",
+            "--cases",
+            str(EX),
+            "--drafter",
+            "mock:flawed",
+            "--out",
+            str(tmp_path / "r.md"),
+            "--label-sheet",
+            str(sheet),
+        ]
+    )
     assert rc == 0
     assert f"({len(CASES.cases)} letters, labels blank)" in capsys.readouterr().out
     lines = sheet.read_text(encoding="utf-8").splitlines()
