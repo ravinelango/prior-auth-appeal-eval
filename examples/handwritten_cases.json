@@ -2518,6 +2518,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-057",
+      "title": "Continuous glucose monitor: hand-written letter whose flawed draft cites a national coverage policy that is not part of the case (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500157",
+        "cpt": "95249",
+        "icd10": "E11.65",
+        "reason_code": "SYN-D42",
+        "reason_text": "Medical necessity not established: insulin use not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7330-C1"
+        ],
+        "reason_terms": [
+          "basal insulin",
+          "mealtime insulin"
+        ],
+        "applicable_policy": "SYN-LCD-7330",
+        "denial_date": "2026-11-03",
+        "appeal_deadline": "2027-01-02",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500157, member SYN-MBR-400157. CPT 95249 denied under SYN-D42: Medical necessity not established: insulin use not documented. Criterion SYN-LCD-7330-C1 not met. You may appeal by 2027-01-02."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0057",
+        "member_id": "SYN-MBR-400157",
+        "patient_name": "Casey Example",
+        "dob": "1972-02-09",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-03-02",
+            "text": "Type 2 diabetes with HbA1c of 9.4 percent; basal insulin glargine started once daily."
+          },
+          {
+            "id": "F2",
+            "date": "2026-07-15",
+            "text": "Mealtime insulin lispro added with each of three meals, for four insulin injections a day."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-30",
+            "text": "Two episodes of symptomatic low blood sugar overnight reported since mealtime insulin began."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7330",
+          "title": "Continuous glucose monitor (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7330-C1",
+              "text": "The patient is treated with insulin"
+            },
+            {
+              "id": "SYN-LCD-7330-C2",
+              "text": "The patient has diabetes documented in the medical record"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-11\nRE: Appeal of the denial of a continuous glucose monitor, claim SYN-CLM-500157 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400157 | DOB: 1972-02-09\nRequested service: CPT 95249 | Diagnosis: ICD-10 E11.65\n\n## Response to denial reason\nYour letter of 2026-11-03 denied the monitor under SYN-D42, stating that SYN-LCD-7330-C1 was not met because insulin use was not documented. The chart documents basal insulin started on 2026-03-02 and mealtime insulin added on 2026-07-15, so the patient now takes insulin four times a day. The clinic notes and medication list are enclosed.\n\n## Clinical summary\n- Type 2 diabetes with HbA1c of 9.4 percent; basal insulin glargine started once daily (2026-03-02).\n- Mealtime insulin lispro added with each of three meals, for four insulin injections a day (2026-07-15).\n- Two episodes of symptomatic low blood sugar overnight reported since mealtime insulin began (2026-09-30).\n\n## Policy basis\nSYN-LCD-7330 (Continuous glucose monitor, synthetic) governs this request. SYN-LCD-7330-C1 and SYN-LCD-7330-C2 are met, and we ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Clinic notes dated 2026-03-02, 2026-07-15 and 2026-09-30\n- Copy of the denial letter dated 2026-11-03\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-11\nRE: Appeal of the denial of a continuous glucose monitor, claim SYN-CLM-500157 (SYNTHETIC CASE)\nPatient: Casey Example | Member ID: SYN-MBR-400157 | DOB: 1972-02-09\nRequested service: CPT 95249 | Diagnosis: ICD-10 E11.65\n\n## Response to denial reason\nYour letter of 2026-11-03 denied the monitor under SYN-D42, stating that SYN-LCD-7330-C1 was not met because insulin use was not documented. The chart documents basal insulin started on 2026-03-02 and mealtime insulin added on 2026-07-15, so the patient now takes insulin four times a day. The clinic notes and medication list are enclosed.\n\n## Clinical summary\n- Type 2 diabetes with HbA1c of 9.4 percent; basal insulin glargine started once daily (2026-03-02).\n- Mealtime insulin lispro added with each of three meals, for four insulin injections a day (2026-07-15).\n- Two episodes of symptomatic low blood sugar overnight reported since mealtime insulin began (2026-09-30).\n\n## Policy basis\nSYN-LCD-7330 (Continuous glucose monitor, synthetic) governs this request. SYN-LCD-7330-C1 and SYN-LCD-7330-C2 are met, and SYN-NCD-5390 covers a monitor for any patient with nocturnal hypoglycemia. We ask that you overturn the denial and authorize the monitor.\n\n## Enclosures\n- Clinic notes dated 2026-03-02, 2026-07-15 and 2026-09-30\n- Copy of the denial letter dated 2026-11-03\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "citations"
+          ]
+        }
+      }
     }
   ]
 }
