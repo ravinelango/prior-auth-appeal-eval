@@ -104,3 +104,20 @@ def test_extra_phi_only_case_is_go_with_conditions():
     assert case.reference_drafts["flawed"].seeded_flaws == ("extra_phi",)
     run = evaluate(type(CASES)("SYNTHETIC", (case,)), MockDrafter("flawed"))
     assert decision(run) == ("GO WITH CONDITIONS", ["PA-023: extra_phi failed"])
+
+
+def test_label_sheet_writes_one_blank_jck_row_per_letter(tmp_path, capsys):
+    sheet = tmp_path / "labels" / "sheet.jsonl"
+    rc = main(["run", "--cases", str(EX), "--drafter", "mock:flawed",
+               "--out", str(tmp_path / "r.md"), "--label-sheet", str(sheet)])
+    assert rc == 0
+    assert f"({len(CASES.cases)} letters, labels blank)" in capsys.readouterr().out
+    lines = sheet.read_text(encoding="utf-8").splitlines()
+    assert lines[0].startswith("# SYNTHETIC")
+    rows = [json.loads(x) for x in lines if not x.startswith("#")]
+    assert [r["id"] for r in rows] == [c.id for c in CASES.cases]
+    first = rows[0]
+    assert first["output"] == MockDrafter("flawed").draft(CASES.cases[0])
+    assert first["deterministic_status"] in {"PASS", "FAIL", "FAIL (minor)"}
+    assert [c["name"] for c in first["criteria"]] == ["persuasive", "complete"]
+    assert all(c["label"] == "" and c["rubric"] for r in rows for c in r["criteria"])
