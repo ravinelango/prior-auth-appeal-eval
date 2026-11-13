@@ -2740,6 +2740,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-060",
+      "title": "Lumbar medial branch block: hand-written letter whose flawed draft swaps the month and day of the DOB (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500160",
+        "cpt": "64493",
+        "icd10": "M47.816",
+        "reason_code": "SYN-D45",
+        "reason_text": "Medical necessity not established: pain duration and conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7360-C1"
+        ],
+        "reason_terms": [
+          "axial",
+          "physical therapy"
+        ],
+        "applicable_policy": "SYN-LCD-7360",
+        "denial_date": "2026-11-06",
+        "appeal_deadline": "2027-01-05",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500160, member SYN-MBR-400160. CPT 64493 denied under SYN-D45: Medical necessity not established: pain duration and conservative care not documented. Criterion SYN-LCD-7360-C1 not met. You may appeal by 2027-01-05."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0060",
+        "member_id": "SYN-MBR-400160",
+        "patient_name": "Jordan Sample",
+        "dob": "1981-06-09",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-04-20",
+            "text": "Axial low back pain worse with standing and extension, no leg pain."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-14",
+            "text": "Completed physical therapy and a daily anti-inflammatory medication; back pain unchanged."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-22",
+            "text": "Lumbar CT showed bilateral L4-L5 and L5-S1 facet arthropathy; back pain rated 6 out of 10."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7360",
+          "title": "Lumbar facet medial branch block (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7360-C1",
+              "text": "Axial low back pain for at least three months that has not responded to conservative care such as physical therapy and anti-inflammatory medication"
+            },
+            {
+              "id": "SYN-LCD-7360-C2",
+              "text": "No untreated radicular pain, and imaging or exam findings consistent with facet-mediated pain"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-13\nRE: Appeal of the denial of lumbar facet medial branch blocks, claim SYN-CLM-500160 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-400160 | DOB: 1981-06-09\nRequested service: CPT 64493 | Diagnosis: ICD-10 M47.816\n\n## Response to denial reason\nYour letter of 2026-11-06 denied the medial branch blocks under SYN-D45, stating that SYN-LCD-7360-C1 was not met because the duration of axial back pain and the conservative care tried were not documented. The chart records axial low back pain since 2026-04-20 and a completed course of physical therapy and anti-inflammatory medication ending on 2026-08-14, after which pain was still rated 6 out of 10. The therapy discharge note is enclosed.\n\n## Clinical summary\n- Axial low back pain worse with standing and extension, no leg pain (2026-04-20).\n- Completed physical therapy and a daily anti-inflammatory medication; back pain unchanged (2026-08-14).\n- Lumbar CT showed bilateral L4-L5 and L5-S1 facet arthropathy; back pain rated 6 out of 10 (2026-09-22).\n\n## Policy basis\nSYN-LCD-7360 (Lumbar facet medial branch block, synthetic) governs this request. SYN-LCD-7360-C1 and SYN-LCD-7360-C2 are met, and we ask that you overturn the denial and authorize the medial branch blocks.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-14\n- Lumbar CT report and clinic note dated 2026-09-22\n- Copy of the denial letter dated 2026-11-06\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-13\nRE: Appeal of the denial of lumbar facet medial branch blocks, claim SYN-CLM-500160 (SYNTHETIC CASE)\nPatient: Jordan Sample | Member ID: SYN-MBR-400160 | DOB: 1981-09-06\nRequested service: CPT 64493 | Diagnosis: ICD-10 M47.816\n\n## Response to denial reason\nYour letter of 2026-11-06 denied the medial branch blocks under SYN-D45, stating that SYN-LCD-7360-C1 was not met because the duration of axial back pain and the conservative care tried were not documented. The chart records axial low back pain since 2026-04-20 and a completed course of physical therapy and anti-inflammatory medication ending on 2026-08-14, after which pain was still rated 6 out of 10. The therapy discharge note is enclosed.\n\n## Clinical summary\n- Axial low back pain worse with standing and extension, no leg pain (2026-04-20).\n- Completed physical therapy and a daily anti-inflammatory medication; back pain unchanged (2026-08-14).\n- Lumbar CT showed bilateral L4-L5 and L5-S1 facet arthropathy; back pain rated 6 out of 10 (2026-09-22).\n\n## Policy basis\nSYN-LCD-7360 (Lumbar facet medial branch block, synthetic) governs this request. SYN-LCD-7360-C1 and SYN-LCD-7360-C2 are met, and we ask that you overturn the denial and authorize the medial branch blocks.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-14\n- Lumbar CT report and clinic note dated 2026-09-22\n- Copy of the denial letter dated 2026-11-06\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "identifiers_match"
+          ]
+        }
+      }
     }
   ]
 }
