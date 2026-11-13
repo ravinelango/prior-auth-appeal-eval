@@ -2666,6 +2666,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-059",
+      "title": "Lumbar epidural steroid injection: hand-written letter whose flawed draft adds a medical record number to the header (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500159",
+        "cpt": "64483",
+        "icd10": "M54.16",
+        "reason_code": "SYN-D44",
+        "reason_text": "Medical necessity not established: conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7350-C1"
+        ],
+        "reason_terms": [
+          "conservative care",
+          "physical therapy"
+        ],
+        "applicable_policy": "SYN-LCD-7350",
+        "denial_date": "2026-11-05",
+        "appeal_deadline": "2027-01-04",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500159, member SYN-MBR-400159. CPT 64483 denied under SYN-D44: Medical necessity not established: conservative care not documented. Criterion SYN-LCD-7350-C1 not met. You may appeal by 2027-01-04."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0059",
+        "member_id": "SYN-MBR-400159",
+        "patient_name": "Riley Example",
+        "dob": "1975-02-14",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-07-08",
+            "text": "Low back pain radiating down the left leg with numbness over the top of the foot."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-28",
+            "text": "Completed six weeks of physical therapy with home exercises; leg pain unchanged."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-30",
+            "text": "Lumbar MRI showed a left L4-L5 disc protrusion contacting the L5 nerve root; leg pain rated 7 out of 10."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7350",
+          "title": "Lumbar transforaminal epidural steroid injection (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7350-C1",
+              "text": "At least four weeks of conservative care, such as physical therapy, have not relieved radicular pain"
+            },
+            {
+              "id": "SYN-LCD-7350-C2",
+              "text": "Imaging shows a disc or foraminal finding that matches the radicular symptoms"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-13\nRE: Appeal of the denial of a lumbar transforaminal epidural steroid injection, claim SYN-CLM-500159 (SYNTHETIC CASE)\nPatient: Riley Example | Member ID: SYN-MBR-400159 | DOB: 1975-02-14\nRequested service: CPT 64483 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-11-05 denied the injection under SYN-D44, stating that SYN-LCD-7350-C1 was not met because conservative care was not documented. The chart documents six weeks of physical therapy completed on 2026-08-28, with leg pain still rated 7 out of 10 at the follow-up visit on 2026-09-30. The therapy discharge note is enclosed.\n\n## Clinical summary\n- Low back pain radiating down the left leg with numbness over the top of the foot (2026-07-08).\n- Completed six weeks of physical therapy with home exercises; leg pain unchanged (2026-08-28).\n- Lumbar MRI showed a left L4-L5 disc protrusion contacting the L5 nerve root; leg pain rated 7 out of 10 (2026-09-30).\n\n## Policy basis\nSYN-LCD-7350 (Lumbar transforaminal epidural steroid injection, synthetic) governs this request. SYN-LCD-7350-C1 and SYN-LCD-7350-C2 are met, and we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-28\n- Lumbar MRI report and clinic note dated 2026-09-30\n- Copy of the denial letter dated 2026-11-05\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-13\nRE: Appeal of the denial of a lumbar transforaminal epidural steroid injection, claim SYN-CLM-500159 (SYNTHETIC CASE)\nPatient: Riley Example | Member ID: SYN-MBR-400159 | DOB: 1975-02-14 | MRN 0083159\nRequested service: CPT 64483 | Diagnosis: ICD-10 M54.16\n\n## Response to denial reason\nYour letter of 2026-11-05 denied the injection under SYN-D44, stating that SYN-LCD-7350-C1 was not met because conservative care was not documented. The chart documents six weeks of physical therapy completed on 2026-08-28, with leg pain still rated 7 out of 10 at the follow-up visit on 2026-09-30. The therapy discharge note is enclosed.\n\n## Clinical summary\n- Low back pain radiating down the left leg with numbness over the top of the foot (2026-07-08).\n- Completed six weeks of physical therapy with home exercises; leg pain unchanged (2026-08-28).\n- Lumbar MRI showed a left L4-L5 disc protrusion contacting the L5 nerve root; leg pain rated 7 out of 10 (2026-09-30).\n\n## Policy basis\nSYN-LCD-7350 (Lumbar transforaminal epidural steroid injection, synthetic) governs this request. SYN-LCD-7350-C1 and SYN-LCD-7350-C2 are met, and we ask that you overturn the denial and authorize the injection.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-28\n- Lumbar MRI report and clinic note dated 2026-09-30\n- Copy of the denial letter dated 2026-11-05\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "extra_phi"
+          ]
+        }
+      }
     }
   ]
 }
