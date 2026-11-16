@@ -2814,6 +2814,80 @@
           ]
         }
       }
+    },
+    {
+      "id": "PA-061",
+      "title": "Knee arthroscopic meniscectomy: hand-written letter whose flawed draft argues the MRI criterion instead of the unmet conservative-care criterion (synthetic)",
+      "denial": {
+        "claim_id": "SYN-CLM-500161",
+        "cpt": "29881",
+        "icd10": "M23.221",
+        "reason_code": "SYN-D46",
+        "reason_text": "Medical necessity not established: mechanical symptoms and failed conservative care not documented",
+        "unmet_criteria": [
+          "SYN-LCD-7370-C1"
+        ],
+        "reason_terms": [
+          "mechanical",
+          "physical therapy"
+        ],
+        "applicable_policy": "SYN-LCD-7370",
+        "denial_date": "2026-11-09",
+        "appeal_deadline": "2027-01-08",
+        "letter_text": "SYNTHETIC DENIAL LETTER. Example Health Plan (fictional). Claim SYN-CLM-500161, member SYN-MBR-400161. CPT 29881 denied under SYN-D46: Medical necessity not established: mechanical symptoms and failed conservative care not documented. Criterion SYN-LCD-7370-C1 not met. You may appeal by 2027-01-08."
+      },
+      "chart": {
+        "patient_id": "SYN-PT-0061",
+        "member_id": "SYN-MBR-400161",
+        "patient_name": "Riley Example",
+        "dob": "1976-03-22",
+        "provider_name": "Dr. Sam Placeholder",
+        "facts": [
+          {
+            "id": "F1",
+            "date": "2026-05-11",
+            "text": "Right knee locking and catching with medial joint line pain since a twisting injury."
+          },
+          {
+            "id": "F2",
+            "date": "2026-08-03",
+            "text": "Completed six weeks of physical therapy and a home exercise program; mechanical locking persists."
+          },
+          {
+            "id": "F3",
+            "date": "2026-09-15",
+            "text": "Right knee MRI showed a displaced flap tear of the posterior horn of the medial meniscus without advanced arthritis."
+          }
+        ]
+      },
+      "policies": [
+        {
+          "id": "SYN-LCD-7370",
+          "title": "Arthroscopic knee meniscectomy (synthetic)",
+          "criteria": [
+            {
+              "id": "SYN-LCD-7370-C1",
+              "text": "Mechanical symptoms such as locking or catching that persist after at least six weeks of conservative care such as physical therapy"
+            },
+            {
+              "id": "SYN-LCD-7370-C2",
+              "text": "MRI showing a meniscal tear consistent with the symptoms and no advanced arthritis of the same knee"
+            }
+          ]
+        }
+      ],
+      "reference_drafts": {
+        "good": {
+          "text": "Date: 2026-11-16\nRE: Appeal of the denial of right knee arthroscopic partial medial meniscectomy, claim SYN-CLM-500161 (SYNTHETIC CASE)\nPatient: Riley Example | Member ID: SYN-MBR-400161 | DOB: 1976-03-22\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.221\n\n## Response to denial reason\nYour letter of 2026-11-09 denied the meniscectomy under SYN-D46, stating that SYN-LCD-7370-C1 was not met because mechanical symptoms and a trial of physical therapy were not documented. The chart records locking and catching since 2026-05-11 and six weeks of physical therapy completed on 2026-08-03, after which the mechanical locking persisted. The therapy discharge note is enclosed.\n\n## Clinical summary\n- Right knee locking and catching with medial joint line pain since a twisting injury (2026-05-11).\n- Completed six weeks of physical therapy and a home exercise program; mechanical locking persists (2026-08-03).\n- Right knee MRI showed a displaced flap tear of the posterior horn of the medial meniscus without advanced arthritis (2026-09-15).\n\n## Policy basis\nSYN-LCD-7370 (Arthroscopic knee meniscectomy, synthetic) governs this request. SYN-LCD-7370-C1 and SYN-LCD-7370-C2 are met, and we ask that you overturn the denial and authorize the arthroscopic partial meniscectomy.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-03\n- Right knee MRI report dated 2026-09-15\n- Copy of the denial letter dated 2026-11-09\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": []
+        },
+        "flawed": {
+          "text": "Date: 2026-11-16\nRE: Appeal of the denial of right knee arthroscopic partial medial meniscectomy, claim SYN-CLM-500161 (SYNTHETIC CASE)\nPatient: Riley Example | Member ID: SYN-MBR-400161 | DOB: 1976-03-22\nRequested service: CPT 29881 | Diagnosis: ICD-10 M23.221\n\n## Response to denial reason\nYour letter of 2026-11-09 denied the meniscectomy under SYN-D46. SYN-LCD-7370-C2 is met: the right knee MRI of 2026-09-15 shows a displaced flap tear of the posterior horn of the medial meniscus without advanced arthritis, which is the kind of tear arthroscopy is meant to treat. The MRI report is enclosed.\n\n## Clinical summary\n- Right knee locking and catching with medial joint line pain since a twisting injury (2026-05-11).\n- Completed six weeks of physical therapy and a home exercise program; mechanical locking persists (2026-08-03).\n- Right knee MRI showed a displaced flap tear of the posterior horn of the medial meniscus without advanced arthritis (2026-09-15).\n\n## Policy basis\nSYN-LCD-7370 (Arthroscopic knee meniscectomy, synthetic) governs this request. SYN-LCD-7370-C1 and SYN-LCD-7370-C2 are met, and we ask that you overturn the denial and authorize the arthroscopic partial meniscectomy.\n\n## Enclosures\n- Physical therapy discharge note dated 2026-08-03\n- Right knee MRI report dated 2026-09-15\n- Copy of the denial letter dated 2026-11-09\n\nSincerely,\nDr. Sam Placeholder, NPI SYN-0000 (synthetic)\n",
+          "seeded_flaws": [
+            "denial_reason_addressed"
+          ]
+        }
+      }
     }
   ]
 }
