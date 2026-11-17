@@ -101,6 +101,17 @@ def test_cli_json_summary_creates_missing_parent_folder(tmp_path):
     assert json.loads(js.read_text(encoding="utf-8"))["decision"] == "NO-GO"
 
 
+def test_cli_run_reports_missing_letter_and_bad_drafter_as_exit_2(tmp_path, capsys):
+    letters = tmp_path / "letters"
+    letters.mkdir()
+    rc = main(["run", "--cases", str(EX), "--drafter", f"files:{letters}"])
+    assert rc == 2
+    err = capsys.readouterr().err
+    assert err.startswith("pae run: no draft for PA-001") and "PA-001.txt" in err
+    assert main(["run", "--cases", str(EX), "--drafter", "nope"]) == 2
+    assert "pae run: unknown drafter 'nope'" in capsys.readouterr().err
+
+
 def test_cli_validate_check_prompt(tmp_path, capsys):
     assert main(["validate", "--cases", str(EX)]) == 0
     letter = tmp_path / "l.txt"

@@ -97,8 +97,17 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"      {f}")
         return 0 if all(res.passed for res in results) else 1
 
-    drafter = get_drafter(a.drafter)
-    evals = evaluate(cases, drafter)
+    try:
+        drafter = get_drafter(a.drafter)
+        evals = evaluate(cases, drafter)
+    except FileNotFoundError as exc:  # files:DIR is missing a letter
+        print(f"pae run: {exc}", file=sys.stderr)
+        return 2
+    except ValueError as exc:
+        if "unknown drafter" not in str(exc):
+            raise
+        print(f"pae run: {exc}", file=sys.stderr)
+        return 2
     verdict, reasons = decision(evals)
     md = render(cases, evals, drafter, a.cases.name)
     if a.out:
