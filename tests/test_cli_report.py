@@ -112,6 +112,15 @@ def test_cli_run_reports_missing_letter_and_bad_drafter_as_exit_2(tmp_path, caps
     assert "pae run: unknown drafter 'nope'" in capsys.readouterr().err
 
 
+def test_cli_check_reports_missing_letter_file_as_exit_2(tmp_path, capsys):
+    missing = tmp_path / "no_such_letter.txt"
+    rc = main(["check", "--cases", str(EX), "--case-id", "PA-001", "--letter", str(missing)])
+    assert rc == 2
+    err = capsys.readouterr().err
+    assert err.startswith("pae check: letter file not found:") and "no_such_letter.txt" in err
+    assert err.count("\n") == 1
+
+
 def test_cli_validate_check_prompt(tmp_path, capsys):
     assert main(["validate", "--cases", str(EX)]) == 0
     letter = tmp_path / "l.txt"

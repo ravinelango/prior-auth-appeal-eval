@@ -176,7 +176,8 @@ pae check  --cases examples/synthetic_cases.json --case-id PA-001 --letter my_le
 pytest -q
 ```
 `--strict` makes `run` exit 1 unless the decision is GO. An unknown `--drafter`, or a
-`files:DIR` folder missing a `<case id>.txt` letter, exits 2 with a one-line `pae run:` error. Sample output:
+`files:DIR` folder missing a `<case id>.txt` letter, exits 2 with a one-line `pae run:` error;
+`pae check` likewise exits 2 with a one-line `pae check:` error when the `--letter` file is missing. Sample output:
 [`examples/sample_report_flawed.md`](examples/sample_report_flawed.md) and
 [`examples/sample_report_good.md`](examples/sample_report_good.md).
 

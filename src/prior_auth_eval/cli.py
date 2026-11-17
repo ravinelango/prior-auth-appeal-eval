@@ -90,7 +90,12 @@ def main(argv: list[str] | None = None) -> int:
         if a.cmd == "prompt":
             print(build_prompt(case))
             return 0
-        results = run_checks(case, a.letter.read_text(encoding="utf-8"))
+        try:
+            letter = a.letter.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            print(f"pae check: letter file not found: {a.letter}", file=sys.stderr)
+            return 2
+        results = run_checks(case, letter)
         for res in results:
             print(f"{'pass' if res.passed else 'FAIL'}  {res.name}")
             for f in res.findings:
