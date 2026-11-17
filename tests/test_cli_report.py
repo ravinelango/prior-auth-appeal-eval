@@ -82,6 +82,25 @@ def test_cli_end_to_end(tmp_path):
     )
 
 
+def test_cli_json_summary_creates_missing_parent_folder(tmp_path):
+    js = tmp_path / "reports" / "nested" / "summary.json"
+    rc = main(
+        [
+            "run",
+            "--cases",
+            str(EX),
+            "--drafter",
+            "mock:flawed",
+            "--out",
+            str(tmp_path / "r.md"),
+            "--json",
+            str(js),
+        ]
+    )
+    assert rc == 0
+    assert json.loads(js.read_text(encoding="utf-8"))["decision"] == "NO-GO"
+
+
 def test_cli_validate_check_prompt(tmp_path, capsys):
     assert main(["validate", "--cases", str(EX)]) == 0
     letter = tmp_path / "l.txt"

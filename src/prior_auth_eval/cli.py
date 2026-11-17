@@ -111,6 +111,7 @@ def main(argv: list[str] | None = None) -> int:
         n = write_label_sheet(a.label_sheet, evals, cases.label)
         print(f"wrote {a.label_sheet} ({n} letters, labels blank)")
     if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
         a.json.write_text(
             json.dumps(
                 {
@@ -124,7 +125,8 @@ def main(argv: list[str] | None = None) -> int:
                     ],
                 },
                 indent=2,
-            )
+            ),
+            encoding="utf-8",
         )
     print(f"decision: {verdict}", file=sys.stderr)
     return 1 if a.strict and verdict != "GO" else 0
